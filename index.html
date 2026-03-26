@@ -98,9 +98,10 @@
         body:before {
             inset: -18%;
             z-index: -4;
-            background: radial-gradient(circle at var(--px) var(--py), var(--l1), transparent 24%), radial-gradient(circle at calc(var(--px) + 18%) calc(var(--py) + 7%), var(--l2), transparent 22%), radial-gradient(circle at 76% 18%, var(--l3), transparent 28%);
+            background: radial-gradient(circle at 30% 35%, var(--l1), transparent 28%), radial-gradient(circle at 65% 60%, var(--l2), transparent 26%), radial-gradient(circle at 76% 18%, var(--l3), transparent 28%);
             filter: blur(30px);
-            animation: drift 18s ease-in-out infinite alternate
+            animation: drift1 40s infinite alternate ease-in-out;
+            will-change: transform;
         }
 
         body:after {
@@ -138,7 +139,61 @@
 
         .orb {
             opacity: .72;
-            animation: float 18s ease-in-out infinite
+            will-change: transform;
+        }
+
+        @keyframes drift1 {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            33% {
+                transform: translate3d(-10vw, 15vh, 0);
+            }
+
+            66% {
+                transform: translate3d(8vw, -10vh, 0);
+            }
+
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes drift2 {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            40% {
+                transform: translate3d(12vw, -12vh, 0);
+            }
+
+            75% {
+                transform: translate3d(-6vw, 18vh, 0);
+            }
+
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes drift3 {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            50% {
+                transform: translate3d(-15vw, -8vh, 0);
+            }
+
+            80% {
+                transform: translate3d(10vw, 12vh, 0);
+            }
+
+            100% {
+                transform: translate3d(0, 0, 0);
+            }
         }
 
         .o1 {
@@ -146,7 +201,8 @@
             height: 26rem;
             top: 5%;
             left: -8%;
-            background: rgba(184, 97, 34, .18)
+            background: rgba(184, 97, 34, .18);
+            animation: drift1 48s infinite ease-in-out;
         }
 
         .o2 {
@@ -155,7 +211,7 @@
             top: 56%;
             right: -5%;
             background: rgba(22, 88, 68, .18);
-            animation-delay: -5s
+            animation: drift2 55s infinite ease-in-out;
         }
 
         .o3 {
@@ -164,16 +220,11 @@
             top: 12%;
             right: 16%;
             background: rgba(255, 255, 255, .08);
-            animation-delay: -10s
+            animation: drift3 62s infinite ease-in-out;
         }
 
         .pointer {
-            width: 24rem;
-            height: 24rem;
-            transform: translate3d(var(--gx), var(--gy), 0);
-            background: radial-gradient(circle, rgba(255, 255, 255, .24) 0%, rgba(184, 97, 34, .14) 42%, transparent 70%);
-            opacity: .72;
-            filter: blur(42px)
+            display: none !important;
         }
 
         .shell {
@@ -538,18 +589,31 @@
 
         .portrait-meta {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             gap: 1rem;
             margin-top: .95rem;
             padding-top: .9rem;
             border-top: 1px solid var(--line)
         }
 
-        .portrait-meta span {
-            color: var(--muted);
-            font-size: .8rem;
-            letter-spacing: .12em;
-            text-transform: uppercase
+        .available {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text);
+        }
+
+        .dot {
+            width: 0.45rem;
+            height: 0.45rem;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
         }
 
         .head {
@@ -1588,21 +1652,6 @@
                 font-weight: 700;
             }
 
-            .available {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.45rem;
-            }
-
-            .dot {
-                width: 0.4rem;
-                height: 0.4rem;
-                border-radius: 50%;
-                background: #10b981;
-                box-shadow: 0 0 10px #10b981;
-            }
-
             .hero-copy {
                 flex: 1 1 auto;
                 width: 100%;
@@ -2311,7 +2360,7 @@
         window.addEventListener("pointermove", e => { target.x = e.clientX; target.y = e.clientY; pointerGlow.style.opacity = ".82" });
         window.addEventListener("pointerleave", () => { target.x = window.innerWidth * .18; target.y = window.innerHeight * .18; pointerGlow.style.opacity = ".68" });
         window.addEventListener("resize", () => { target.x = Math.min(target.x, window.innerWidth); target.y = Math.min(target.y, window.innerHeight) });
-        animateGlow();
+        /* animateGlow(); */
 
         const stickyHeads = document.querySelectorAll(".split-section .head");
         window.addEventListener("scroll", () => {
