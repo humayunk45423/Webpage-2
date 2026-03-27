@@ -108,6 +108,7 @@
             filter: blur(40px);
             animation: drift 30s ease-in-out infinite alternate;
             transform: translate3d(0, 0, 0);
+            will-change: transform;
             opacity: 0.8
         }
 
@@ -177,7 +178,8 @@
             position: absolute;
             border-radius: 999px;
             filter: blur(22px);
-            will-change: transform, opacity
+            will-change: transform, opacity;
+            transform: translate3d(0, 0, 0);
         }
 
         .orb {
@@ -760,6 +762,14 @@
             line-height: 1
         }
 
+        .contact-info p {
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            line-height: 1.65;
+            color: var(--muted);
+            margin: 0 0 2rem;
+            max-width: 40rem
+        }
+
         .contact-methods {
             display: grid;
             gap: 1rem;
@@ -881,7 +891,8 @@
         .reveal {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0, 0, 1)
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+            will-change: transform, opacity
         }
 
         .reveal.active {
@@ -1209,7 +1220,7 @@
                         <div class="actions">
                             <a href="#projects" class="btn primary">
                                 <i class="fa-solid fa-briefcase"></i>
-                                <span>See Projects</span>
+                                <span>Projects</span>
                             </a>
                             <a href="#services" class="btn secondary">
                                 <i class="fa-solid fa-layer-group"></i>
@@ -1617,65 +1628,56 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        revealObserver.unobserve(entry.target); // Reveal only once
+                        revealObserver.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
             document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-            // 4. Pointer Glow Animation
+            // 4. Pointer Glow & Scroll Effects (PC Optimized)
             const pointerGlow = document.getElementById('pointerGlow');
-            const state = { x: window.innerWidth * 0.18, y: window.innerHeight * 0.18 };
-            const target = { ...state };
-            let isHovering = false;
+            const stickyHeads = document.querySelectorAll('.split-section .section-title');
 
-            const updateGlow = () => {
-                if (window.innerWidth < 1024) return;
-
-                state.x += (target.x - state.x) * 0.12;
-                state.y += (target.y - state.y) * 0.12;
-
-                root.style.setProperty('--px', `${(state.x / window.innerWidth) * 100}%`);
-                root.style.setProperty('--py', `${(state.y / window.innerHeight) * 100}%`);
-                root.style.setProperty('--gx', `${state.x - 192}px`);
-                root.style.setProperty('--gy', `${state.y - 192}px`);
-
-                if (pointerGlow) {
-                    pointerGlow.style.opacity = isHovering ? "0.8" : "0.5";
-                }
-
-                requestAnimationFrame(updateGlow);
+            const state = {
+                x: window.innerWidth * 0.18,
+                y: window.innerHeight * 0.18,
+                targetX: window.innerWidth * 0.18,
+                targetY: window.innerHeight * 0.18,
+                isMoving: false,
+                isHovering: false,
+                animating: false
             };
 
-            window.addEventListener('pointermove', (e) => {
-                target.x = e.clientX;
-                target.y = e.clientY;
-                isHovering = true;
-            }, { passive: true });
+            const updateLoop = () => {
+                let needsUpdate = false;
 
-            window.addEventListener('pointerleave', () => {
-                target.x = window.innerWidth * 0.18;
-                target.y = window.innerHeight * 0.18;
-                isHovering = false;
-            }, { passive: true });
+                // 1. Pointer Logic
+                if (window.innerWidth >= 1024) {
+                    const dx = state.targetX - state.x;
+                    const dy = state.targetY - state.y;
 
-            if (window.innerWidth >= 1024) {
-                requestAnimationFrame(updateGlow);
-            }
+                    if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+                        state.x += dx * 0.12;
+                        state.y += dy * 0.12;
 
-            // 5. Section Heading Sticky Fade
-            const stickyHeads = document.querySelectorAll('.split-section .section-title');
-            let scrollTimeout;
+                        root.style.setProperty('--px', `${(state.x / window.innerWidth) * 100}%`);
+                        root.style.setProperty('--py', `${(state.y / window.innerHeight) * 100}%`);
+                        root.style.setProperty('--gx', `${state.x - 192}px`);
+                        root.style.setProperty('--gy', `${state.y - 192}px`);
 
-            window.addEventListener('scroll', () => {
-                const isMobile = window.innerWidth < 1025;
-                if (isMobile) return;
+                        if (pointerGlow) {
+                            pointerGlow.style.opacity = state.isHovering ? "0.8" : "0.5";
+                        }
+                        needsUpdate = true;
+                    }
+                }
 
-                if (!scrollTimeout) {
-                    scrollTimeout = requestAnimationFrame(() => {
-                        stickyHeads.forEach(head => {
-                            const rect = head.getBoundingClientRect();
+                // 2. Scroll Title Fade Logic (Only when scrolling or near thresholds)
+                if (window.innerWidth >= 1024) {
+                    stickyHeads.forEach(head => {
+                        const rect = head.getBoundingClientRect();
+                        if (rect.top < 250 && rect.bottom > -50) {
                             if (rect.top < 150 && rect.top > 0) {
                                 const opacity = Math.max(0, (rect.top - 80) / 70);
                                 head.style.opacity = opacity.toString();
@@ -1684,11 +1686,51 @@
                             } else {
                                 head.style.opacity = "1";
                             }
-                        });
-                        scrollTimeout = null;
+                        }
                     });
                 }
+
+                if (needsUpdate || state.isMoving) {
+                    requestAnimationFrame(updateLoop);
+                    state.animating = true;
+                } else {
+                    state.animating = false;
+                }
+            };
+
+            const startLoop = () => {
+                if (!state.animating) {
+                    state.animating = true;
+                    requestAnimationFrame(updateLoop);
+                }
+            };
+
+            window.addEventListener('pointermove', (e) => {
+                if (window.innerWidth < 1024) return;
+                state.targetX = e.clientX;
+                state.targetY = e.clientY;
+                state.isHovering = true;
+                state.isMoving = true;
+                startLoop();
+
+                // Stop move flag after a short delay
+                clearTimeout(state.moveTimeout);
+                state.moveTimeout = setTimeout(() => { state.isMoving = false; }, 100);
             }, { passive: true });
+
+            window.addEventListener('pointerleave', () => {
+                state.targetX = window.innerWidth * 0.18;
+                state.targetY = window.innerHeight * 0.18;
+                state.isHovering = false;
+                startLoop();
+            }, { passive: true });
+
+            window.addEventListener('scroll', () => {
+                if (window.innerWidth >= 1024) startLoop();
+            }, { passive: true });
+
+            // Initial run
+            if (window.innerWidth >= 1024) startLoop();
         });
     </script>
 </body>
