@@ -45,8 +45,6 @@
             --accent-line: rgba(22, 88, 68, .22);
             --px: 18%;
             --py: 18%;
-            --gx: calc(18vw - 12rem);
-            --gy: calc(18vh - 12rem);
             --grid: rgba(11, 11, 11, .06)
         }
 
@@ -224,12 +222,13 @@
         .pointer {
             width: 24rem;
             height: 24rem;
-            transform: translate3d(var(--gx), var(--gy), 0);
             background: radial-gradient(circle, rgba(255, 255, 255, .15) 0%, rgba(184, 97, 34, .12) 40%, transparent 70%);
             opacity: 0;
             filter: blur(42px);
             transition: opacity 0.4s ease;
-            pointer-events: none
+            pointer-events: none;
+            left: 0;
+            top: 0
         }
 
         @media (max-width: 1024px) {
@@ -880,11 +879,11 @@
 
             0%,
             100% {
-                transform: translateY(0)
+                transform: translate3d(0, 0, 0)
             }
 
             50% {
-                transform: translateY(-20px)
+                transform: translate3d(0, -20px, 0)
             }
         }
 
@@ -1661,12 +1660,15 @@
                         state.x += dx * 0.12;
                         state.y += dy * 0.12;
 
-                        root.style.setProperty('--px', `${(state.x / window.innerWidth) * 100}%`);
-                        root.style.setProperty('--py', `${(state.y / window.innerHeight) * 100}%`);
-                        root.style.setProperty('--gx', `${state.x - 192}px`);
-                        root.style.setProperty('--gy', `${state.y - 192}px`);
+                        const px = (state.x / window.innerWidth) * 100;
+                        const py = (state.y / window.innerHeight) * 100;
 
+                        // Direct style updates for performance peaks
+                        document.body.style.setProperty('--px', `${px}%`);
+                        document.body.style.setProperty('--py', `${py}%`);
+                        
                         if (pointerGlow) {
+                            pointerGlow.style.transform = `translate3d(${state.x - 192}px, ${state.y - 192}px, 0)`;
                             pointerGlow.style.opacity = state.isHovering ? "0.8" : "0.5";
                         }
                         needsUpdate = true;
