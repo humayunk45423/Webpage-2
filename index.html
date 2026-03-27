@@ -106,8 +106,31 @@
             z-index: -4;
             background: radial-gradient(circle at var(--px) var(--py), var(--l1), transparent 24%), radial-gradient(circle at calc(var(--px) + 18%) calc(var(--py) + 7%), var(--l2), transparent 22%), radial-gradient(circle at 76% 18%, var(--l3), transparent 28%);
             filter: blur(40px);
-            animation: drift 20s ease-in-out infinite alternate;
-            will-change: transform
+            animation: drift 30s ease-in-out infinite alternate;
+            transform: translate3d(0, 0, 0);
+            opacity: 0.8
+        }
+
+        @media (max-width: 1024px) {
+
+            :root,
+            html[data-theme=dark] {
+                --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                --shadow2: 0 2px 8px rgba(0, 0, 0, 0.06);
+            }
+
+            body:before,
+            body:after,
+            .bg {
+                display: none !important;
+                content: none;
+                animation: none !important;
+            }
+
+            body {
+                background: var(--bg) !important;
+                background-attachment: scroll !important;
+            }
         }
 
         body:after {
@@ -115,7 +138,17 @@
             z-index: -3;
             background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
             background-size: 72px 72px;
-            mask-image: linear-gradient(180deg, rgba(0, 0, 0, .3), transparent 88%)
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, .3), transparent 88%);
+            -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, .3), transparent 88%);
+        }
+
+        @media (max-width: 1024px) {
+            body:after {
+                mask-image: none;
+                -webkit-mask-image: none;
+                background-size: 48px 48px;
+                opacity: 0.4;
+            }
         }
 
         a {
@@ -127,7 +160,8 @@
         img {
             display: block;
             max-width: 100%;
-            height: auto
+            height: auto;
+            image-rendering: -webkit-optimize-contrast;
         }
 
         .bg {
@@ -148,7 +182,15 @@
 
         .orb {
             opacity: .72;
-            animation: float 18s ease-in-out infinite
+            animation: float 18s ease-in-out infinite;
+            pointer-events: none;
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .orb {
+                display: none !important;
+            }
         }
 
         .o1 {
@@ -184,7 +226,14 @@
             background: radial-gradient(circle, rgba(255, 255, 255, .15) 0%, rgba(184, 97, 34, .12) 40%, transparent 70%);
             opacity: 0;
             filter: blur(42px);
-            transition: opacity 0.4s ease
+            transition: opacity 0.4s ease;
+            pointer-events: none
+        }
+
+        @media (max-width: 1024px) {
+            .pointer {
+                display: none;
+            }
         }
 
         .shell {
@@ -218,7 +267,16 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, border-color 0.3s ease
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease
+        }
+
+        @media (max-width: 1024px) {
+            .nav-wrap {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: var(--nav);
+                border-width: 1px;
+            }
         }
 
         .brand {
@@ -306,7 +364,8 @@
         .nav a:hover {
             background: var(--accent);
             color: var(--accent-ink);
-            box-shadow: 0 8px 24px rgba(11, 11, 11, .12)
+            box-shadow: 0 8px 24px rgba(11, 11, 11, .12);
+            transform: translateY(-1px)
         }
 
         .page-main {
@@ -315,7 +374,9 @@
 
         .section {
             padding: 4rem 0;
-            scroll-margin-top: 4.5rem
+            scroll-margin-top: 4.5rem;
+            content-visibility: auto;
+            contain-intrinsic-size: 0 500px;
         }
 
         .split-section {
@@ -468,7 +529,7 @@
             border: 1px solid var(--line);
             border-radius: 2.5rem;
             box-shadow: var(--shadow);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
         }
 
         .portrait:hover {
@@ -569,7 +630,8 @@
         .service-card:hover {
             transform: translateY(-8px);
             border-color: var(--accent);
-            box-shadow: var(--shadow)
+            box-shadow: var(--shadow);
+            background: var(--surface2)
         }
 
         .service-icon {
@@ -635,7 +697,8 @@
         .project-card:hover {
             transform: translateY(-8px);
             border-color: var(--accent);
-            box-shadow: var(--shadow)
+            box-shadow: var(--shadow);
+            background: var(--surface2)
         }
 
         .project-content h3 {
@@ -795,11 +858,11 @@
 
         @keyframes drift {
             from {
-                transform: translate(0, 0)
+                transform: translate3d(0, 0, 0)
             }
 
             to {
-                transform: translate(2%, 2%)
+                transform: translate3d(2%, 2%, 0)
             }
         }
 
@@ -817,8 +880,8 @@
 
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0, 0, 1)
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0, 0, 1)
         }
 
         .reveal.active {
@@ -853,11 +916,14 @@
             .method {
                 text-align: left
             }
+
             .split-section {
                 min-height: auto;
                 padding: 4rem 0;
             }
-            .services-grid, .projects-grid {
+
+            .services-grid,
+            .projects-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                 gap: 1.5rem
             }
@@ -1063,6 +1129,20 @@
                 text-align: center;
                 font-size: 0.75rem;
             }
+
+            /* Mega Lite optimizations for lower end devices */
+            .portrait:hover,
+            .service-card:hover,
+            .project-card:hover,
+            .social-item:hover,
+            .method:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+
+            .section {
+                contain: layout paint;
+            }
         }
 
         /* Reduced Motion */
@@ -1152,7 +1232,7 @@
                         <div class="portrait">
                             <div class="frame">
                                 <img src="https://i.postimg.cc/NjZ9R8Z4/refined.png" alt="Portrait of Humayoun Kobir"
-                                    decoding="async" loading="eager">
+                                    decoding="async" loading="eager" fetchpriority="high">
                             </div>
                             <div class="portrait-meta">
                                 <div class="available">
@@ -1475,6 +1555,7 @@
             const themeMeta = document.querySelector('meta[name="theme-color"]');
 
             const setTheme = (theme) => {
+                if (root.getAttribute('data-theme') === theme && localStorage.getItem('portfolio-theme') === theme) return;
                 root.setAttribute('data-theme', theme);
                 localStorage.setItem('portfolio-theme', theme);
                 themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
@@ -1585,20 +1666,28 @@
 
             // 5. Section Heading Sticky Fade
             const stickyHeads = document.querySelectorAll('.split-section .section-title');
-            window.addEventListener('scroll', () => {
-                if (window.innerWidth < 1025) return;
+            let scrollTimeout;
 
-                stickyHeads.forEach(head => {
-                    const rect = head.getBoundingClientRect();
-                    if (rect.top < 150 && rect.top > 0) {
-                        const opacity = Math.max(0, (rect.top - 80) / 70);
-                        head.style.opacity = opacity.toString();
-                    } else if (rect.top <= 0) {
-                        head.style.opacity = "0";
-                    } else {
-                        head.style.opacity = "1";
-                    }
-                });
+            window.addEventListener('scroll', () => {
+                const isMobile = window.innerWidth < 1025;
+                if (isMobile) return;
+
+                if (!scrollTimeout) {
+                    scrollTimeout = requestAnimationFrame(() => {
+                        stickyHeads.forEach(head => {
+                            const rect = head.getBoundingClientRect();
+                            if (rect.top < 150 && rect.top > 0) {
+                                const opacity = Math.max(0, (rect.top - 80) / 70);
+                                head.style.opacity = opacity.toString();
+                            } else if (rect.top <= 0) {
+                                head.style.opacity = "0";
+                            } else {
+                                head.style.opacity = "1";
+                            }
+                        });
+                        scrollTimeout = null;
+                    });
+                }
             }, { passive: true });
         });
     </script>
