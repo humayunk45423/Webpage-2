@@ -1248,25 +1248,40 @@
             }
 
             .method {
-                padding: 0.65rem 1rem;
-                gap: 0.75rem;
-                border-radius: 1rem;
+                padding: 1rem 1.15rem;
+                gap: 1rem;
+                border-radius: 1.25rem;
+                min-height: auto;
             }
 
             .method-icon {
-                width: 2.25rem;
-                height: 2.25rem;
-                font-size: 1rem;
-                border-radius: 0.6rem;
-                flex: 0 0 2.25rem;
+                width: 2.75rem;
+                height: 2.75rem;
+                font-size: 1.25rem;
+                border-radius: 0.75rem;
+                flex: 0 0 2.75rem;
+            }
+
+            .method-main {
+                gap: 0.85rem;
             }
 
             .method-text strong {
-                font-size: 0.55rem;
+                font-size: 0.6rem;
             }
 
             .method-text span {
                 font-size: 0.85rem;
+                white-space: normal; /* Allow wrapping */
+                word-break: break-all; /* Prevent long strings from overflowing */
+                line-height: 1.4;
+            }
+
+            .copy-btn {
+                width: 2.25rem;
+                height: 2.25rem;
+                font-size: 0.9rem;
+                flex: 0 0 2.25rem;
             }
 
             .social-grid {
