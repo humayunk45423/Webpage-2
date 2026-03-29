@@ -57,8 +57,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%20%21%40%23%24%25%5E%26%2A%28%29-_%2B%3D%5B%5D%7B%7D%7C%3B%3A%27%22%2C.%3C%3E%3F%2F%5C"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
@@ -140,7 +141,8 @@
         body:after {
             content: "";
             position: fixed;
-            pointer-events: none
+            pointer-events: none;
+            will-change: transform;
         }
 
         body:before {
@@ -148,12 +150,11 @@
             z-index: -4;
             background:
                 radial-gradient(circle at 35% 35%, var(--l1) 0%, transparent 45%),
-                radial-gradient(circle at 53% 42%, var(--l2) 0%, transparent 42%),
-                radial-gradient(circle at 76% 18%, var(--l3) 0%, transparent 50%);
+                radial-gradient(circle at 53% 42%, var(--l2) 0%, transparent 42%);
             animation: drift 30s ease-in-out infinite alternate;
             transform: translate3d(0, 0, 0);
             will-change: transform;
-            opacity: 0.6;
+            opacity: 0.5;
             contain: strict;
         }
 
@@ -466,6 +467,7 @@
             scroll-margin-top: 4.5rem;
             content-visibility: auto;
             contain-intrinsic-size: 0 500px;
+            contain: layout paint;
         }
 
         .split-section {
@@ -1272,8 +1274,10 @@
 
             .method-text span {
                 font-size: 0.85rem;
-                white-space: normal; /* Allow wrapping */
-                word-break: break-all; /* Prevent long strings from overflowing */
+                white-space: normal;
+                /* Allow wrapping */
+                word-break: break-all;
+                /* Prevent long strings from overflowing */
                 line-height: 1.4;
             }
 
@@ -1355,7 +1359,7 @@
                 <a class="brand" href="#top" aria-label="Go to top">
                     <span class="mark">
                         <img src="https://i.postimg.cc/nhqTbFH1/Logo-Animation.gif"
-                            alt="Humayoun Kobir - Animated Brand Logo" decoding="async">
+                            alt="Humayoun Kobir - Animated Brand Logo" decoding="async" fetchpriority="high">
                     </span>
                     <span class="brand-text">
                         <strong>Humayoun Kobir</strong>
@@ -1432,7 +1436,7 @@
             <section class="section split-section" id="services">
                 <div class="container">
                     <h2 class="section-title reveal">Services</h2>
-                    <div class="services-grid">
+                    <div class="services-grid" style="contain: layout;">
                         <article class="service-card reveal">
                             <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
                             <h3>Graphic Design</h3>
@@ -1507,7 +1511,7 @@
             <section class="section split-section" id="projects">
                 <div class="container">
                     <h2 class="section-title reveal">Projects</h2>
-                    <div class="projects-grid">
+                    <div class="projects-grid" style="contain: layout;">
                         <article class="project-card reveal">
                             <div class="project-content">
                                 <h3>Sadia Variety Store</h3>
@@ -1663,19 +1667,22 @@
                                         <span id="emailText">humayunk45423@gmail.com</span>
                                     </div>
                                 </a>
-                                <button class="copy-btn" title="Copy Email" onclick="copyContact('humayunk45423@gmail.com', this)">
+                                <button class="copy-btn" title="Copy Email"
+                                    onclick="copyContact('humayunk45423@gmail.com', this)">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
                             </div>
                             <div class="method" id="waMethod">
-                                <a href="https://wa.me/8801721445207" target="_blank" class="method-main" aria-label="Chat on WhatsApp">
+                                <a href="https://wa.me/8801721445207" target="_blank" class="method-main"
+                                    aria-label="Chat on WhatsApp">
                                     <div class="method-icon"><i class="fa-brands fa-whatsapp"></i></div>
                                     <div class="method-text">
                                         <strong>Instant Response</strong>
                                         <span id="waText">+8801721445207</span>
                                     </div>
                                 </a>
-                                <button class="copy-btn" title="Copy Number" onclick="copyContact('+8801721445207', this)">
+                                <button class="copy-btn" title="Copy Number"
+                                    onclick="copyContact('+8801721445207', this)">
                                     <i class="fa-solid fa-copy"></i>
                                 </button>
                             </div>
@@ -1842,11 +1849,16 @@
                 animating: false,
                 isTypingVisible: false,
                 scrollY: 0,
-                titlePositions: []
+                lastScrollY: -1,
+                titlePositions: [],
+                winW: window.innerWidth,
+                winH: window.innerHeight
             };
 
             const computePositions = () => {
-                const sy = window.scrollY || window.pageYOffset;
+                const sy = state.scrollY;
+                state.winW = window.innerWidth;
+                state.winH = window.innerHeight;
                 state.titlePositions = Array.from(stickyHeads).map(head => {
                     const rect = head.getBoundingClientRect();
                     return {
@@ -1882,14 +1894,18 @@
 
                 // 2. Zero-Layout Scroll Logic (The Peak) + Glider Sync
                 const sy = state.scrollY;
-                if (window.innerWidth >= 1024) {
+                const winW = state.winW;
+
+                if (winW >= 1024) {
                     // Update Page Reveals (Throttled via loop)
-                    state.titlePositions.forEach(pos => {
+                    const titlePositions = state.titlePositions;
+                    for (let i = 0; i < titlePositions.length; i++) {
+                        const pos = titlePositions[i];
                         const relativeTop = pos.top - sy;
                         if (relativeTop < 250 && relativeTop > -100) {
                             if (relativeTop < 150 && relativeTop > 0) {
-                                const opacity = Math.max(0, (relativeTop - 80) / 70);
-                                if (pos.el.style.opacity !== opacity.toString()) pos.el.style.opacity = opacity.toString();
+                                const opacity = ((relativeTop - 80) / 70).toFixed(2);
+                                if (pos.el.style.opacity !== opacity) pos.el.style.opacity = opacity;
                             } else if (relativeTop <= 0) {
                                 if (pos.el.style.opacity !== "0") pos.el.style.opacity = "0";
                             } else {
@@ -1898,7 +1914,7 @@
                         } else if (pos.el.style.opacity !== "" && relativeTop >= 250) {
                             pos.el.style.opacity = "";
                         }
-                    });
+                    }
 
                     // Update Glider (Pixel Perfect Sync)
                     if (typeof updateGliderSync === "function") updateGliderSync();
@@ -1907,7 +1923,6 @@
                 if (needsUpdate || state.isMoving || (sy !== state.lastScrollY)) {
                     state.lastScrollY = sy;
                     requestAnimationFrame(updateLoop);
-                    state.animating = true;
                 } else {
                     state.animating = false;
                 }
@@ -2034,10 +2049,10 @@
                 navigator.clipboard.writeText(text).then(() => {
                     const icon = btn.querySelector('i');
                     const originalClass = icon.className;
-                    
+
                     btn.classList.add('copied');
                     icon.className = 'fa-solid fa-check';
-                    
+
                     setTimeout(() => {
                         btn.classList.remove('copied');
                         icon.className = originalClass;
