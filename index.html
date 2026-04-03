@@ -1141,16 +1141,21 @@
         }
 
         .social-item:hover {
-            border-color: var(--accent);
+            border-color: transparent;
             transform: translateY(-10px);
-            background: var(--surface2);
+            background-image: linear-gradient(var(--surface2), var(--surface2)), var(--vibrant-gradient);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
             box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.2), 0 0 20px var(--soft);
             z-index: 10;
         }
 
         .social-item i {
             font-size: 1.25rem;
-            color: var(--accent)
+            background: var(--vibrant-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .social-item span {
