@@ -300,7 +300,7 @@
         });
         // Disable F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J, Ctrl+U
         document.addEventListener('keydown', function (e) {
-            if (e.key === '' ||
+            if (e.key === 'F12' ||
                 (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J' || e.key === 'i' || e.key === 'c' || e.key === 'j')) ||
                 (e.ctrlKey && (e.key === 'U' || e.key === 'u'))) {
                 e.preventDefault();
@@ -314,6 +314,6 @@
             const after = new Date().getTime();
             if (after - before > 100) {
                 // If it paused, they have DevTools open. You can redirect or clear the body.
-                document.body.innerHTML = "Inspector detected. Nice try! ðŸ˜‰";
+                document.body.innerHTML = "Inspector detected. Nice try!😏;
             }
         }, 1000);
