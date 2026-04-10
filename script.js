@@ -307,13 +307,91 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
-// Anti-DevTools Debugger Trap
+// Anti-DevTools Security Trap
 setInterval(function () {
     const before = new Date().getTime();
-    debugger; // This will pause the site if DevTools is open
+    debugger; // Pauses execution if DevTools is open
     const after = new Date().getTime();
+
     if (after - before > 100) {
-        // If it paused, they have DevTools open. You can redirect or clear the body.
-        document.body.innerHTML = "Inspector detected. Nice try!😏";
+        if (!document.getElementById('troll-overlay')) {
+            const rickrollUrl = "https://www.youtube.com/watch?v=iik25wqIuFo";
+
+            const style = document.createElement('style');
+            style.textContent = `
+                #troll-overlay {
+                    position: fixed;
+                    inset: 0;
+                    background: #050505;
+                    z-index: 9999999;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    color: #ffffff;
+                    font-family: "Manrope", sans-serif;
+                    text-align: center;
+                    padding: 2rem;
+                    cursor: default;
+                }
+                .troll-alert-btn {
+                    font-size: clamp(1.2rem, 3vw, 2rem);
+                    font-weight: 800;
+                    margin-bottom: 2rem;
+                    padding: 1.5rem 3.5rem;
+                    border: 2px solid #ff6b00;
+                    border-radius: 1.5rem;
+                    color: #ff6b00;
+                    background: rgba(255, 107, 0, 0.05);
+                    cursor: pointer;
+                    animation: glitch 2s infinite;
+                }
+                @keyframes glitch {
+                    0% { transform: translate(0); text-shadow: none; }
+                    2% { transform: translate(-2px, 2px); text-shadow: 2px 0 #fff, -2px 0 #ff6b00; }
+                    4% { transform: translate(2px, -2px); text-shadow: -2px 0 #fff, 2px 0 #ff6b00; }
+                    6% { transform: translate(0); text-shadow: none; }
+                }
+                .troll-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    background: #ff6b00;
+                    color: #000000;
+                    padding: 1.25rem 3rem;
+                    border-radius: 999px;
+                    font-size: 1.3rem;
+                    font-weight: 800;
+                    cursor: pointer;
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    box-shadow: 0 10px 40px rgba(255, 107, 0, 0.4);
+                }
+                .troll-btn:hover {
+                    transform: translateY(-8px) scale(1.05);
+                    box-shadow: 0 25px 60px rgba(255, 107, 0, 0.6);
+                    background: #ffba00;
+                }
+            `;
+            document.head.appendChild(style);
+
+            const overlay = document.createElement('div');
+            overlay.id = 'troll-overlay';
+            overlay.innerHTML = `
+                <div class="troll-alert-btn">Inspector detected. Nice try!😏</div>
+                <div class="troll-btn">
+                    <i class="fa-solid fa-house"></i> Click here to back
+                </div>
+            `;
+
+            // Handle clicking anywhere on the screen or specific buttons
+            const trapAction = () => { window.location.href = rickrollUrl; };
+            overlay.addEventListener('click', trapAction);
+
+            document.body.innerHTML = '';
+            document.body.appendChild(overlay);
+            document.body.style.overflow = 'hidden';
+
+            Object.freeze(document.body);
+        }
     }
 }, 1000);
