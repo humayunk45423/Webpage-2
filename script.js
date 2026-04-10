@@ -1,4 +1,4 @@
-﻿/**
+/**
          * Humayoun Kobir | Portfolio Logic
          * Optimized for performance and smoothness.
          */
@@ -314,6 +314,6 @@
             const after = new Date().getTime();
             if (after - before > 100) {
                 // If it paused, they have DevTools open. You can redirect or clear the body.
-                document.body.innerHTML = "Inspector detected. Nice try!😏;
+                document.body.innerHTML = "Inspector detected. Nice try!";
             }
         }, 1000);
