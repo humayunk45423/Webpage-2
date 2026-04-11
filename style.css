@@ -745,6 +745,7 @@
         }
 
         .chips li {
+            position: relative;
             font-size: 0.75rem;
             font-weight: 700;
             padding: 0.35rem 0.75rem;
@@ -752,13 +753,20 @@
             border: 1px solid var(--line);
             border-radius: 999px;
             color: var(--text);
-            transition: all 0.3s var(--bezier);
+            white-space: nowrap;
+            transition: border-color .3s, background .3s, color .3s, transform .3s, box-shadow .3s;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+            /* Hardware acceleration to prevent sub-pixel glitches */
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            will-change: transform, background, border-color;
+            background-clip: padding-box;
+            overflow: hidden;
         }
 
         @media (hover: hover) {
             .chips li:hover {
-                border-color: transparent;
+                border-color: var(--accent);
                 color: var(--accent-ink);
                 transform: translateY(-3px);
                 background: var(--vibrant-gradient);
@@ -766,6 +774,7 @@
             }
 
             html[data-theme=dark] .chips li:hover {
+                border-color: rgba(255, 255, 255, 0.4);
                 background: var(--vibrant-gradient);
             }
         }
