@@ -1072,8 +1072,9 @@
         }
 
         .social-item span {
-            font-size: 1.25rem;
-            font-weight: 700
+            font-size: 1.1rem;
+            font-weight: 700;
+            white-space: nowrap;
         }
 
         .footer {
@@ -1166,9 +1167,23 @@
             }
 
             .contact-layout {
-                grid-template-columns: 1.1fr 0.9fr;
-                gap: 2rem;
+                grid-template-columns: 1fr 1.2fr;
+                gap: 4rem;
                 align-items: center;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 1.25rem;
+            }
+
+            .contact-methods,
+            .social-grid {
+                width: 100%;
+            }
+
+            .method {
+                text-align: left;
             }
 
             .reveal {
@@ -1212,8 +1227,33 @@
         @media (max-width: 768px) {
             .contact-layout {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 2rem;
                 text-align: center;
+            }
+
+            .contact-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-methods {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+                width: 100%;
+            }
+
+            .social-item span {
+                font-size: 0.95rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .hero-grid {
