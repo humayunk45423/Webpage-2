@@ -229,11 +229,14 @@
         .header {
             position: sticky;
             top: 0;
-            z-index: 100;
-            padding: 1.25rem 0 0
+            z-index: 1000;
+            padding: 1.25rem 0 0;
+            background: transparent;
+            pointer-events: none;
         }
 
         .nav-wrap {
+            pointer-events: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -390,7 +393,7 @@
 
         .section {
             padding: 4rem 0;
-            scroll-margin-top: 4.5rem;
+            scroll-margin-top: 6rem;
             content-visibility: auto;
             contain-intrinsic-size: 1px 500px;
             contain: layout style;
@@ -884,9 +887,9 @@
 
         .contact-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: flex-end
+            grid-template-columns: 1fr 1.2fr;
+            gap: clamp(2rem, 5vw, 5rem);
+            align-items: center;
         }
 
         .contact-info h2 {
@@ -1034,15 +1037,15 @@
 
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem
+            grid-template-columns: repeat(auto-fit, minmax(clamp(160px, 18vw, 260px), 1fr));
+            gap: clamp(1rem, 1.5vw, 1.5rem);
         }
 
         .social-item {
             display: flex;
             align-items: center;
-            gap: 1.25rem;
-            padding: 1.5rem 1.75rem;
+            gap: 1rem;
+            padding: clamp(1rem, 2vw, 1.5rem) clamp(1.25rem, 2.5vw, 1.75rem);
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: 1.75rem;
@@ -1064,17 +1067,21 @@
         }
 
         .social-item i {
-            font-size: 1.5rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
             background: var(--vibrant-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            flex-shrink: 0;
         }
 
         .social-item span {
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 1.1vw, 1.1rem);
             font-weight: 700;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-width: 0;
         }
 
         .footer {
@@ -1167,13 +1174,32 @@
             }
 
             .contact-layout {
-                grid-template-columns: 1fr 1.2fr;
-                gap: 4rem;
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .contact-info {
+                display: flex;
+                flex-direction: column;
                 align-items: center;
+                text-align: center;
+            }
+
+            .contact-methods,
+            .social-grid {
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+            }
+
+            .method {
+                text-align: left;
             }
 
             .social-grid {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
                 gap: 1.25rem;
             }
 
@@ -1603,7 +1629,7 @@
             }
 
             .social-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
                 gap: 0.75rem;
                 margin-top: 0.75rem;
             }
