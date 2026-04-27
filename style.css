@@ -703,11 +703,12 @@
             position: relative;
             overflow: hidden;
             contain: layout style;
+            will-change: transform;
         }
 
         @media (hover: hover) {
             .service-card:hover {
-                transform: translateY(-12px);
+                transform: translateY(-12px) translate3d(0,0,0);
                 border-color: var(--accent-line);
                 box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.18), 0 0 20px var(--soft);
                 background: var(--surface2);
@@ -828,6 +829,7 @@
             overflow: hidden;
             transition: all 0.45s var(--bezier);
             contain: layout style;
+            will-change: transform;
         }
 
         .project-card:hover {
