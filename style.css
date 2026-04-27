@@ -1158,11 +1158,16 @@
                 margin-right: auto;
             }
 
-            .hero-grid,
-            .contact-layout {
+            .hero-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 2.5rem;
                 text-align: center
+            }
+
+            .contact-layout {
+                grid-template-columns: 1.1fr 0.9fr;
+                gap: 2rem;
+                align-items: center;
             }
 
             .reveal {
@@ -1198,8 +1203,20 @@
 
             .services-grid,
             .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 1.5rem
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .hero-grid {
+                gap: 1.5rem;
             }
         }
 
