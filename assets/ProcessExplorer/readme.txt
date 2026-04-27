@@ -1,0 +1,1 @@
+Process Explorer, part of the Microsoft Sysinternals suite, is an advanced Windows task manager that provides real-time monitoring of running processes, DLLs, and handles. It excels at identifying resource hogs, malware, and locked files by offering a detailed, hierarchical view of process activity and system resource usage, such as CPU, memory, and GPU.

@@ -1,0 +1,16 @@
+AppDoze.net
+============================
+How to Install the Application
+===========================
+1. Install Application using exe file in Setup folder
+2. Close the Application completely (Even from system tray and task manager)
+3. Copy revouninstallerpro5.lic file from Crack folder to "C:\ProgramData\VS Revo Group\Revo Uninstaller Pro\"
+4. Confirm replacing if asked
+5. Enjoy the Application
+
+==========================
+For Direct and full speed downloads kindly visit https://Appdoze.net
+
+Windows Apps: https://appdoze.net/category/windows/
+Android Apps: https://appdoze.net/category/android/
+MacOS Apps: https://appdoze.net/category/mac/

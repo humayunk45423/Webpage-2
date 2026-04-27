@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Hub | Humayoun Kobir Repository</title>
+    <meta name="description"
+        content="A curated collection of essential software, optimization scripts, and technical guides by Humayoun Kobir. High-performance tools for PC optimization and creative workflows.">
+    <meta name="author" content="Humayoun Kobir">
+    <link rel="canonical" href="https://humayounkobir.vercel.app/files.html">
+
+    <!-- Open Graph Meta -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Software Hub | Humayoun Kobir Repository">
+    <meta property="og:description" content="Essential PC optimization tools and high-performance scripts.">
+    <meta property="og:image" content="assets/site-images/refined.webp">
+    <link rel="icon" type="image/png" href="assets/site-images/Artboard_1logo_border_radious.png">
+
+    <!-- Fonts & Icons (Optimized) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Shared Style -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Symmetrical Layout */
+        .files-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            min-height: 80vh;
+        }
+
+        .explorer-header {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .header-top {
+            text-align: left;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--vibrant-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--vibrant-gradient);
+            border-radius: 2px;
+            margin-top: 0.25rem;
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 !important;
+        }
+
+        .category-pills {
+            display: flex;
+            gap: 0.75rem;
+            margin: 0 !important;
+            flex-wrap: wrap;
+            /* Changed to wrap for desktop to avoid clipping */
+            padding: 0.5rem 0.2rem;
+        }
+
+        .pill {
+            padding: 0.65rem 1.25rem;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--muted);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s var(--bezier);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .pill:hover {
+            border-color: var(--accent);
+            color: var(--text);
+            transform: translateY(-3px);
+        }
+
+        .pill.active {
+            background: var(--vibrant-gradient);
+            color: var(--accent-ink);
+            border-color: transparent;
+            box-shadow: 0 10px 20px var(--soft);
+        }
+
+        /* Views */
+        #explorerView,
+        #detailView {
+            display: none;
+            animation: fadeIn 0.5s var(--bezier);
+            width: 100%;
+        }
+
+        #explorerView.active,
+        #detailView.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Explorer Mode */
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 500px;
+        }
+
+        .file-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 1.75rem;
+            padding: 1.25rem;
+            transition: all 0.45s var(--bezier);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .file-card:hover {
+            transform: translateY(-8px);
+            background: var(--bg2);
+            box-shadow: 0 25px 50px -10px var(--soft);
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .group-header {
+            grid-column: 1 / -1;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 1.25rem 0 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            animation: fadeIn 0.8s var(--bezier);
+        }
+
+        @media (max-width: 600px) {
+            .group-header {
+                margin: 0.5rem 0 0.5rem;
+                font-size: 0.9rem;
+                gap: 0.75rem;
+            }
+        }
+
+        .group-header i {
+            font-size: 1.25rem;
+        }
+
+        .group-header::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+        }
+
+        .file-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            background: var(--vibrant-gradient);
+            border-radius: 1.15rem;
+            display: grid;
+            place-items: center;
+            font-size: 1.5rem;
+            color: var(--accent-ink);
+            box-shadow: 0 8px 20px -5px var(--soft);
+            transition: all 0.4s var(--bezier);
+        }
+
+        .file-card:hover .file-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .file-meta h3 {
+            margin: 0 0 0.25rem;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .file-meta span {
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        /* Detail View Mode */
+        .detail-mode .explorer-header {
+            display: none;
+        }
+
+        .detail-page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            cursor: pointer;
+            transition: all 0.3s var(--bezier);
+            border: 1px solid var(--line);
+        }
+
+        .back-btn:hover {
+            border-color: var(--accent);
+            transform: translateX(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .detail-grid > * {
+            min-width: 0;
+        }
+
+        .detail-hero-column {
+            position: sticky;
+            top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            padding: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 2.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow2);
+            text-align: center;
+        }
+
+        .detail-hero-info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .detail-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--vibrant-gradient);
+            color: var(--accent-ink);
+            border-radius: 1.75rem;
+            display: grid;
+            place-items: center;
+            font-size: 2.2rem;
+            box-shadow: 0 20px 40px var(--soft);
+            margin: 0 auto 0.5rem;
+        }
+
+        .detail-hero-info h1 {
+            font-size: 1.75rem;
+            font-weight: 900;
+            margin: 0 0 0.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .version-badge {
+            display: inline-flex;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            background: var(--soft);
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 0.75rem;
+            border: 1px solid var(--accent-line);
+        }
+
+        .download-hero {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem;
+            border-radius: 1.25rem;
+            background: var(--vibrant-gradient);
+            color: var(--accent-ink);
+            font-size: 1.05rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.4s var(--bezier);
+            box-shadow: 0 10px 30px var(--soft);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .download-hero:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px var(--soft);
+        }
+
+        .btn-secondary-soft {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.1rem;
+            border-radius: 1.25rem;
+            background: var(--bg2);
+            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--line);
+        }
+
+        .btn-secondary-soft:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--soft);
+        }
+
+        .copy-card {
+            background: var(--bg2);
+            padding: 1.25rem;
+            border-radius: 1.25rem;
+            border: 1px solid var(--line);
+            text-align: left;
+        }
+
+        .copy-card span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        /* Detail Page Components */
+        .adobe-ps {
+            background: linear-gradient(135deg, #001E36, #00A9E5);
+            color: #fff !important;
+            margin-bottom: 1rem;
+            border: none;
+            box-shadow: 0 10px 25px rgba(0, 169, 229, 0.3);
+        }
+
+        .adobe-ai {
+            background: linear-gradient(135deg, #330000, #FF9A00);
+            color: #fff !important;
+            border: none;
+            box-shadow: 0 10px 25px rgba(255, 154, 0, 0.3);
+        }
+
+        .sidebar-divider {
+            border-top: 1px solid var(--line);
+            padding-top: 1rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .sidebar-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .command-block {
+            margin-bottom: 2rem;
+            background: var(--bg2);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--line);
+        }
+
+        .command-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .command-desc {
+            margin: 0 0 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .command-pre {
+            margin: 0 0 1rem;
+            padding: 1rem;
+        }
+
+        .command-code {
+            font-size: 0.85rem;
+        }
+
+        .readme-meta {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .readme-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .readme-item i {
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+        }
+
+        .copy-card code {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            word-break: break-all;
+        }
+
+        .copy-btn-small {
+            width: 100%;
+            padding: 0.65rem;
+            border-radius: 0.85rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            color: var(--text);
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn-small:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--soft);
+        }
+
+        .readme-section {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 2.5rem;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .readme-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text);
+        }
+
+        .readme-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+        }
+
+        .readme-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--muted);
+            white-space: pre-wrap;
+        }
+
+        pre {
+            background: var(--bg2);
+            color: var(--text);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.95rem;
+            border: 1px solid var(--line);
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+            max-width: 100%;
+        }
+
+        .pre-copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            padding: 0.4rem 0.8rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            color: var(--text);
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pre-copy-btn:hover {
+            background: var(--accent);
+            color: var(--accent-ink);
+            border-color: var(--accent);
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 500px;
+            margin: 2rem 0 3rem;
+            animation: fadeIn 0.8s var(--bezier);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 1.1rem;
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 1.25rem;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s var(--bezier);
+            box-shadow: var(--shadow);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--bg2);
+            box-shadow: 0 0 0 4px var(--soft), 0 15px 30px -5px var(--soft);
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 2rem !important;
+            padding: 2rem 0;
+            border-top: 1px solid var(--line);
+            text-align: center;
+            opacity: 0.6;
+            font-size: 0.85rem;
+        }
+
+        /* Robust Copy Toast */
+        .copy-toast {
+            position: fixed !important;
+            bottom: 4rem;
+            left: 50%;
+            transform: translate(-50%, 20px) !important;
+            background: var(--surface) !important;
+            color: var(--accent) !important;
+            padding: 0.85rem 1.75rem;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            border: 2px solid var(--accent-line) !important;
+            backdrop-filter: blur(25px) !important;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5) !important;
+            transition: all 0.4s var(--bezier) !important;
+            z-index: 999999 !important;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            white-space: nowrap;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        .copy-toast.show {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translate(-50%, 0) !important;
+            pointer-events: all !important;
+        }
+
+        @media (max-width: 1024px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .detail-hero-column {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .files-layout {
+                margin-top: 0;
+                padding: 0.75rem;
+                border-radius: 1.25rem;
+            }
+
+            .explorer-header {
+                gap: 0.5rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .controls-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.75rem;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+
+            .search-box input {
+                padding: 0.85rem 1rem 0.85rem 3rem;
+                font-size: 0.95rem;
+                border-radius: 1rem;
+            }
+
+            .category-pills {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+                width: 100%;
+                margin: 0 !important;
+                padding: 0.25rem 0 0.5rem;
+                overflow-x: visible;
+            }
+
+            .pill {
+                width: 100%;
+                justify-content: center;
+                padding: 0.75rem 1rem;
+                font-size: 0.85rem;
+                border-radius: 0.85rem;
+            }
+
+            /* Make 'Scripts & Tools' span both columns */
+            .pill[data-category="text"] {
+                grid-column: 1 / span 2;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+                margin-bottom: 0.5rem;
+                text-align: left;
+            }
+
+            .header-top {
+                text-align: left;
+            }
+
+            .file-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.65rem;
+                padding: 0 0.25rem;
+            }
+
+            .file-card {
+                padding: 1rem 0.65rem;
+                border-radius: 1.15rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 0.75rem;
+            }
+
+            .file-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .file-icon {
+                width: 2.75rem;
+                height: 2.75rem;
+                font-size: 1.15rem;
+                margin: 0 auto;
+                border-radius: 0.85rem;
+            }
+
+            .file-meta h3 {
+                font-size: 0.85rem;
+                line-height: 1.2;
+                margin-bottom: 0.25rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .file-meta span {
+                font-size: 0.6rem;
+                display: block;
+                opacity: 0.8;
+            }
+
+            /* Detail View Mobile Polish */
+            .detail-page {
+                padding: 0;
+            }
+
+            .back-btn {
+                margin-bottom: 1.5rem;
+                padding: 0.6rem 1.25rem;
+                font-size: 0.85rem;
+            }
+
+            .detail-hero-column {
+                padding: 1.25rem 1rem;
+                border-radius: 1.25rem;
+                gap: 1rem;
+            }
+
+            .detail-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 1.75rem;
+                border-radius: 1.25rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .detail-hero-info h1 {
+                font-size: 1.15rem;
+                line-height: 1.2;
+                margin: 0 0 0.25rem;
+            }
+
+            .readme-section {
+                padding: 1.25rem;
+                border-radius: 1.5rem;
+            }
+
+            .readme-content {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .version-badge {
+                padding: 0.25rem 0.75rem;
+                font-size: 0.65rem;
+            }
+
+            .download-hero {
+                padding: 1rem;
+                font-size: 0.9rem;
+                border-radius: 1rem;
+            }
+
+            .btn-secondary-soft {
+                padding: 0.85rem;
+                font-size: 0.85rem;
+                border-radius: 1rem;
+            }
+
+            .copy-card {
+                padding: 1rem;
+                border-radius: 1rem;
+            }
+
+
+            .readme-title {
+                font-size: 1.25rem;
+            }
+
+            .command-block {
+                padding: 1rem;
+                border-radius: 1.25rem;
+            }
+
+            .command-desc {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Allow Selection for Code and Readme */
+        pre,
+        code,
+        .readme-content {
+            user-select: text !important;
+            -webkit-user-select: text !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <span class="orb o1"></span>
+        <span class="orb o2"></span>
+        <span class="orb o3"></span>
+    </div>
+
+    <div class="shell">
+        <header class="header">
+            <div class="container">
+                <div class="nav-wrap">
+                    <a href="index.html" class="brand">
+                        <div class="mark"><img src="assets/site-images/Logo-Animation.gif" alt="HK"></div>
+                        <div class="brand-text"><strong>Humayoun Kobir</strong><small>Repository</small></div>
+                    </a>
+                    <nav class="nav">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#projects">Projects</a>
+                        <a href="index.html#contact">Contact</a>
+                    </nav>
+                    <button class="toggle" id="themeToggle"><i id="themeIcon" class="fa-solid fa-moon"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <main class="page-main container">
+            <div class="files-layout" id="mainLayout">
+                <section class="explorer-header">
+                    <div class="header-top">
+                        <h1 class="section-title">Software Hub</h1>
+                    </div>
+
+                    <div class="controls-row">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="fileSearch" placeholder="Search essential tools...">
+                        </div>
+
+                        <div class="category-pills">
+                            <div class="pill active" data-category="all"><i class="fa-solid fa-layer-group"></i> All
+                            </div>
+                            <div class="pill" data-category="software"><i class="fa-solid fa-compact-disc"></i>
+                                Softwares</div>
+                            <div class="pill" data-category="text"><i class="fa-solid fa-code"></i> Scripts & Tools
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div id="explorerView" class="active">
+                    <div class="file-grid" id="fileGrid"></div>
+                </div>
+
+                <div id="detailView">
+                    <div class="detail-page" id="detailContent"></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer container">
+            <p>&copy; 2026 Humayoun Kobir.</p>
+        </footer>
+    </div>
+
+    <div class="copy-toast" id="copyToast"><i class="fa-solid fa-circle-check"></i> Copied to clipboard!</div>
+
+    <script src="script.js"></script>
+    <script>
+        const fileData = [
+            { id: "autoruns", name: "Autoruns", category: "software", icon: "fa-solid fa-bolt", path: "assets/Autoruns/Autoruns.rar", readme: "## Overview\nStartup monitor utility.\n\n## Instructions\n1. Run autoruns64.exe as Admin." },
+            { id: "avro", name: "Avro Keyboard", category: "software", icon: "fa-solid fa-keyboard", path: "assets/Avro/setup_avrokeyboard_5.6.0.exe", readme: "## Overview\nBengali phonetic keyboard." },
+            { id: "bios-button", name: "BIOS Enter Button", category: "software", icon: "fa-solid fa-microchip", path: "assets/BIOS enter button/One click to Bios.rar", readme: "## What it does\nAn instant, one-click solution to identify and enter the correct BIOS/UEFI keys for your specific PC hardware without manual searching." },
+            { id: "cdi", name: "CrystalDiskInfo", category: "software", icon: "fa-solid fa-hard-drive", path: "assets/CrystalDiskInfo/CDI.rar", readme: "## Overview\nA professional HDD/SSD health monitoring tool that displays detailed hardware information and S.M.A.R.T. status to prevent data loss." },
+            { id: "cdm", name: "CrystalDiskMark", category: "software", icon: "fa-solid fa-gauge-high", path: "assets/CrystalDiskMark/CDM.rar", readme: "## Overview\nThe industry-standard disk benchmark utility to measure the read and write speeds of your storage drives." },
+            { id: "directx", name: "DirectX 11 Setup", category: "text", icon: "fa-solid fa-gamepad", path: "assets/DirectX 11 Setup.rar", readme: "## Overview\nEssential DirectX 11 Runtime components required to run modern games and high-performance graphics applications." },
+            { id: "easeus-recovery", name: "EaseUS Data Recovery", category: "software", icon: "fa-solid fa-database", path: "assets/EaseUS_Data_Recovery_Wizard_Technician_12.8.0_Multilingual/EaseUS_Data_Recovery_Wizard_Technician_12.8.0_Multilingual.rar", readme: "## Overview\nAdvanced data recovery software for technicians to retrieve lost, deleted, or formatted files from any storage device." },
+            { id: "easeus-partition", name: "EaseUS Partition Master", category: "software", icon: "fa-solid fa-layer-group", path: "assets/EaseUS_Partition_Master_13.0_Technician_Edition/EPM Technical Edition.rar", readme: "## Overview\nA comprehensive disk management tool for partitioning, merging, and optimizing your hard drives." },
+            { id: "glary", name: "Glary Utility Pro", category: "software", icon: "fa-solid fa-broom", path: "assets/Glary Utility/Glary_Utilities_v5.211.0.240.exe", copyLabel: "Serial Key", copyText: "3788-61679-58286-4470", readme: "## Activation\nUse the Serial Key provided below to unlock the Professional version features for system cleaning and optimization." },
+            { id: "goodbyedpi", name: "Good Bye DPI", category: "software", icon: "fa-solid fa-unlock", path: "assets/Good Bye DPI/goodbyedpi-0.2.2.rar", readme: "## Overview\nBypass Deep Packet Inspection." },
+            { id: "hitmanpro", name: "HitmanPro Scanner", category: "software", icon: "fa-solid fa-bug-slash", path: "assets/HitmanPro_3.8.28_Build_324/HitmanPro 3.8.rar", readme: "## Overview\nCloud-based malware scanner." },
+            {
+                id: "pc-opt", name: "PC Optimisation Guide", category: "text", icon: "fa-solid fa-bolt-lightning", path: "assets/Pc optimisation.txt", readme: "## Instructions\nRun Powershell as Administrator and execute the commands below.", commands: [
+                    { desc: "Chris Titus Tech Windows Utility", code: "irm \"https://christitus.com/win\" | iex" },
+                    { desc: "Windows & Office Activation (MAS)", code: "irm https://get.activated.win | iex" },
+                    { desc: "Disable Dynamic Tick (Fix Stutter)", code: "bcdedit /set disabledynamictick yes" },
+                    { desc: "Ultimate Performance Power Plan", code: "powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61" },
+                    { desc: "System File Checker (SFC Scan)", code: "sfc /scannow" },
+                    { desc: "DISM Image Restore Health", code: "DISM.exe /Online /Cleanup-image /Restorehealth" },
+                    { desc: "Disk Drive Health Check", code: "wmic Diskdrive get status" }
+                ]
+            },
+            { id: "registry-path", name: "Context Menu Registry", category: "text", icon: "fa-solid fa-code", path: "assets/Registry path of context menu.txt", content: "Computer\\HKEY_CLASSES_ROOT\\Directory\\Background\\shell" },
+            { id: "right-click-repair", name: "Right Click Repair Code", category: "text", icon: "fa-solid fa-wrench", path: "assets/Right click repare coad.txt", content: "shell:::{80F3F1D5-FECA-45F3-BC32-752C152E456E}" },
+            { id: "win-office-act", name: "Windows & Office Activator", category: "text", icon: "fa-solid fa-key", path: "assets/Windows Office Activation Script.txt", readme: "## Instructions\nRun Powershell as Administrator to use this script.", content: "irm https://get.activated.win | iex" },
+            { id: "pic-recovery", name: "Picture Recovery Software", category: "software", icon: "fa-solid fa-image", path: "assets/Picture Recovary Software/testdisk-7.3-WIP.rar", readme: "## Overview\nRecover lost images." },
+            { id: "process-explorer", name: "Process Explorer", category: "software", icon: "fa-solid fa-list-check", path: "assets/ProcessExplorer/PE.rar", readme: "## Overview\nSysinternals Process Explorer." },
+            { id: "revo", name: "Revo Uninstaller Pro", category: "software", icon: "fa-solid fa-eraser", path: "assets/Revo Uninstaller Pro 5.4.3 FINAL/Revo Uninsataller.rar", copyLabel: "Crack Path", copyText: "C:\\ProgramData\\VS Revo Group\\Revo Uninstaller Pro\\", readme: "## Instructions\nCopy lic file to crack path." },
+            { id: "win10-menu", name: "Win10 Right Click Menu", category: "text", icon: "fa-solid fa-window-restore", path: "assets/Windows 10 Right click menu/Old-Right-Click-Menu-WIndows-11.zip", readme: "## Overview\nWindows 10 context menu for Win 11." },
+            { id: "cursor", name: "Win11 Rounded Cursor", category: "text", icon: "fa-solid fa-arrow-pointer", path: "assets/Windows 11 rounded Cursor/windows_11 cursors.zip", readme: "## Overview\nRounded cursors for Win 11." },
+            { id: "winrar", name: "Winrar Pro", category: "software", icon: "fa-solid fa-file-zipper", path: "assets/Winrar/rarreg.rar", officialUrl: "https://www.win-rar.com/fileadmin/winrar-versions/winrar-x64-701.exe", sevenZipUrl: "https://www.7-zip.org/", readme: "## Instructions\n1. Install the Official WinRAR.\n2. Download the 'Activation Fix (.rar)' from the sidebar.\n3. Extract the 'rarreg.key' from the downloaded RAR file.\n4. Move the 'rarreg.key' to the WinRAR installation folder (usually C:\\Program Files\\WinRAR).\n\n## 7-Zip Alternative\nIf you prefer a free and open-source tool, I highly recommend **7-Zip**. It is the best alternative to WinRAR, completely free, and often achieves higher compression ratios than any other software." },
+            { id: "hwinfo", name: "HWiNFO (Hardware Info)", category: "software", icon: "fa-solid fa-microchip", path: "https://www.hwinfo.com/download/", installerUrl: "https://www.hwinfo.com/download/", portableUrl: "https://www.hwinfo.com/download/", readme: "## Overview\nHWiNFO is a professional hardware information and diagnostic tool supporting latest components, industry technologies and standards.\n\n## Important Note\nTo prevent being blocked by the server, please use the buttons on the left to go to the **Official Download Page**. From there, you can select the latest 'Local (U.S.)' or 'Fosshub' link to start your download.\n\n## Key Features\n- Comprehensive Hardware Monitoring\n- System Health Monitoring (Thermal, Voltage, Fan, Power)\n- Customizable Alerts and Extensions." },
+            { id: "adobe-suite", name: "Adobe Software Suite", category: "software", icon: "fa-solid fa-palette", path: "Adobe Software", photoshopUrl: "https://getitintopc.com/adobe-photoshop-cc-2020-free-download/", illustratorUrl: "https://getitintopc.com/adobe-illustrator-cc-2020-free-download/", readme: "## Pro Creative Suite\nThis package includes the most stable 2020 versions of Adobe's leading creative software.\n\n## Included Software\n Adobe Photoshop 2020: The world's best imaging and graphic design software.\n Adobe Illustrator 2020: The industry-standard vector graphics software.\n\n## Installation Guide\n1. Click the buttons on the left to go to the **Download Page**.\n2. Once on the site, scroll down to the blue 'Download' button.\n3. The password for all zip files is usually **123**." },
+            { id: "cru", name: "Custom Resolution Utility", category: "text", icon: "fa-solid fa-tv", path: "assets/cru-1.5.3/CRU.rar", readme: "## Overview\nCustom monitor resolutions." }
+        ];
+
+        const mainLayout = document.getElementById('mainLayout');
+        const explorerView = document.getElementById('explorerView');
+        const detailView = document.getElementById('detailView');
+        const fileGrid = document.getElementById('fileGrid');
+        const detailContent = document.getElementById('detailContent');
+        const fileSearch = document.getElementById('fileSearch');
+        const copyToast = document.getElementById('copyToast');
+
+        let currentCategory = 'all';
+
+        function renderCard(f) {
+            const ext = f.path.split('.').pop().toUpperCase();
+            const displayExt = ext.length > 5 ? 'LINK' : ext;
+            return `
+                <div class="file-card reveal active" onclick="showDetail('${f.id}')">
+                    <div class="file-info">
+                        <div class="file-icon"><i class="${f.icon}"></i></div>
+                        <div class="file-meta">
+                            <h3>${f.name}</h3>
+                            <span>${displayExt} • ${f.category.toUpperCase()}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderExplorer() {
+            const term = fileSearch.value.toLowerCase();
+            const filtered = fileData.filter(f => {
+                const catMatch = currentCategory === 'all' || f.category === currentCategory;
+                const searchMatch = f.name.toLowerCase().includes(term);
+                return catMatch && searchMatch;
+            });
+
+            const softwares = filtered.filter(f => f.category === 'software');
+            const scripts = filtered.filter(f => f.category === 'text');
+
+            let html = '';
+
+            if (softwares.length > 0) {
+                if (currentCategory === 'all') {
+                    html += `<div class="group-header"><i class="fa-solid fa-box-archive"></i> Software & Utilities</div>`;
+                }
+                html += softwares.map(renderCard).join('');
+            }
+
+            if (scripts.length > 0) {
+                if (currentCategory === 'all') {
+                    html += `<div class="group-header"><i class="fa-solid fa-code"></i> Scripts, Tools & Codes</div>`;
+                }
+                html += scripts.map(renderCard).join('');
+            }
+
+            if (html === '') {
+                html = `<div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--muted);">No matches found for "${term}"</div>`;
+            }
+
+            fileGrid.innerHTML = html;
+        }
+
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        let explorerScrollPos = 0;
+        function showDetail(id, isFromPopstate = false) {
+            if (!isFromPopstate) {
+                explorerScrollPos = window.scrollY;
+            }
+            const file = fileData.find(f => f.id === id);
+            if (!file) return;
+
+            mainLayout.classList.add('detail-mode');
+            explorerView.classList.remove('active');
+            detailView.classList.add('active');
+
+            const fileName = file.path.split('/').pop();
+            let heroHtml = `
+                <div class="detail-hero-info">
+                    <div class="detail-icon"><i class="${file.icon}"></i></div>
+                    <h1>${file.name}</h1>
+                    <span class="version-badge">${file.category.toUpperCase()} ASSET</span>
+                </div>
+            `;
+
+            if (file.id === 'winrar') {
+                heroHtml += `
+                    <a href="${file.officialUrl}" class="download-hero" target="_blank">
+                        <i class="fa-solid fa-download"></i> Official WinRAR
+                    </a>
+                    <a href="${file.path}" class="btn-secondary-soft" download="rarreg.rar" style="margin-bottom: 1rem">
+                        <i class="fa-solid fa-key"></i> Activation Fix (.rar)
+                    </a>
+                    <div class="sidebar-divider">
+                        <span class="sidebar-label">Best Alternative</span>
+                        <a href="${file.sevenZipUrl}" class="btn-secondary-soft" target="_blank">
+                            <i class="fa-solid fa-box-open"></i> 7-Zip Official Site
+                        </a>
+                    </div>
+                `;
+            } else if (file.id === 'adobe-suite') {
+                heroHtml += `
+                    <a href="${file.photoshopUrl}" class="download-hero adobe-ps" target="_blank">
+                        <i class="fa-solid fa-image"></i> Photoshop 2020
+                    </a>
+                    <a href="${file.illustratorUrl}" class="download-hero adobe-ai" target="_blank">
+                        <i class="fa-solid fa-pen-nib"></i> Illustrator 2020
+                    </a>
+                `;
+            } else if (file.id === 'hwinfo') {
+                heroHtml += `
+                    <a href="${file.path}" class="download-hero" target="_blank">
+                        <i class="fa-solid fa-download"></i> Go to Download Page
+                    </a>
+                    <div style="margin-top: 1rem; width: 100%">
+                        <a href="${file.installerUrl}" class="btn-secondary-soft" target="_blank" style="margin-top: 0.5rem">
+                            <i class="fa-solid fa-external-link"></i> Installer Version
+                        </a>
+                        <a href="${file.portableUrl}" class="btn-secondary-soft" target="_blank" style="margin-top: 0.5rem">
+                            <i class="fa-solid fa-external-link"></i> Portable Version
+                        </a>
+                    </div>
+                `;
+            } else if (file.content) {
+                heroHtml += `
+                    <div class="download-hero" style="background: var(--bg2); color: var(--accent); border: 1px solid var(--line); cursor: default;">
+                        <i class="fa-solid fa-copy"></i> Copy Script Below
+                    </div>
+                `;
+            } else {
+                heroHtml += `
+                    <a href="${file.path}" class="download-hero" download="${fileName}">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Download Now
+                    </a>
+                `;
+            }
+
+            let bodyHtml = '';
+            let copySection = '';
+            if (file.copyText) {
+                copySection = `
+                    <div class="copy-card" style="margin-top: 1.5rem">
+                        <span>${file.copyLabel}</span>
+                        <code>${file.copyText}</code>
+                        <button class="copy-btn-small" onclick="doCopy('${file.copyText.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;')}')">
+                            <i class="fa-solid fa-copy"></i> Copy ${file.copyLabel}
+                        </button>
+                    </div>
+                `;
+            }
+
+            const formatReadme = (text) => {
+                if (!text) return '';
+                return text
+                    .replace(/## (.*)/g, '<div class="readme-meta">$1</div>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/^- (.*)/gm, '<div class="readme-item"><i class="fa-solid fa-check"></i> $1</div>')
+                    .replace(/\n/g, '<br>');
+            };
+
+            if (file.category === 'text') {
+                let contentHtml = '';
+                if (file.commands) {
+                    contentHtml = file.commands.map(cmd => `
+                        <div class="command-block">
+                            <span class="command-label">Command Description</span>
+                            <p class="command-desc">${cmd.desc}</p>
+                            <pre class="command-pre"><code class="command-code">${cmd.code}</code></pre>
+                            <button class="copy-btn-small" onclick="doCopy('${cmd.code.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;')}')">
+                                <i class="fa-solid fa-copy"></i> Copy This Command
+                            </button>
+                        </div>
+                    `).join('');
+                } else if (file.content) {
+                    contentHtml = `
+                        <div class="command-block">
+                            <span class="command-label">Source Code</span>
+                            <pre class="command-pre"><code id="textContent" class="command-code">${file.content}</code></pre>
+                            <button class="copy-btn-small" onclick="doCopy(document.getElementById('textContent').innerText)">
+                                <i class="fa-solid fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                    `;
+                }
+
+                bodyHtml = `
+                    <section class="readme-section">
+                        ${file.readme ? `<div class="readme-content" style="margin-bottom: 2.5rem">${formatReadme(file.readme)}</div>` : ''}
+                        ${contentHtml ? `
+                            <h2 class="readme-title">${file.commands ? 'Optimization Scripts' : 'Asset Content'}</h2>
+                            ${contentHtml}
+                        ` : ''}
+                        ${copySection}
+                    </section>
+                `;
+            } else {
+                bodyHtml = `
+                    <section class="readme-section">
+                        <h2 class="readme-title">Documentation</h2>
+                        <div class="readme-content">${formatReadme(file.readme)}</div>
+                        ${copySection}
+                    </section>
+                `;
+            }
+
+            detailContent.innerHTML = `
+                <div class="back-btn" onclick="hideDetail()">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Explorer
+                </div>
+                <div class="detail-grid">
+                    <aside class="detail-hero-column">${heroHtml}</aside>
+                    ${bodyHtml}
+                </div>
+            `;
+
+            window.scrollTo({ top: 0, behavior: 'instant' });
+            if (!isFromPopstate) {
+                history.pushState({ view: 'detail', id: id }, '', `#${id}`);
+            }
+        }
+
+        function hideDetail(isFromPopstate = false) {
+            mainLayout.classList.remove('detail-mode');
+            detailView.classList.remove('active');
+            explorerView.classList.add('active');
+            
+            // Sync scroll instantly without rebuilding DOM
+            window.scrollTo({ top: explorerScrollPos, behavior: 'instant' });
+            
+            if (!isFromPopstate) {
+                history.pushState({ view: 'explorer' }, '', window.location.pathname);
+            }
+        }
+
+        let toastTimer;
+        function doCopy(text) {
+            function showToast() {
+                clearTimeout(toastTimer);
+                copyToast.classList.add('show');
+                toastTimer = setTimeout(() => copyToast.classList.remove('show'), 2000);
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(showToast).catch(() => {
+                    // Fallback if clipboard fails
+                    copyFallback(text);
+                    showToast();
+                });
+            } else {
+                copyFallback(text);
+                showToast();
+            }
+        }
+
+        function copyFallback(text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        }
+
+        // Initialize
+        renderExplorer();
+
+        fileSearch.addEventListener('input', renderExplorer);
+        document.querySelectorAll('.pill').forEach(item => {
+            item.onclick = () => {
+                document.querySelectorAll('.pill').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                currentCategory = item.dataset.category;
+                renderExplorer();
+            };
+        });
+
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.view === 'detail') { 
+                showDetail(e.state.id, true); 
+            } else { 
+                hideDetail(true); 
+            }
+        });
+
+        if (window.location.hash) {
+            const id = window.location.hash.substring(1);
+            showDetail(id, true);
+        } else {
+            history.replaceState({ view: 'explorer' }, '', window.location.pathname);
+            renderExplorer();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+Modifies Windows Explorer This PC User Folder Display in Windows 11
+See YouTube video for demo:
+https://www.youtube.com/watch?v=IPM9uVsoQsQ
+Double-click reg file(s) in add folder to enable individual or all items.
+Double-click reg files(s) in remove folder to disable individual or all items.
+After loading reg file(s) you can do one of three things to enable changes:
+1. Restart Explorer using Task Manager.
+2. Log out.
+3. Reboot PC.
+--
+Last updated 2022-12-11

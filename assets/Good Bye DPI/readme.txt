@@ -1,0 +1,1 @@
+GoodbyeDPI is a Windows-based, open-source utility designed to bypass Internet Service Provider (ISP) censorship and website filtering by tricking Deep Packet Inspection (DPI) systems. It modifies network traffic to make restricted websites appear accessible, without needing a VPN, altering your IP address, or significantly lowering internet speeds.

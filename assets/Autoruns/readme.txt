@@ -1,0 +1,1 @@
+Autoruns for Windows (part of Sysinternals) is a Microsoft utility that shows and manages all programs, drivers, and services configured to launch automatically during system boot or user login. 

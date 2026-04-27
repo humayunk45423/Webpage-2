@@ -1,0 +1,1 @@
+Double click on the file to shutdown and this directly take your pc to BIOS.

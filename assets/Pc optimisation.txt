@@ -1,0 +1,29 @@
+▶Commands|
+Run Powershell as Administrator
+
+irm https://get.activated.win | iex
+irm "https://christitus.com/win" | iex
+
+bcdedit /set disabledynamictick yes
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+sfc /scannow
+DISM.exe /Online /Cleanup-image /Restorehealth
+wmic
+Diskdrive get status
+
+▶Update Drivers
+➢NVIDIA | https://www.nvidia.com/
+➢AMD | https://www.amd.com/en/support
+➢Intel | https://downloadcenter.intel.com/
+
+Apps
+▶Revo Uninstaller | https://bit.ly/3eAA1tm
+▶Intel Graphics Commander | https://bit.ly/30LzOhX
+▶ParkControl | https://bitsum.com/parkcontrol/
+▶SystemCache | https://systweak-cacheboost.informer....
+▶AwdCleaner | https://bit.ly/37xh4pQ
+▶Unpark CPU | https://bit.ly/2KSoUmf
+▶Wise Cleaner | https://bit.ly/33BMgTW
+▶Swiftshader
+➢64 Bit https://bit.ly/3sDJxUN
+➢32 Bit https://bit.ly/3ipRnfS
