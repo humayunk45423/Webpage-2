@@ -881,14 +881,37 @@
                 font-size: 1.25rem;
             }
             
+            .readme-section {
+                border: none !important;
+                box-shadow: none !important;
+                padding: 1.5rem 1rem;
+                background: transparent;
+                width: 100%;
+                border-radius: 0;
+            }
+
+            .readme-title::after {
+                background: var(--line) !important;
+                opacity: 0.3;
+            }
+
             pre {
-                border-bottom: none !important;
+                border: none !important;
+                box-shadow: none !important;
                 margin: 1rem 0;
+                background: rgba(0,0,0,0.1) !important;
+            }
+
+            pre::-webkit-scrollbar {
+                display: none;
             }
 
             .command-block {
+                border: none !important;
+                box-shadow: none !important;
                 padding: 1rem;
-                border-radius: 1.25rem;
+                background: var(--bg2);
+                overflow: hidden;
             }
 
             .command-desc {
