@@ -965,7 +965,7 @@
             font-weight: 800;
             margin-bottom: 0.15rem;
         }
-
+        
         .method-text span {
             font-size: 1.1rem;
             font-weight: 900;
@@ -1033,7 +1033,7 @@
 
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem
         }
 
@@ -1041,13 +1041,15 @@
             display: flex;
             align-items: center;
             gap: 1.25rem;
-            padding: 1.25rem 1.5rem;
+            padding: 1.5rem 1.75rem;
             background: var(--surface);
             border: 1px solid var(--line);
-            border-radius: 1.5rem;
+            border-radius: 1.75rem;
             transition: all 0.4s var(--bezier);
             position: relative;
             z-index: 1;
+            min-width: 0;
+            overflow: hidden;
         }
 
         .social-item:hover {
@@ -1061,7 +1063,7 @@
         }
 
         .social-item i {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             background: var(--vibrant-gradient);
             -webkit-background-clip: text;
             background-clip: text;
@@ -1069,7 +1071,7 @@
         }
 
         .social-item span {
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             font-weight: 700
         }
 
@@ -1159,7 +1161,7 @@
             .hero-grid,
             .contact-layout {
                 grid-template-columns: 1fr;
-                gap: 2.5rem;
+                gap: 1.5rem;
                 text-align: center
             }
 
@@ -1543,20 +1545,30 @@
             }
 
             .social-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.5rem;
-                margin-top: 1rem;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 0.75rem;
+                margin-top: 0.75rem;
             }
 
             .social-item {
-                padding: 0.6rem 0.75rem;
-                gap: 0.5rem;
-                border-radius: 0.75rem;
-                min-height: 2.75rem;
+                padding: 1rem 0.75rem;
+                gap: 0.6rem;
+                border-radius: 1.25rem;
+                min-height: 3.5rem;
+                min-width: 0;
+                overflow: hidden;
+            }
+
+            .social-item i {
+                font-size: clamp(1.1rem, 5vw, 1.35rem);
+                flex-shrink: 0;
             }
 
             .social-item span {
-                font-size: 0.7rem;
+                font-size: clamp(0.75rem, 3.5vw, 0.95rem);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .footer {
