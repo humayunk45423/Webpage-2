@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Typing Animation
     const typingElement = document.getElementById('typing');
-    const words = ["Graphic Designer.", "Beginner 3D Artist.", "Data Entry Specialist.", "Computer Hardware Enthusiast."];
+    const words = ["Graphic Designer.", "Beginner 3D Artist.", "Data Entry Specialist.", "Computer Hardware Enthusiast.", "Vibe coder."];
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
