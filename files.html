@@ -456,7 +456,7 @@
 
         .command-block {
             margin-bottom: 2rem;
-            background: #000000;
+            background: var(--bg2);
             padding: 1.5rem;
             border-radius: 1.5rem;
             border: 1px solid var(--line);
@@ -577,8 +577,8 @@
         }
 
         pre {
-            background: #000000;
-            color: #ffffff;
+            background: var(--bg2);
+            color: var(--text);
             padding: 1.5rem;
             border-radius: 1rem;
             font-family: 'JetBrains Mono', 'Consolas', monospace;
@@ -881,40 +881,13 @@
                 font-size: 1.25rem;
             }
             
-            .readme-section {
-                border: none !important;
-                box-shadow: none !important;
-                padding: 1.5rem 1rem;
-                background: transparent;
-                width: 100%;
-                border-radius: 0;
-            }
-
-            .readme-title::after {
-                background: var(--line) !important;
-                opacity: 0.3;
-            }
-
-            pre {
-                border: none !important;
-                box-shadow: none !important;
-                margin: 1rem 0;
-                background: #000000 !important;
-                border-radius: 1rem;
-                color: #ffffff;
-            }
-
-            pre::-webkit-scrollbar {
-                display: none;
+            .readme-title {
+                font-size: 1.25rem;
             }
 
             .command-block {
-                border: none !important;
-                box-shadow: none !important;
                 padding: 1rem;
-                background: #000000 !important;
-                overflow: hidden;
-                border-radius: 1.5rem;
+                border-radius: 1.25rem;
             }
 
             .command-desc {
