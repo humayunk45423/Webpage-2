@@ -239,7 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (targetLeft !== undefined) {
-            // Restored width-based sizing to preserve perfect border-radius (pill shape)
+            // Force integers to prevent sub-pixel rendering artifacts on the border-radius
+            targetLeft = Math.round(targetLeft);
+            targetWidth = Math.round(targetWidth);
+            
             glider.style.transform = `translate3d(${targetLeft}px, 0, 0)`;
             glider.style.width = `${targetWidth}px`;
             glider.classList.add('visible');
