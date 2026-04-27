@@ -694,12 +694,10 @@
             border: 1px solid var(--line);
             border-radius: 2.25rem;
             transition: all 0.45s var(--bezier);
-            contain: content;
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
-            content-visibility: auto;
             contain: layout style;
         }
 
@@ -825,7 +823,6 @@
             border-radius: 2.25rem;
             overflow: hidden;
             transition: all 0.45s var(--bezier);
-            content-visibility: auto;
             contain: layout style;
         }
 
@@ -1383,8 +1380,8 @@
                 align-items: center;
                 text-align: center;
                 min-height: auto;
-                contain: content;
-                /* Isolate rendering for mobile perf */
+                contain: layout style;
+                /* Isolate rendering for mobile perf without clipping shadows */
             }
 
             .service-card h3,
