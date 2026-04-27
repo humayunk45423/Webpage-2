@@ -28,6 +28,8 @@
 
     <!-- Shared Style -->
     <link rel="stylesheet" href="style.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="referrer" content="no-referrer">
 
     <style>
         /* Symmetrical Layout */
@@ -99,7 +101,7 @@
             white-space: nowrap;
             font-size: 0.85rem;
             background: var(--surface);
-            border: 1px solid var(--line);
+            box-shadow: inset 0 0 0 1px var(--line);
             border-radius: 999px;
             color: var(--muted);
             font-weight: 700;
@@ -109,6 +111,7 @@
             align-items: center;
             gap: 0.75rem;
             backdrop-filter: blur(10px);
+            border: 0;
         }
 
         .pill:hover {
@@ -120,15 +123,19 @@
         .pill.active {
             background: var(--vibrant-gradient);
             color: var(--accent-ink);
-            border-color: transparent;
             box-shadow: 0 10px 20px var(--soft);
         }
 
         /* Views */
-        #explorerView,
+        #explorerView {
+            display: none;
+            animation: fastFade 0.3s ease-out;
+            width: 100%;
+        }
+
         #detailView {
             display: none;
-            animation: fadeIn 0.5s var(--bezier);
+            animation: slideUp 0.5s var(--bezier);
             width: 100%;
         }
 
@@ -137,7 +144,7 @@
             display: block;
         }
 
-        @keyframes fadeIn {
+        @keyframes slideUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
@@ -146,6 +153,15 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes fastFade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
             }
         }
 
@@ -193,7 +209,6 @@
             display: flex;
             align-items: center;
             gap: 1.25rem;
-            animation: fadeIn 0.8s var(--bezier);
         }
 
         @media (max-width: 600px) {
@@ -1078,38 +1093,38 @@
 
             if (file.id === 'winrar') {
                 heroHtml += `
-                    <a href="${file.officialUrl}" class="download-hero" target="_blank">
+                    <a href="${file.officialUrl}" class="download-hero" target="_blank" rel="noopener noreferrer nofollow">
                         <i class="fa-solid fa-download"></i> Official WinRAR
                     </a>
-                    <a href="${file.path}" class="btn-secondary-soft" download="rarreg.rar" style="margin-bottom: 1rem">
+                    <a href="${file.path}" class="btn-secondary-soft" download="rarreg.rar" style="margin-bottom: 1rem" rel="nofollow">
                         <i class="fa-solid fa-key"></i> Activation Fix (.rar)
                     </a>
                     <div class="sidebar-divider">
                         <span class="sidebar-label">Best Alternative</span>
-                        <a href="${file.sevenZipUrl}" class="btn-secondary-soft" target="_blank">
+                        <a href="${file.sevenZipUrl}" class="btn-secondary-soft" target="_blank" rel="noopener noreferrer nofollow">
                             <i class="fa-solid fa-box-open"></i> 7-Zip Official Site
                         </a>
                     </div>
                 `;
             } else if (file.id === 'adobe-suite') {
                 heroHtml += `
-                    <a href="${file.photoshopUrl}" class="download-hero adobe-ps" target="_blank">
+                    <a href="${file.photoshopUrl}" class="download-hero adobe-ps" target="_blank" rel="noopener noreferrer nofollow">
                         <i class="fa-solid fa-image"></i> Photoshop 2020
                     </a>
-                    <a href="${file.illustratorUrl}" class="download-hero adobe-ai" target="_blank">
+                    <a href="${file.illustratorUrl}" class="download-hero adobe-ai" target="_blank" rel="noopener noreferrer nofollow">
                         <i class="fa-solid fa-pen-nib"></i> Illustrator 2020
                     </a>
                 `;
             } else if (file.id === 'hwinfo') {
                 heroHtml += `
-                    <a href="${file.path}" class="download-hero" target="_blank">
+                    <a href="${file.path}" class="download-hero" target="_blank" rel="noopener noreferrer nofollow">
                         <i class="fa-solid fa-download"></i> Go to Download Page
                     </a>
                     <div style="margin-top: 1rem; width: 100%">
-                        <a href="${file.installerUrl}" class="btn-secondary-soft" target="_blank" style="margin-top: 0.5rem">
+                        <a href="${file.installerUrl}" class="btn-secondary-soft" target="_blank" style="margin-top: 0.5rem" rel="noopener noreferrer nofollow">
                             <i class="fa-solid fa-external-link"></i> Installer Version
                         </a>
-                        <a href="${file.portableUrl}" class="btn-secondary-soft" target="_blank" style="margin-top: 0.5rem">
+                        <a href="${file.portableUrl}" class="btn-secondary-soft" target="_blank" style="margin-top: 0.5rem" rel="noopener noreferrer nofollow">
                             <i class="fa-solid fa-external-link"></i> Portable Version
                         </a>
                     </div>
@@ -1122,7 +1137,7 @@
                 `;
             } else {
                 heroHtml += `
-                    <a href="${file.path}" class="download-hero" download="${fileName}">
+                    <a href="${file.path}" class="download-hero" download="${fileName}" rel="nofollow">
                         <i class="fa-solid fa-cloud-arrow-down"></i> Download Now
                     </a>
                 `;
