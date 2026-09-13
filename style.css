@@ -716,18 +716,20 @@
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: 2.25rem;
-            transition: all 0.45s var(--bezier);
+            transition: transform 0.35s var(--bezier), box-shadow 0.35s var(--bezier), border-color 0.3s ease, background 0.3s ease;
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
             contain: layout style;
-            will-change: transform;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translateZ(0);
         }
 
         @media (hover: hover) {
             .service-card:hover {
-                transform: translateY(-12px) translate3d(0,0,0);
+                transform: translateY(-12px) translateZ(0);
                 border-color: var(--accent-line);
                 box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.18), 0 0 20px var(--soft);
                 background: var(--surface2);
@@ -846,16 +848,20 @@
             border: 1px solid var(--line);
             border-radius: 2.25rem;
             overflow: hidden;
-            transition: all 0.45s var(--bezier);
+            transition: transform 0.35s var(--bezier), box-shadow 0.35s var(--bezier), border-color 0.3s ease, background 0.3s ease;
             contain: layout style;
-            will-change: transform;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translateZ(0);
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-line);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
-            background: var(--surface2);
+        @media (hover: hover) {
+            .project-card:hover {
+                transform: translateY(-10px) translateZ(0);
+                border-color: var(--accent-line);
+                box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
+                background: var(--surface2);
+            }
         }
 
         .project-content h3 {
@@ -1070,21 +1076,26 @@
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: 1.75rem;
-            transition: all 0.4s var(--bezier);
+            transition: transform 0.35s var(--bezier), box-shadow 0.35s var(--bezier), border-color 0.3s ease;
             position: relative;
             z-index: 1;
             min-width: 0;
             overflow: hidden;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translateZ(0);
         }
 
-        .social-item:hover {
-            border-color: transparent;
-            transform: translateY(-10px);
-            background-image: linear-gradient(var(--surface2), var(--surface2)), var(--vibrant-gradient);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-            box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.2), 0 0 20px var(--soft);
-            z-index: 10;
+        @media (hover: hover) {
+            .social-item:hover {
+                border-color: transparent;
+                transform: translateY(-8px) translateZ(0);
+                background-image: linear-gradient(var(--surface2), var(--surface2)), var(--vibrant-gradient);
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+                box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.2), 0 0 20px var(--soft);
+                z-index: 10;
+            }
         }
 
         .social-item i {
@@ -1151,8 +1162,8 @@
 
         .reveal {
             opacity: 0;
-            transform: translate3d(0, 30px, 0);
-            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: translate3d(0, 24px, 0);
+            transition: opacity 0.5s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
         }
 

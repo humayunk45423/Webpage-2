@@ -333,13 +333,14 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
-// Anti-DevTools Security Trap
-setInterval(function () {
-    const before = new Date().getTime();
-    debugger; // Pauses execution if DevTools is open
-    const after = new Date().getTime();
+// Anti-DevTools Security Trap (Desktop only - preserves mobile CPU battery and JIT performance)
+if (window.innerWidth >= 1024 && !('ontouchstart' in window)) {
+    setInterval(function () {
+        const before = new Date().getTime();
+        debugger; // Pauses execution if DevTools is open
+        const after = new Date().getTime();
 
-    if (after - before > 100) {
+        if (after - before > 100) {
         if (!document.getElementById('troll-overlay')) {
             const rickrollUrl = "https://www.youtube.com/watch?v=iik25wqIuFo";
 
@@ -421,3 +422,4 @@ setInterval(function () {
         }
     }
 }, 1000);
+}
