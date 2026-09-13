@@ -1,0 +1,23 @@
+{
+  "name": "Humayoun Kobir Portfolio & Software HQ",
+  "short_name": "Humayoun Kobir",
+  "description": "Official portfolio and Software HQ of Humayoun Kobir (Humayun Kabir) - Computer Science Diploma Engineer & Graphic Designer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08090b",
+  "theme_color": "#08090b",
+  "icons": [
+    {
+      "src": "assets/site-images/Artboard_1logo_border_radious.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/site-images/Artboard_1logo_border_radious.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

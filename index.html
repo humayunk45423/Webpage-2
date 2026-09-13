@@ -176,6 +176,7 @@
 
     <link rel="icon" type="image/png" href="assets/site-images/Artboard_1logo_border_radious.png">
     <link rel="apple-touch-icon" href="assets/site-images/Artboard_1logo_border_radious.png">
+    <link rel="manifest" href="site.webmanifest">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Ultra Performance: Resource Hints -->
@@ -209,6 +210,17 @@
         media="print" onload="this.media='all'">
 
     <link rel="stylesheet" href="style.css">
+    <!-- Instant Page Transitions: Chromium Speculation Rules -->
+    <script type="speculationrules">
+    {
+      "prerender": [
+        {
+          "source": "list",
+          "urls": ["files.html"]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
