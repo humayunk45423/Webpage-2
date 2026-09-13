@@ -25,22 +25,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const isMobile = () => window.matchMedia('(max-width: 1024px)').matches || ('ontouchstart' in window && window.innerWidth <= 1024);
+
     const setTheme = (theme, withTransition = true) => {
         if (root.getAttribute('data-theme') === theme && localStorage.getItem('portfolio-theme') === theme) return;
 
-        // Use modern native View Transitions API for buttery smooth 120fps mobile crossfade
-        if (withTransition && document.startViewTransition) {
+        // Desktop: Use hardware View Transitions (100% smooth on PC GPUs)
+        if (withTransition && !isMobile() && document.startViewTransition) {
             document.startViewTransition(() => {
                 applyTheme(theme);
             });
-        } else if (withTransition) {
-            // Coordinated CSS fallback for browsers without View Transitions
-            root.classList.add('theme-transitioning');
-            applyTheme(theme);
-            setTimeout(() => {
-                root.classList.remove('theme-transitioning');
-            }, 350);
         } else {
+            // Mobile: Instantaneous zero-latency swap (prevents mobile CPU/GPU rasterization lag)
             applyTheme(theme);
         }
     };

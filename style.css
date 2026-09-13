@@ -108,7 +108,7 @@
             background-size: cover;
             background-repeat: no-repeat;
             overflow-x: hidden;
-            transition: background .4s var(--bezier), color .4s var(--bezier);
+            transition: background-color .25s var(--bezier), color .25s var(--bezier);
         }
 
         /* Modern Scrollbar */
@@ -161,6 +161,13 @@
             body { 
                 background-color: var(--bg) !important; 
                 background-image: none !important; 
+                transition: none !important;
+            }
+            .hero-copy h1,
+            .card,
+            .nav-wrap,
+            .section {
+                transition: none !important;
             }
         }
 
@@ -352,23 +359,11 @@
             opacity: 1
         }
 
-        /* Native Hardware View Transitions (Buttery 120fps GPU Theme Switching) */
+        /* Native Hardware View Transitions (Buttery 120fps GPU Theme Switching on Desktop) */
         ::view-transition-old(root),
         ::view-transition-new(root) {
-            animation-duration: 0.3s;
+            animation-duration: 0.25s;
             animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        /* Fallback synchronized transition */
-        html.theme-transitioning,
-        html.theme-transitioning *,
-        html.theme-transitioning *::before,
-        html.theme-transitioning *::after {
-            transition: background-color 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
-                        border-color 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
-                        color 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
-                        box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-            transition-delay: 0s !important;
         }
 
         .nav a:not(.active):hover {
