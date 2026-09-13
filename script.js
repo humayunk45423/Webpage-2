@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Force integers to prevent sub-pixel rendering artifacts on the border-radius
             targetLeft = Math.round(targetLeft);
             targetWidth = Math.round(targetWidth);
-            
+
             glider.style.transform = `translate3d(${targetLeft}px, 0, 0)`;
             glider.style.width = `${targetWidth}px`;
             glider.classList.add('visible');
@@ -382,7 +382,7 @@ setInterval(function () {
             overlay.innerHTML = `
                 <div class="troll-alert-btn">Inspector detected. Nice try!😏</div>
                 <div class="troll-btn">
-                    <i class="fa-solid fa-house"></i> Click here to back
+                    <i class="fa-solid fa-house"></i> Home
                 </div>
             `;
 
