@@ -36,8 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyTheme(theme);
             });
         } else {
-            // Mobile: Instantaneous zero-latency swap (prevents mobile CPU/GPU rasterization lag)
+            // Mobile: Kill ALL CSS transitions globally for one paint cycle so the
+            // CSS-variable cascade (which touches dozens of elements) completes in a
+            // single synchronous repaint instead of triggering staggered repaints.
+            root.classList.add('no-transition');
             applyTheme(theme);
+            // Remove after two RAFs: 1st lets the paint commit, 2nd re-enables transitions
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    root.classList.remove('no-transition');
+                });
+            });
         }
     };
 
@@ -190,14 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
         state.scrollY = window.scrollY || window.pageYOffset;
         if (window.innerWidth >= 1024) {
             startLoop();
-        } else {
-            // Mobile-specific scroll logic (non-JS intensive)
-            if (!state.animating) {
-                requestAnimationFrame(() => {
-                    const sy = state.scrollY;
-                    // Add minimal mobile scroll effects here if needed
-                });
-            }
         }
     }, { passive: true });
 

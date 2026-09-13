@@ -171,6 +171,19 @@
             }
         }
 
+        /* ─── Zero-Transition Theme Swap (Mobile Performance) ───────────────────
+           Applied briefly by JS during theme toggle on mobile. Kills every
+           running transition globally so the colour-variable cascade completes
+           in a single synchronous paint instead of triggering dozens of
+           staggered restyle/repaint cycles. Removed after next RAF.
+        ────────────────────────────────────────────────────────────────────── */
+        html.no-transition *,
+        html.no-transition *::before,
+        html.no-transition *::after {
+            transition: none !important;
+            animation-duration: 0.001ms !important;
+        }
+
         a {
             text-decoration: none;
             color: inherit;
@@ -383,7 +396,7 @@
             background: var(--vibrant-gradient);
             border-radius: 999px;
             z-index: 1;
-            transition: opacity 0.4s ease;
+            transition: transform 0.28s var(--bezier), width 0.28s var(--bezier), opacity 0.3s ease;
             pointer-events: none;
             opacity: 0;
             will-change: transform, width;
@@ -504,7 +517,16 @@
             font-weight: 700;
             font-size: 0.95rem;
             border: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: transform 0.25s var(--bezier), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:active,
+        .toggle:active,
+        .pill:active {
+            transform: scale(0.96) !important;
+            transition: transform 0.1s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
         }
 
         .btn.primary {
@@ -716,13 +738,12 @@
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: 2.25rem;
-            transition: all 0.45s var(--bezier);
+            transition: transform 0.35s var(--bezier), border-color 0.3s ease, background 0.3s ease, box-shadow 0.35s ease;
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
             contain: layout style;
-            will-change: transform;
         }
 
         @media (hover: hover) {
