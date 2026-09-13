@@ -158,7 +158,10 @@
                 display: none !important;
                 animation: none !important;
             }
-            body { background: var(--bg) !important; }
+            body { 
+                background-color: var(--bg) !important; 
+                background-image: none !important; 
+            }
         }
 
         a {
@@ -329,7 +332,9 @@
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            z-index: 2
+            z-index: 2;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .nav a {
@@ -347,10 +352,23 @@
             opacity: 1
         }
 
-        .toggle:hover {
-            background: var(--surface);
-            color: var(--text);
-            transform: translateY(-1px)
+        /* Native Hardware View Transitions (Buttery 120fps GPU Theme Switching) */
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+            animation-duration: 0.3s;
+            animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* Fallback synchronized transition */
+        html.theme-transitioning,
+        html.theme-transitioning *,
+        html.theme-transitioning *::before,
+        html.theme-transitioning *::after {
+            transition: background-color 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        border-color 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        color 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+            transition-delay: 0s !important;
         }
 
         .nav a:not(.active):hover {
@@ -444,6 +462,12 @@
         html[data-theme=dark] .hero-copy h1 {
             color: #fff;
             filter: drop-shadow(0 0 30px rgba(255, 122, 0, 0.4)) drop-shadow(0 0 60px rgba(255, 122, 0, 0.15));
+        }
+
+        @media (max-width: 768px) {
+            html[data-theme=dark] .hero-copy h1 {
+                filter: drop-shadow(0 0 16px rgba(255, 122, 0, 0.35));
+            }
         }
 
         #typing {

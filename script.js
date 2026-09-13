@@ -4,31 +4,58 @@
          */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Theme Toggle
+    // 1. Theme Toggle (Native View Transitions & 120fps Mobile Optimization)
     const root = document.documentElement;
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const themeLabel = document.getElementById('themeLabel');
     const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-    const setTheme = (theme) => {
-        if (root.getAttribute('data-theme') === theme && localStorage.getItem('portfolio-theme') === theme) return;
+    const applyTheme = (theme) => {
         root.setAttribute('data-theme', theme);
         localStorage.setItem('portfolio-theme', theme);
-        themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-        themeLabel.textContent = theme === 'dark' ? 'Light' : 'Dark';
-        themeMeta.setAttribute('content', theme === 'dark' ? '#0b0b0b' : '#ffffff');
+        if (themeIcon) {
+            themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+        if (themeLabel) {
+            themeLabel.textContent = theme === 'dark' ? 'Light' : 'Dark';
+        }
+        if (themeMeta) {
+            themeMeta.setAttribute('content', theme === 'dark' ? '#0b0b0b' : '#ffffff');
+        }
     };
 
-    themeToggle.addEventListener('click', () => {
-        const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-    });
+    const setTheme = (theme, withTransition = true) => {
+        if (root.getAttribute('data-theme') === theme && localStorage.getItem('portfolio-theme') === theme) return;
 
-    // Initialize Theme
+        // Use modern native View Transitions API for buttery smooth 120fps mobile crossfade
+        if (withTransition && document.startViewTransition) {
+            document.startViewTransition(() => {
+                applyTheme(theme);
+            });
+        } else if (withTransition) {
+            // Coordinated CSS fallback for browsers without View Transitions
+            root.classList.add('theme-transitioning');
+            applyTheme(theme);
+            setTimeout(() => {
+                root.classList.remove('theme-transitioning');
+            }, 350);
+        } else {
+            applyTheme(theme);
+        }
+    };
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme, true);
+        });
+    }
+
+    // Initialize Theme (without transition on first load to prevent flash)
     const savedTheme = localStorage.getItem('portfolio-theme') ||
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    setTheme(savedTheme);
+    setTheme(savedTheme, false);
 
     // 2. Typing Animation
     const typingElement = document.getElementById('typing');
