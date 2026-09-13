@@ -233,6 +233,7 @@
         .file-icon {
             width: 3.5rem;
             height: 3.5rem;
+            flex-shrink: 0;
             background: var(--vibrant-gradient);
             border-radius: 1.15rem;
             display: grid;
@@ -245,6 +246,11 @@
 
         .file-card:hover .file-icon {
             transform: scale(1.1) rotate(5deg);
+        }
+
+        .file-meta {
+            min-width: 0;
+            flex: 1;
         }
 
         .file-meta h3 {
@@ -328,6 +334,7 @@
         .detail-icon {
             width: 80px;
             height: 80px;
+            flex-shrink: 0;
             background: var(--vibrant-gradient);
             color: var(--accent-ink);
             border-radius: 1.75rem;
@@ -791,6 +798,7 @@
             .file-icon {
                 width: 2.75rem;
                 height: 2.75rem;
+                flex-shrink: 0;
                 font-size: 1.15rem;
                 margin: 0 auto;
                 border-radius: 0.85rem;
