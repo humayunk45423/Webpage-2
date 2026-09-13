@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
     <title>Software HQ | Humayoun Kobir Repository</title>
     <meta name="description"
         content="Software HQ by Humayoun Kobir: Essential PC optimization tools, custom Windows utilities, hardware diagnostics, and creative software.">
@@ -23,6 +24,9 @@
         content="A curated collection of essential software, optimization scripts, and technical tools by Humayoun Kobir (Humayun Kabir).">
     <meta property="og:url" content="https://humayounkobir.vercel.app/files.html">
     <meta property="og:image" content="https://humayounkobir.vercel.app/assets/site-images/refined.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Software HQ - Humayoun Kobir Repository">
     <meta property="og:locale" content="en_US">
 
     <!-- Twitter / X -->
@@ -72,16 +76,24 @@
     <!-- Fonts & Icons (Optimized) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
         as="style">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        media="print" onload="this.media='all'">
 
     <!-- Shared Style -->
     <link rel="stylesheet" href="style.css">
     <meta name="format-detection" content="telephone=no">
-    <meta name="referrer" content="no-referrer">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <style>
         /* Symmetrical Layout */
@@ -1009,7 +1021,7 @@
             <div class="container">
                 <div class="nav-wrap">
                     <a href="index.html" class="brand">
-                        <div class="mark"><img src="assets/site-images/Logo-Animation.gif" alt="HK"></div>
+                        <div class="mark"><img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir - Animated Brand Logo" width="44" height="44" decoding="async" fetchpriority="high"></div>
                         <div class="brand-text"><strong>Humayoun Kobir</strong><small>Repository</small></div>
                     </a>
                     <nav class="nav">
@@ -1063,7 +1075,7 @@
 
     <div class="copy-toast" id="copyToast"><i class="fa-solid fa-circle-check"></i> Copied to clipboard!</div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <script>
         const fileData = [
             { id: "autoruns", name: "Autoruns", category: "software", icon: "fa-solid fa-bolt", path: "assets/Autoruns/Autoruns.rar", readme: "## Overview\nStartup monitor utility.\n\n## Instructions\n1. Run autoruns64.exe as Admin." },
