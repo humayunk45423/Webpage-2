@@ -35,18 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
             document.startViewTransition(() => {
                 applyTheme(theme);
             });
+        } else if (withTransition) {
+            // Mobile: GPU-composited opacity crossfade.
+            // Phase 1 → fade OUT (compositor thread only, zero layout/paint cost)
+            root.classList.add('theme-switching');
+            root.classList.remove('theme-revealing');
+
+            // Wait for fade-out to finish, then swap theme while invisible
+            setTimeout(() => {
+                applyTheme(theme);                     // Single synchronous paint (hidden)
+                root.classList.remove('theme-switching');
+                root.classList.add('theme-revealing'); // Phase 2 → fade IN
+                // Clean up revealing class after it finishes
+                setTimeout(() => root.classList.remove('theme-revealing'), 240);
+            }, 185); // matches the 0.18s fade-out duration
         } else {
-            // Mobile: Kill ALL CSS transitions globally for one paint cycle so the
-            // CSS-variable cascade (which touches dozens of elements) completes in a
-            // single synchronous repaint instead of triggering staggered repaints.
-            root.classList.add('no-transition');
+            // Initial load: instant with no animation
             applyTheme(theme);
-            // Remove after two RAFs: 1st lets the paint commit, 2nd re-enables transitions
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    root.classList.remove('no-transition');
-                });
-            });
         }
     };
 

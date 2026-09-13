@@ -171,17 +171,22 @@
             }
         }
 
-        /* ─── Zero-Transition Theme Swap (Mobile Performance) ───────────────────
-           Applied briefly by JS during theme toggle on mobile. Kills every
-           running transition globally so the colour-variable cascade completes
-           in a single synchronous paint instead of triggering dozens of
-           staggered restyle/repaint cycles. Removed after next RAF.
-        ────────────────────────────────────────────────────────────────────── */
-        html.no-transition *,
-        html.no-transition *::before,
-        html.no-transition *::after {
+        /* ─── Zero-Cost Mobile Theme Crossfade ────────────────────────────────
+           Instead of running 30+ individual CSS property transitions (which
+           cause staggered repaints), we fade the entire html element via
+           opacity. Opacity is GPU-composited: zero layout, zero paint.
+           It gives a smooth crossfade feel on any device at 60-120fps.
+        ────────────────────────────────────────────────── */
+        html.theme-switching {
+            opacity: 0;
+            transition: opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        html.theme-switching * {
             transition: none !important;
-            animation-duration: 0.001ms !important;
+        }
+        html.theme-revealing {
+            opacity: 1;
+            transition: opacity 0.22s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
         }
 
         a {
