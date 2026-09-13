@@ -35,22 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.startViewTransition(() => {
                 applyTheme(theme);
             });
-        } else if (withTransition) {
-            // Mobile: GPU-composited opacity crossfade.
-            // Phase 1 → fade OUT (compositor thread only, zero layout/paint cost)
-            root.classList.add('theme-switching');
-            root.classList.remove('theme-revealing');
-
-            // Wait for fade-out to finish, then swap theme while invisible
-            setTimeout(() => {
-                applyTheme(theme);                     // Single synchronous paint (hidden)
-                root.classList.remove('theme-switching');
-                root.classList.add('theme-revealing'); // Phase 2 → fade IN
-                // Clean up revealing class after it finishes
-                setTimeout(() => root.classList.remove('theme-revealing'), 240);
-            }, 185); // matches the 0.18s fade-out duration
         } else {
-            // Initial load: instant with no animation
+            // Mobile: Instantaneous zero-latency swap (prevents mobile CPU/GPU rasterization lag)
             applyTheme(theme);
         }
     };
@@ -204,6 +190,14 @@ document.addEventListener('DOMContentLoaded', () => {
         state.scrollY = window.scrollY || window.pageYOffset;
         if (window.innerWidth >= 1024) {
             startLoop();
+        } else {
+            // Mobile-specific scroll logic (non-JS intensive)
+            if (!state.animating) {
+                requestAnimationFrame(() => {
+                    const sy = state.scrollY;
+                    // Add minimal mobile scroll effects here if needed
+                });
+            }
         }
     }, { passive: true });
 
