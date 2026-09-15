@@ -1207,6 +1207,7 @@
             detailView.classList.add('active');
 
             const fileName = file.path.split('/').pop();
+            const encodedPath = file.path.split('/').map(seg => encodeURIComponent(seg)).join('/');
             let heroHtml = `
                 <div class="detail-hero-info">
                     <div class="detail-icon"><i class="${file.icon}"></i></div>
@@ -1220,7 +1221,7 @@
                     <a href="${file.officialUrl}" class="download-hero" target="_blank" rel="noopener noreferrer nofollow">
                         <i class="fa-solid fa-download"></i> Official WinRAR
                     </a>
-                    <a href="${file.path}" class="btn-secondary-soft" download="rarreg.rar" style="margin-bottom: 1rem" rel="nofollow">
+                    <a href="${encodedPath}" class="btn-secondary-soft" download="rarreg.rar" style="margin-bottom: 1rem" rel="nofollow">
                         <i class="fa-solid fa-key"></i> Activation Fix (.rar)
                     </a>
                     <div class="sidebar-divider">
@@ -1241,7 +1242,7 @@
                 `;
             } else if (file.id === 'hwinfo') {
                 heroHtml += `
-                    <a href="${file.path}" class="download-hero" target="_blank" rel="noopener noreferrer nofollow">
+                    <a href="${encodedPath}" class="download-hero" target="_blank" rel="noopener noreferrer nofollow">
                         <i class="fa-solid fa-download"></i> Go to Download Page
                     </a>
                     <div style="margin-top: 1rem; width: 100%">
@@ -1261,7 +1262,7 @@
                 `;
             } else {
                 heroHtml += `
-                    <a href="${file.path}" class="download-hero" download="${fileName}" rel="nofollow">
+                    <a href="${encodedPath}" class="download-hero" download="${fileName}" rel="nofollow">
                         <i class="fa-solid fa-cloud-arrow-down"></i> Download Now
                     </a>
                 `;
