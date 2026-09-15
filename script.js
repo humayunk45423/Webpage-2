@@ -49,8 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize Theme (without transition on first load to prevent flash)
-    const savedTheme = localStorage.getItem('portfolio-theme') ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
     setTheme(savedTheme, false);
 
     // 2. Typing Animation

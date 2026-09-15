@@ -3,6 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- Critical: Theme Sync (runs before render to prevent flash) -->
+    <script>
+    (function(){
+        var saved = localStorage.getItem('portfolio-theme');
+        var preferred = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', preferred);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if(meta) meta.setAttribute('content', preferred === 'dark' ? '#0b0b0b' : '#ffffff');
+    })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
     <link rel="canonical" href="https://humayounkobir.vercel.app/">
