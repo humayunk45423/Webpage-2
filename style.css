@@ -80,10 +80,13 @@
             -webkit-tap-highlight-color: transparent;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeSpeed;
+        }
+
+        .btn, .toggle, .pill, .copy-btn, .nav a, .mark, .hero-note, .tag {
             user-select: none;
             -webkit-user-select: none;
             -webkit-user-drag: none;
-            text-rendering: optimizeSpeed;
         }
 
         :focus-visible {
@@ -1188,8 +1191,13 @@
             transition-delay: 0.4s
         }
 
-        @media (max-width: 1024px) {
+        /* ==========================================================================
+           Masterclass Device-Adaptive Responsive System
+           (Fluid scaling from 320px ultra-mobile to 4K displays with 100% layout preservation)
+           ========================================================================== */
 
+        /* Laptops, Tablets & iPad Landscape (<= 1024px) */
+        @media (max-width: 1024px) {
             .section-title {
                 text-align: center;
             }
@@ -1202,12 +1210,44 @@
             .hero-grid {
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
-                text-align: center
+                text-align: center;
+            }
+
+            .hero-copy {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .hero-side {
+                order: -1;
+            }
+
+            .actions,
+            .hero-notes {
+                justify-content: center;
+            }
+
+            .portrait {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .split-section {
+                min-height: auto;
+                padding: 4rem 0;
+            }
+
+            .services-grid,
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
             }
 
             .contact-layout {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: 2.5rem;
                 text-align: center;
             }
 
@@ -1235,75 +1275,100 @@
                 gap: 1.25rem;
             }
 
-            .contact-methods,
-            .social-grid {
-                width: 100%;
+            .glider {
+                display: none !important;
             }
 
-            .method {
-                text-align: left;
+            .nav a.active {
+                background: var(--vibrant-gradient);
+                color: var(--accent-ink);
+                border-radius: 999px;
+            }
+        }
+
+        /* Tablets & iPad Portrait (<= 768px) */
+        @media (max-width: 768px) {
+            .section {
+                padding: 3rem 0;
             }
 
-            .reveal {
-                opacity: 1 !important;
-                transform: none !important;
-                transition: none !important;
-                will-change: auto !important;
-            }
-
-            .hero-copy {
-                display: flex;
-                flex-direction: column;
-                align-items: center
-            }
-
-            .hero-side {
-                order: -1;
-            }
-
-            .actions,
-            .hero-notes {
-                justify-content: center
-            }
-
-            .method {
-                text-align: left
-            }
-
-            .split-section {
+            .hero {
                 min-height: auto;
-                padding: 4rem 0;
+                padding: 2rem 0;
+            }
+
+            .nav-wrap {
+                padding: 0.5rem 0.85rem;
+                gap: 0.4rem;
+            }
+
+            .brand {
+                gap: 0.6rem;
+            }
+
+            .mark {
+                width: 2.4rem;
+                height: 2.4rem;
+                flex: 0 0 2.4rem;
+            }
+
+            .brand-text strong {
+                font-size: 0.88rem;
+            }
+
+            .brand-text small {
+                font-size: 0.6rem;
+            }
+
+            .nav a,
+            .toggle {
+                padding: 0.45rem 0.65rem;
+                font-size: 0.82rem;
             }
 
             .services-grid,
             .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 1.5rem
-            }
-        }
-
-        @media (max-width: 768px) {
-            .contact-layout {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .contact-info {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .contact-methods {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
-                width: 100%;
+            }
+
+            .service-card,
+            .project-card {
+                padding: 1.25rem;
+                border-radius: 1.5rem;
+            }
+
+            .service-icon {
+                width: 3rem;
+                height: 3rem;
+                font-size: 1.3rem;
+                margin-bottom: 0.85rem;
+                border-radius: 0.85rem;
+            }
+
+            .service-card h3,
+            .project-content h3 {
+                font-size: 1.05rem;
+            }
+
+            .service-card p,
+            .project-content p {
+                font-size: 0.85rem;
+            }
+
+            .chips li {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.65rem;
+            }
+
+            .project-link {
+                padding: 0.65rem 1.1rem;
+                font-size: 0.82rem;
             }
 
             .social-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
+                gap: 0.85rem;
                 width: 100%;
             }
 
@@ -1314,237 +1379,208 @@
                 text-overflow: ellipsis;
             }
 
-            .hero-grid {
-                gap: 1.5rem;
+            .method {
+                padding: 1.1rem 1.35rem;
+                gap: 1rem;
+                border-radius: 1.5rem;
+            }
+
+            .method-icon {
+                width: 3rem;
+                height: 3rem;
+                font-size: 1.3rem;
+                flex: 0 0 3rem;
+                border-radius: 1rem;
+            }
+
+            .method-text strong {
+                font-size: 0.78rem;
+            }
+
+            .method-text span {
+                font-size: 0.95rem;
+            }
+
+            .copy-btn {
+                width: 2.75rem;
+                height: 2.75rem;
+                font-size: 1.1rem;
+                flex: 0 0 2.75rem;
             }
         }
 
-        @media (max-width: 600px) {
+        /* Mobile Smartphones (<= 520px) */
+        @media (max-width: 520px) {
             .section {
-                padding: 1.5rem 0
-            }
-
-            .hero {
-                min-height: calc(100svh - 3.5rem);
-                padding: 0.5rem 0 1rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center
-            }
-
-            .nav-wrap {
-                padding: 0.5rem 1rem;
-            }
-
-            .mark {
-                width: 2.25rem;
-                height: 2.25rem;
-                flex: 0 0 2.25rem;
-            }
-
-            .brand-text strong {
-                font-size: 0.85rem;
-            }
-
-            .hero-grid {
-                gap: 0.75rem
-            }
-
-            .hero-copy h2 {
-                font-size: 0.75rem;
-                margin-bottom: 0.2rem;
-                letter-spacing: 0.1em;
-            }
-
-            .hero-copy h1 {
-                margin: 0 0 0.2rem;
-                font-size: 2rem;
-                letter-spacing: -0.04em;
-                line-height: 1.05;
-            }
-
-            #typing {
-                margin: 0 0 0.5rem;
-                font-size: 0.9rem;
-                min-height: 1.1rem;
-            }
-
-            .about-text {
-                margin: 0 0 1rem;
-                font-size: 0.85rem;
-                line-height: 1.45
-            }
-
-            .actions {
-                margin-bottom: 1rem;
-                gap: 0.5rem
-            }
-
-            .btn {
-                min-height: 2.5rem;
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-                flex: 1
-            }
-
-            .portrait {
-                max-width: 180px;
-                padding: 0.45rem;
-                border-radius: 1.5rem;
-                box-shadow: none !important;
-            }
-
-            .frame {
-                border-radius: 1.15rem
-            }
-
-            .portrait-meta {
-                margin-top: 0.5rem;
-                padding-top: 0.5rem;
-            }
-
-            .available {
-                font-size: 0.65rem;
-            }
-
-            .hero-note {
-                padding: 0.35rem 0.75rem;
-                font-size: 0.7rem;
+                padding: 2rem 0;
             }
 
             .shell {
-                width: calc(100% - 1.25rem)
+                width: calc(100% - 1rem);
             }
 
-            .nav {
-                display: none
+            .container {
+                width: 100%;
             }
 
             .header {
-                padding-top: 0.5rem
+                padding-top: 0.5rem;
+            }
+
+            .nav-wrap {
+                padding: 0.4rem 0.6rem;
+                gap: 0.25rem;
+            }
+
+            .mark {
+                width: 2.15rem;
+                height: 2.15rem;
+                flex: 0 0 2.15rem;
+            }
+
+            .brand-text strong {
+                font-size: 0.8rem;
+            }
+
+            .brand-text small {
+                display: none;
+            }
+
+            .nav a {
+                padding: 0.35rem 0.45rem;
+                font-size: 0.75rem;
+            }
+
+            .toggle {
+                padding: 0.35rem 0.55rem;
+                font-size: 0.75rem;
+            }
+
+            #themeLabel {
+                display: none;
+            }
+
+            .hero {
+                padding: 1rem 0;
+                min-height: auto;
+            }
+
+            .hero-grid {
+                gap: 1.25rem;
+            }
+
+            .hero-copy h2 {
+                font-size: 0.85rem;
+                margin-bottom: 0.35rem;
+                letter-spacing: 0.08em;
+            }
+
+            .hero-copy h1 {
+                font-size: clamp(2rem, 8.5vw, 2.6rem);
+                letter-spacing: -0.04em;
+                line-height: 1.1;
+                margin-bottom: 0.4rem;
+            }
+
+            #typing {
+                font-size: 0.95rem;
+                min-height: 1.4rem;
+                margin-bottom: 0.85rem;
+            }
+
+            .about-text {
+                font-size: 0.88rem;
+                line-height: 1.55;
+                margin-bottom: 1.25rem;
+            }
+
+            .actions {
+                gap: 0.5rem;
+                margin-bottom: 1.5rem;
+                width: 100%;
+            }
+
+            .btn {
+                min-height: 2.75rem;
+                padding: 0.65rem 1.2rem;
+                font-size: 0.85rem;
+                flex: 1 1 calc(50% - 0.5rem);
+            }
+
+            .btn.outline {
+                flex: 1 1 100%;
+            }
+
+            .hero-notes {
+                gap: 0.4rem;
+            }
+
+            .hero-note {
+                font-size: 0.75rem;
+                padding: 0.35rem 0.7rem;
+            }
+
+            .portrait {
+                max-width: 240px;
+                border-radius: 2rem;
+                padding: 0.75rem;
+            }
+
+            .frame {
+                border-radius: 1.4rem;
+            }
+
+            .portrait-meta {
+                margin-top: 0.75rem;
+                padding-top: 0.75rem;
+            }
+
+            .available {
+                font-size: 0.7rem;
+            }
+
+            .services-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
             .service-card,
             .project-card {
-                padding: 1.5rem;
-                border-radius: 1.5rem
+                padding: 1.25rem;
+                border-radius: 1.35rem;
             }
 
             .service-icon {
                 width: 2.75rem;
                 height: 2.75rem;
-                font-size: 1.25rem;
-                margin-bottom: 1rem;
-                border-radius: 0.75rem
-            }
-
-            .service-card,
-            .project-card {
-                padding: 1rem;
-                border-radius: 1.25rem;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .service-card h3,
-            .project-content h3 {
-                font-size: 0.95rem;
-                margin-bottom: 0.25rem;
-                line-height: 1.2;
-            }
-
-            .service-card p,
-            .project-content p {
-                font-size: 0.75rem;
-                line-height: 1.4;
-                margin-bottom: 0.5rem;
-                text-align: center;
-            }
-
-            .service-icon {
-                width: 2.25rem;
-                height: 2.25rem;
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 margin-bottom: 0.75rem;
-                border-radius: 0.6rem;
-                /* Center the icon frame itself */
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .chips {
-                gap: 0.25rem;
-                justify-content: center;
-            }
-
-            .chips li {
-                font-size: 0.65rem;
-                padding: 0.2rem 0.5rem;
-            }
-
-            .services-grid,
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.65rem;
-            }
-
-            .service-card,
-            .project-card {
-                padding: 0.85rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                min-height: auto;
-                contain: layout style;
-                /* Isolate rendering for mobile perf without clipping shadows */
+                border-radius: 0.75rem;
             }
 
             .service-card h3,
             .project-content h3 {
-                font-size: 0.85rem;
-                line-height: 1.2;
-                margin-bottom: 0.25rem;
-                min-height: 2.1rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                font-size: 1.05rem;
+                margin-bottom: 0.35rem;
             }
 
             .service-card p,
             .project-content p {
-                font-size: 0.70rem;
-                line-height: 1.35;
-                margin-bottom: 0.5rem;
-                opacity: 0.9;
-                text-align: center;
-            }
-
-            .service-icon {
-                aspect-ratio: 1;
-                width: 2rem;
-                height: auto;
-                font-size: 1rem;
-                margin-bottom: 0.5rem;
-                border-radius: 0.6rem;
-                display: grid;
-                place-items: center;
+                font-size: 0.85rem;
+                line-height: 1.5;
+                margin-bottom: 0.85rem;
             }
 
             .chips {
-                gap: 0.35rem;
                 display: flex;
-                flex-direction: column;
-                align-items: center;
+                flex-wrap: wrap;
+                gap: 0.35rem;
             }
 
             .chips li {
-                font-size: 0.72rem;
-                padding: 0.35rem 0.75rem;
-                white-space: nowrap;
-                line-height: 1.1;
+                font-size: 0.75rem;
+                padding: 0.35rem 0.7rem;
                 border-radius: 999px;
             }
 
@@ -1557,81 +1593,69 @@
             }
 
             .project-links {
-                gap: 0.35rem;
+                gap: 0.45rem;
                 width: 100%;
                 display: flex;
                 flex-direction: column;
+                margin-top: 0.85rem;
             }
 
             .project-link {
-                padding: 0.5rem 1rem;
-                font-size: 0.65rem;
+                padding: 0.65rem 1rem;
+                font-size: 0.8rem;
                 border-radius: 999px;
                 width: 100%;
-                white-space: normal;
-                /* CRITICAL: Allow long project titles to wrap */
-                word-wrap: break-word;
-                line-height: 1.2;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                min-height: 2.2rem;
-                /* Keep hit area consistent */
+                min-height: 2.5rem;
+                box-sizing: border-box;
             }
 
             .project-link span {
                 text-align: left;
                 flex: 1;
-                padding-right: 0.25rem;
-            }
-
-            .project-link i {
-                font-size: 0.55rem;
-                flex: 0 0 0.5rem;
             }
 
             .project-tags {
-                margin-bottom: 0.4rem;
-                gap: 0.15rem;
+                margin-bottom: 0.5rem;
+                gap: 0.25rem;
                 flex-wrap: wrap;
-                /* Ensure tags wrap to avoid leaking out */
-                justify-content: center;
             }
 
             .tag {
-                font-size: 0.5rem;
-                /* Shrunk for narrow columns */
-                padding: 0.1rem 0.3rem;
-                letter-spacing: -0.01em;
+                font-size: 0.65rem;
+                padding: 0.2rem 0.5rem;
             }
 
             .contact-info h2 {
-                font-size: 1.5rem;
-                margin-bottom: 0.25rem;
+                font-size: 2.2rem;
+                margin-bottom: 0.5rem;
             }
 
             .contact-info p {
-                font-size: 0.75rem;
-                margin-bottom: 0.75rem;
+                font-size: 0.85rem;
+                margin-bottom: 1rem;
             }
 
             .contact-methods {
-                margin-top: 0.5rem;
-                gap: 0.4rem;
+                margin-top: 1rem;
+                gap: 0.6rem;
+                width: 100%;
             }
 
             .method {
-                padding: 0.75rem 1rem;
+                padding: 0.85rem 1rem;
                 gap: 0.75rem;
-                border-radius: 1rem;
+                border-radius: 1.25rem;
             }
 
             .method-icon {
-                width: 2.25rem;
-                height: 2.25rem;
+                width: 2.5rem;
+                height: 2.5rem;
                 font-size: 1.1rem;
-                border-radius: 0.6rem;
-                flex: 0 0 2.25rem;
+                border-radius: 0.75rem;
+                flex: 0 0 2.5rem;
             }
 
             #waMethod .method-icon svg {
@@ -1640,99 +1664,61 @@
             }
 
             .method-text strong {
-                font-size: 0.55rem;
+                font-size: 0.72rem;
             }
 
             .method-text span {
-                font-size: 0.75rem;
+                font-size: 0.82rem;
             }
 
             .copy-btn {
-                width: 2rem;
-                height: 2rem;
-                font-size: 0.8rem;
-                flex: 0 0 2rem;
-            }
-
-            .copy-btn::after {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.4rem;
-                border-radius: 0.5rem;
+                width: 2.25rem;
+                height: 2.25rem;
+                font-size: 0.9rem;
+                flex: 0 0 2.25rem;
             }
 
             .social-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-                margin-top: 0.75rem;
+                gap: 0.65rem;
+                margin-top: 1rem;
+                width: 100%;
             }
 
             .social-item {
-                padding: 1rem 0.75rem;
-                gap: 0.6rem;
+                padding: 0.85rem 0.75rem;
+                gap: 0.5rem;
                 border-radius: 1.25rem;
-                min-height: 3.5rem;
+                min-height: 3.25rem;
                 min-width: 0;
-                overflow: hidden;
             }
 
             .social-item i {
-                font-size: clamp(1.1rem, 5vw, 1.35rem);
-                flex-shrink: 0;
+                font-size: 1.2rem;
             }
 
             .social-item span {
-                font-size: clamp(0.75rem, 3.5vw, 0.95rem);
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                font-size: 0.8rem;
             }
 
             .footer {
-                padding: 1rem 0;
-                margin-top: 1.5rem;
+                padding: 1.5rem 0;
+                margin-top: 2rem;
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 0.75rem;
                 text-align: center;
-                font-size: 0.75rem;
+                font-size: 0.8rem;
             }
+        }
 
-            /* Mega Lite optimizations & Full Hover Sticky Fix for Mobile */
+        /* Touch Interactions & Hover Resilience for Mobile Devices */
+        @media (hover: none) {
             .portrait:hover,
             .service-card:hover,
             .project-card:hover,
             .social-item:hover,
-            .method:hover,
-            .btn:hover {
+            .method:hover {
                 transform: none !important;
-                box-shadow: none !important;
-                /* Disable color changes that 'stick' on touchscreens */
-                background: unset !important;
-                border-color: unset !important;
-                color: unset !important;
-                background-color: revert !important;
-            }
-
-            .btn.secondary:hover {
-                background: var(--surface) !important;
-                color: var(--text) !important;
-                border-color: var(--line) !important;
-            }
-
-            .btn.outline:hover {
-                background: transparent !important;
-                color: var(--accent) !important;
-                border-color: var(--accent) !important;
-            }
-
-            /* Prevent primary button from looking stuck/active */
-            .btn.primary:hover {
-                background: var(--accent) !important;
-                color: var(--accent-ink) !important;
-            }
-
-            .section {
-                contain: layout;
-                /* Replaced paint with layout to prevent tooltip clipping */
             }
         }
 
