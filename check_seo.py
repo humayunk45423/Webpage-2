@@ -113,6 +113,21 @@ def test_html_file(filename, is_home=False):
             missing_assets.append(clean_asset)
     check(f"{filename}: Local linked assets exist ({len(src_matches) - len(missing_assets)} validated)", len(missing_assets) == 0, f"Missing files: {missing_assets}")
 
+def test_software_hq_downloads():
+    print("\n--- Testing Software HQ Download Assets in files.js ---")
+    files_js_path = os.path.join(WORKSPACE_DIR, "files.js")
+    if not os.path.exists(files_js_path):
+        ERRORS.append("files.js missing")
+        return
+    with open(files_js_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    paths = [p for p in re.findall(r'path:\s*"([^"]+)"', content) if p.startswith("assets/")]
+    missing = []
+    for p in paths:
+        if not os.path.exists(os.path.join(WORKSPACE_DIR, p)):
+            missing.append(p)
+    check(f"Software HQ Download Assets ({len(paths)} verified)", len(missing) == 0, f"Missing files: {missing}")
+
 def test_sitemap():
     print("\n--- Testing sitemap.xml ---")
     sitemap_path = os.path.join(WORKSPACE_DIR, "sitemap.xml")
@@ -151,6 +166,7 @@ def main():
     test_html_file("index.html", is_home=True)
     test_html_file("files.html", is_home=False)
     test_html_file("404.html", is_home=False)
+    test_software_hq_downloads()
     test_sitemap()
     test_robots()
     test_llms_and_404()
