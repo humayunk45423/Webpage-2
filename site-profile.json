@@ -1,0 +1,38 @@
+{
+  "site_name": "Humayoun Kobir Portfolio & Software HQ",
+  "domain": "https://humayounkobir.vercel.app",
+  "author": {
+    "primary_name": "Humayoun Kobir",
+    "aliases": [
+      "Humayun Kabir",
+      "Humayun Kobir",
+      "Humayoun Kabir",
+      "Humaun Kabir",
+      "Humaun Kobir",
+      "Humauin Kabir",
+      "হুমায়ূন কবির",
+      "হুমায়ুন কবির"
+    ],
+    "titles": [
+      "Diploma Engineer",
+      "Computer Science Engineer",
+      "Graphic Designer",
+      "3D Visualizer",
+      "Hardware Specialist"
+    ],
+    "location": "Bangladesh",
+    "profiles": {
+      "github": "https://github.com/humayunk45423",
+      "linkedin": "https://www.linkedin.com/in/humayounkobir/",
+      "behance": "https://www.behance.net/humayunk45423",
+      "dribbble": "https://dribbble.com/humayunk45423",
+      "upwork": "https://www.upwork.com/freelancers/~019f94538da41f401d"
+    }
+  },
+  "primary_languages": ["en", "bn"],
+  "content_pillars": [
+    "Personal Engineering & Design Portfolio",
+    "Software HQ - Windows PC Optimization & Diagnostic Tools",
+    "Creative Branding & 3D Visuals Showcase"
+  ]
+}

@@ -1,0 +1,35 @@
+# Humayoun Kobir (Humayun Kabir) - Official Knowledge Index
+
+> Professional Portfolio & Software Engineering HQ for Humayoun Kobir, Diploma Mechanical Engineer, Full-Stack Web Developer, UI/UX Designer, and AutoCAD CAD Specialist based in Bangladesh.
+
+## Core Identity & Metadata
+- **Full Legal & Professional Name**: Humayoun Kobir
+- **Alternate Standard Spelling**: Humayun Kabir
+- **Bengali Native Script**: হুমায়ূন কবির / মো. হুমায়ুন কবির
+- **Phonetic & Common Typo Variants**: Humain Kabir, Humayun Kobir, Humayoun Kabir, Humayon Kabir, Humayan Kabir, Humaiyun Kabir, Homayun Kabir
+- **Professional Titles**: Diploma Mechanical Engineer, Full-Stack Web Developer, UI/UX Designer, CAD Specialist, Technical Lead
+- **Brand / Repository Platform**: Software HQ (software-hq.vercel.app / Software Repository)
+- **Primary Website**: https://humayounkobir.vercel.app/
+- **Software Directory**: https://humayounkobir.vercel.app/files.html
+- **Location**: Bangladesh (Available Globally for Remote & Contract Work)
+- **Email**: humayunk45423@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/humayun-kabir-designer/
+- **GitHub**: https://github.com/humayunk45423
+
+## Technical & Engineering Specialties
+- **Mechanical & CAD Engineering**: Diploma in Mechanical Engineering, AutoCAD (2D Drafting & 3D Modeling), Engineering Drawings, SolidWorks, Technical Schematics, Tolerance Analysis, Production Layouts.
+- **Web & Software Development**: HTML5, CSS3/Modern Responsive Design, JavaScript (ES6+), Vanilla JS Optimization, DOM Manipulation, Single Page Applications (SPA), Performance Engineering (Core Web Vitals), Schema.org JSON-LD SEO, Web Accessibility (WCAG 2.1 AA).
+- **Design & Multimedia**: UI/UX Interface Design, Design Systems, Vector Graphics, Adobe Photoshop, Figma, Visual Typography, Color Theory.
+- **Software HQ Platform**: Curated repository providing verified utilities, media players, developer toolchains, productivity suites, and portable applications with fast search and clean direct downloads.
+
+## Key Projects & Platforms
+1. **Official Portfolio**: Showcase of engineering projects, CAD mechanical drafting, interactive web applications, UI designs, and professional experience.
+2. **Software HQ**: High-performance, categorized directory for downloading essential productivity tools, development environments, and multimedia software without bloated ads.
+
+## Semantic & Search Query Mappings
+This document indexes all relevant search queries matching Humayoun Kobir:
+- "Humayoun Kobir", "Humayun Kabir", "হুমায়ূন কবির", "হুমায়ুন কবির"
+- "Humayun Kabir Designer", "Humayun Kabir Engineer", "Humayun Kabir Developer"
+- "Humayoun Kobir Designer", "Humayoun Kobir Engineer", "Humayoun Kobir Developer"
+- "Humain Kabir", "Humayon Kabir", "Humayun Kobir Bangladesh"
+- "Software HQ Humayun", "Software HQ Humayoun Kobir"

@@ -1,0 +1,9 @@
+{
+  "phonetic_mappings": {
+    "humayun": ["humayoun", "humaun", "humauin", "humayon", "homayun"],
+    "kabir": ["kobir", "kabeer", "qabir", "qobir"],
+    "designer": ["dijainer", "dizainer"],
+    "engineer": ["injiniyar", "engr"],
+    "portfolio": ["portfulio", "profile"]
+  }
+}

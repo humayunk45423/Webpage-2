@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Humayoun Kobir</title>
+    <meta name="description" content="404 - Page Not Found. Explore the portfolio of Humayoun Kobir (Humayun Kabir) or browse software utilities on Software HQ.">
+    <link rel="canonical" href="https://humayounkobir.vercel.app/404.html">
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" type="image/png" href="assets/site-images/Artboard_1logo_border_radious.png">
+    <link rel="apple-touch-icon" href="assets/site-images/Artboard_1logo_border_radious.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .error-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .error-code {
+            font-size: clamp(5rem, 15vw, 10rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary, #6366f1), var(--accent-secondary, #a855f7));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        .error-title {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary, #ffffff);
+        }
+        .error-desc {
+            color: var(--text-secondary, #94a3b8);
+            max-width: 500px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .btn-primary {
+            background: #6366f1;
+            color: #ffffff;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container" aria-label="Main Navigation">
+            <a href="index.html" class="logo">Humayoun Kobir</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="files.html">Software HQ</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content" class="error-container">
+        <div class="error-code" aria-hidden="true">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-desc">
+            The resource you are looking for might have been removed, had its name changed, or is temporarily unavailable. Explore the portfolio or visit Software HQ.
+        </p>
+        <div class="error-actions">
+            <a href="index.html" class="btn-action btn-primary">Return Home</a>
+            <a href="files.html" class="btn-action btn-secondary">Browse Software HQ</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Humayoun Kobir. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
