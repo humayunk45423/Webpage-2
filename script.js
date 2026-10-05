@@ -277,7 +277,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+
+        // Synchronize Mobile Bottom Dock Navigation
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link[data-section]');
+        if (mobileNavLinks.length) {
+            const currentSectionId = sections[activeIdx]?.id;
+            mobileNavLinks.forEach(mLink => {
+                if (mLink.getAttribute('data-section') === currentSectionId) {
+                    mLink.classList.add('active');
+                } else {
+                    mLink.classList.remove('active');
+                }
+            });
+        }
     };
+
+    // Mobile Nav Click Handlers for instant smooth feedback
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelectorAll('.mobile-nav-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
 
     window.addEventListener('resize', () => {
         computePositions();
