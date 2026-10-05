@@ -1749,3 +1749,73 @@
                 scroll-behavior: auto !important;
             }
         }
+
+        /* Software HQ Search Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 1.5rem;
+            background: var(--surface);
+            border: 1px dashed var(--line);
+            border-radius: 2rem;
+            margin: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .empty-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.25rem;
+            opacity: 0.7;
+        }
+
+        .empty-state h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin: 0 0 0.5rem;
+            color: var(--text);
+        }
+
+        .empty-state p {
+            font-size: 0.95rem;
+            color: var(--muted);
+            max-width: 450px;
+            margin: 0 0 1.5rem;
+            line-height: 1.5;
+        }
+
+        .empty-clear-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 999px;
+            background: var(--vibrant-gradient);
+            color: var(--accent-ink);
+            font-size: 0.9rem;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s var(--bezier);
+            box-shadow: 0 10px 25px var(--soft);
+        }
+
+        .empty-clear-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px var(--soft);
+        }
+
+        /* Keyboard Accessibility Focus Rings */
+        .file-card:focus-visible,
+        .pill:focus-visible,
+        .back-btn:focus-visible,
+        .download-hero:focus-visible,
+        .btn-secondary-soft:focus-visible,
+        .empty-clear-btn:focus-visible {
+            outline: 2px solid var(--accent) !important;
+            outline-offset: 3px;
+        }

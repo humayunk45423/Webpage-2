@@ -1,273 +1,238 @@
-# 🌟 Humayoun Kobir | Official Portfolio & Software HQ
+# Humayoun Kobir - Portfolio & Software HQ
 
-[![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fhumayounkobir.vercel.app%2F&label=Live%20Website&color=165844&logo=vercel)](https://humayounkobir.vercel.app/)
-[![License](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE)
-[![Vanilla Stack](https://img.shields.io/badge/Stack-Vanilla%20HTML5%20%7C%20CSS3%20%7C%20JS-F16529.svg)](https://developer.mozilla.org/)
-[![Performance](https://img.shields.io/badge/Lighthouse-100%25%20Optimized-success.svg)](#-performance--engineering-highlights)
-[![SEO](https://img.shields.io/badge/SEO-JSON--LD%20Entity%20Graph-blue.svg)](#-seo--semantic-architecture)
+[![Live Site](https://img.shields.io/badge/Site-Live%20on%20Vercel-165844?style=flat-square&logo=vercel)](https://humayounkobir.vercel.app/)
+[![Stack](https://img.shields.io/badge/Stack-HTML5%20%2F%20CSS3%20%2F%20Vanilla%20JS-f06529?style=flat-square)](https://developer.mozilla.org/)
+[![License](https://img.shields.io/badge/License-MIT-333333?style=flat-square)](LICENSE)
 
-> **Welcome to the official repository of Humayoun Kobir (Humayun Kabir / হুমায়ূন কবির)** — Computer Science Diploma Engineer, Graphic Designer, 3D Visualizer, and Hardware Enthusiast based in Bangladesh.
-> 
-> This repository houses both a **blazing-fast, zero-dependency personal portfolio** and **Software HQ**, an interactive web-based curation hub of essential PC optimization tools, diagnostic utilities, creative suites, and Windows scripts.
+Source repository for the personal portfolio of **Humayoun Kobir** (Humayun Kabir / হুমায়ূন কবির) — Computer Science Diploma Engineer, Graphic Designer, and Hardware Specialist based in Bangladesh.
 
----
-
-## 📑 Table of Contents
-
-- [🌐 Live Deployment](#-live-deployment)
-- [🏗️ System Architecture & Navigation Flow](#️-system-architecture--navigation-flow)
-- [✨ Key Features & Technical Highlights](#-key-features--technical-highlights)
-- [🗂️ Software HQ: Curated Utility Directory](#️-software-hq-curated-utility-directory)
-  - [1. 🛡️ System Optimization, Maintenance & Utilities](#1-️-system-optimization-maintenance--utilities)
-  - [2. 🔍 Hardware Monitoring & Diagnostics](#2--hardware-monitoring--diagnostics)
-  - [3. 💾 Data Recovery & Storage Management](#3--data-recovery--storage-management)
-  - [4. 🎨 Creative, 3D & Design Tools](#4--creative-3d--design-tools)
-  - [5. ⚡ Windows Tweaks, Registry & Customization](#5--windows-tweaks-registry--customization)
-  - [6. ⌨️ Language & Productivity](#6-️-language--productivity)
-- [💻 One-Click Windows Optimization Commands](#-one-click-windows-optimization-commands)
-- [⚡ Performance & Engineering Highlights](#-performance--engineering-highlights)
-- [🔍 SEO & Semantic Entity Resolution](#-seo--semantic-entity-resolution)
-- [📁 Repository Structure](#-repository-structure)
-- [🚀 Local Development & Setup](#-local-development--setup)
-- [📫 Contact & Social Profiles](#-contact--social-profiles)
+The repository includes two core surfaces:
+1. **Main Portfolio (`index.html`)**: Personal background, professional services, creative project showpieces, and contact channels.
+2. **Software HQ (`files.html`)**: An interactive, search-enabled utility directory and command hub for PC optimization tools, hardware diagnostics, and Windows maintenance scripts.
 
 ---
 
-## 🌐 Live Deployment
+## Table of Contents
 
-| Page | URL | Purpose |
+- [Overview](#overview)
+- [Architecture & Flow](#architecture--flow)
+- [Technical Features](#technical-features)
+- [Software HQ Catalog](#software-hq-catalog)
+  - [System Optimization & Maintenance](#system-optimization--maintenance)
+  - [Hardware Monitoring & Diagnostics](#hardware-monitoring--diagnostics)
+  - [Data Recovery & Storage](#data-recovery--storage)
+  - [Design & Typography Tools](#design--typography-tools)
+  - [Windows Tweaks & Registry](#windows-tweaks--registry)
+  - [Productivity & Language](#productivity--language)
+- [Quick Maintenance Commands](#quick-maintenance-commands)
+- [Performance & Edge Rules](#performance--edge-rules)
+- [Schema & Entity Resolution](#schema--entity-resolution)
+- [Project Structure](#project-structure)
+- [Running Locally](#running-locally)
+- [Contact](#contact)
+
+---
+
+## Overview
+
+The site is built with pure Vanilla web technologies (HTML5, CSS3, ES6+ JS) without build steps, bundlers, or heavy framework runtimes. This keeps cold loads fast, minimizes memory consumption on low-end devices, and allows direct deployment to static hosts.
+
+| Endpoint | File | Purpose |
 | :--- | :--- | :--- |
-| **Main Portfolio** | [humayounkobir.vercel.app](https://humayounkobir.vercel.app/) | Personal profile, services, creative portfolio, and contact portal. |
-| **Software HQ** | [humayounkobir.vercel.app/files.html](https://humayounkobir.vercel.app/files.html) | Interactive tool explorer, diagnostic downloads, and copy-paste script hub. |
+| `https://humayounkobir.vercel.app/` | `index.html` | Profile, design showcase, service breakdown, social connections |
+| `https://humayounkobir.vercel.app/files.html` | `files.html` | Interactive software library, deep links, one-click script copy |
 
 ---
 
-## 🏗️ System Architecture & Navigation Flow
+## Architecture & Flow
 
-The application is structured as a high-performance **Multi-Page Application (MPA)** with **Client-Side Hash Routing** for sub-views, synchronized via **Chromium Speculation Rules** for instantaneous sub-millisecond page switches.
+The site operates as a multi-page setup connected via Chromium Speculation Rules for near-zero latency page switches, while `files.html` uses client-side hash routing for its sub-views.
 
 ```mermaid
 flowchart TD
-    A["User Entry (Browser)"] --> B["Inline Theme Resolver in head"]
-    B -->|"Zero Flash"| C["index.html (Main Portfolio)"]
+    A["User Request"] --> B["Inline Theme Init in head"]
+    B --> C["index.html (Main Portfolio)"]
     
-    subgraph S1 ["index.html - Core Experience"]
-        C --> D["Hero & Dynamic Typing"]
-        C --> E["Services & OfferCatalog"]
-        C --> F["Project Showcase"]
+    subgraph S1 ["index.html Sections"]
+        C --> D["Hero & Typewriter"]
+        C --> E["Services Catalog"]
+        C --> F["Projects Showcase"]
         C --> G["Contact & Social Matrix"]
     end
 
     C -->|"Speculation Rules Prerender"| H["files.html (Software HQ)"]
 
-    subgraph S2 ["files.html - Interactive Utility Explorer"]
+    subgraph S2 ["files.html Client Router"]
         H --> I["Category Filtering (All / Softwares / Scripts)"]
-        H --> J["Instant Real-Time Search Filter"]
-        H --> K["Detail View & Deep Hash Link (#id)"]
-        K --> L["One-Click Clipboard Command Runners"]
-        K --> M["Direct Utility Downloads"]
+        H --> J["Live Keyword Search"]
+        H --> K["Detail View (#id Hash Route)"]
+        K --> L["Clipboard Script Copy"]
+        K --> M["Direct Asset Downloads"]
     end
 ```
 
-### 🎨 Theme State Machine & Zero-Flash Pipeline
+### Theme State & View Transition Sequence
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor User
-    participant Head as Inline Script (head)
+    participant Head as Head Script
     participant Storage as localStorage
-    participant DOM as Document Object Model
-    participant ViewTrans as View Transitions API
+    participant DOM as DOM Root
+    participant VT as View Transitions API
 
-    User->>Head: Requests Webpage
-    Head->>Storage: getItem('portfolio-theme')
-    alt Theme stored
-        Storage-->>Head: 'dark' or 'light'
-    else No theme stored
-        Head->>Head: Check prefers-color-scheme
+    User->>Head: Load Page
+    Head->>Storage: Read 'portfolio-theme'
+    alt Theme Found
+        Storage-->>Head: 'dark' | 'light'
+    else Fallback
+        Head->>Head: Evaluate prefers-color-scheme
     end
-    Head->>DOM: setAttribute('data-theme', theme)
-    Note over DOM: Page renders with correct theme (Zero FOUC)
-    User->>DOM: Clicks Theme Toggle Button
-    DOM->>ViewTrans: startViewTransition()
-    ViewTrans->>DOM: Mutate data-theme attribute
-    DOM->>Storage: setItem('portfolio-theme', newTheme)
+    Head->>DOM: Set data-theme on html element (Pre-paint)
+    Note over DOM: Initial render matches target theme (No FOUC)
+    User->>DOM: Toggle Theme Button
+    DOM->>VT: startViewTransition()
+    VT->>DOM: Update data-theme
+    DOM->>Storage: Persist selection to localStorage
 ```
 
 ---
 
-## ✨ Key Features & Technical Highlights
+## Technical Features
 
-1. **Pure Vanilla Power (Zero Framework Overhead)**:
-   - Hand-crafted HTML5, modular CSS3, and modern Vanilla ES6+ JavaScript.
-   - Ultra-small asset payload with no heavy React/Next.js/Vue runtimes.
-
-2. **Smart Dual Theme (Vibrant Light & Sleek Dark)**:
-   - **Light Mode**: Clean white background (`#ffffff`) with deep emerald green accent (`#165844`).
-   - **Dark Mode**: OLED-friendly dark surface (`#070707`) with high-energy amber-orange accent (`#ff6b00`).
-   - **Native Hardware View Transitions**: Smooth geometric morphing on modern browsers.
-
-3. **Glider Scroll-Synced Navbar**:
-   - Hardware-accelerated sliding glider pill in the navigation bar that dynamically syncs 1:1 with scroll position and section boundaries.
-
-4. **Instantaneous Speculation Rules API**:
-   - Modern Chromium `<script type="speculationrules">` prerenders subsequent pages in the background, achieving **0ms perceived latency** when clicking between the main portfolio and Software HQ.
-
-5. **Client-Side Hash Router in Software HQ**:
-   - Interactive detail pages with seamless `window.history.pushState` and `popstate` support (`#cru`, `#pc-opt`, `#adobe-suite`), allowing direct shareable links to any software card.
-
-6. **Mobile-First High Frame Rate Tuning**:
-   - Heavy background blur filters and continuous timer loops are automatically detached on mobile devices (`max-width: 1024px`) to preserve CPU battery life and maintain rock-solid **120 FPS**.
+- **Theme Engine**: Light theme (`#ffffff` / `#165844` accent) and dark theme (`#070707` / `#ff6b00` accent) handled through CSS custom properties. Supported browsers use the native View Transitions API for smooth morphing.
+- **Pre-paint Theme Synchronization**: Small inline script executes in `<head>` before the DOM is rendered to prevent flashes of unstyled content (FOUC).
+- **Glider Navigation**: Scroll position is computed against section boundaries using `requestAnimationFrame` loops on desktop, driving a floating glider highlight behind active navigation links.
+- **Speculation Rules Prerendering**: Chromium-based browsers preload and prerender `files.html` from `index.html` (and vice versa) for instant page transitions.
+- **Adaptive Mobile Mode**: Continuous scroll animations and expensive background blur filters are disabled for screen widths below 1024px to preserve battery life and maintain 120 FPS on mobile devices.
+- **Client-Side Hash Router**: `files.html` listens to `hashchange` and `popstate` events to render dedicated detail pages (`#cdi`, `#pc-opt`, `#hwinfo`) with full browser history support.
 
 ---
 
-## 🗂️ Software HQ: Curated Utility Directory
+## Software HQ Catalog
 
-**Software HQ** provides a categorized catalog of tools, utilities, scripts, and creative suites. Below is the comprehensive classification breakdown:
+A categorized breakdown of software, diagnostic utilities, scripts, and creative suites hosted or referenced in the repository.
 
-### 1. 🛡️ System Optimization, Maintenance & Utilities
+### System Optimization & Maintenance
 
-| Software / Tool | License / Type | File Location | Description & Usage |
+| Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **Autoruns** | 🟢 **Freeware (Microsoft Sysinternals)** | `assets/Autoruns/Autoruns.rar` | Shows all auto-starting programs, services, driver hooks, and scheduled tasks. Run `autoruns64.exe` as Administrator. |
-| **Process Explorer** | 🟢 **Freeware (Microsoft Sysinternals)** | `assets/ProcessExplorer/PE.rar` | Advanced task manager showing file handles, DLL dependencies, CPU threads, and GPU consumption per process. |
-| **Process Monitor** | 🟢 **Freeware (Microsoft Sysinternals)** | `assets/ProcessMonitor.zip` | Real-time monitoring of Windows file system, registry, and process/thread activity. |
-| **Glary Utilities Pro** | 🔑 **Serial Key Included** | `assets/Glary Utility/Glary_Utilities_v5.211.0.240.exe` | All-in-one system optimizer with registry cleaner, disk cleaner, startup manager, and shortcut fixer. |
-| **Revo Uninstaller Pro** | 🔧 **Technician / Patched** | `assets/Revo Uninstaller Pro 5.4.3 FINAL/Revo Uninsataller.rar` | Deep-level uninstaller that removes leftover files, temporary folders, and registry keys after standard uninstallations. |
-| **HitmanPro Scanner** | ☁️ **Second-Opinion Cloud Scanner** | `assets/HitmanPro_3.8.28_Build_324/HitmanPro 3.8.rar` | Rapid cloud-based malware, rootkit, and trojan scanner that operates without conflicting with primary antivirus software. |
-| **Good Bye DPI** | 🌐 **Free & Open-Source (FOSS)** | `assets/Good Bye DPI/goodbyedpi-0.2.2.rar` | Utility to bypass Deep Packet Inspection (DPI) censorship and network throttling without requiring a slow VPN. |
-| **WinRAR Pro** | 📦 **Shareware / Patch Key Provided** | `assets/Winrar/rarreg.rar` | Industry standard RAR/ZIP compression tool. Includes registration key (`rarreg.key`) and recommendations for **7-Zip** (FOSS). |
-| **Visual C++ Runtimes AIO** | 🧰 **Essential Runtimes Pack** | `assets/Visual C++ Runtimes All-in-One-Jun-2026.zip` | One-click batch installer containing all Microsoft Visual C++ redistributable packages (2005 to 2022, x86/x64). |
-| **DirectX 11 Setup** | 🎮 **Microsoft Runtime** | `assets/DirectX 11 Setup.rar` | Full offline DirectX End-User Runtime installer for games and 3D rendering engines. |
+| **Autoruns** | Freeware (Microsoft Sysinternals) | `assets/Autoruns/Autoruns.rar` | Deep startup program, service, driver, and scheduled task manager. |
+| **Process Explorer** | Freeware (Microsoft Sysinternals) | `assets/ProcessExplorer/PE.rar` | Detailed task manager showing handles, DLLs, and per-process hardware stats. |
+| **Process Monitor** | Freeware (Microsoft Sysinternals) | `assets/ProcessMonitor.zip` | Real-time tracking of file system, registry, and thread activity. |
+| **Glary Utilities Pro** | Software (Key included) | `assets/Glary Utility/Glary_Utilities_v5.211.0.240.exe` | System maintenance suite with registry repair, disk cleanup, and startup tools. |
+| **Revo Uninstaller Pro** | Software (Patched) | `assets/Revo Uninstaller Pro 5.4.3 FINAL/Revo Uninsataller.rar` | Deep uninstaller that cleans remnant files and registry keys after standard uninstall. |
+| **HitmanPro Scanner** | Freeware / Cloud Scanner | `assets/HitmanPro_3.8.28_Build_324/HitmanPro 3.8.rar` | Secondary cloud-based malware, rootkit, and trojan scanner. |
+| **Good Bye DPI** | Open Source (FOSS) | `assets/Good Bye DPI/goodbyedpi-0.2.2.rar` | Deep Packet Inspection bypass utility for censored or throttled networks. |
+| **WinRAR Pro** | Shareware (License key provided) | `assets/Winrar/rarreg.rar` | Archive manager with license key (`rarreg.key`). 7-Zip is also recommended as a FOSS alternative. |
+| **Visual C++ Runtimes AIO** | Redistributable Pack | `assets/Visual C++ Runtimes All-in-One-Jun-2026.zip` | Single installer covering Microsoft Visual C++ runtimes from 2005 to 2022 (x86 & x64). |
+| **DirectX 11 Setup** | Microsoft Runtime | `assets/DirectX 11 Setup.rar` | DirectX runtime libraries required for 3D apps and games. |
 
----
+### Hardware Monitoring & Diagnostics
 
-### 2. 🔍 Hardware Monitoring & Diagnostics
-
-| Software / Tool | License / Type | File Location / Link | Description & Usage |
+| Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **CrystalDiskInfo (CDI)** | 🟢 **Open-Source / Freeware** | `assets/CrystalDiskInfo/CDI.rar` | Monitors HDD/SSD health status, power-on hours, temperature, and S.M.A.R.T. predictive failure indicators. |
-| **CrystalDiskMark (CDM)** | 🟢 **Open-Source / Freeware** | `assets/CrystalDiskMark/CDM.rar` | Measures sequential and random read/write storage speeds across NVMe SSDs, SATA drives, and USB media. |
-| **HWiNFO** | 🟢 **Freeware / Official Mirrors** | `https://www.hwinfo.com/download/` | Real-time hardware telemetry: CPU core temperatures, voltages, power draw, GPU memory junction temperatures, and fan speeds. |
-| **Custom Resolution Utility (CRU)** | 🖥️ **Freeware by ToastyX** | `assets/cru-1.5.3/CRU.rar` | EDID editor to configure custom refresh rates, overclock monitors, tweak FreeSync ranges, and adjust display timings. |
-| **BIOS Enter Button** | ⚡ **Custom FastBoot Utility** | `assets/BIOS enter button/One click to Bios.rar` | Automated script that triggers a direct reboot into UEFI/BIOS setup without repeatedly mashing motherboard hotkeys. |
+| **CrystalDiskInfo (CDI)** | Open Source / Freeware | `assets/CrystalDiskInfo/CDI.rar` | Storage drive health monitoring and S.M.A.R.T. telemetry. |
+| **CrystalDiskMark (CDM)** | Open Source / Freeware | `assets/CrystalDiskMark/CDM.rar` | Sequential and random read/write storage benchmark utility. |
+| **HWiNFO** | Freeware | Official Mirror Link (`hwinfo.com`) | In-depth hardware telemetry: temperatures, voltages, clock speeds, and fan curves. |
+| **Custom Resolution Utility (CRU)** | Freeware (ToastyX) | `assets/cru-1.5.3/CRU.rar` | EDID manager to configure custom display resolutions and refresh rates. |
+| **BIOS Enter Button** | Batch Utility | `assets/BIOS enter button/One click to Bios.rar` | One-click reboot directly into motherboard UEFI/BIOS firmware. |
 
----
+### Data Recovery & Storage
 
-### 3. 💾 Data Recovery & Storage Management
-
-| Software / Tool | License / Type | File Location | Description & Usage |
+| Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **EaseUS Data Recovery** | 🛠️ **Technician Edition 12.8.0** | `assets/EaseUS_Data_Recovery_Wizard_Technician_...` | Recovers deleted files, formatted partitions, and RAW drives across SSDs, HDDs, SD cards, and USB flash drives. |
-| **EaseUS Partition Master** | 🛠️ **Technician Edition 13.0** | `assets/EaseUS_Partition_Master_13.0_...` | Comprehensive partition resizing, partition alignment (4K alignment for SSDs), MBR-to-GPT disk conversion, and cloning. |
-| **Picture Recovery (TestDisk & PhotoRec)** | 🟢 **Free & Open-Source (FOSS - GPL)** | `assets/Picture Recovery Software/testdisk-7.3-WIP.rar` | Powerful command-line data recovery utility capable of carving and retrieving lost photos and documents from corrupt media. |
+| **EaseUS Data Recovery** | Software (Technician v12.8) | `assets/EaseUS_Data_Recovery_Wizard_Technician_...` | File recovery for formatted, deleted, or RAW partitions. |
+| **EaseUS Partition Master** | Software (Technician v13.0) | `assets/EaseUS_Partition_Master_13.0_...` | Partition resizing, 4K alignment, MBR-to-GPT conversion, and disk cloning. |
+| **Picture Recovery (PhotoRec)** | Open Source (GPL) | `assets/Picture Recovery Software/testdisk-7.3-WIP.rar` | File carving tool for recovering photos, documents, and media from corrupted storage. |
 
----
+### Design & Typography Tools
 
-### 4. 🎨 Creative, 3D & Design Tools
-
-| Software / Tool | License / Type | Source / Download Guide | Description & Usage |
+| Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **Adobe Photoshop CC 2020** | 🎨 **Creative Suite Repack** | Pre-activated Mirror (`getitintopc`) | Industry-standard raster graphic design, photo manipulation, and UI asset creation. |
-| **Adobe Illustrator CC 2020** | 📐 **Creative Suite Repack** | Pre-activated Mirror (`getitintopc`) | Vector design software for logos, brand identity packages, typography, and print layouts. |
-| **FontLab** | 🔤 **Type Design Suite** | `assets/FontLab.rar` | Professional font editor used to craft, interpolate, and export OpenType, TrueType, and Web fonts (`.woff2`). |
-| **Foxit PDF Editor** | 📄 **PDF Pro Suite** | `assets/Foxit pdf editor.rar` | Lightweight, fast PDF editor to annotate, sign, edit text, merge pages, and convert documents. |
+| **Adobe Photoshop CC 2020** | Creative Suite (Repack) | Mirror Guide | Raster editing, photo manipulation, and UI graphic assets. |
+| **Adobe Illustrator CC 2020** | Creative Suite (Repack) | Mirror Guide | Vector graphic design for logos, brand identity, and illustrations. |
+| **FontLab** | Typeface Design Suite | `assets/FontLab.rar` | Typography software to create, edit, and export custom OpenType and Web fonts. |
+| **Foxit PDF Editor** | PDF Suite | `assets/Foxit pdf editor.rar` | Document management tool to edit text, merge files, and sign PDF forms. |
 
----
+### Windows Tweaks & Registry
 
-### 5. ⚡ Windows Tweaks, Registry & Customization
-
-| Software / Tool | License / Type | File Location | Description & Usage |
+| Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **Win10 Right Click Menu for Win 11** | 🪟 **Registry Mod** | `assets/Windows 10 Right click menu/...` | Restores classic, full Windows 10 right-click context menu in Windows 11 without nested menus. |
-| **Win11 Rounded Cursors** | 🖱️ **Custom Theme Asset** | `assets/Windows 11 rounded Cursor/...` | Modern, high-DPI rounded cursor scheme for Windows desktop customization. |
-| **Context Menu Registry Path** | 📝 **Text Reference** | `assets/Registry path of context menu.txt` | Key path: `HKEY_CLASSES_ROOT\Directory\Background\shell` for adding custom context menu tools. |
-| **Right Click Repair Code** | 🛠️ **CLSID Command** | `assets/Right click repair code.txt` | Direct Windows shell GUID repair string: `shell:::{80F3F1D5-FECA-45F3-BC32-752C152E456E}`. |
+| **Win10 Menu on Win11** | Registry Patch | `assets/Windows 10 Right click menu/...` | Restores classic Windows 10 context menus in Windows 11. |
+| **Win11 Rounded Cursors** | Custom Asset | `assets/Windows 11 rounded Cursor/...` | High-DPI rounded cursor theme for Windows. |
+| **Context Menu Registry Path** | Text Reference | `assets/Registry path of context menu.txt` | Direct registry path for custom context menu entries. |
+| **Right Click Repair Code** | Shell GUID | `assets/Right click repair code.txt` | Direct GUID string for Windows Explorer right-click behavior. |
 
----
+### Productivity & Language
 
-### 6. ⌨️ Language & Productivity
-
-| Software / Tool | License / Type | File Location | Description & Usage |
+| Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **Avro Keyboard** | 🟢 **Free & Open-Source (FOSS - OmicronLab)** | `assets/Avro/setup_avrokeyboard_5.6.0.exe` | Standard phonetic Bangla typing software with Unicode and ANSI font support. |
+| **Avro Keyboard** | Open Source (OmicronLab) | `assets/Avro/setup_avrokeyboard_5.6.0.exe` | Standard phonetic Bangla typing software supporting Unicode and ANSI layouts. |
 
 ---
 
-## 💻 One-Click Windows Optimization Commands
+## Quick Maintenance Commands
 
 Software HQ includes quick copy-paste commands for system maintenance via Administrator PowerShell:
 
 ```powershell
-# 1. Launch Chris Titus Tech Windows Utility (Debloat, Tweaks & Packages)
+# 1. Chris Titus Tech Windows Utility (Debloat, tweaks, package installs)
 irm "https://christitus.com/win" | iex
 
-# 2. Microsoft Activation Scripts (MAS) for Windows & Office
+# 2. Microsoft Activation Scripts (MAS)
 irm https://get.activated.win | iex
 
-# 3. Disable Dynamic Tick (Fix micro-stutters and improve frame pacing)
+# 3. Disable Dynamic Tick (Fix timer latency and frame pacing stutters)
 bcdedit /set disabledynamictick yes
 
-# 4. Enable Windows Ultimate Performance Power Plan
+# 4. Enable Ultimate Performance Power Plan
 powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 
-# 5. Run System File Checker (Scan & Repair Corrupted System Files)
+# 5. Run System File Checker (SFC)
 sfc /scannow
 
-# 6. DISM Online Image Health Restoration
+# 6. DISM Component Store Health Restoration
 DISM.exe /Online /Cleanup-image /Restorehealth
 
-# 7. Check Hard Drive & SSD Hardware S.M.A.R.T. Status
+# 7. Check Drive Hardware Health via WMIC
 wmic Diskdrive get status
 ```
 
 ---
 
-## ⚡ Performance & Engineering Highlights
+## Performance & Edge Rules
 
-```
-┌────────────────────────────────────────────────────────┐
-│               PERFORMANCE OPTIMIZATION MATRIX          │
-├───────────────────────────────┬────────────────────────┤
-│ Optimization Technique        │ Implementation Detail │
-├───────────────────────────────┼────────────────────────┤
-│ Speculation Rules API         │ Background prerendering│
-│ CSS content-visibility        │ contain-intrinsic-size │
-│ Google Font Subsetting        │ ASCII Range Encoding   │
-│ Resource Hints                │ preconnect & prefetch  │
-│ Asset Caching (Vercel)        │ 1-Year Immutable Cache │
-│ CSS Repaint Minimization      │ translate3d & will-chg │
-└───────────────────────────────┴────────────────────────┘
-```
-
-- **CSS Layout Containment**: `content-visibility: auto` is declared on below-the-fold sections so the browser skips layout and rendering until the user approaches the viewport.
-- **Font Subsetting**: The Manrope webfont is requested with an explicit character whitelist (`&text=...`), cutting font file payloads by over **80%**.
-- **Edge Cache Headers**: [vercel.json](file:///f:/Me%20&%20My%20Docs/1.%20Recent%20Projects/Webpage-2/vercel.json) enforces `Cache-Control: public, max-age=31536000, immutable` for static assets and strict security policies (`nosniff`, `SAMEORIGIN`, `strict-origin-when-cross-origin`).
+- **CSS Layout Containment**: Below-the-fold sections use `content-visibility: auto` with `contain-intrinsic-size` to skip initial render calculation until scrolled into view.
+- **Font Optimization**: Google Font `Manrope` is loaded with character-range subsetting (`&text=...`), reducing the initial font payload by ~80%.
+- **Vercel Edge Rules**: Configured in `vercel.json`:
+  - Static assets under `/assets/` have `Cache-Control: public, max-age=31536000, immutable`.
+  - Global headers enforce `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, and `Referrer-Policy: strict-origin-when-cross-origin`.
 
 ---
 
-## 🔍 SEO & Semantic Entity Resolution
+## Schema & Entity Resolution
 
-To maximize search visibility and resolve all phonetic variations of the author's name across Google, Bing, and AI search engines, the site implements a comprehensive **JSON-LD Schema Graph**:
+The homepage embeds structured JSON-LD data to link name variations and services for search indexing:
 
 ```mermaid
 flowchart LR
-    P["Person Entity (Humayoun Kobir)"] --- S["sameAs (GitHub, LinkedIn, Behance, Upwork)"]
-    P --- A["alternateName Variants (Humayun Kabir, etc.)"]
-    P --- O["hasOfferCatalog (Services & Offerings)"]
+    P["Person (Humayoun Kobir)"] --- S["sameAs (GitHub, LinkedIn, Behance, Upwork)"]
+    P --- A["alternateName (Humayun Kabir, Humayoun Kabir, হুমায়ূন কবির)"]
+    P --- O["hasOfferCatalog (Design, 3D Modeling, Data Entry)"]
     P --- W["WebSite & ProfilePage"]
     W --- C["CollectionPage (Software HQ)"]
 ```
 
 ---
 
-## 📁 Repository Structure
+## Project Structure
 
 ```
 Webpage-2/
 ├── assets/                     # Downloadable utilities, scripts, icons & media
-│   ├── site-images/            # WebP profile images, banners & animated logo GIF
+│   ├── site-images/            # WebP graphics, brand banners & animated logo
 │   ├── Autoruns/               # Sysinternals Autoruns archive
 │   ├── Avro/                   # Avro keyboard setup
 │   ├── CrystalDiskInfo/        # CDI health monitoring archive
@@ -277,46 +242,45 @@ Webpage-2/
 │   ├── HitmanPro_.../          # HitmanPro scanner archive
 │   ├── ProcessExplorer/        # Process Explorer archive
 │   ├── Revo Uninstaller.../    # Revo Uninstaller Pro archive
-│   ├── Winrar/                 # WinRAR activation fix
+│   ├── Winrar/                 # WinRAR activation key package
 │   ├── cru-1.5.3/              # Custom Resolution Utility
 │   └── ...                     # Additional scripts, runtimes & tools
 ├── BingSiteAuth.xml            # Bing Webmaster verification
 ├── files.html                  # Software HQ interactive utility explorer
 ├── google066fec538eede997.html # Google Search Console verification
 ├── index.html                  # Main portfolio homepage
-├── README.md                   # Comprehensive repository documentation
-├── robots.txt                  # Search engine crawler instructions
+├── README.md                   # Repository documentation
+├── robots.txt                  # Search crawler directives
 ├── script.js                   # Navigation glider, theme switcher, typing animation
-├── site.webmanifest            # Progressive Web App manifest
-├── sitemap.xml                 # XML Sitemap for search indexing
-├── style.css                   # Global design tokens, themes, layouts & animations
-└── vercel.json                 # Vercel edge headers, security rules & caching
+├── site.webmanifest            # Web manifest configuration
+├── sitemap.xml                 # XML Sitemap for search engines
+├── style.css                   # Global styling, tokens, themes & layout rules
+└── vercel.json                 # Vercel deployment headers and cache rules
 ```
 
 ---
 
-## 🚀 Local Development & Setup
+## Running Locally
 
-This project uses standard vanilla web technologies and requires no package installations or build compilation steps.
+No package managers, compilers, or build steps are required.
 
-### Option 1: Live Server (VS Code / Antigravity IDE)
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/humayunk45423/Webpage-2.git
-   ```
-2. Open the directory in your IDE.
-3. Right-click [index.html](file:///f:/Me%20&%20My%20Docs/1.%20Recent%20Projects/Webpage-2/index.html) and select **"Open with Live Server"** (or use any local static file server).
+### Static File Server
+Clone the repository and open `index.html` with any local HTTP server:
 
-### Option 2: Python Simple HTTP Server
-Run from the project root:
 ```bash
+# Clone repository
+git clone https://github.com/humayunk45423/Webpage-2.git
+
+# Serve using Python 3
+cd Webpage-2
 python -m http.server 8080
 ```
-Then navigate to `http://localhost:8080` in your web browser.
+
+Open `http://localhost:8080` in your web browser.
 
 ---
 
-## 📫 Contact & Social Profiles
+## Contact
 
 - **Email**: [humayunk45423@gmail.com](mailto:humayunk45423@gmail.com)
 - **WhatsApp**: [+8801721445207](https://wa.me/8801721445207)
@@ -324,10 +288,4 @@ Then navigate to `http://localhost:8080` in your web browser.
 - **LinkedIn**: [linkedin.com/in/humayounkobir](https://www.linkedin.com/in/humayounkobir/)
 - **Behance**: [behance.net/humayunk45423](https://www.behance.net/humayunk45423)
 - **Dribbble**: [dribbble.com/humayunk45423](https://dribbble.com/humayunk45423)
-- **Upwork**: [Profile Link](https://www.upwork.com/freelancers/~019f94538da41f401d)
-
----
-
-<div align="center">
-  <sub>Designed & Developed by <b>Humayoun Kobir</b>. Built for speed, elegance, and utility.</sub>
-</div>
+- **Upwork**: [Freelancer Profile](https://www.upwork.com/freelancers/~019f94538da41f401d)
