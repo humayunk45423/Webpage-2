@@ -47,20 +47,20 @@
 The application is structured as a high-performance **Multi-Page Application (MPA)** with **Client-Side Hash Routing** for sub-views, synchronized via **Chromium Speculation Rules** for instantaneous sub-millisecond page switches.
 
 ```mermaid
-graph TD
-    A["User Entry (Browser)"] --> B["Inline Theme Resolver in &lt;head&gt;"]
-    B -->|Zero Flash| C["index.html (Main Portfolio)"]
+flowchart TD
+    A["User Entry (Browser)"] --> B["Inline Theme Resolver in head"]
+    B -->|"Zero Flash"| C["index.html (Main Portfolio)"]
     
-    subgraph "index.html - Core Experience"
+    subgraph S1 ["index.html - Core Experience"]
         C --> D["Hero & Dynamic Typing"]
         C --> E["Services & OfferCatalog"]
         C --> F["Project Showcase"]
         C --> G["Contact & Social Matrix"]
     end
 
-    C -->|Speculation Rules Prerender (0ms)| H["files.html (Software HQ)"]
+    C -->|"Speculation Rules Prerender"| H["files.html (Software HQ)"]
 
-    subgraph "files.html - Interactive Utility Explorer"
+    subgraph S2 ["files.html - Interactive Utility Explorer"]
         H --> I["Category Filtering (All / Softwares / Scripts)"]
         H --> J["Instant Real-Time Search Filter"]
         H --> K["Detail View & Deep Hash Link (#id)"]
@@ -75,7 +75,7 @@ graph TD
 sequenceDiagram
     autonumber
     actor User
-    participant Head as Inline Script (&lt;head&gt;)
+    participant Head as Inline Script (head)
     participant Storage as localStorage
     participant DOM as Document Object Model
     participant ViewTrans as View Transitions API
@@ -87,7 +87,7 @@ sequenceDiagram
     else No theme stored
         Head->>Head: Check prefers-color-scheme
     end
-    Head->>DOM: setAttribute('data-theme', theme) (PRE-RENDER)
+    Head->>DOM: setAttribute('data-theme', theme)
     Note over DOM: Page renders with correct theme (Zero FOUC)
     User->>DOM: Clicks Theme Toggle Button
     DOM->>ViewTrans: startViewTransition()
@@ -252,10 +252,10 @@ wmic Diskdrive get status
 To maximize search visibility and resolve all phonetic variations of the author's name across Google, Bing, and AI search engines, the site implements a comprehensive **JSON-LD Schema Graph**:
 
 ```mermaid
-graph LR
-    P["Person Entity<br>(Humayoun Kobir)"] --- S["sameAs<br>(GitHub, LinkedIn, Behance, Upwork)"]
-    P --- A["alternateName Variants<br>(Humayun Kabir, হুমায়ূন কবির, etc.)"]
-    P --- O["hasOfferCatalog<br>(Graphic Design, 3D Modeling, Data Entry)"]
+flowchart LR
+    P["Person Entity (Humayoun Kobir)"] --- S["sameAs (GitHub, LinkedIn, Behance, Upwork)"]
+    P --- A["alternateName Variants (Humayun Kabir, etc.)"]
+    P --- O["hasOfferCatalog (Services & Offerings)"]
     P --- W["WebSite & ProfilePage"]
     W --- C["CollectionPage (Software HQ)"]
 ```
