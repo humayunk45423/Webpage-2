@@ -471,6 +471,13 @@ function showDetail(id, isFromPopstate = false) {
 
     let bodyHtml = `<div class="readme-section">`;
 
+    if (item.readme) {
+        bodyHtml += `
+            <div class="readme-title"><i class="fa-solid fa-circle-info"></i> Documentation</div>
+            <div class="readme-content">${formatMarkdown(item.readme)}</div>
+        `;
+    }
+
     if (item.copyText) {
         bodyHtml += `
             <div class="doc-key-card">
@@ -502,13 +509,6 @@ function showDetail(id, isFromPopstate = false) {
         bodyHtml += `
             <div class="readme-title"><i class="fa-solid fa-file-code"></i> Code / Reference</div>
             <pre><button class="pre-copy-btn" onclick="doCopy('${escapeJsString(item.content)}')"><i class="fa-solid fa-copy"></i> Copy</button><code>${escapeHtml(item.content)}</code></pre>
-        `;
-    }
-
-    if (item.readme) {
-        bodyHtml += `
-            <div class="readme-title"><i class="fa-solid fa-circle-info"></i> Documentation</div>
-            <div class="readme-content">${formatMarkdown(item.readme)}</div>
         `;
     }
 
