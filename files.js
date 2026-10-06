@@ -927,8 +927,17 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+function updateSearchPlaceholder() {
+    if (fileSearch) {
+        fileSearch.placeholder = window.innerWidth <= 600 ? "Search..." : "Search essential tools, scripts, commands...";
+    }
+}
+
 // Initialize Explorer
 document.addEventListener('DOMContentLoaded', () => {
+    updateSearchPlaceholder();
+    window.addEventListener('resize', updateSearchPlaceholder);
+
     renderExplorer();
 
     if (fileSearch) {

@@ -531,34 +531,43 @@
 
         .group-header {
             grid-column: 1 / -1;
-            font-size: 1.1rem;
+            margin: 1.75rem 0 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .group-title {
+            font-size: 1.05rem;
             font-weight: 800;
             color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin: 1.25rem 0 0.5rem;
-            display: flex;
+            letter-spacing: 0.08em;
+            margin: 0;
+            display: inline-flex;
             align-items: center;
-            gap: 1.25rem;
+            gap: 0.75rem;
+            white-space: nowrap;
         }
 
-        @media (max-width: 600px) {
-            .group-header {
-                margin: 0.5rem 0 0.5rem;
-                font-size: 0.9rem;
-                gap: 0.75rem;
-            }
+        .group-title i {
+            font-size: 1.15rem;
+            color: var(--accent);
         }
 
-        .group-header i {
-            font-size: 1.25rem;
-        }
-
-        .group-header::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--line);
+        .group-count {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--muted);
+            background: var(--surface);
+            border: 1px solid var(--line);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            white-space: nowrap;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
         }
 
         .file-icon {
@@ -1138,57 +1147,128 @@
             }
 
             .explorer-header {
-                gap: 0.5rem;
+                gap: 0.65rem;
+                margin-bottom: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .header-top {
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 1.85rem;
                 margin-bottom: 0.25rem;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title::after {
+                margin: 0.35rem auto 0;
             }
 
             .controls-row {
                 flex-direction: column;
-                align-items: stretch;
+                align-items: center;
                 gap: 0.75rem;
+                width: 100%;
             }
 
             .search-box {
                 max-width: 100%;
+                width: 100%;
+                position: relative;
             }
 
             .search-box input {
-                padding: 0.85rem 1rem 0.85rem 3rem;
+                padding: 0.85rem 1rem;
                 font-size: 0.95rem;
                 border-radius: 1rem;
+                text-align: center;
+            }
+
+            .search-box i {
+                left: 1.25rem;
+                opacity: 0.5;
             }
 
             .category-pills {
                 display: flex;
-                gap: 0.6rem;
+                gap: 0.5rem;
                 width: 100%;
                 margin: 0 !important;
-                padding: 0.2rem 0;
+                padding: 0.1rem 0 0.35rem;
                 overflow: visible;
                 flex-wrap: nowrap;
                 align-items: center;
+                justify-content: center;
             }
 
-            .category-dropdown-menu {
-                right: auto;
-                left: 0;
-                min-width: 240px;
-                max-width: 90vw;
-            }
-
-            .pill {
-                padding: 0.6rem 1.15rem;
+            .pill#pillAll {
+                flex: 1;
+                justify-content: center;
+                text-align: center;
+                padding: 0.65rem 1rem;
                 font-size: 0.85rem;
             }
 
-            .section-title {
-                font-size: 1.75rem;
-                margin-bottom: 0.5rem;
-                text-align: left;
+            .category-dropdown-wrapper {
+                flex: 1.35;
+                display: flex;
+                width: 100%;
             }
 
-            .header-top {
-                text-align: left;
+            .category-dropdown-wrapper .pill {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+                padding: 0.65rem 0.9rem;
+                font-size: 0.85rem;
+            }
+
+            .category-dropdown-menu {
+                right: 0;
+                left: 0;
+                min-width: 100%;
+                max-width: 100%;
+            }
+
+            .group-header {
+                margin: 1.15rem 0 0.5rem;
+                gap: 0.5rem;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 0.25rem;
+            }
+
+            .group-title {
+                font-size: 0.82rem;
+                letter-spacing: 0.04em;
+                gap: 0.45rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .group-title i {
+                font-size: 0.95rem;
+                flex-shrink: 0;
+            }
+
+            .group-count {
+                font-size: 0.68rem;
+                padding: 0.2rem 0.55rem;
+                flex-shrink: 0;
+                white-space: nowrap;
+                border-radius: 999px;
             }
 
             .file-grid {
