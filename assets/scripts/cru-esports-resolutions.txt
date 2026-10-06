@@ -1,0 +1,85 @@
+================================================================================
+CUSTOM RESOLUTION UTILITY (CRU) ESPORTS RESOLUTION GUIDE & TIMING PROFILES
+Prepared for: Competitive Gaming, PUBG Steam, CS2, Apex Legends, Valorant
+================================================================================
+
+[1] POPULAR ESPORTS STRETCHED RESOLUTIONS MATRIX & ASPECT RATIOS
+
+--------------------------------------------------------------------------------
+A. 1080p MONITORS (Native: 1920x1080 - 16:9)
+--------------------------------------------------------------------------------
+1. 1728 x 1080 (Aspect Ratio: 16:10)  [*** PUBG STEAM PRO META ***]
+   - Why use it: Enlarges character hitboxes by ~10% with almost no vertical FOV loss.
+   - Text & Crosshair: Remains sharp and readable on 1080p native panels.
+   - Common Refresh Rates: 60Hz | 75Hz | 120Hz | 144Hz | 165Hz | 240Hz | 360Hz
+
+2. 1440 x 1080 (Aspect Ratio: 4:3)    [*** CS2 / APEX CLASSIC ***]
+   - Why use it: Maximum player model width, fastest horizontal target acquisition.
+   - Common Refresh Rates: 60Hz | 75Hz | 120Hz | 144Hz | 165Hz | 240Hz | 360Hz
+
+3. 1600 x 1080 (Aspect Ratio: 4:3 Wide / 5:3)
+   - Why use it: Balanced hybrid between 16:10 clarity and 4:3 width.
+   - Common Refresh Rates: 60Hz | 75Hz | 120Hz | 144Hz | 165Hz | 240Hz | 360Hz
+
+4. 1280 x 960 (Aspect Ratio: 4:3)     [*** MAX FPS / LOW-SPEC RIGS ***]
+   - Why use it: Significant GPU framerate boost, massive hitbox stretching.
+   - Common Refresh Rates: 60Hz | 75Hz | 120Hz | 144Hz | 165Hz | 240Hz | 360Hz
+
+--------------------------------------------------------------------------------
+B. 1440p / 2K MONITORS (Native: 2560x1440 - 16:9)
+--------------------------------------------------------------------------------
+1. 2304 x 1440 (Aspect Ratio: 16:10)  [*** 2K PUBG STEAM PRO META ***]
+   - Why use it: Direct 16:10 1:1 mathematical equivalent of 1728x1080 on 1440p panels.
+   - Pixel Clarity: Extreme crispness on 27" / 32" QHD displays.
+   - Common Refresh Rates: 60Hz | 75Hz | 120Hz | 144Hz | 165Hz | 240Hz | 360Hz
+
+2. 1920 x 1440 (Aspect Ratio: 4:3)    [*** 2K CS2 / VALORANT ***]
+   - Why use it: True 4:3 stretched resolution with full 1440p vertical detail.
+   - Common Refresh Rates: 60Hz | 75Hz | 120Hz | 144Hz | 165Hz | 240Hz
+
+3. 2048 x 1440 (Aspect Ratio: ~16:11 Hybrid)
+   - Common Refresh Rates: 60Hz | 75Hz | 120Hz | 144Hz | 165Hz | 240Hz
+
+--------------------------------------------------------------------------------
+C. 4K MONITORS (Native: 3840x2160 - 16:9)
+--------------------------------------------------------------------------------
+1. 3456 x 2160 (Aspect Ratio: 16:10) -> Ultra-crisp 16:10 stretched for 4K.
+2. 2880 x 2160 (Aspect Ratio: 4:3)   -> Ultra-crisp 4:3 stretched for 4K.
+   - Common Refresh Rates: 60Hz | 120Hz | 144Hz | 165Hz | 240Hz
+
+================================================================================
+[2] STEP-BY-STEP CRU INSTALLATION & CONFIGURATION GUIDE
+================================================================================
+
+1. Open Custom Resolution Utility (CRU.exe) as Administrator.
+2. Select your active display from the top dropdown (marked with active asterisk *).
+3. Under "Detailed Resolutions" (Top Box), click "Add...".
+4. Set:
+   - Timing: Automatic (PC standard) or Manual / LCD standard
+   - Active Horizontal: [Desired Width, e.g. 1728]
+   - Active Vertical: [Desired Height, e.g. 1080]
+   - Refresh rate: [Your monitor's refresh rate, e.g. 144Hz / 240Hz]
+5. Click OK.
+6. Run "restart64.exe" from the CRU folder to reload your graphics driver safely without rebooting.
+
+================================================================================
+[3] GPU SCALING SETUP (REQUIRED TO REMOVE BLACK BARS)
+================================================================================
+
+* NVIDIA USERS:
+  1. Open NVIDIA Control Panel.
+  2. Navigate to: Display -> Adjust desktop size and position.
+  3. Select "Full-screen".
+  4. Set "Perform scaling on:" to "GPU" (or "Display" if your monitor supports hardware scaling).
+  5. Check "Override the scaling mode set by games and programs".
+  6. Click Apply.
+
+* AMD RADEON USERS:
+  1. Open AMD Software: Adrenalin Edition.
+  2. Go to Gaming -> Display.
+  3. Enable "GPU Scaling".
+  4. Set "Scaling Mode" to "Full panel".
+
+* INTEL GRAPHICS USERS:
+  1. Open Intel Graphics Command Center.
+  2. Go to Display -> General -> Scale: Select "Stretch" / "Scale Full Screen".

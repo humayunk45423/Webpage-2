@@ -1,0 +1,55 @@
+Windows Registry Editor Version 5.00
+
+; ====================================================================
+; HUMAYOUN POWER USER CONTEXT MENU PACK
+; Adds: Take Ownership, Restart Explorer, PowerShell Admin & System Tools
+; ====================================================================
+
+; --- [1] Take Ownership for Files ---
+[HKEY_CLASSES_ROOT\*\shell\TakeOwnership]
+@="Take Ownership"
+"HasLUAShield"=""
+"NoWorkingDirectory"=""
+"Position"="Middle"
+
+[HKEY_CLASSES_ROOT\*\shell\TakeOwnership\command]
+@="cmd.exe /c takeown /f \"%1\" && icacls \"%1\" /grant administrators:F"
+"IsolatedCommand"="cmd.exe /c takeown /f \"%1\" && icacls \"%1\" /grant administrators:F"
+
+; --- [2] Take Ownership for Folders ---
+[HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership]
+@="Take Ownership"
+"HasLUAShield"=""
+"NoWorkingDirectory"=""
+"Position"="Middle"
+
+[HKEY_CLASSES_ROOT\Directory\shell\TakeOwnership\command]
+@="cmd.exe /c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant administrators:F /t"
+"IsolatedCommand"="cmd.exe /c takeown /f \"%1\" /r /d y && icacls \"%1\" /grant administrators:F /t"
+
+; --- [3] Restart Windows Explorer on Desktop Background ---
+[HKEY_CLASSES_ROOT\Directory\Background\shell\RestartExplorer]
+@="Restart Explorer"
+"Icon"="explorer.exe,0"
+"Position"="Bottom"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\RestartExplorer\command]
+@="cmd.exe /c taskkill /f /im explorer.exe & start explorer.exe"
+
+; --- [4] Open PowerShell as Administrator on Desktop Background ---
+[HKEY_CLASSES_ROOT\Directory\Background\shell\PowerShellAdmin]
+@="Open PowerShell as Administrator"
+"Icon"="powershell.exe"
+"Position"="Top"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\PowerShellAdmin\command]
+@="powershell.exe -NoExit -Command \"Set-Location '%V'; [Security.Principal.WindowsPrincipal]$user = [Security.Principal.WindowsIdentity]::GetCurrent(); if (-not $user.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) { Start-Process powershell.exe -ArgumentList '-NoExit', '-Command', \\\"Set-Location '%V'\\\" -Verb RunAs; Exit }\""
+
+; --- [5] GodMode Direct Access in Desktop Context Menu ---
+[HKEY_CLASSES_ROOT\Directory\Background\shell\GodMode]
+@="GodMode Panel"
+"Icon"="control.exe"
+"Position"="Bottom"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\GodMode\command]
+@="explorer.exe shell:::{ED7BA470-8E54-465E-825C-99712043E01C}"
