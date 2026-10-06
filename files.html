@@ -646,22 +646,120 @@
             background: var(--soft);
         }
 
-        .copy-card {
-            background: var(--bg2);
-            padding: 1.25rem;
-            border-radius: 1.25rem;
-            border: 1px solid var(--line);
-            text-align: left;
+        /* Grouped Section Headers */
+        .section-group {
+            margin-bottom: 2.75rem;
+            width: 100%;
         }
 
-        .copy-card span {
-            display: block;
+        .group-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            padding: 0 0.5rem;
+        }
+
+        .group-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            letter-spacing: -0.01em;
+            margin: 0;
+        }
+
+        .group-title i {
+            color: var(--accent);
+            font-size: 1.15rem;
+        }
+
+        .group-count {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            background: var(--soft);
+            color: var(--accent);
+            border: 1px solid var(--accent-line);
+        }
+
+        /* Documentation License / Serial Key Card */
+        .doc-key-card {
+            background: var(--bg2);
+            border: 1px solid var(--line);
+            border-radius: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            box-shadow: var(--shadow2);
+        }
+
+        .doc-key-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            min-width: 200px;
+            flex: 1;
+        }
+
+        .doc-key-label {
             font-size: 0.75rem;
             font-weight: 800;
             color: var(--accent);
             text-transform: uppercase;
-            margin-bottom: 0.75rem;
-            text-align: center;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .doc-key-code {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            background: var(--surface);
+            padding: 0.4rem 0.75rem;
+            border-radius: 0.6rem;
+            border: 1px solid var(--line);
+            display: inline-block;
+            word-break: break-all;
+            user-select: all;
+        }
+
+        .doc-key-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--accent);
+            color: var(--accent-ink);
+            border: none;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.25s var(--bezier);
+            box-shadow: 0 8px 20px var(--soft);
+            flex-shrink: 0;
+        }
+
+        .doc-key-copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px var(--soft);
+            opacity: 0.95;
+        }
+
+        .doc-key-copy-btn:focus-visible {
+            outline: 2px solid var(--accent) !important;
+            outline-offset: 3px;
         }
 
         /* Detail Page Components */
@@ -678,23 +776,6 @@
             color: #fff !important;
             border: none;
             box-shadow: 0 10px 25px rgba(255, 154, 0, 0.3);
-        }
-
-        .sidebar-divider {
-            border-top: 1px solid var(--line);
-            padding-top: 1rem;
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .sidebar-label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-            text-align: center;
         }
 
         .command-block {
@@ -1238,9 +1319,7 @@
                     </div>
                 </section>
 
-                <div id="explorerView" class="active">
-                    <div class="file-grid" id="fileGrid"></div>
-                </div>
+                <div id="explorerView" class="active"></div>
 
                 <div id="detailView">
                     <div class="detail-page" id="detailContent"></div>

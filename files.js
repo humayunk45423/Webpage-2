@@ -290,10 +290,37 @@ const copyToast = document.getElementById('copyToast');
 let currentCategory = 'all';
 let explorerScrollPos = 0;
 
-// Render Explorer Grid with Enhanced Search
+// Render Explorer Grid with Enhanced Grouped Sections
+function createCard(item) {
+    const card = document.createElement('div');
+    card.className = 'file-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `View details for ${item.name}`);
+
+    card.onclick = () => showDetail(item.id);
+    card.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            showDetail(item.id);
+        }
+    };
+
+    card.innerHTML = `
+        <div class="file-info">
+            <div class="file-icon"><i class="${item.icon}"></i></div>
+            <div class="file-meta">
+                <h3>${escapeHtml(item.name)}</h3>
+                <span>${item.category === 'software' ? 'Executable / Utility' : 'Script / Tweak'}</span>
+            </div>
+        </div>
+    `;
+    return card;
+}
+
 function renderExplorer() {
     const query = fileSearch ? fileSearch.value.toLowerCase().trim() : '';
-    fileGrid.innerHTML = '';
+    explorerView.innerHTML = '';
 
     const filtered = fileData.filter(item => {
         const matchesCategory = (currentCategory === 'all' || item.category === currentCategory);
@@ -314,43 +341,57 @@ function renderExplorer() {
     });
 
     if (filtered.length === 0) {
-        fileGrid.innerHTML = `
-            <div class="empty-state">
-                <i class="fa-solid fa-magnifying-glass empty-icon"></i>
-                <h3>No tools or scripts found</h3>
-                <p>No results match "${escapeHtml(query)}". Try searching for a different keyword or category.</p>
-                <button class="empty-clear-btn" onclick="clearSearch()">Clear Search</button>
+        explorerView.innerHTML = `
+            <div class="file-grid">
+                <div class="empty-state">
+                    <i class="fa-solid fa-magnifying-glass empty-icon"></i>
+                    <h3>No tools or scripts found</h3>
+                    <p>No results match "${escapeHtml(query)}". Try searching for a different keyword or category.</p>
+                    <button class="empty-clear-btn" onclick="clearSearch()">Clear Search</button>
+                </div>
             </div>
         `;
         return;
     }
 
-    filtered.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'file-card';
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `View details for ${item.name}`);
+    const softwares = filtered.filter(item => item.category === 'software');
+    const scripts = filtered.filter(item => item.category === 'text');
 
-        card.onclick = () => showDetail(item.id);
-        card.onkeydown = (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                showDetail(item.id);
-            }
-        };
-
-        card.innerHTML = `
-            <div class="file-info">
-                <div class="file-icon"><i class="${item.icon}"></i></div>
-                <div class="file-meta">
-                    <h3>${escapeHtml(item.name)}</h3>
-                    <span>${item.category === 'software' ? 'Executable / Utility' : 'Script / Tweak'}</span>
+    if (currentCategory === 'all' || currentCategory === 'software') {
+        if (softwares.length > 0) {
+            const section = document.createElement('div');
+            section.className = 'section-group';
+            section.innerHTML = `
+                <div class="group-header">
+                    <h2 class="group-title"><i class="fa-solid fa-compact-disc"></i> Softwares</h2>
+                    <span class="group-count">${softwares.length} items</span>
                 </div>
-            </div>
-        `;
-        fileGrid.appendChild(card);
-    });
+            `;
+            const grid = document.createElement('div');
+            grid.className = 'file-grid';
+            softwares.forEach(item => grid.appendChild(createCard(item)));
+            section.appendChild(grid);
+            explorerView.appendChild(section);
+        }
+    }
+
+    if (currentCategory === 'all' || currentCategory === 'text') {
+        if (scripts.length > 0) {
+            const section = document.createElement('div');
+            section.className = 'section-group';
+            section.innerHTML = `
+                <div class="group-header">
+                    <h2 class="group-title"><i class="fa-solid fa-code"></i> Scripts &amp; Tools</h2>
+                    <span class="group-count">${scripts.length} items</span>
+                </div>
+            `;
+            const grid = document.createElement('div');
+            grid.className = 'file-grid';
+            scripts.forEach(item => grid.appendChild(createCard(item)));
+            section.appendChild(grid);
+            explorerView.appendChild(section);
+        }
+    }
 }
 
 function clearSearch() {
@@ -428,21 +469,21 @@ function showDetail(id, isFromPopstate = false) {
         `;
     }
 
+    let bodyHtml = `<div class="readme-section">`;
+
     if (item.copyText) {
-        heroHtml += `
-            <div class="sidebar-divider">
-                <div class="copy-card">
-                    <span class="sidebar-label">${item.copyLabel || 'Copy Value'}</span>
-                    <code>${escapeHtml(item.copyText)}</code>
-                    <button class="copy-btn-small" onclick="doCopy('${escapeJsString(item.copyText)}')">
-                        <i class="fa-solid fa-copy"></i> Copy
-                    </button>
+        bodyHtml += `
+            <div class="doc-key-card">
+                <div class="doc-key-info">
+                    <span class="doc-key-label"><i class="fa-solid fa-key"></i> ${escapeHtml(item.copyLabel || 'License / Serial Key')}</span>
+                    <code class="doc-key-code">${escapeHtml(item.copyText)}</code>
                 </div>
+                <button class="doc-key-copy-btn" onclick="doCopy('${escapeJsString(item.copyText)}')">
+                    <i class="fa-solid fa-copy"></i> Copy ${escapeHtml(item.copyLabel || 'Key')}
+                </button>
             </div>
         `;
     }
-
-    let bodyHtml = `<div class="readme-section">`;
 
     if (item.commands && item.commands.length > 0) {
         bodyHtml += `<div class="readme-title"><i class="fa-solid fa-terminal"></i> PowerShell Commands</div>`;
