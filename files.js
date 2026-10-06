@@ -591,10 +591,11 @@ function escapeJsString(str) {
 function formatMarkdown(text) {
     if (!text) return '';
     let formatted = escapeHtml(text);
-    formatted = formatted.replace(/^## (.*$)/gim, '<div class="readme-meta">$1</div>');
+    formatted = formatted.replace(/^##\s*(.*?)\r?\n+/gim, '<div class="readme-meta">$1</div>');
+    formatted = formatted.replace(/^##\s*(.*?)$/gim, '<div class="readme-meta">$1</div>');
     formatted = formatted.replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>');
     formatted = formatted.replace(/`([^`]+)`/gim, '<code>$1</code>');
-    return formatted;
+    return formatted.trim();
 }
 
 // Global Keyboard Handler (Escape to close detail view)
