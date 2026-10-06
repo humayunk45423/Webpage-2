@@ -538,6 +538,11 @@ const fileData = [
     }
 ];
 
+// Enable manual scroll restoration to remember explorer scroll position precisely
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
 // DOM Elements
 const mainLayout = document.getElementById('mainLayout');
 const explorerView = document.getElementById('explorerView');
@@ -817,7 +822,12 @@ function showDetail(id, isFromPopstate = false) {
                 <div class="command-block">
                     <span class="command-label">Command</span>
                     <p class="command-desc">${escapeHtml(cmd.desc)}</p>
-                    <pre><button class="pre-copy-btn" onclick="doCopy('${escapeJsString(cmd.code)}')"><i class="fa-solid fa-copy"></i> Copy</button><code>${escapeHtml(cmd.code)}</code></pre>
+                    <div class="code-box">
+                        <code>${escapeHtml(cmd.code)}</code>
+                    </div>
+                    <button class="code-copy-btn" onclick="doCopy('${escapeJsString(cmd.code)}')">
+                        <i class="fa-solid fa-copy"></i> Copy Command
+                    </button>
                 </div>
             `;
         });
@@ -826,7 +836,14 @@ function showDetail(id, isFromPopstate = false) {
     if (item.content) {
         bodyHtml += `
             <div class="readme-title"><i class="fa-solid fa-file-code"></i> Code / Reference</div>
-            <pre><button class="pre-copy-btn" onclick="doCopy('${escapeJsString(item.content)}')"><i class="fa-solid fa-copy"></i> Copy</button><code>${escapeHtml(item.content)}</code></pre>
+            <div class="code-card">
+                <div class="code-box">
+                    <code>${escapeHtml(item.content)}</code>
+                </div>
+                <button class="code-copy-btn" onclick="doCopy('${escapeJsString(item.content)}')">
+                    <i class="fa-solid fa-copy"></i> Copy Code
+                </button>
+            </div>
         `;
     }
 
@@ -853,7 +870,21 @@ function hideDetail(isFromPopstate = false) {
     detailView.classList.remove('active');
     explorerView.classList.add('active');
 
-    window.scrollTo({ top: explorerScrollPos, behavior: 'instant' });
+    let targetPos = explorerScrollPos;
+    try {
+        const saved = sessionStorage.getItem('explorerScrollPos');
+        if (saved !== null) {
+            targetPos = parseInt(saved, 10) || targetPos;
+        }
+    } catch (e) {}
+
+    window.scrollTo({ top: targetPos, behavior: 'instant' });
+    requestAnimationFrame(() => {
+        window.scrollTo({ top: targetPos, behavior: 'instant' });
+    });
+    setTimeout(() => {
+        window.scrollTo({ top: targetPos, behavior: 'instant' });
+    }, 40);
 
     if (!isFromPopstate) {
         history.pushState({ view: 'explorer' }, '', window.location.pathname);
