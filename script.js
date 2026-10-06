@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const applyTheme = (theme) => {
         root.setAttribute('data-theme', theme);
         localStorage.setItem('portfolio-theme', theme);
+        if (themeToggle) {
+            const isDark = theme === 'dark';
+            themeToggle.setAttribute('data-state', isDark ? 'right' : 'left');
+            themeToggle.setAttribute('aria-checked', isDark ? 'true' : 'false');
+            themeToggle.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+            themeToggle.setAttribute('title', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+        }
         if (themeIcon) {
             themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
         }

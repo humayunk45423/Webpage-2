@@ -360,9 +360,14 @@
                     <a href="#contact">Contact</a>
                     <div class="glider" id="navGlider"></div>
                 </nav>
-                <button class="toggle" id="themeToggle" type="button" aria-label="Switch color theme">
-                    <i class="fa-solid fa-moon" id="themeIcon" aria-hidden="true"></i>
-                    <span id="themeLabel">Dark</span>
+                <button type="button" class="segmented-toggle" id="themeToggle" data-state="left" aria-label="Toggle Theme (Light / Dark)" title="Toggle Theme (Light / Dark)">
+                    <div class="toggle-slider" aria-hidden="true"></div>
+                    <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
+                        <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                    </span>
+                    <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
+                        <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                    </span>
                 </button>
             </div>
         </header>

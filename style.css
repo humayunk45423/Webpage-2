@@ -327,8 +327,7 @@
             isolation: isolate
         }
 
-        .nav a,
-        .toggle {
+        .nav a {
             padding: .6rem .9rem;
             border-radius: 999px;
             color: var(--muted);
@@ -336,6 +335,7 @@
             border: 0;
             font: inherit;
             font-size: 0.88rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -344,19 +344,205 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .nav a {
-            font-weight: 600
-        }
-
-        .toggle:hover {
-            background: var(--surface);
-            color: var(--text);
-            transform: translateY(-1px)
-        }
-
         .nav a.active {
             color: var(--accent-ink);
-            opacity: 1
+            opacity: 1;
+        }
+
+        /* ─── Segmented Sliding Theme Toggle (SnapSignFit Symmetrical Design) ─── */
+        .segmented-toggle,
+        .toggle,
+        .theme-switch {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 68px;
+            height: 32px;
+            padding: 2.5px;
+            border-radius: 999px;
+            background-color: #f4f4f5;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            flex-shrink: 0;
+            vertical-align: middle;
+        }
+
+        html[data-theme="dark"] .segmented-toggle,
+        html[data-theme="dark"] .toggle,
+        html[data-theme="dark"] .theme-switch,
+        [data-theme="dark"] .segmented-toggle,
+        [data-theme="dark"] .toggle,
+        [data-theme="dark"] .theme-switch {
+            background-color: #1b1b1e;
+            border-color: #26262a;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        .segmented-toggle:hover,
+        .toggle:hover,
+        .theme-switch:hover {
+            border-color: #94a3b8;
+        }
+
+        .segmented-toggle:focus-visible,
+        .toggle:focus-visible,
+        .theme-switch:focus-visible {
+            outline: 2px solid #2563eb;
+            outline-offset: 2px;
+        }
+
+        /* Sliding highlight (thumb) */
+        .toggle-slider,
+        .toggle-thumb {
+            position: absolute;
+            top: 2.5px;
+            left: 2.5px;
+            width: calc((100% - 5px) / 2);
+            height: calc(100% - 5px);
+            border-radius: 999px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+            pointer-events: none;
+            transform: translateX(0);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease, box-shadow 0.25s ease;
+            will-change: transform;
+            z-index: 1;
+        }
+
+        html[data-theme="dark"] .toggle-slider,
+        html[data-theme="dark"] .toggle-thumb,
+        [data-theme="dark"] .toggle-slider,
+        [data-theme="dark"] .toggle-thumb {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 10px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+        }
+
+        /* When state is right or dark mode: animate slider to right */
+        .segmented-toggle[data-state="right"] .toggle-slider,
+        .segmented-toggle[data-state="right"] .toggle-thumb,
+        .toggle[data-state="right"] .toggle-slider,
+        .toggle[data-state="right"] .toggle-thumb,
+        html[data-theme="dark"] .segmented-toggle .toggle-slider,
+        html[data-theme="dark"] .segmented-toggle .toggle-thumb,
+        html[data-theme="dark"] .toggle .toggle-slider,
+        html[data-theme="dark"] .toggle .toggle-thumb,
+        html[data-theme="dark"] .theme-switch .toggle-slider,
+        html[data-theme="dark"] .theme-switch .toggle-thumb {
+            transform: translateX(100%);
+        }
+
+        /* Option slots */
+        .toggle-opt,
+        .toggle-icon {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #475569;
+            transition: color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            line-height: 1;
+            pointer-events: none;
+            position: relative;
+            top: auto;
+            left: auto;
+            right: auto;
+            width: auto;
+        }
+
+        .toggle-opt i,
+        .toggle-opt svg,
+        .toggle-icon i,
+        .toggle-icon svg {
+            flex-shrink: 0;
+            font-size: 13px;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
+        }
+
+        /* Active option states */
+        .segmented-toggle[data-state="left"] .opt-left,
+        .segmented-toggle[data-state="right"] .opt-right,
+        .toggle[data-state="left"] .opt-left,
+        .toggle[data-state="right"] .opt-right,
+        html[data-theme="light"] .opt-left,
+        html[data-theme="dark"] .opt-right,
+        html[data-theme="light"] .sun,
+        html[data-theme="dark"] .moon {
+            color: #0f172a;
+            font-weight: 800;
+        }
+
+        html[data-theme="dark"] .opt-left,
+        html[data-theme="dark"] .sun,
+        html[data-theme="light"] .opt-right,
+        html[data-theme="light"] .moon {
+            color: #94a3b8;
+        }
+
+        .segmented-toggle[data-state="left"] .opt-left i,
+        .segmented-toggle[data-state="left"] .opt-left svg,
+        .toggle[data-state="left"] .opt-left i,
+        .toggle[data-state="left"] .opt-left svg,
+        html[data-theme="light"] .opt-left i,
+        html[data-theme="light"] .opt-left svg,
+        html[data-theme="light"] .sun i,
+        html[data-theme="light"] .sun svg {
+            color: #f59e0b !important; /* Bright sun when active */
+            transform: scale(1.12);
+            filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.45));
+        }
+
+        .segmented-toggle[data-state="right"] .opt-right i,
+        .segmented-toggle[data-state="right"] .opt-right svg,
+        .toggle[data-state="right"] .opt-right i,
+        .toggle[data-state="right"] .opt-right svg,
+        html[data-theme="dark"] .opt-right i,
+        html[data-theme="dark"] .opt-right svg,
+        html[data-theme="dark"] .moon i,
+        html[data-theme="dark"] .moon svg {
+            color: #38bdf8 !important; /* Glowing moon when active */
+            transform: scale(1.12);
+            filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.7));
+        }
+
+        .segmented-toggle[data-state="left"] .opt-right i,
+        .segmented-toggle[data-state="left"] .opt-right svg,
+        .segmented-toggle[data-state="right"] .opt-left i,
+        .segmented-toggle[data-state="right"] .opt-left svg,
+        .toggle[data-state="left"] .opt-right i,
+        .toggle[data-state="left"] .opt-right svg,
+        .toggle[data-state="right"] .opt-left i,
+        .toggle[data-state="right"] .opt-left svg,
+        html[data-theme="light"] .opt-right i,
+        html[data-theme="light"] .opt-right svg,
+        html[data-theme="light"] .moon i,
+        html[data-theme="light"] .moon svg,
+        html[data-theme="dark"] .opt-left i,
+        html[data-theme="dark"] .opt-left svg,
+        html[data-theme="dark"] .sun i,
+        html[data-theme="dark"] .sun svg {
+            color: #94a3b8 !important;
+            transform: scale(0.9);
+            filter: none;
+            opacity: 0.7;
+        }
+
+        .toggle:focus-visible,
+        .theme-switch:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
         }
 
         /* Native Hardware View Transitions (Buttery 120fps GPU Theme Switching on Desktop) */
