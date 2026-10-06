@@ -705,13 +705,15 @@
             border-radius: 2px
         }
 
-        .services-grid {
+        .services-grid,
+        .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem
         }
 
-        .service-card {
+        .service-card,
+        .skill-card {
             padding: 2.25rem;
             background: var(--surface);
             border: 1px solid var(--line);
@@ -728,7 +730,8 @@
         }
 
         @media (hover: hover) {
-            .service-card:hover {
+            .service-card:hover,
+            .skill-card:hover {
                 transform: translateY(-12px) translateZ(0);
                 border-color: var(--accent-line);
                 box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.18), 0 0 20px var(--soft);
@@ -736,7 +739,8 @@
             }
         }
 
-        .service-card::after {
+        .service-card::after,
+        .skill-card::after {
             content: "";
             position: absolute;
             inset: 0;
@@ -1276,6 +1280,7 @@
             }
 
             .services-grid,
+            .skills-grid,
             .projects-grid {
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 1.5rem
@@ -1485,12 +1490,14 @@
             }
 
             .services-grid,
+            .skills-grid,
             .projects-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 0.65rem;
             }
 
             .service-card,
+            .skill-card,
             .project-card {
                 padding: 0.85rem;
                 display: flex;
