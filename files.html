@@ -434,102 +434,36 @@
             gap: 1.25rem;
         }
 
-        /* Explorer Windows Group by Layout */
-        .explorer-groups-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2.25rem;
-            width: 100%;
-        }
-
-        .explorer-group {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            width: 100%;
-        }
-
         .group-header {
+            grid-column: 1 / -1;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 1.25rem 0 0.5rem;
             display: flex;
             align-items: center;
-            gap: 0.65rem;
-            padding: 0.4rem 0.2rem;
-            cursor: pointer;
-            user-select: none;
-            transition: opacity 0.2s ease;
-        }
-
-        .group-header:hover {
-            opacity: 0.85;
-        }
-
-        .group-header:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-            border-radius: 0.5rem;
-        }
-
-        .group-chevron {
-            font-size: 0.75rem;
-            color: var(--muted);
-            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 16px;
-            height: 16px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .explorer-group.collapsed .group-chevron {
-            transform: rotate(-90deg);
-        }
-
-        .group-title-wrap {
-            display: flex;
-            align-items: baseline;
-            gap: 0.5rem;
-            white-space: nowrap;
-        }
-
-        .group-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.01em;
-        }
-
-        .group-count {
-            font-size: 0.82rem;
-            font-weight: 500;
-            color: var(--muted);
-        }
-
-        .group-divider {
-            flex: 1;
-            height: 1px;
-            background: var(--line);
-            margin-left: 0.5rem;
-            opacity: 0.8;
-        }
-
-        .group-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .explorer-group.collapsed .group-grid {
-            display: none;
+            gap: 1.25rem;
         }
 
         @media (max-width: 600px) {
-            .group-title {
-                font-size: 0.88rem;
+            .group-header {
+                margin: 0.5rem 0 0.5rem;
+                font-size: 0.9rem;
+                gap: 0.75rem;
             }
-            .explorer-groups-container {
-                gap: 1.5rem;
-            }
+        }
+
+        .group-header i {
+            font-size: 1.25rem;
+        }
+
+        .group-header::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--line);
         }
 
         .file-icon {
@@ -1298,11 +1232,8 @@
 
                         <div class="category-pills" role="tablist" aria-label="Filter software categories">
                             <button class="pill active" data-category="all" role="tab" aria-selected="true" type="button"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> All</button>
-                            <button class="pill" data-category="scripts" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-terminal" aria-hidden="true"></i> Custom Scripts</button>
-                            <button class="pill" data-category="system" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> System &amp; Opt</button>
-                            <button class="pill" data-category="hardware" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-microchip" aria-hidden="true"></i> Hardware &amp; Diagnostic</button>
-                            <button class="pill" data-category="storage" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-hard-drive" aria-hidden="true"></i> Storage &amp; Recovery</button>
-                            <button class="pill" data-category="creative" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-palette" aria-hidden="true"></i> Creative &amp; Utilities</button>
+                            <button class="pill" data-category="software" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-compact-disc" aria-hidden="true"></i> Softwares</button>
+                            <button class="pill" data-category="text" role="tab" aria-selected="false" type="button"><i class="fa-solid fa-code" aria-hidden="true"></i> Scripts &amp; Tools</button>
                         </div>
                     </div>
                 </section>
