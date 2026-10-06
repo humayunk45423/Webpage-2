@@ -480,17 +480,10 @@
         html[data-theme="dark"] .opt-right,
         html[data-theme="light"] .sun,
         html[data-theme="dark"] .moon {
-            color: #0f172a;
             font-weight: 800;
         }
 
-        html[data-theme="dark"] .opt-left,
-        html[data-theme="dark"] .sun,
-        html[data-theme="light"] .opt-right,
-        html[data-theme="light"] .moon {
-            color: #94a3b8;
-        }
-
+        /* Light mode active Sun: Black */
         .segmented-toggle[data-state="left"] .opt-left i,
         .segmented-toggle[data-state="left"] .opt-left svg,
         .toggle[data-state="left"] .opt-left i,
@@ -499,11 +492,13 @@
         html[data-theme="light"] .opt-left svg,
         html[data-theme="light"] .sun i,
         html[data-theme="light"] .sun svg {
-            color: #f59e0b !important; /* Bright sun when active */
+            color: #000000 !important;
             transform: scale(1.12);
-            filter: drop-shadow(0 0 3px rgba(245, 158, 11, 0.45));
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+            opacity: 1;
         }
 
+        /* Dark mode active Moon: White */
         .segmented-toggle[data-state="right"] .opt-right i,
         .segmented-toggle[data-state="right"] .opt-right svg,
         .toggle[data-state="right"] .opt-right i,
@@ -512,11 +507,13 @@
         html[data-theme="dark"] .opt-right svg,
         html[data-theme="dark"] .moon i,
         html[data-theme="dark"] .moon svg {
-            color: #38bdf8 !important; /* Glowing moon when active */
+            color: #ffffff !important;
             transform: scale(1.12);
-            filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.7));
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+            opacity: 1;
         }
 
+        /* Inactive muted icons */
         .segmented-toggle[data-state="left"] .opt-right i,
         .segmented-toggle[data-state="left"] .opt-right svg,
         .segmented-toggle[data-state="right"] .opt-left i,
@@ -528,15 +525,21 @@
         html[data-theme="light"] .opt-right i,
         html[data-theme="light"] .opt-right svg,
         html[data-theme="light"] .moon i,
-        html[data-theme="light"] .moon svg,
+        html[data-theme="light"] .moon svg {
+            color: #94a3b8 !important;
+            transform: scale(0.9);
+            filter: none;
+            opacity: 0.65;
+        }
+
         html[data-theme="dark"] .opt-left i,
         html[data-theme="dark"] .opt-left svg,
         html[data-theme="dark"] .sun i,
         html[data-theme="dark"] .sun svg {
-            color: #94a3b8 !important;
+            color: #64748b !important;
             transform: scale(0.9);
             filter: none;
-            opacity: 0.7;
+            opacity: 0.5;
         }
 
         .toggle:focus-visible,
