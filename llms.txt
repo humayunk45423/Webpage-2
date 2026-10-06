@@ -27,9 +27,9 @@
 2. **Software HQ**: High-performance, categorized directory for downloading essential productivity tools, development environments, and multimedia software without bloated ads.
 
 ## Semantic & Search Query Mappings
-This document indexes all relevant search queries matching Humayoun Kobir:
-- "Humayoun Kobir", "Humayun Kabir", "হুমায়ূন কবির", "হুমায়ুন কবির"
-- "Humayun Kabir Designer", "Humayun Kabir Engineer", "Humayun Kabir Developer"
-- "Humayoun Kobir Designer", "Humayoun Kobir Engineer", "Humayoun Kobir Developer"
-- "Humain Kabir", "Humayon Kabir", "Humayun Kobir Bangladesh"
-- "Software HQ Humayun", "Software HQ Humayoun Kobir"
+This document indexes all relevant search queries matching Humayoun Kobir & Software HQ:
+- **Primary Identity**: "Humayoun Kobir", "Humayun Kabir", "হুমায়ূন কবির", "হুমায়ুন কবির", "মো. হুমায়ুন কবির"
+- **Profession & Titles**: "Humayun Kabir Designer", "Humayun Kabir Engineer", "Humayoun Kobir Designer", "Humayoun Kobir Engineer", "Humayun Kabir Graphic Designer", "Humayun Kabir 3D Artist", "Humayun Kabir Bangladesh"
+- **Phonetic & Typo Variants**: "Humain Kabir", "Humain Kobir", "Humayon Kabir", "Humayon Kobir", "Humayun Kobir", "Humayoun Kabir", "Humaun Kabir", "Humaun Kobir", "Humauin Kabir", "Humauin Kobir", "Homayun Kabir"
+- **Software HQ Combinations (English)**: "Software HQ", "SoftwareHQ", "Humayoun Kobir Software HQ", "Humayun Kabir Software HQ", "Humayun Kobir Software HQ", "Humayoun Kabir Software HQ", "Humaun Kabir Software HQ", "Humain Kabir Software HQ", "Software HQ Humayoun Kobir", "Software HQ Humayun Kabir", "Software HQ Humayun Kobir", "SoftwareHQ Humayun Kabir", "SoftwareHQ Humayoun Kobir", "Software HQ Repository", "Software HQ Tools", "Software HQ Utilities", "Humayun Kabir Tools", "Humayoun Kobir PC Optimization"
+- **Software HQ Combinations (Bengali)**: "হুমায়ূন কবির সফটওয়্যার এইচকিউ", "হুমায়ুন কবির সফটওয়্যার এইচকিউ", "হুমায়ূন কবির সফটওয়্যার এইচকিউ", "হুমায়ুন কবির সফটওয়্যার এইচকিউ", "হুমায়ুন কবীর সফটওয়্যার এইচকিউ", "মোঃ হুমায়ুন কবির সফটওয়্যার এইচকিউ", "মোহাম্মদ হুমায়ূন কবির সফটওয়্যার এইচকিউ", "হুমায়ুন কবির সফটওয়্যার", "হুমায়ূন কবির সফটওয়্যার", "হুমায়ুন কবির টুলস", "সফটওয়্যার এইচকিউ হুমায়ুন কবির", "সফটওয়্যার এইচকিউ হুমায়ূন কবির", "সফটওয়্যার এইচকিউ হুমায়ুন কবির", "সফটওয়্যার এইচকিউ", "সফটওয়্যার এইচকিউ"
