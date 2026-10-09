@@ -632,7 +632,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!sMetrics.length || !nMetrics.length) return;
 
         let activeIdx = 0;
-        const isAtBottom = (window.innerHeight + sy) >= document.body.offsetHeight - 80;
+        const bodyHeight = (document.body && document.body.offsetHeight) || document.documentElement.scrollHeight || 0;
+        const isAtBottom = (window.innerHeight + sy) >= bodyHeight - 80;
 
         if (isAtBottom) {
             activeIdx = sMetrics.length - 1;

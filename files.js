@@ -637,7 +637,7 @@ function selectCategory(catId) {
     }
 
     document.querySelectorAll('.dropdown-item').forEach(item => {
-        item.classList.toggle('active', item.dataset.category === catId);
+        item.classList.toggle('active', item.getAttribute('data-category') === catId);
     });
 
     closeDropdown();
@@ -698,8 +698,8 @@ function createCard(item) {
 }
 
 function renderExplorer() {
-    const query = fileSearch ? fileSearch.value.toLowerCase().trim() : '';
-    explorerView.innerHTML = '';
+    const query = (fileSearch && fileSearch.value ? fileSearch.value : '').toLowerCase().trim();
+    if (explorerView) explorerView.innerHTML = '';
 
     const filtered = fileData.filter(item => {
         const matchesCategory = (currentCategory === 'all' || item.category === currentCategory);
@@ -746,12 +746,16 @@ function renderExplorer() {
             .sort((a, b) => a.name.localeCompare(b.name));
 
         if (itemsInCat.length > 0) {
+            const curLang = document.documentElement.getAttribute('data-lang') || 'en';
+            const catTitle = (categoryNames[cat.id] && categoryNames[cat.id][curLang]) || cat.name;
+            const countLabel = curLang === 'bn' ? `${itemsInCat.length} টি টুল` : (itemsInCat.length === 1 ? '1 item' : `${itemsInCat.length} items`);
+
             const section = document.createElement('div');
             section.className = 'section-group';
             section.innerHTML = `
                 <div class="group-header">
-                    <h2 class="group-title"><i class="${cat.icon}"></i> ${escapeHtml(cat.name)}</h2>
-                    <span class="group-count">${itemsInCat.length} items</span>
+                    <h2 class="group-title"><i class="${cat.icon}"></i> ${escapeHtml(catTitle)}</h2>
+                    <span class="group-count">${countLabel}</span>
                 </div>
             `;
             const grid = document.createElement('div');
@@ -1078,7 +1082,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update dropdown menu items
         document.querySelectorAll('.dropdown-item').forEach(item => {
-            const catId = item.dataset.category;
+            const catId = item.getAttribute('data-category');
             if (categoryNames[catId]) {
                 const icon = item.querySelector('i');
                 const iconHtml = icon ? icon.outerHTML : '';
@@ -1188,7 +1192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.dropdown-item').forEach(item => {
         item.onclick = (e) => {
             e.stopPropagation();
-            selectCategory(item.dataset.category);
+            selectCategory(item.getAttribute('data-category'));
         };
     });
 
@@ -1292,3 +1296,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+window.copyContact = (text, btn) => {
+    const updateBtnUi = () => {
+        if (!btn) return;
+        const icon = btn.querySelector('i');
+        if (!icon) return;
+        const originalClass = icon.className;
+        btn.classList.add('copied');
+        icon.className = 'fa-solid fa-check';
+        setTimeout(() => {
+            btn.classList.remove('copied');
+            icon.className = originalClass;
+        }, 2000);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(updateBtnUi).catch(() => {
+            copyFallback(text);
+            updateBtnUi();
+        });
+    } else {
+        copyFallback(text);
+        updateBtnUi();
+    }
+};
+
+window.showDetail = showDetail;
+window.hideDetail = hideDetail;
+window.clearSearch = clearSearch;
+window.doCopy = doCopy;
