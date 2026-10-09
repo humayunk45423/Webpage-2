@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     // 5. Scroll Sync Navigation Logic (Ultra-Optimized 1:1 Sync)
-    const navLinks = document.querySelectorAll('.nav a');
+    const navLinks = document.querySelectorAll('.nav a[href^="#"]');
     const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href'))).filter(s => s);
     const glider = document.getElementById('navGlider');
 
@@ -292,21 +292,50 @@ document.addEventListener('DOMContentLoaded', () => {
         updateGliderSync();
     }, { passive: true });
 
-    // 6. Copy to Clipboard Utility
+    // 6. Copy to Clipboard Utility with Safe Fallback
     window.copyContact = (text, btn) => {
-        navigator.clipboard.writeText(text).then(() => {
+        const updateBtnUi = () => {
+            if (!btn) return;
             const icon = btn.querySelector('i');
+            if (!icon) return;
             const originalClass = icon.className;
-
             btn.classList.add('copied');
             icon.className = 'fa-solid fa-check';
-
             setTimeout(() => {
                 btn.classList.remove('copied');
                 icon.className = originalClass;
             }, 2000);
-        });
+        };
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(updateBtnUi).catch(() => {
+                fallbackCopy(text);
+                updateBtnUi();
+            });
+        } else {
+            fallbackCopy(text);
+            updateBtnUi();
+        }
     };
+
+    function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+    }
+
+    // 7. Register PWA Service Worker (Offline Support)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch(() => {});
+        });
+    }
 
     // Initial run
     if ('requestIdleCallback' in window) {

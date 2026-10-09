@@ -555,13 +555,80 @@
             animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .nav a:not(.active):hover {
+        .nav a:not(.active):not(.nav-software-btn):hover {
             color: var(--text);
-            transform: translateY(-1px)
+            transform: translateY(-1px);
         }
 
-        .nav a:hover {
-            background: transparent !important
+        .nav a:not(.nav-software-btn):hover {
+            background: transparent !important;
+        }
+
+        /* ─── Top Nav Software HQ Button ─── */
+        .nav-software-btn {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.46rem 0.85rem !important;
+            font-size: 0.82rem !important;
+            font-weight: 700 !important;
+            color: var(--accent) !important;
+            background: var(--soft) !important;
+            border: 1px solid var(--accent-line) !important;
+            border-radius: 999px;
+            margin-left: 0.2rem;
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+            box-shadow: 0 2px 8px var(--soft);
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        .nav-software-btn i {
+            font-size: 0.8rem;
+            color: var(--accent);
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+
+        .nav-software-btn:hover {
+            background: var(--vibrant-gradient) !important;
+            color: var(--accent-ink) !important;
+            border-color: transparent !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 15px var(--soft), 0 0 10px var(--soft);
+        }
+
+        .nav-software-btn:hover i {
+            color: var(--accent-ink);
+            transform: scale(1.15) rotate(6deg);
+        }
+
+        html[data-theme="dark"] .nav-software-btn {
+            background: rgba(255, 107, 0, 0.12) !important;
+            border-color: rgba(255, 107, 0, 0.28) !important;
+            color: #ff9838 !important;
+        }
+
+        html[data-theme="dark"] .nav-software-btn i {
+            color: #ff9838;
+        }
+
+        html[data-theme="dark"] .nav-software-btn:hover {
+            color: #000000 !important;
+            background: var(--vibrant-gradient) !important;
+        }
+
+        html[data-theme="dark"] .nav-software-btn:hover i {
+            color: #000000;
+        }
+
+        .nav-software-btn.active {
+            background: var(--vibrant-gradient) !important;
+            color: var(--accent-ink) !important;
+            border-color: transparent !important;
+        }
+
+        .nav-software-btn.active i {
+            color: var(--accent-ink) !important;
         }
 
         .glider {

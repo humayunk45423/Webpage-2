@@ -1016,4 +1016,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         history.replaceState({ view: 'explorer' }, '', window.location.pathname);
     }
+
+    // Register PWA Service Worker (Offline Support for Software HQ)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch(() => {});
+        });
+    }
 });
