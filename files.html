@@ -249,6 +249,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
@@ -1518,25 +1519,35 @@
                 <div class="nav-wrap">
                     <a href="index.html" class="brand">
                         <div class="mark"><img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir - Animated Brand Logo" width="44" height="44" decoding="async" fetchpriority="high"></div>
-                        <div class="brand-text"><strong>Humayoun Kobir</strong><small>Repository</small></div>
+                        <div class="brand-text"><strong data-i18n="brand_name">Humayoun Kobir</strong><small data-i18n="brand_repo">Repository</small></div>
                     </a>
                     <nav class="nav" aria-label="Primary navigation">
-                        <a href="index.html#about">About</a>
-                        <a href="index.html#skills">Skills</a>
-                        <a href="index.html#projects">Projects</a>
-                        <a href="index.html#contact">Contact</a>
-                        <a href="files.html" class="active" id="navSoftwareHq">Software HQ</a>
+                        <a href="index.html#about" data-i18n="nav_about">About</a>
+                        <a href="index.html#skills" data-i18n="nav_skills">Skills</a>
+                        <a href="index.html#projects" data-i18n="nav_projects">Projects</a>
+                        <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+                        <a href="files.html" class="active" id="navSoftwareHq" data-i18n="nav_softwarehq">Software HQ</a>
                         <div class="glider" id="navGlider"></div>
                     </nav>
-                    <button type="button" class="segmented-toggle" id="themeToggle" data-state="left" aria-label="Toggle Theme (Light / Dark)" title="Toggle Theme (Light / Dark)">
-                        <div class="toggle-slider" aria-hidden="true"></div>
-                        <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
-                            <i class="fa-solid fa-sun" aria-hidden="true"></i>
-                        </span>
-                        <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
-                            <i class="fa-solid fa-moon" aria-hidden="true"></i>
-                        </span>
-                    </button>
+                    <div class="header-controls">
+                        <button type="button" class="segmented-toggle lang-toggle" id="langToggle" data-state="right" aria-label="Toggle Language (English / Bangla)" title="Toggle Language (English / Bangla)">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
+                            <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
+                        </button>
+                        <button type="button" class="segmented-toggle" id="themeToggle" data-state="left" aria-label="Toggle Theme (Light / Dark)" title="Toggle Theme (Light / Dark)">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
+                                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                            </span>
+                            <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
+                                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                        <button type="button" class="hamburger-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu" title="Menu">
+                            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
@@ -1545,7 +1556,7 @@
             <div class="files-layout" id="mainLayout">
                 <section class="explorer-header">
                     <div class="header-top">
-                        <h1 class="section-title">Software HQ</h1>
+                        <h1 class="section-title" data-i18n="shq_title">Software HQ</h1>
                     </div>
 
                     <div class="controls-row">
@@ -1611,7 +1622,7 @@
         </main>
 
         <footer class="footer container">
-            <p>&copy; 2026 Humayoun Kobir.</p>
+            <p data-i18n="footer_copyright">&copy; 2026 Humayoun Kobir. All rights reserved.</p>
         </footer>
     </div>
 
@@ -1619,6 +1630,98 @@
 
     <script src="script.js" defer></script>
     <script src="files.js" defer></script>
+
+    <!-- Mobile Navigation Drawer & Backdrop -->
+    <div class="mobile-drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation Drawer" aria-hidden="true">
+        <div class="drawer-header">
+            <a class="brand" href="index.html#top" aria-label="Go to top">
+                <span class="mark">
+                    <img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir Logo" width="34" height="34" loading="lazy">
+                </span>
+                <span class="brand-text">
+                    <strong data-i18n="brand_name">Humayoun Kobir</strong>
+                    <small data-i18n="brand_title">Engineer & Designer</small>
+                </span>
+            </a>
+            <button type="button" class="drawer-close-btn" id="closeMenuBtn" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="drawer-body">
+            <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_nav_title">Navigation</div>
+                <nav class="drawer-nav">
+                    <a href="index.html#about" class="drawer-nav-item"><i class="fa-solid fa-user"></i><span data-i18n="nav_about">About</span></a>
+                    <a href="index.html#skills" class="drawer-nav-item"><i class="fa-solid fa-layer-group"></i><span data-i18n="nav_skills">Skills</span></a>
+                    <a href="index.html#projects" class="drawer-nav-item"><i class="fa-solid fa-briefcase"></i><span data-i18n="nav_projects">Projects</span></a>
+                    <a href="index.html#contact" class="drawer-nav-item"><i class="fa-solid fa-paper-plane"></i><span data-i18n="nav_contact">Contact</span></a>
+                    <a href="files.html" class="drawer-nav-item active"><i class="fa-solid fa-folder-open"></i><span data-i18n="nav_softwarehq">Software HQ</span></a>
+                </nav>
+            </div>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_contact_title">Direct Contact</div>
+                <div class="drawer-contacts">
+                    <div class="method">
+                        <a href="mailto:humayunk45423@gmail.com" class="method-main" aria-label="Send email">
+                            <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="method-text">
+                                <strong data-i18n="contact_email_title">Email Address</strong>
+                                <span>humayunk45423@gmail.com</span>
+                            </div>
+                        </a>
+                        <button class="copy-btn" title="Copy Email" onclick="copyContact('humayunk45423@gmail.com', this)">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="method">
+                        <a href="https://wa.me/8801721445207" target="_blank" rel="noopener noreferrer nofollow" class="method-main" aria-label="Chat on WhatsApp">
+                            <div class="method-icon">
+                                <svg viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M20 10C20 15.51 15.51 20 10 20C7.97 20 6.08 19.39 4.5 18.35L0.66 19.58L1.9 15.86C0.7 14.22 0 12.19 0 10C0 4.49 4.48 0 10 0L10 0C15.51 0 20 4.49 20 10ZM15.99 12.73C15.89 12.56 13.62 11.51 13.44 11.45C13.18 11.35 12.92 11.38 12.72 11.66C12.44 12.06 12.16 12.46 11.94 12.7C11.77 12.89 11.48 12.91 11.24 12.81C10.91 12.67 10.01 12.36 8.89 11.36C8.03 10.59 7.44 9.64 7.27 9.35C7.1 9.05 7.25 8.88 7.39 8.72C7.81 8.2 8.39 7.85 8.1 7.24C8.03 7.1 7.45 5.66 7.2 5.08C7 4.59 6.86 4.57 6.23 4.57C4.93 4.57 4.19 6.08 4.19 7.37C4.19 9.9 7.77 13.71 10.35 14.78C12.65 15.73 13.33 15.64 13.86 15.53C14.62 15.37 15.58 14.8 15.82 14.12C16.06 13.44 16.06 12.86 15.99 12.73Z"></path>
+                                </svg>
+                            </div>
+                            <div class="method-text">
+                                <strong data-i18n="contact_wa_title">WhatsApp / Phone</strong>
+                                <span>+8801721445207</span>
+                            </div>
+                        </a>
+                        <button class="copy-btn" title="Copy Number" onclick="copyContact('+8801721445207', this)">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_preferences_title">Preferences</div>
+                <div class="drawer-toggles">
+                    <div class="drawer-toggle-row">
+                        <span data-i18n="toggle_language_label">Language</span>
+                        <button type="button" class="segmented-toggle lang-toggle" id="langToggleMobile" data-state="right" aria-label="Toggle Language" title="Toggle Language">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
+                            <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
+                        </button>
+                    </div>
+                    <div class="drawer-toggle-row">
+                        <span data-i18n="toggle_theme_label">Theme</span>
+                        <button type="button" class="segmented-toggle" id="themeToggleMobile" data-state="left" aria-label="Toggle Theme" title="Toggle Theme">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
+                                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                            </span>
+                            <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
+                                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
 </body>
 
 </html>

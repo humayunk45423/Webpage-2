@@ -3,6 +3,64 @@
  * Fast, client-side utility directory with search, dynamic category grouping, and hash routing.
  */
 
+
+// =========================================================================
+// Bilingual Translation Dictionary for Software HQ
+// =========================================================================
+const translations = {
+    en: {
+        brand_name: "Humayoun Kobir",
+        brand_title: "Engineer & Designer",
+        brand_repo: "Repository",
+        nav_about: "About",
+        nav_skills: "Skills",
+        nav_projects: "Projects",
+        nav_contact: "Contact",
+        nav_softwarehq: "Software HQ",
+        drawer_nav_title: "Navigation",
+        drawer_contact_title: "Direct Contact",
+        drawer_preferences_title: "Preferences",
+        contact_email_title: "Email Address",
+        contact_wa_title: "WhatsApp / Phone",
+        toggle_language_label: "Language",
+        toggle_theme_label: "Theme",
+        shq_title: "Software HQ",
+        cat_all: "All Tools",
+        cat_select: "Select Category",
+        footer_copyright: "© 2026 Humayoun Kobir. All rights reserved."
+    },
+    bn: {
+        brand_name: "হুমায়ূন কবির",
+        brand_title: "প্রকৌশলী ও ডিজাইনার",
+        brand_repo: "সফটওয়্যার ভান্ডার",
+        nav_about: "পরিচিতি",
+        nav_skills: "দক্ষতা",
+        nav_projects: "প্রকল্প",
+        nav_contact: "যোগাযোগ",
+        nav_softwarehq: "সফটওয়্যার HQ",
+        drawer_nav_title: "নেভিগেশন মেনু",
+        drawer_contact_title: "সরাসরি যোগাযোগ",
+        drawer_preferences_title: "পছন্দসমূহ",
+        contact_email_title: "ইমেইল ঠিকানা",
+        contact_wa_title: "হোয়াটসঅ্যাপ / ফোন",
+        toggle_language_label: "ভাষা",
+        toggle_theme_label: "থিম",
+        shq_title: "সফটওয়্যার HQ",
+        cat_all: "সকল টুলস",
+        cat_select: "ক্যাটাগরি বাছাই করুন",
+        footer_copyright: "© ২০২৬ হুমায়ূন কবির। সর্বস্বত্ব সংরক্ষিত।"
+    }
+};
+
+const categoryNames = {
+    utilities: { en: "Productivity & Utilities", bn: "প্রোডাক্টিভিটি ও ইউটিলিটি" },
+    system: { en: "System & Maintenance", bn: "সিস্টেম ও রক্ষণাবেক্ষণ" },
+    storage: { en: "Storage & Recovery", bn: "স্টোরেজ ও রিকভারি" },
+    optimization: { en: "Optimization & Gaming", bn: "অপ্টিমাইজেশন ও গেমিং" },
+    diagnostics: { en: "Hardware & Diagnostics", bn: "হার্ডওয়্যার ও ডায়াগনস্টিক" },
+    creative: { en: "Creative & Design", bn: "ক্রিয়েটিভ ও ডিজাইন" }
+};
+
 const categoryList = [
     { id: "utilities", name: "Productivity & Utilities", icon: "fa-solid fa-toolbox" },
     { id: "system", name: "System & Maintenance", icon: "fa-solid fa-sliders" },
@@ -729,7 +787,8 @@ function showDetail(id, isFromPopstate = false) {
     detailView.classList.add('active');
 
     const categoryObj = categoryList.find(c => c.id === item.category);
-    const categoryLabel = categoryObj ? categoryObj.name : 'Software Utility';
+    const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
+    const categoryLabel = (categoryNames[item.category] && categoryNames[item.category][currentLang]) || (categoryObj ? categoryObj.name : 'Software Utility');
     const versionBadge = item.badge ? `${categoryLabel} • ${item.badge}` : categoryLabel;
 
     let heroHtml = `
@@ -960,12 +1019,152 @@ document.addEventListener('keydown', (e) => {
 
 function updateSearchPlaceholder() {
     if (fileSearch) {
-        fileSearch.placeholder = window.innerWidth <= 600 ? "Search..." : "Search essential tools, scripts, commands...";
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
+        if (currentLang === 'bn') {
+            fileSearch.placeholder = window.innerWidth <= 600 ? "খুঁজুন..." : "প্রয়োজনীয় টুলস, স্ক্রিপ্ট, কমান্ড খুঁজুন...";
+        } else {
+            fileSearch.placeholder = window.innerWidth <= 600 ? "Search..." : "Search essential tools, scripts, commands...";
+        }
     }
 }
 
 // Initialize Explorer
 document.addEventListener('DOMContentLoaded', () => {
+    // Language & Theme initialization for Software HQ
+    const root = document.documentElement;
+    const langToggle = document.getElementById('langToggle');
+    const langToggleMobile = document.getElementById('langToggleMobile');
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+    const updateLangToggleUi = (lang) => {
+        const isBn = lang === 'bn';
+        [langToggle, langToggleMobile].forEach(t => {
+            if (!t) return;
+            t.setAttribute('data-state', isBn ? 'left' : 'right');
+            t.setAttribute('aria-label', isBn ? 'Switch to English' : 'Switch to Bangla');
+            t.setAttribute('title', isBn ? 'Switch to English' : 'Switch to Bangla');
+
+            const optLeft = t.querySelector('.opt-left');
+            const optRight = t.querySelector('.opt-right');
+            if (optLeft && optRight) {
+                if (isBn) {
+                    optLeft.textContent = 'বাং';
+                    optRight.textContent = 'ইং';
+                } else {
+                    optLeft.textContent = 'BN';
+                    optRight.textContent = 'EN';
+                }
+            }
+        });
+    };
+
+    const applyLanguage = (lang) => {
+        root.setAttribute('data-lang', lang);
+        root.setAttribute('lang', lang);
+        localStorage.setItem('portfolio-lang', lang);
+
+        const dict = translations[lang] || translations.en;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key]) {
+                el.textContent = dict[key];
+            }
+        });
+
+        // Update dropdown menu items
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            const catId = item.dataset.category;
+            if (categoryNames[catId]) {
+                const icon = item.querySelector('i');
+                const iconHtml = icon ? icon.outerHTML : '';
+                item.innerHTML = `${iconHtml} ${categoryNames[catId][lang] || categoryNames[catId].en}`;
+            }
+        });
+
+        updateLangToggleUi(lang);
+        updateSearchPlaceholder();
+        renderExplorer();
+
+        if (detailView && detailView.classList.contains('active') && window.location.hash) {
+            showDetail(window.location.hash.substring(1), true);
+        }
+    };
+
+    const toggleLanguage = () => {
+        const cur = root.getAttribute('data-lang') || 'en';
+        const newLang = cur === 'bn' ? 'en' : 'bn';
+        applyLanguage(newLang);
+    };
+
+    [langToggle, langToggleMobile].forEach(btn => {
+        if (btn) btn.addEventListener('click', toggleLanguage);
+    });
+
+    const updateThemeToggleUi = (theme) => {
+        const isDark = theme === 'dark';
+        [themeToggle, themeToggleMobile].forEach(t => {
+            if (!t) return;
+            t.setAttribute('data-state', isDark ? 'right' : 'left');
+            t.setAttribute('aria-checked', isDark ? 'true' : 'false');
+            t.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+            t.setAttribute('title', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+        });
+    };
+
+    const applyTheme = (theme) => {
+        root.setAttribute('data-theme', theme);
+        localStorage.setItem('portfolio-theme', theme);
+        updateThemeToggleUi(theme);
+    };
+
+    [themeToggle, themeToggleMobile].forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+        }
+    });
+
+    // Drawer open/close
+    const openDrawer = () => {
+        if (mobileDrawer && drawerBackdrop) {
+            mobileDrawer.classList.add('active');
+            drawerBackdrop.classList.add('active');
+            mobileDrawer.setAttribute('aria-hidden', 'false');
+            drawerBackdrop.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    const closeDrawer = () => {
+        if (mobileDrawer && drawerBackdrop) {
+            mobileDrawer.classList.remove('active');
+            drawerBackdrop.classList.remove('active');
+            mobileDrawer.setAttribute('aria-hidden', 'true');
+            drawerBackdrop.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+    };
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openDrawer);
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeDrawer);
+    if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+
+    document.querySelectorAll('.drawer-nav a').forEach(link => {
+        link.addEventListener('click', closeDrawer);
+    });
+
+    const savedLang = localStorage.getItem('portfolio-lang') || 'en';
+    applyLanguage(savedLang);
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    applyTheme(savedTheme);
+
     updateSearchPlaceholder();
     window.addEventListener('resize', updateSearchPlaceholder);
 

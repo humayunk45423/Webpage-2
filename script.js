@@ -1,76 +1,416 @@
 /**
-         * Humayoun Kobir | Portfolio Logic
-         * Optimized for performance and smoothness.
-         */
+ * Humayoun Kobir | Portfolio Logic
+ * Optimized for maximum performance, bilingual support (EN/BN), and smooth transitions.
+ */
+
+// Translation Dictionary for Full Bilingual Support
+const translations = {
+    en: {
+        brand_name: "Humayoun Kobir",
+        brand_title: "Engineer & Designer",
+        brand_repo: "Repository",
+        nav_about: "About",
+        nav_skills: "Skills",
+        nav_projects: "Projects",
+        nav_contact: "Contact",
+        nav_softwarehq: "Software HQ",
+        drawer_nav_title: "Navigation",
+        drawer_contact_title: "Direct Contact",
+        drawer_preferences_title: "Preferences",
+        contact_email_title: "Email Address",
+        contact_wa_title: "WhatsApp / Phone",
+        toggle_language_label: "Language",
+        toggle_theme_label: "Theme",
+        
+        // Hero Section
+        hero_greeting: "Assalamu Alaikum (Greetings)!",
+        hero_iam: "I'm Humayoun Kobir",
+        hero_about_text: "A Diploma Engineer in Computer Science with a focus on smart strategies and efficient solutions. Bridging the gap between technical engineering and creative design through 3D modeling, branding, and data optimization.",
+        btn_skills: "Skills",
+        btn_projects: "Projects",
+        btn_connect: "Connect",
+        chip_gd: "Graphic Design",
+        chip_3d: "3D Modeling & Blender",
+        chip_excel: "Excel & Data Specialists",
+        chip_hw: "Hardware Solutions",
+        available_badge: "Available for Hire",
+
+        // Skills Section
+        skills_title: "Skills",
+        svc1_title: "Graphic Design",
+        svc1_desc: "Visual assets built for promotion, branding, and polished communication.",
+        svc1_c1: "Logo design",
+        svc1_c2: "Banner design",
+        svc1_c3: "Business cards",
+        svc1_c4: "Social ads",
+
+        svc2_title: "Programming & Web Basics",
+        svc2_desc: "Comfortable with core languages and practical scripting for small projects.",
+        svc2_c1: "C and C++",
+        svc2_c2: "Python",
+        svc2_c3: "HTML, CSS, JavaScript",
+        svc2_c4: "VBS for Windows",
+
+        svc3_title: "Data & Office Work",
+        svc3_desc: "Spreadsheet-heavy tasks delivered with accuracy, structure, and clean formatting.",
+        svc3_c1: "Microsoft Excel",
+        svc3_c2: "Google Sheets",
+        svc3_c3: "Data entry",
+        svc3_c4: "Lead generation",
+
+        svc4_title: "3D & Blender",
+        svc4_desc: "Entry-level 3D work with attention to form, scene lighting, and presentation.",
+        svc4_c1: "3D modeling",
+        svc4_c2: "Rendering",
+        svc4_c3: "Lighting",
+        svc4_c4: "Architectural visuals",
+
+        svc5_title: "PC Software & Hardware",
+        svc5_desc: "Hands-on setup, diagnostics, optimization, and maintenance across devices.",
+        svc5_c1: "Hardware diagnostics",
+        svc5_c2: "BIOS and thermals",
+        svc5_c3: "OS installs",
+        svc5_c4: "Custom ROM flashing",
+
+        svc6_title: "Electronics & DIY",
+        svc6_desc: "Practical builds using core electronics knowledge and reliable component testing.",
+        svc6_c1: "Breadboard prototyping",
+        svc6_c2: "DC-DC systems",
+        svc6_c3: "Charging modules",
+        svc6_c4: "Basic soldering",
+
+        // Projects Section
+        projects_title: "Projects",
+        lnk_live_website: "Live Website",
+        lnk_live_webapp: "Live Web App",
+        lnk_github_repo: "GitHub Repository",
+        lnk_ps_script: "PowerShell Script",
+        lnk_download_pdf: "Download PDF",
+        lnk_banner_design: "Banner Design",
+        lnk_poster_design: "Poster Design",
+        lnk_logo_design: "Logo Design",
+        lnk_business_card: "Business Card",
+        lnk_fb_ads: "Facebook Ads Poster",
+        lnk_mkt_ads: "Marketplace Ads Run",
+        lnk_card_design: "Business Card Design",
+        lnk_cash_memo: "Cash Memo Design",
+
+        // Contact Section
+        contact_title: "Let's build something great.",
+        contact_text: "Open for collaborations, freelance projects, or just a coffee chat about tech and design.",
+        contact_email_btn: "Click here to Email",
+        contact_wa_btn: "Click here to WhatsApp",
+        social_quran: "Read Quran",
+        social_dawah: "Dawah Files",
+        social_softwarehq: "Software HQ",
+        social_app_dl: "App Download",
+
+        // Footer
+        footer_copyright: "© 2026 Humayoun Kobir. All rights reserved.",
+        footer_back_top: "Back to top"
+    },
+    bn: {
+        brand_name: "হুমায়ূন কবির",
+        brand_title: "প্রকৌশলী ও ডিজাইনার",
+        brand_repo: "সফটওয়্যার ভান্ডার",
+        nav_about: "পরিচিতি",
+        nav_skills: "দক্ষতা",
+        nav_projects: "প্রকল্প",
+        nav_contact: "যোগাযোগ",
+        nav_softwarehq: "সফটওয়্যার HQ",
+        drawer_nav_title: "নেভিগেশন মেনু",
+        drawer_contact_title: "সরাসরি যোগাযোগ",
+        drawer_preferences_title: "পছন্দসমূহ",
+        contact_email_title: "ইমেইল ঠিকানা",
+        contact_wa_title: "হোয়াটসঅ্যাপ / ফোন",
+        toggle_language_label: "ভাষা",
+        toggle_theme_label: "থিম",
+
+        // Hero Section
+        hero_greeting: "আসসালামু আলাইকুম!",
+        hero_iam: "আমি হুমায়ূন কবির",
+        hero_about_text: "কম্পিউটার সায়েন্সে ডিপ্লোমা ইঞ্জিনিয়ার, যিনি স্মার্ট স্ট্র্যাটেজি ও দক্ষ সমাধান সৃষ্টিতে নিবেদিত। ৩ডি মডেলিং, ব্র্যান্ডিং এবং ডাটা অপ্টিমাইজেশনের মাধ্যমে টেকনিক্যাল ইঞ্জিনিয়ারিং ও ক্রিয়েটিভ ডিজাইনের মেলবন্ধন ঘটাই।",
+        btn_skills: "দক্ষতা",
+        btn_projects: "প্রকল্পসমূহ",
+        btn_connect: "যোগাযোগ",
+        chip_gd: "গ্রাফিক ডিজাইন",
+        chip_3d: "৩ডি মডেলিং ও ব্লেন্ডার",
+        chip_excel: "এক্সেল ও ডাটা বিশেষজ্ঞ",
+        chip_hw: "হার্ডওয়্যার সমাধান",
+        available_badge: "কাজের জন্য প্রস্তুত",
+
+        // Skills Section
+        skills_title: "দক্ষতা ও অভিজ্ঞতা",
+        svc1_title: "গ্রাফিক ডিজাইন",
+        svc1_desc: "প্রচারণা, ব্র্যান্ডিং এবং দৃষ্টিনন্দন যোগাযোগের জন্য নির্মিত মানসম্মত ভিজ্যুয়াল উপাদান।",
+        svc1_c1: "লোগো ডিজাইন",
+        svc1_c2: "ব্যানার ডিজাইন",
+        svc1_c3: "বিজনেস কার্ড",
+        svc1_c4: "সোশ্যাল অ্যাডস",
+
+        svc2_title: "প্রোগ্রামিং ও ওয়েব বেসিকস",
+        svc2_desc: "কোর ল্যাঙ্গুয়েজ এবং বিভিন্ন প্রজেক্টের প্রয়োজনীয় স্ক্রিপ্টিংয়ে কার্যকর দক্ষতা।",
+        svc2_c1: "C ও C++",
+        svc2_c2: "পাইথন",
+        svc2_c3: "HTML, CSS, জাভাস্ক্রিপ্ট",
+        svc2_c4: "উইন্ডোজ VBS",
+
+        svc3_title: "ডাটা ও অফিস ব্যবস্থাপনা",
+        svc3_desc: "স্প্রেডশিট ও ডাটাবেজ নির্ভর কাজ নিখুঁত নির্ভুলতা ও সুশৃঙ্খল ফরম্যাটিংয়ে সম্পন্ন।",
+        svc3_c1: "মাইক্রোসফট এক্সেল",
+        svc3_c2: "গুগল শিটস",
+        svc3_c3: "ডাটা এন্ট্রি",
+        svc3_c4: "লিড জেনারেশন",
+
+        svc4_title: "৩ডি ও ব্লেন্ডার",
+        svc4_desc: "নিখুঁত ফর্ম, সঠিক লাইটিং ও আকর্ষণীয় প্রেজেন্টেশনের ৩ডি ভিজ্যুয়াল মডেলিং।",
+        svc4_c1: "৩ডি মডেলিং",
+        svc4_c2: "রেন্ডারিং",
+        svc4_c3: "লাইটিং",
+        svc4_c4: "আর্কিটেকচারাল সিন",
+
+        svc5_title: "পিসি সফটওয়্যার ও হার্ডওয়্যার",
+        svc5_desc: "ডিভাইস ডায়াগনস্টিক, সিস্টেম অপ্টিমাইজেশন, রক্ষণাবেক্ষণ ও কারিগরি সমাধান।",
+        svc5_c1: "হার্ডওয়্যার ডায়াগনস্টিক",
+        svc5_c2: "বায়োস ও থার্মাল টিউনিং",
+        svc5_c3: "ওএস ইনস্টলেশন",
+        svc5_c4: "কাস্টম রম ফ্ল্যাশিং",
+
+        svc6_title: "ইলেকট্রনিক্স ও DIY",
+        svc6_desc: "ইলেকট্রনিক্স নলেজ ও কম্পোনেন্ট টেস্টিং নির্ভর ব্যবহারিক সার্কিট ডেভেলপমেন্ট।",
+        svc6_c1: "সার্কিট প্রোটোটাইপিং",
+        svc6_c2: "ডিসি-ডিসি সিস্টেম",
+        svc6_c3: "চার্জিং মডিউল",
+        svc6_c4: "বেসিক সোল্ডারিং",
+
+        // Projects Section
+        projects_title: "নির্বাচিত প্রকল্পসমূহ",
+        lnk_live_website: "লাইভ ওয়েবসাইট",
+        lnk_live_webapp: "লাইভ ওয়েব অ্যাপ",
+        lnk_github_repo: "গিটহাব রেপো",
+        lnk_ps_script: "পাওয়ারশেল স্ক্রিপ্ট",
+        lnk_download_pdf: "ডাউনলোড PDF",
+        lnk_banner_design: "ব্যানার ডিজাইন",
+        lnk_poster_design: "পোস্টার ডিজাইন",
+        lnk_logo_design: "লোগো ডিজাইন",
+        lnk_business_card: "বিজনেস কার্ড",
+        lnk_fb_ads: "ফেসবুক বিজ্ঞাপন পোস্টার",
+        lnk_mkt_ads: "মার্কেটপ্লেস বিজ্ঞাপন",
+        lnk_card_design: "বিজনেস কার্ড ডিজাইন",
+        lnk_cash_memo: "ক্যাশ মেমো ডিজাইন",
+
+        // Contact Section
+        contact_title: "একসাথে দারুণ কিছু তৈরি করি।",
+        contact_text: "যেকোনো কোলাবোরেশন, ফ্রিল্যান্স প্রজেক্ট বা প্রযুক্তি ও ডিজাইন নিয়ে আলোচনার জন্য আমি সদা উন্মুক্ত।",
+        contact_email_btn: "ইমেইল করতে ক্লিক করুন",
+        contact_wa_btn: "হোয়াটসঅ্যাপ করতে ক্লিক করুন",
+        social_quran: "কুরআন পড়ুন",
+        social_dawah: "দাওয়াহ ফাইল",
+        social_softwarehq: "সফটওয়্যার HQ",
+        social_app_dl: "অ্যাপ ডাউনলোড",
+
+        // Footer
+        footer_copyright: "© ২০২৬ হুমায়ূন কবির। সর্বস্বত্ব সংরক্ষিত।",
+        footer_back_top: "উপরে ফিরে যান"
+    }
+};
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Theme Toggle (Native View Transitions & 120fps Mobile Optimization)
     const root = document.documentElement;
+
+    // =========================================================================
+    // 1. Theme Management (Light / Dark)
+    // =========================================================================
     const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeLabel = document.getElementById('themeLabel');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
     const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    const isMobile = () => window.matchMedia('(max-width: 1024px)').matches || ('ontouchstart' in window && window.innerWidth <= 1024);
+
+    const updateThemeToggleUi = (theme) => {
+        const isDark = theme === 'dark';
+        [themeToggle, themeToggleMobile].forEach(t => {
+            if (!t) return;
+            t.setAttribute('data-state', isDark ? 'right' : 'left');
+            t.setAttribute('aria-checked', isDark ? 'true' : 'false');
+            t.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+            t.setAttribute('title', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+        });
+        if (themeMeta) {
+            themeMeta.setAttribute('content', isDark ? '#0b0b0b' : '#ffffff');
+        }
+    };
 
     const applyTheme = (theme) => {
         root.setAttribute('data-theme', theme);
         localStorage.setItem('portfolio-theme', theme);
-        if (themeToggle) {
-            const isDark = theme === 'dark';
-            themeToggle.setAttribute('data-state', isDark ? 'right' : 'left');
-            themeToggle.setAttribute('aria-checked', isDark ? 'true' : 'false');
-            themeToggle.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
-            themeToggle.setAttribute('title', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
-        }
-        if (themeIcon) {
-            themeIcon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-        }
-        if (themeLabel) {
-            themeLabel.textContent = theme === 'dark' ? 'Light' : 'Dark';
-        }
-        if (themeMeta) {
-            themeMeta.setAttribute('content', theme === 'dark' ? '#0b0b0b' : '#ffffff');
-        }
+        updateThemeToggleUi(theme);
     };
-
-    const isMobile = () => window.matchMedia('(max-width: 1024px)').matches || ('ontouchstart' in window && window.innerWidth <= 1024);
 
     const setTheme = (theme, withTransition = true) => {
         if (root.getAttribute('data-theme') === theme && localStorage.getItem('portfolio-theme') === theme) return;
 
-        // Desktop: Use hardware View Transitions (100% smooth on PC GPUs)
         if (withTransition && !isMobile() && document.startViewTransition) {
             document.startViewTransition(() => {
                 applyTheme(theme);
             });
         } else {
-            // Mobile: Instantaneous zero-latency swap (prevents mobile CPU/GPU rasterization lag)
             applyTheme(theme);
         }
     };
 
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            setTheme(newTheme, true);
-        });
-    }
+    [themeToggle, themeToggleMobile].forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', () => {
+                const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme, true);
+            });
+        }
+    });
 
-    // Initialize Theme (without transition on first load to prevent flash)
     const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
-    setTheme(savedTheme, false);
+    applyTheme(savedTheme);
 
-    // 2. Typing Animation
+    // =========================================================================
+    // 2. Bilingual Language Management (EN / BN - Segmented Slider)
+    // =========================================================================
+    const langToggle = document.getElementById('langToggle');
+    const langToggleMobile = document.getElementById('langToggleMobile');
+
+    const typingWords = {
+        en: ["Graphic Designer.", "Beginner 3D Artist.", "Data Entry Specialist.", "Computer Hardware Enthusiast.", "Vibe coder."],
+        bn: ["গ্রাফিক ডিজাইনার।", "৩ডি ভিজ্যুয়ালাইজার।", "ডাটা এন্ট্রি স্পেশালিস্ট।", "হার্ডওয়্যার বিশেষজ্ঞ।", "ভাইব কোডার।"]
+    };
+
+    let activeLang = localStorage.getItem('portfolio-lang') || 'en';
+
+    const updateLangToggleUi = (lang) => {
+        const isBn = lang === 'bn';
+        [langToggle, langToggleMobile].forEach(t => {
+            if (!t) return;
+            t.setAttribute('data-state', isBn ? 'left' : 'right');
+            t.setAttribute('aria-label', isBn ? 'Switch to English' : 'Switch to Bangla');
+            t.setAttribute('title', isBn ? 'Switch to English' : 'Switch to Bangla');
+
+            const optLeft = t.querySelector('.opt-left');
+            const optRight = t.querySelector('.opt-right');
+            if (optLeft && optRight) {
+                if (isBn) {
+                    optLeft.textContent = 'বাং';
+                    optRight.textContent = 'ইং';
+                } else {
+                    optLeft.textContent = 'BN';
+                    optRight.textContent = 'EN';
+                }
+            }
+        });
+    };
+
+    const applyLanguage = (lang) => {
+        activeLang = lang;
+        root.setAttribute('data-lang', lang);
+        root.setAttribute('lang', lang);
+        localStorage.setItem('portfolio-lang', lang);
+
+        // Update all data-i18n DOM elements
+        const dict = translations[lang] || translations.en;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key]) {
+                el.textContent = dict[key];
+            }
+        });
+
+        updateLangToggleUi(lang);
+
+        // Update Typing animation dataset
+        words = typingWords[lang] || typingWords.en;
+        wordIndex = 0;
+        charIndex = 0;
+        isDeleting = false;
+
+        // Recompute navigation glider dimensions immediately to accommodate new text length
+        computePositions();
+        refreshMetrics();
+        updateGliderSync();
+
+        requestAnimationFrame(() => {
+            refreshMetrics();
+            updateGliderSync();
+        });
+    };
+
+    const toggleLanguage = () => {
+        const newLang = activeLang === 'bn' ? 'en' : 'bn';
+        applyLanguage(newLang);
+    };
+
+    [langToggle, langToggleMobile].forEach(btn => {
+        if (btn) {
+            btn.addEventListener('click', toggleLanguage);
+        }
+    });
+
+    // =========================================================================
+    // 3. Mobile Navigation Drawer & Backdrop Logic
+    // =========================================================================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+    const openDrawer = () => {
+        if (mobileDrawer && drawerBackdrop) {
+            mobileDrawer.classList.add('active');
+            drawerBackdrop.classList.add('active');
+            mobileDrawer.setAttribute('aria-hidden', 'false');
+            drawerBackdrop.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    const closeDrawer = () => {
+        if (mobileDrawer && drawerBackdrop) {
+            mobileDrawer.classList.remove('active');
+            drawerBackdrop.classList.remove('active');
+            mobileDrawer.setAttribute('aria-hidden', 'true');
+            drawerBackdrop.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+    };
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openDrawer);
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeDrawer);
+    if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+
+    // Close drawer when clicking any navigation link
+    document.querySelectorAll('.drawer-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeDrawer();
+        });
+    });
+
+    // Escape key closes mobile drawer
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('active')) {
+            closeDrawer();
+        }
+    });
+
+    // =========================================================================
+    // 4. Typing Animation
+    // =========================================================================
     const typingElement = document.getElementById('typing');
-    const words = ["Graphic Designer.", "Beginner 3D Artist.", "Data Entry Specialist.", "Computer Hardware Enthusiast.", "Vibe coder."];
+    let words = typingWords[activeLang] || typingWords.en;
     let wordIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
     let typingSpeed = 100;
 
     const type = () => {
-        if (!state.isTypingVisible) return;
+        if (!state.isTypingVisible || !typingElement) return;
 
-        const currentWord = words[wordIndex];
+        const currentWord = words[wordIndex] || words[0];
         const shouldDelete = isDeleting;
         const currentSlice = currentWord.substring(0, charIndex);
 
@@ -102,7 +442,9 @@ document.addEventListener('DOMContentLoaded', () => {
         typeObserver.observe(typingElement);
     }
 
-    // 3. Optimized Scroll Reveal (Only for Desktop/High-Performance)
+    // =========================================================================
+    // 5. Scroll Reveal (Desktop vs Mobile Optimized)
+    // =========================================================================
     if (window.innerWidth >= 1024) {
         const observerOptions = {
             threshold: 0.15,
@@ -120,11 +462,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     } else {
-        // Instantly show everything on mobile to save CPU/Battery
         document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
     }
 
-    // 4. Ultra-Light Scroll Sync (PC Optimized)
+    // =========================================================================
+    // 6. Ultra-Light Scroll Sync & Position State
+    // =========================================================================
     const stickyHeads = document.querySelectorAll('.split-section .section-title');
 
     const state = {
@@ -153,8 +496,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateLoop = () => {
         let needsUpdate = false;
-
-        // Optimized Scroll Logic
         const sy = state.scrollY;
         if (state.winW >= 1024) {
             const titlePositions = state.titlePositions;
@@ -197,7 +538,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    // 5. Page Slide Transitions & Navigation Glider Logic
+    // =========================================================================
+    // 7. Page Slide Transitions & Navigation Glider Logic
+    // =========================================================================
     const pageMain = document.querySelector('.page-main');
     const transitionDir = sessionStorage.getItem('page-transition-dir');
     if (transitionDir === 'to-index' && pageMain) {
@@ -213,7 +556,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const glider = document.getElementById('navGlider');
     const softwareHqLink = document.querySelector('.nav a[href="files.html"]');
 
-    // Cache metrics to avoid layout thrashing in the scroll loop
     let cachedNavMetrics = [];
     let cachedSectionMetrics = [];
 
@@ -228,7 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }));
     };
 
-    // Instant Glider Placement on Target (Prevents jumping from About to Contact on page load)
     const initGliderTarget = () => {
         if (!glider || window.innerWidth < 1024) return;
         refreshMetrics();
@@ -262,7 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (cachedNavMetrics[activeIdx]) {
             const target = cachedNavMetrics[activeIdx];
-            glider.style.transition = 'none'; // Instant placement without leaping animation
+            glider.style.transition = 'none';
             glider.style.transform = `translate3d(${Math.round(target.left)}px, 0, 0)`;
             glider.style.width = `${Math.round(target.width)}px`;
             glider.classList.add('visible');
@@ -271,7 +612,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.toggle('active', idx === activeIdx);
             });
 
-            // Smooth transitions enabled for subsequent user interactions
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     if (glider) glider.style.transition = '';
@@ -317,7 +657,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Smooth Software HQ Page Transition from Right
     if (softwareHqLink && !softwareHqLink.classList.contains('active')) {
         softwareHqLink.addEventListener('click', (e) => {
             e.preventDefault();
@@ -338,12 +677,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Apply saved or initial language
+    applyLanguage(activeLang);
+
     // Initialize metrics and glider immediately
     computePositions();
     initGliderTarget();
     if (window.innerWidth >= 1024) startLoop();
 
-    // Re-sync after web fonts or external assets finish loading to ensure 100% pixel precision
     if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(() => {
             computePositions();
@@ -357,7 +698,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateGliderSync();
     });
 
-    // 6. Copy to Clipboard Utility with Safe Fallback
+    // =========================================================================
+    // 8. Copy to Clipboard Utility with Safe Fallback
+    // =========================================================================
     window.copyContact = (text, btn) => {
         const updateBtnUi = () => {
             if (!btn) return;
@@ -395,14 +738,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.removeChild(ta);
     }
 
-    // 7. Register PWA Service Worker (Offline Support)
+    // =========================================================================
+    // 9. Register PWA Service Worker
+    // =========================================================================
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js').catch(() => {});
         });
     }
 
-    // Initial run
     if ('requestIdleCallback' in window) {
         requestIdleCallback(() => {
             computePositions();

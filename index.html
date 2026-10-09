@@ -12,6 +12,9 @@
         var meta = document.querySelector('meta[name="theme-color"]');
         if(meta) meta.setAttribute('content', preferred === 'dark' ? '#0b0b0b' : '#ffffff');
         if (window.location.hash) { document.documentElement.style.scrollBehavior = 'auto'; }
+        var savedLang = localStorage.getItem('portfolio-lang') || 'en';
+        document.documentElement.setAttribute('data-lang', savedLang);
+        document.documentElement.setAttribute('lang', savedLang);
     })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -322,8 +325,8 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
-        as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <link
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%20%21%40%23%24%25%5E%26%2A%28%29-_%2B%3D%5B%5D%7B%7D%7C%3B%3A%27%22%2C.%3C%3E%3F%2F%5C"
         rel="stylesheet" media="print" onload="this.media='all'">
@@ -374,27 +377,37 @@
                             width="44" height="44" decoding="async" fetchpriority="high">
                     </span>
                     <span class="brand-text">
-                        <strong>Humayoun Kobir</strong>
-                        <small>Engineer & Designer</small>
+                        <strong data-i18n="brand_name">Humayoun Kobir</strong>
+                        <small data-i18n="brand_title">Engineer & Designer</small>
                     </span>
                 </a>
                 <nav class="nav" aria-label="Primary navigation">
-                    <a href="#about">About</a>
-                    <a href="#skills">Skills</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact">Contact</a>
-                    <a href="files.html" id="navSoftwareHq">Software HQ</a>
+                    <a href="#about" data-i18n="nav_about">About</a>
+                    <a href="#skills" data-i18n="nav_skills">Skills</a>
+                    <a href="#projects" data-i18n="nav_projects">Projects</a>
+                    <a href="#contact" data-i18n="nav_contact">Contact</a>
+                    <a href="files.html" id="navSoftwareHq" data-i18n="nav_softwarehq">Software HQ</a>
                     <div class="glider" id="navGlider"></div>
                 </nav>
-                <button type="button" class="segmented-toggle" id="themeToggle" data-state="left" aria-label="Toggle Theme (Light / Dark)" title="Toggle Theme (Light / Dark)">
-                    <div class="toggle-slider" aria-hidden="true"></div>
-                    <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
-                        <i class="fa-solid fa-sun" aria-hidden="true"></i>
-                    </span>
-                    <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
-                        <i class="fa-solid fa-moon" aria-hidden="true"></i>
-                    </span>
-                </button>
+                <div class="header-controls">
+                    <button type="button" class="segmented-toggle lang-toggle" id="langToggle" data-state="right" aria-label="Toggle Language (English / Bangla)" title="Toggle Language (English / Bangla)">
+                        <div class="toggle-slider" aria-hidden="true"></div>
+                        <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
+                        <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
+                    </button>
+                    <button type="button" class="segmented-toggle" id="themeToggle" data-state="left" aria-label="Toggle Theme (Light / Dark)" title="Toggle Theme (Light / Dark)">
+                        <div class="toggle-slider" aria-hidden="true"></div>
+                        <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
+                            <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                        </span>
+                        <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
+                            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                    <button type="button" class="hamburger-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu" title="Menu">
+                        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
         </header>
 
@@ -402,8 +415,8 @@
             <section class="section hero" id="about" style="content-visibility: visible; contain: none;">
                 <div class="container hero-grid">
                     <div class="hero-copy reveal">
-                        <h2>Assalamu Alaikum (Greetings)!</h2>
-                        <h1>I'm Humayoun Kobir</h1>
+                        <h2 data-i18n="hero_greeting">Assalamu Alaikum (Greetings)!</h2>
+                        <h1 data-i18n="hero_iam">I'm Humayoun Kobir</h1>
                         <div id="typing" aria-hidden="true"></div>
                         <div class="sr-only">
                             <p>Humayoun Kobir (widely written as Humayun Kabir, Humayun Kobir, Humayoun Kabir, or in Bengali as হুমায়ূন কবির / হুমায়ুন কবির / মো: হুমায়ুন কবির) is a professional Computer Science Diploma Engineer, Creative Graphic Designer, 3D Visualizer, and Windows Hardware Specialist from Bangladesh.</p>
@@ -418,22 +431,22 @@
                         <div class="actions">
                             <a href="#skills" class="btn primary">
                                 <i class="fa-solid fa-layer-group"></i>
-                                <span>Skills</span>
+                                <span data-i18n="btn_skills">Skills</span>
                             </a>
                             <a href="#projects" class="btn secondary">
                                 <i class="fa-solid fa-briefcase"></i>
-                                <span>Projects</span>
+                                <span data-i18n="btn_projects">Projects</span>
                             </a>
                             <a href="#contact" class="btn outline">
                                 <i class="fa-solid fa-paper-plane"></i>
-                                <span>Connect</span>
+                                <span data-i18n="btn_connect">Connect</span>
                             </a>
                         </div>
                         <div class="hero-notes">
-                            <span class="hero-note">Graphic Design</span>
-                            <span class="hero-note">3D Modeling & Blender</span>
-                            <span class="hero-note">Excel & Data Specialists</span>
-                            <span class="hero-note">Hardware Solutions</span>
+                            <span class="hero-note" data-i18n="chip_gd">Graphic Design</span>
+                            <span class="hero-note" data-i18n="chip_3d">3D Modeling & Blender</span>
+                            <span class="hero-note" data-i18n="chip_excel">Excel & Data Specialists</span>
+                            <span class="hero-note" data-i18n="chip_hw">Hardware Solutions</span>
                         </div>
                     </div>
 
@@ -447,7 +460,7 @@
                             <div class="portrait-meta" style="contain: content;">
                                 <div class="available">
                                     <span class="dot"></span>
-                                    <span>Available for Hire</span>
+                                    <span data-i18n="available_badge">Available for Hire</span>
                                 </div>
                             </div>
                         </div>
@@ -458,77 +471,72 @@
             <section class="section split-section" id="skills"
                 style="content-visibility: auto; contain-intrinsic-size: 1px 1000px;">
                 <div class="container">
-                    <h2 class="section-title reveal">Skills</h2>
+                    <h2 class="section-title reveal" data-i18n="skills_title">Skills</h2>
                     <div class="services-grid">
                         <article class="service-card reveal">
                             <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
                             <h3>Graphic Design</h3>
                             <p>Visual assets built for promotion, branding, and polished communication.</p>
                             <ul class="chips">
-                                <li>Logo design</li>
-                                <li>Banner design</li>
-                                <li>Business cards</li>
-                                <li>Social ads</li>
+                                <li data-i18n="svc1_c1">Logo design</li>
+                                <li data-i18n="svc1_c2">Banner design</li>
+                                <li data-i18n="svc1_c3">Business cards</li>
+                                <li data-i18n="svc1_c4">Social ads</li>
                             </ul>
                         </article>
                         <article class="service-card reveal d1">
                             <div class="service-icon"><i class="fa-solid fa-code"></i></div>
-                            <h3>Programming & Web Basics</h3>
-                            <p>Comfortable with core languages and practical scripting for small projects.</p>
+                            <h3 data-i18n="svc2_title">Programming & Web Basics</h3>
+                            <p data-i18n="svc2_desc">Comfortable with core languages and practical scripting for small projects.</p>
                             <ul class="chips">
-                                <li>C and C++</li>
-                                <li>Python</li>
-                                <li>HTML, CSS, <span class="hide-mobile">JavaScript</span><span
-                                        class="show-mobile">JS</span></li>
-                                <li>VBS for Windows</li>
+                                <li data-i18n="svc2_c1">C and C++</li>
+                                <li data-i18n="svc2_c2">Python</li>
+                                <li data-i18n="svc2_c3">HTML, CSS, JavaScript</li>
+                                <li data-i18n="svc2_c4">VBS for Windows</li>
                             </ul>
                         </article>
                         <article class="service-card reveal d2">
                             <div class="service-icon"><i class="fa-solid fa-sheet-plastic"></i></div>
-                            <h3>Data & Office Work</h3>
-                            <p>Spreadsheet-heavy tasks delivered with accuracy, structure, and clean formatting.</p>
+                            <h3 data-i18n="svc3_title">Data & Office Work</h3>
+                            <p data-i18n="svc3_desc">Spreadsheet-heavy tasks delivered with accuracy, structure, and clean formatting.</p>
                             <ul class="chips">
-                                <li>Microsoft Excel</li>
-                                <li>Google Sheets</li>
-                                <li>Data entry</li>
-                                <li>Lead generation</li>
+                                <li data-i18n="svc3_c1">Microsoft Excel</li>
+                                <li data-i18n="svc3_c2">Google Sheets</li>
+                                <li data-i18n="svc3_c3">Data entry</li>
+                                <li data-i18n="svc3_c4">Lead generation</li>
                             </ul>
                         </article>
                         <article class="service-card reveal">
                             <div class="service-icon"><i class="fa-solid fa-cube"></i></div>
-                            <h3>3D & Blender</h3>
-                            <p>Entry-level 3D work with attention to form, scene lighting, and presentation.</p>
+                            <h3 data-i18n="svc4_title">3D & Blender</h3>
+                            <p data-i18n="svc4_desc">Entry-level 3D work with attention to form, scene lighting, and presentation.</p>
                             <ul class="chips">
-                                <li>3D modeling</li>
-                                <li>Rendering</li>
-                                <li>Lighting</li>
-                                <li><span class="hide-mobile">Architectural visuals</span><span class="show-mobile">Arch
-                                        Viz</span></li>
+                                <li data-i18n="svc4_c1">3D modeling</li>
+                                <li data-i18n="svc4_c2">Rendering</li>
+                                <li data-i18n="svc4_c3">Lighting</li>
+                                <li data-i18n="svc4_c4">Architectural visuals</li>
                             </ul>
                         </article>
                         <article class="service-card reveal d1">
                             <div class="service-icon"><i class="fa-solid fa-desktop"></i></div>
-                            <h3>PC Software & Hardware</h3>
-                            <p>Hands-on setup, diagnostics, optimization, and maintenance across devices.</p>
+                            <h3 data-i18n="svc5_title">PC Software & Hardware</h3>
+                            <p data-i18n="svc5_desc">Hands-on setup, diagnostics, optimization, and maintenance across devices.</p>
                             <ul class="chips">
-                                <li><span class="hide-mobile">Hardware diagnostics</span><span
-                                        class="show-mobile">Diagnostics</span></li>
-                                <li>BIOS and thermals</li>
-                                <li>OS installs</li>
-                                <li><span class="hide-mobile">Custom ROM flashing</span><span class="show-mobile">ROM
-                                        Flashing</span></li>
+                                <li data-i18n="svc5_c1">Hardware diagnostics</li>
+                                <li data-i18n="svc5_c2">BIOS and thermals</li>
+                                <li data-i18n="svc5_c3">OS installs</li>
+                                <li data-i18n="svc5_c4">Custom ROM flashing</li>
                             </ul>
                         </article>
                         <article class="service-card reveal d2">
                             <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
-                            <h3>Electronics & DIY</h3>
-                            <p>Practical builds using core electronics knowledge and reliable component testing.</p>
+                            <h3 data-i18n="svc6_title">Electronics & DIY</h3>
+                            <p data-i18n="svc6_desc">Practical builds using core electronics knowledge and reliable component testing.</p>
                             <ul class="chips">
-                                <li><span class="hide-mobile">Breadboard prototyping</span><span
-                                        class="show-mobile">Circuit Builds</span></li>
-                                <li>DC-DC systems</li>
-                                <li>Charging modules</li>
-                                <li>Basic soldering</li>
+                                <li data-i18n="svc6_c1">Breadboard prototyping</li>
+                                <li data-i18n="svc6_c2">DC-DC systems</li>
+                                <li data-i18n="svc6_c3">Charging modules</li>
+                                <li data-i18n="svc6_c4">Basic soldering</li>
                             </ul>
                         </article>
                     </div>
@@ -538,7 +546,7 @@
             <section class="section split-section" id="projects"
                 style="content-visibility: auto; contain-intrinsic-size: 1px 1200px;">
                 <div class="container">
-                    <h2 class="section-title reveal">Projects</h2>
+                    <h2 class="section-title reveal" data-i18n="projects_title">Projects</h2>
                     <div class="projects-grid">
                         <article class="project-card reveal">
                             <div class="project-content">
@@ -548,12 +556,12 @@
                                     <a href="https://snapsignfit.vercel.app" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="Visit SnapSignFit Live Website">
-                                        <span>Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://github.com/humayunk45423/SnapSignFit" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View SnapSignFit GitHub Repository">
-                                        <span>GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -567,17 +575,17 @@
                                     <a href="https://hktool.vercel.app" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="Visit HK-Tool Live Web App">
-                                        <span>Live Web App</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_live_webapp">Live Web App</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://github.com/humayunk45423/HK-Tool" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View HK-Tool GitHub Repository">
-                                        <span>GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://hktool.vercel.app/i" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="Direct PowerShell Install Script">
-                                        <span>PowerShell Script</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_ps_script">PowerShell Script</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -591,12 +599,12 @@
                                     <a href="https://sthapottoshoili.vercel.app" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="Visit SthapottoShoili Live 3D Experience">
-                                        <span>Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://github.com/humayunk45423/SthapottoShoili" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View SthapottoShoili GitHub Repository">
-                                        <span>GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -610,17 +618,17 @@
                                     <a href="https://duetcode.vercel.app" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="Visit DUET Code Live Explorer Web App">
-                                        <span>Live Web App</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_live_webapp">Live Web App</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://github.com/humayunk45423/C-Cpp-Basic-programmes" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View DUET C & C++ Programs GitHub Repository">
-                                        <span>GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://github.com/humayunk45423/C-Cpp-Basic-programmes/raw/main/DUET%20C%20%26%20C%2B%2B%20Programs.pdf" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="Download DUET Admission C & C++ PDF">
-                                        <span>Download PDF</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_download_pdf">Download PDF</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -634,12 +642,12 @@
                                     <a href="https://duettimer.vercel.app" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="Visit DUET Timer Live Web App">
-                                        <span>Live Web App</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_live_webapp">Live Web App</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://github.com/humayunk45423/DUET-Timer" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View DUET Timer GitHub Repository">
-                                        <span>GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -654,22 +662,22 @@
                                     <a href="https://sadiastore.vercel.app" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="Visit Sadia Variety Store Live Website">
-                                        <span>Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://github.com/humayunk45423/SadiaVarietyStore" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View Sadia Variety Store GitHub Repository">
-                                        <span>GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://maps.app.goo.gl/M4JL9vnC1bjpBjrp7" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View Sadia Variety Store Banner Design">
-                                        <span>Banner Design</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_banner_design">Banner Design</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="assets/site-images/Artboard_1logo_name_choto.png" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View Sadia Variety Store Poster Work">
-                                        <span>Poster Design</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_poster_design">Poster Design</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -683,21 +691,21 @@
                                     <a href="https://mobileexpress.vercel.app" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="Visit Mobile Express Live Web App">
-                                        <span>Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://github.com/humayunk45423/Webpage-T" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View Mobile Express GitHub Repository">
-                                        <span>GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="https://maps.app.goo.gl/NdeX5h3EM9D5ye6M6" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link">
-                                        <span>Logo Design</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_logo_design">Logo Design</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="assets/site-images/Mobile_Express_Business_Card.png" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link" decoding="async"
                                         loading="lazy">
-                                        <span>Business Card</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_business_card">Business Card</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -712,17 +720,17 @@
                                     <a href="assets/site-images/415043082_122093206244186305_1002341150726708714_n.jpg"
                                         target="_blank" rel="noopener noreferrer nofollow" class="project-link"
                                         title="View Tadrib Academy Logo Project">
-                                        <span>Logo Design</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_logo_design">Logo Design</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="assets/site-images/Artboard_1.png" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View Facebook Ads Designs">
-                                        <span>Facebook Ads Poster</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_fb_ads">Facebook Ads Poster</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="assets/site-images/Artboard_1_4x.png" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link"
                                         title="View Marketplace Marketing Work">
-                                        <span>Marketplace Ads Run</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_mkt_ads">Marketplace Ads Run</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -736,19 +744,19 @@
                                 <div class="project-links">
                                     <a href="assets/site-images/Artboard_1logo_wng_bn_Card.png" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link">
-                                        <span>Logo Design</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_logo_design">Logo Design</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="assets/site-images/Fuad_Mobile_Point_Banner.png" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link">
-                                        <span>Banner Design</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_banner_design">Banner Design</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="assets/site-images/Artboard_1B_Card.png" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link">
-                                        <span>Business Card Design</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_card_design">Business Card Design</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                     <a href="assets/site-images/Screenshot_2026_03_25_172443.png" target="_blank"
                                         rel="noopener noreferrer nofollow" class="project-link">
-                                        <span>Cash Memo Design</span><i class="fa-solid fa-arrow-right"></i>
+                                        <span data-i18n="lnk_cash_memo">Cash Memo Design</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
@@ -760,16 +768,14 @@
             <section class="section split-section" id="contact" style="min-height: 82vh;">
                 <div class="container contact-layout">
                     <div class="contact-info reveal">
-                        <h2>Let's build something great.</h2>
-                        <p class="about-text">Open for collaborations, freelance projects, or just a coffee chat about
-                            tech and design.</p>
+                        <h2 data-i18n="contact_title">Let's build something great.</h2>
+                        <p class="about-text" data-i18n="contact_text">Open for collaborations, freelance projects, or just a coffee chat about tech and design.</p>
                         <div class="contact-methods">
                             <div class="method" id="mailMethod">
                                 <a href="mailto:humayunk45423@gmail.com" class="method-main" aria-label="Send email">
                                     <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
                                     <div class="method-text">
-                                        <strong><span class="hide-mobile">Click</span><span
-                                                class="show-mobile">Tap</span> here to Email</strong>
+                                        <strong data-i18n="contact_email_btn">Click here to Email</strong>
                                         <span id="emailText">humayunk45423@gmail.com</span>
                                     </div>
                                 </a>
@@ -789,8 +795,7 @@
                                         </svg>
                                     </div>
                                     <div class="method-text">
-                                        <strong><span class="hide-mobile">Click</span><span
-                                                class="show-mobile">Tap</span> here to WhatsApp</strong>
+                                        <strong data-i18n="contact_wa_btn">Click here to WhatsApp</strong>
                                         <span id="waText">+8801721445207</span>
                                     </div>
                                 </a>
@@ -837,11 +842,11 @@
                         </a>
                         <a href="https://muslimbangla.com/quran" target="_blank" rel="noopener noreferrer nofollow"
                             class="social-item">
-                            <i class="fa-solid fa-book-open"></i><span>Read Quran</span>
+                            <i class="fa-solid fa-book-open"></i><span data-i18n="social_quran">Read Quran</span>
                         </a>
                         <a href="https://drive.google.com/drive/folders/13VIzyy7N3K6mcx4eBnc7XTe4E-SxVGEG"
                             target="_blank" rel="noopener noreferrer nofollow" class="social-item">
-                            <i class="fa-solid fa-mosque"></i><span>Dawah Files</span>
+                            <i class="fa-solid fa-mosque"></i><span data-i18n="social_dawah">Dawah Files</span>
                         </a>
                         <a href="files.html" class="social-item">
                             <i class="fa-solid fa-folder-open"></i><span>Software HQ</span>
@@ -849,7 +854,7 @@
                         <a href="https://github.com/humayunk45423/Webpage-2/releases/download/v1.0/Humayoun.Kobir.apk"
                             class="social-item" aria-label="Download Humayoun Kobir Android App" role="link"
                             rel="nofollow">
-                            <i class="fa-brands fa-android" aria-hidden="true"></i><span>App Download</span>
+                            <i class="fa-brands fa-android" aria-hidden="true"></i><span data-i18n="social_app_dl">App Download</span>
                         </a>
                     </div>
                 </div>
@@ -857,14 +862,106 @@
         </main>
 
         <footer class="container footer">
-            <span>&copy; 2026 Humayoun Kobir. All rights reserved.</span>
+            <span data-i18n="footer_copyright">&copy; 2026 Humayoun Kobir. All rights reserved.</span>
             <div class="footer-links">
-                <a href="#top">Back to top</a>
+                <a href="#top" data-i18n="footer_back_top">Back to top</a>
             </div>
         </footer>
     </div>
 
     <script src="script.js" defer></script>
+
+
+    <!-- Mobile Navigation Drawer & Backdrop -->
+    <div class="mobile-drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation Drawer" aria-hidden="true">
+        <div class="drawer-header">
+            <a class="brand" href="#top" aria-label="Go to top">
+                <span class="mark">
+                    <img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir Logo" width="34" height="34" loading="lazy">
+                </span>
+                <span class="brand-text">
+                    <strong data-i18n="brand_name">Humayoun Kobir</strong>
+                    <small data-i18n="brand_title">Engineer & Designer</small>
+                </span>
+            </a>
+            <button type="button" class="drawer-close-btn" id="closeMenuBtn" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="drawer-body">
+            <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_nav_title">Navigation</div>
+                <nav class="drawer-nav">
+                    <a href="#about" class="drawer-nav-item"><i class="fa-solid fa-user"></i><span data-i18n="nav_about">About</span></a>
+                    <a href="#skills" class="drawer-nav-item"><i class="fa-solid fa-layer-group"></i><span data-i18n="nav_skills">Skills</span></a>
+                    <a href="#projects" class="drawer-nav-item"><i class="fa-solid fa-briefcase"></i><span data-i18n="nav_projects">Projects</span></a>
+                    <a href="#contact" class="drawer-nav-item"><i class="fa-solid fa-paper-plane"></i><span data-i18n="nav_contact">Contact</span></a>
+                    <a href="files.html" class="drawer-nav-item"><i class="fa-solid fa-folder-open"></i><span data-i18n="nav_softwarehq">Software HQ</span></a>
+                </nav>
+            </div>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_contact_title">Direct Contact</div>
+                <div class="drawer-contacts">
+                    <div class="method">
+                        <a href="mailto:humayunk45423@gmail.com" class="method-main" aria-label="Send email">
+                            <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="method-text">
+                                <strong data-i18n="contact_email_title">Email Address</strong>
+                                <span>humayunk45423@gmail.com</span>
+                            </div>
+                        </a>
+                        <button class="copy-btn" title="Copy Email" onclick="copyContact('humayunk45423@gmail.com', this)">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="method">
+                        <a href="https://wa.me/8801721445207" target="_blank" rel="noopener noreferrer nofollow" class="method-main" aria-label="Chat on WhatsApp">
+                            <div class="method-icon">
+                                <svg viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M20 10C20 15.51 15.51 20 10 20C7.97 20 6.08 19.39 4.5 18.35L0.66 19.58L1.9 15.86C0.7 14.22 0 12.19 0 10C0 4.49 4.48 0 10 0L10 0C15.51 0 20 4.49 20 10ZM15.99 12.73C15.89 12.56 13.62 11.51 13.44 11.45C13.18 11.35 12.92 11.38 12.72 11.66C12.44 12.06 12.16 12.46 11.94 12.7C11.77 12.89 11.48 12.91 11.24 12.81C10.91 12.67 10.01 12.36 8.89 11.36C8.03 10.59 7.44 9.64 7.27 9.35C7.1 9.05 7.25 8.88 7.39 8.72C7.81 8.2 8.39 7.85 8.1 7.24C8.03 7.1 7.45 5.66 7.2 5.08C7 4.59 6.86 4.57 6.23 4.57C4.93 4.57 4.19 6.08 4.19 7.37C4.19 9.9 7.77 13.71 10.35 14.78C12.65 15.73 13.33 15.64 13.86 15.53C14.62 15.37 15.58 14.8 15.82 14.12C16.06 13.44 16.06 12.86 15.99 12.73Z"></path>
+                                </svg>
+                            </div>
+                            <div class="method-text">
+                                <strong data-i18n="contact_wa_title">WhatsApp / Phone</strong>
+                                <span>+8801721445207</span>
+                            </div>
+                        </a>
+                        <button class="copy-btn" title="Copy Number" onclick="copyContact('+8801721445207', this)">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_preferences_title">Preferences</div>
+                <div class="drawer-toggles">
+                    <div class="drawer-toggle-row">
+                        <span data-i18n="toggle_language_label">Language</span>
+                        <button type="button" class="segmented-toggle lang-toggle" id="langToggleMobile" data-state="right" aria-label="Toggle Language" title="Toggle Language">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
+                            <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
+                        </button>
+                    </div>
+                    <div class="drawer-toggle-row">
+                        <span data-i18n="toggle_theme_label">Theme</span>
+                        <button type="button" class="segmented-toggle" id="themeToggleMobile" data-state="left" aria-label="Toggle Theme" title="Toggle Theme">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
+                                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                            </span>
+                            <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
+                                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
 
 </body>
 
