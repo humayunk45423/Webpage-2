@@ -555,80 +555,13 @@
             animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
-        .nav a:not(.active):not(.nav-software-btn):hover {
+        .nav a:not(.active):hover {
             color: var(--text);
             transform: translateY(-1px);
         }
 
-        .nav a:not(.nav-software-btn):hover {
+        .nav a:hover {
             background: transparent !important;
-        }
-
-        /* ─── Top Nav Software HQ Button ─── */
-        .nav-software-btn {
-            display: inline-flex !important;
-            align-items: center;
-            gap: 0.45rem;
-            padding: 0.46rem 0.85rem !important;
-            font-size: 0.82rem !important;
-            font-weight: 700 !important;
-            color: var(--accent) !important;
-            background: var(--soft) !important;
-            border: 1px solid var(--accent-line) !important;
-            border-radius: 999px;
-            margin-left: 0.2rem;
-            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-            box-shadow: 0 2px 8px var(--soft);
-            text-decoration: none;
-            line-height: 1;
-        }
-
-        .nav-software-btn i {
-            font-size: 0.8rem;
-            color: var(--accent);
-            transition: transform 0.25s ease, color 0.25s ease;
-        }
-
-        .nav-software-btn:hover {
-            background: var(--vibrant-gradient) !important;
-            color: var(--accent-ink) !important;
-            border-color: transparent !important;
-            transform: translateY(-1px) !important;
-            box-shadow: 0 4px 15px var(--soft), 0 0 10px var(--soft);
-        }
-
-        .nav-software-btn:hover i {
-            color: var(--accent-ink);
-            transform: scale(1.15) rotate(6deg);
-        }
-
-        html[data-theme="dark"] .nav-software-btn {
-            background: rgba(255, 107, 0, 0.12) !important;
-            border-color: rgba(255, 107, 0, 0.28) !important;
-            color: #ff9838 !important;
-        }
-
-        html[data-theme="dark"] .nav-software-btn i {
-            color: #ff9838;
-        }
-
-        html[data-theme="dark"] .nav-software-btn:hover {
-            color: #000000 !important;
-            background: var(--vibrant-gradient) !important;
-        }
-
-        html[data-theme="dark"] .nav-software-btn:hover i {
-            color: #000000;
-        }
-
-        .nav-software-btn.active {
-            background: var(--vibrant-gradient) !important;
-            color: var(--accent-ink) !important;
-            border-color: transparent !important;
-        }
-
-        .nav-software-btn.active i {
-            color: var(--accent-ink) !important;
         }
 
         .glider {
@@ -639,7 +572,7 @@
             background: var(--vibrant-gradient);
             border-radius: 999px;
             z-index: 1;
-            transition: opacity 0.4s ease;
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), width 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
             pointer-events: none;
             opacity: 0;
             will-change: transform, width;
@@ -648,12 +581,74 @@
         }
 
         .glider.moving {
-            transform: scaleX(0.85) scaleY(0.95)
+            transform: scaleX(0.85) scaleY(0.95);
         }
 
         .glider.visible {
             opacity: 1;
-            transform: scaleX(1) scaleY(1)
+        }
+
+        /* ─── Seamless Page Sliding Transitions (Software HQ & Main Nav) ─── */
+        body.page-slide-in-right {
+            animation: pageSlideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        body.page-slide-in-left {
+            animation: pageSlideInLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        body.page-exit-left {
+            animation: pageExitLeft 0.26s cubic-bezier(0.4, 0, 1, 1) forwards;
+            pointer-events: none;
+        }
+
+        body.page-exit-right {
+            animation: pageExitRight 0.26s cubic-bezier(0.4, 0, 1, 1) forwards;
+            pointer-events: none;
+        }
+
+        @keyframes pageSlideInRight {
+            from {
+                opacity: 0;
+                transform: translate3d(40px, 0, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes pageSlideInLeft {
+            from {
+                opacity: 0;
+                transform: translate3d(-40px, 0, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes pageExitLeft {
+            from {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                opacity: 0;
+                transform: translate3d(-40px, 0, 0);
+            }
+        }
+
+        @keyframes pageExitRight {
+            from {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                opacity: 0;
+                transform: translate3d(40px, 0, 0);
+            }
         }
 
         .page-main {

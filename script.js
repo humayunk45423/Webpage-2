@@ -207,10 +207,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    // 5. Scroll Sync Navigation Logic (Ultra-Optimized 1:1 Sync)
+    // 5. Page Slide Transitions & Navigation Glider Logic
+    const transitionDir = sessionStorage.getItem('page-transition-dir');
+    if (transitionDir === 'to-index') {
+        document.body.classList.add('page-slide-in-left');
+        sessionStorage.removeItem('page-transition-dir');
+        setTimeout(() => {
+            document.body.classList.remove('page-slide-in-left');
+        }, 400);
+    }
+
     const navLinks = document.querySelectorAll('.nav a[href^="#"]');
     const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href'))).filter(s => s);
     const glider = document.getElementById('navGlider');
+    const softwareHqLink = document.querySelector('.nav a[href="files.html"]');
 
     // Cache metrics to avoid layout thrashing in the scroll loop
     let cachedNavMetrics = [];
@@ -229,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateGliderSync = () => {
         if (!glider || window.innerWidth < 1024) return;
+        if (softwareHqLink && softwareHqLink.classList.contains('active')) return;
 
         const sy = state.scrollY;
         const sMetrics = cachedSectionMetrics;
@@ -268,7 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (targetLeft !== undefined) {
-            // Force integers to prevent sub-pixel rendering artifacts on the border-radius
             targetLeft = Math.round(targetLeft);
             targetWidth = Math.round(targetWidth);
 
@@ -285,6 +295,25 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     };
+
+    // Smooth Software HQ Page Transition from Right
+    if (softwareHqLink && !softwareHqLink.classList.contains('active')) {
+        softwareHqLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            navLinks.forEach(l => l.classList.remove('active'));
+            softwareHqLink.classList.add('active');
+            if (glider) {
+                glider.style.transform = `translate3d(${Math.round(softwareHqLink.offsetLeft)}px, 0, 0)`;
+                glider.style.width = `${Math.round(softwareHqLink.offsetWidth)}px`;
+                glider.classList.add('visible');
+            }
+            sessionStorage.setItem('page-transition-dir', 'to-files');
+            document.body.classList.add('page-exit-left');
+            setTimeout(() => {
+                window.location.href = softwareHqLink.href;
+            }, 240);
+        });
+    }
 
     window.addEventListener('resize', () => {
         computePositions();

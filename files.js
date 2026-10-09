@@ -1017,6 +1017,60 @@ document.addEventListener('DOMContentLoaded', () => {
         history.replaceState({ view: 'explorer' }, '', window.location.pathname);
     }
 
+    // Page Slide In Transition
+    const transitionDir = sessionStorage.getItem('page-transition-dir');
+    if (transitionDir === 'to-files' || !transitionDir) {
+        document.body.classList.add('page-slide-in-right');
+        sessionStorage.removeItem('page-transition-dir');
+        setTimeout(() => {
+            document.body.classList.remove('page-slide-in-right');
+        }, 400);
+    }
+
+    // Top Nav Selection Pill (Glider) Positioning
+    const glider = document.getElementById('navGlider');
+    const softwareHqTab = document.getElementById('navSoftwareHq') || document.querySelector('.nav a.active');
+    const syncGlider = () => {
+        if (glider && softwareHqTab && window.innerWidth >= 1024) {
+            glider.style.transform = `translate3d(${Math.round(softwareHqTab.offsetLeft)}px, 0, 0)`;
+            glider.style.width = `${Math.round(softwareHqTab.offsetWidth)}px`;
+            glider.classList.add('visible');
+        }
+    };
+    setTimeout(syncGlider, 50);
+    window.addEventListener('resize', syncGlider, { passive: true });
+
+    // Smooth Page Exit Slide When Clicking Back to Main Tabs
+    document.querySelectorAll('.nav a[href^="index.html"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetHref = link.getAttribute('href');
+            document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            if (glider && window.innerWidth >= 1024) {
+                glider.style.transform = `translate3d(${Math.round(link.offsetLeft)}px, 0, 0)`;
+                glider.style.width = `${Math.round(link.offsetWidth)}px`;
+            }
+            sessionStorage.setItem('page-transition-dir', 'to-index');
+            document.body.classList.add('page-exit-right');
+            setTimeout(() => {
+                window.location.href = targetHref;
+            }, 240);
+        });
+    });
+
+    const brandLink = document.querySelector('.header .brand[href="index.html"]');
+    if (brandLink) {
+        brandLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            sessionStorage.setItem('page-transition-dir', 'to-index');
+            document.body.classList.add('page-exit-right');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 240);
+        });
+    }
+
     // Register PWA Service Worker (Offline Support for Software HQ)
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
