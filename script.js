@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             width: link.offsetWidth
         }));
         cachedSectionMetrics = sections.map(section => ({
-            target: section.offsetTop - scrollMargin
+            target: Math.max(0, section.offsetTop - scrollMargin)
         }));
     };
 
@@ -251,9 +251,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             const currentScroll = window.scrollY || window.pageYOffset || 0;
             if (cachedSectionMetrics.length) {
-                for (let i = 0; i < cachedSectionMetrics.length; i++) {
-                    if (currentScroll >= cachedSectionMetrics[i].target - 10) {
+                for (let i = cachedSectionMetrics.length - 1; i >= 0; i--) {
+                    if (currentScroll >= cachedSectionMetrics[i].target - 20) {
                         activeIdx = i;
+                        break;
                     }
                 }
             }
@@ -290,43 +291,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!sMetrics.length || !nMetrics.length) return;
 
-        let targetLeft, targetWidth, activeIdx = -1;
-
+        let activeIdx = 0;
         const isAtBottom = (window.innerHeight + sy) >= document.body.offsetHeight - 80;
 
         if (isAtBottom) {
             activeIdx = sMetrics.length - 1;
-            targetLeft = nMetrics[activeIdx].left;
-            targetWidth = nMetrics[activeIdx].width;
-        } else if (sy <= sMetrics[0].target) {
-            targetLeft = nMetrics[0].left;
-            targetWidth = nMetrics[0].width;
-            activeIdx = 0;
-        } else if (sy >= sMetrics[sMetrics.length - 1].target) {
-            targetLeft = nMetrics[sMetrics.length - 1].left;
-            targetWidth = nMetrics[sMetrics.length - 1].width;
-            activeIdx = sMetrics.length - 1;
         } else {
-            for (let i = 0; i < sMetrics.length - 1; i++) {
-                const startPoint = sMetrics[i].target;
-                const endPoint = sMetrics[i + 1].target;
-
-                if (sy >= startPoint && sy < endPoint) {
-                    const progress = (sy - startPoint) / (endPoint - startPoint);
-                    targetLeft = nMetrics[i].left + (nMetrics[i + 1].left - nMetrics[i].left) * progress;
-                    targetWidth = nMetrics[i].width + (nMetrics[i + 1].width - nMetrics[i].width) * progress;
-                    activeIdx = progress > 0.5 ? i + 1 : i;
+            for (let i = sMetrics.length - 1; i >= 0; i--) {
+                if (sy >= sMetrics[i].target - 20) {
+                    activeIdx = i;
                     break;
                 }
             }
         }
 
-        if (targetLeft !== undefined) {
-            targetLeft = Math.round(targetLeft);
-            targetWidth = Math.round(targetWidth);
-
-            glider.style.transform = `translate3d(${targetLeft}px, 0, 0)`;
-            glider.style.width = `${targetWidth}px`;
+        const target = nMetrics[activeIdx];
+        if (target) {
+            glider.style.transform = `translate3d(${Math.round(target.left)}px, 0, 0)`;
+            glider.style.width = `${Math.round(target.width)}px`;
             glider.classList.add('visible');
 
             navLinks.forEach((link, idx) => {
@@ -360,6 +342,20 @@ document.addEventListener('DOMContentLoaded', () => {
     computePositions();
     initGliderTarget();
     if (window.innerWidth >= 1024) startLoop();
+
+    // Re-sync after web fonts or external assets finish loading to ensure 100% pixel precision
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+            computePositions();
+            refreshMetrics();
+            updateGliderSync();
+        });
+    }
+    window.addEventListener('load', () => {
+        computePositions();
+        refreshMetrics();
+        updateGliderSync();
+    });
 
     // 6. Copy to Clipboard Utility with Safe Fallback
     window.copyContact = (text, btn) => {

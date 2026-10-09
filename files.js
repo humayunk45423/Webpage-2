@@ -1045,6 +1045,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     syncGlider();
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(syncGlider);
+    }
+    window.addEventListener('load', syncGlider);
     window.addEventListener('resize', syncGlider, { passive: true });
 
     // Smooth Page Exit Slide When Clicking Back to Main Tabs
