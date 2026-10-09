@@ -891,6 +891,32 @@
         </div>
         <div class="drawer-body">
             <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_preferences_title">Preferences</div>
+                <div class="drawer-toggles">
+                    <div class="drawer-toggle-row">
+                        <span data-i18n="toggle_language_label">Language</span>
+                        <button type="button" class="segmented-toggle lang-toggle" id="langToggleMobile" data-state="right" aria-label="Toggle Language" title="Toggle Language">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
+                            <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
+                        </button>
+                    </div>
+                    <div class="drawer-toggle-row">
+                        <span data-i18n="toggle_theme_label">Theme</span>
+                        <button type="button" class="segmented-toggle" id="themeToggleMobile" data-state="left" aria-label="Toggle Theme" title="Toggle Theme">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
+                                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                            </span>
+                            <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
+                                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-section">
                 <div class="drawer-section-title" data-i18n="drawer_nav_title">Navigation</div>
                 <nav class="drawer-nav">
                     <a href="#about" class="drawer-nav-item"><i class="fa-solid fa-user"></i><span data-i18n="nav_about">About</span></a>
@@ -930,32 +956,6 @@
                         </a>
                         <button class="copy-btn" title="Copy Number" onclick="copyContact('+8801721445207', this)">
                             <i class="fa-solid fa-copy"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="drawer-section">
-                <div class="drawer-section-title" data-i18n="drawer_preferences_title">Preferences</div>
-                <div class="drawer-toggles">
-                    <div class="drawer-toggle-row">
-                        <span data-i18n="toggle_language_label">Language</span>
-                        <button type="button" class="segmented-toggle lang-toggle" id="langToggleMobile" data-state="right" aria-label="Toggle Language" title="Toggle Language">
-                            <div class="toggle-slider" aria-hidden="true"></div>
-                            <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
-                            <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
-                        </button>
-                    </div>
-                    <div class="drawer-toggle-row">
-                        <span data-i18n="toggle_theme_label">Theme</span>
-                        <button type="button" class="segmented-toggle" id="themeToggleMobile" data-state="left" aria-label="Toggle Theme" title="Toggle Theme">
-                            <div class="toggle-slider" aria-hidden="true"></div>
-                            <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
-                                <i class="fa-solid fa-sun" aria-hidden="true"></i>
-                            </span>
-                            <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
-                                <i class="fa-solid fa-moon" aria-hidden="true"></i>
-                            </span>
                         </button>
                     </div>
                 </div>
