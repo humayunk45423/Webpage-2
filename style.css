@@ -588,71 +588,89 @@
             opacity: 1;
         }
 
-        /* ─── Seamless Page Sliding Transitions (Software HQ & Main Nav) ─── */
-        body.page-slide-in-right {
-            animation: pageSlideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+        /* ─── Ultra-Smooth Hardware-Accelerated Page Transitions (120 FPS GPU) ─── */
+        .page-main {
+            display: block;
+            will-change: transform, opacity;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
-        body.page-slide-in-left {
-            animation: pageSlideInLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+        .page-main.page-slide-in-right {
+            animation: pageSlideInRight 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
-        body.page-exit-left {
-            animation: pageExitLeft 0.26s cubic-bezier(0.4, 0, 1, 1) forwards;
+        .page-main.page-slide-in-left {
+            animation: pageSlideInLeft 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .page-main.page-exit-left {
+            animation: pageExitLeft 0.16s cubic-bezier(0.4, 0, 1, 1) forwards;
             pointer-events: none;
         }
 
-        body.page-exit-right {
-            animation: pageExitRight 0.26s cubic-bezier(0.4, 0, 1, 1) forwards;
+        .page-main.page-exit-right {
+            animation: pageExitRight 0.16s cubic-bezier(0.4, 0, 1, 1) forwards;
             pointer-events: none;
         }
 
         @keyframes pageSlideInRight {
-            from {
+            0% {
                 opacity: 0;
-                transform: translate3d(40px, 0, 0);
+                transform: translate3d(16px, 0, 0);
             }
-            to {
+            100% {
                 opacity: 1;
                 transform: translate3d(0, 0, 0);
             }
         }
 
         @keyframes pageSlideInLeft {
-            from {
+            0% {
                 opacity: 0;
-                transform: translate3d(-40px, 0, 0);
+                transform: translate3d(-16px, 0, 0);
             }
-            to {
+            100% {
                 opacity: 1;
                 transform: translate3d(0, 0, 0);
             }
         }
 
         @keyframes pageExitLeft {
-            from {
+            0% {
                 opacity: 1;
                 transform: translate3d(0, 0, 0);
             }
-            to {
+            100% {
                 opacity: 0;
-                transform: translate3d(-40px, 0, 0);
+                transform: translate3d(-12px, 0, 0);
             }
         }
 
         @keyframes pageExitRight {
-            from {
+            0% {
                 opacity: 1;
                 transform: translate3d(0, 0, 0);
             }
-            to {
+            100% {
                 opacity: 0;
-                transform: translate3d(40px, 0, 0);
+                transform: translate3d(12px, 0, 0);
             }
         }
 
-        .page-main {
-            display: block
+        @media (prefers-reduced-motion: reduce) {
+            .page-main.page-slide-in-right,
+            .page-main.page-slide-in-left,
+            .page-main.page-exit-left,
+            .page-main.page-exit-right {
+                animation: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+            .glider {
+                transition: none !important;
+            }
         }
 
         .section {

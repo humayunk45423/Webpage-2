@@ -11,6 +11,7 @@
         document.documentElement.setAttribute('data-theme', preferred);
         var meta = document.querySelector('meta[name="theme-color"]');
         if(meta) meta.setAttribute('content', preferred === 'dark' ? '#0b0b0b' : '#ffffff');
+        if (window.location.hash) { document.documentElement.style.scrollBehavior = 'auto'; }
     })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = {
         animating: false,
         isTypingVisible: false,
-        scrollY: 0,
+        scrollY: window.scrollY || window.pageYOffset || 0,
         lastScrollY: -1,
         titlePositions: [],
         winW: window.innerWidth,
@@ -154,9 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateLoop = () => {
         let needsUpdate = false;
 
-        // 1. Dynamic Background & Pointer Glow Removed
-
-        // 2. Optimized Scroll Logic
+        // Optimized Scroll Logic
         const sy = state.scrollY;
         if (state.winW >= 1024) {
             const titlePositions = state.titlePositions;
@@ -188,33 +186,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', () => {
         computePositions();
+        refreshMetrics();
+        updateGliderSync();
     }, { passive: true });
 
-    // Pointer listeners removed for extreme performance
-
     window.addEventListener('scroll', () => {
-        state.scrollY = window.scrollY || window.pageYOffset;
+        state.scrollY = window.scrollY || window.pageYOffset || 0;
         if (window.innerWidth >= 1024) {
             startLoop();
-        } else {
-            // Mobile-specific scroll logic (non-JS intensive)
-            if (!state.animating) {
-                requestAnimationFrame(() => {
-                    const sy = state.scrollY;
-                    // Add minimal mobile scroll effects here if needed
-                });
-            }
         }
     }, { passive: true });
 
     // 5. Page Slide Transitions & Navigation Glider Logic
+    const pageMain = document.querySelector('.page-main');
     const transitionDir = sessionStorage.getItem('page-transition-dir');
-    if (transitionDir === 'to-index') {
-        document.body.classList.add('page-slide-in-left');
+    if (transitionDir === 'to-index' && pageMain) {
+        pageMain.classList.add('page-slide-in-left');
         sessionStorage.removeItem('page-transition-dir');
         setTimeout(() => {
-            document.body.classList.remove('page-slide-in-left');
-        }, 400);
+            pageMain.classList.remove('page-slide-in-left');
+        }, 360);
     }
 
     const navLinks = document.querySelectorAll('.nav a[href^="#"]');
@@ -235,6 +226,58 @@ document.addEventListener('DOMContentLoaded', () => {
         cachedSectionMetrics = sections.map(section => ({
             target: section.offsetTop - scrollMargin
         }));
+    };
+
+    // Instant Glider Placement on Target (Prevents jumping from About to Contact on page load)
+    const initGliderTarget = () => {
+        if (!glider || window.innerWidth < 1024) return;
+        refreshMetrics();
+        if (!cachedNavMetrics.length) return;
+
+        let activeIdx = 0;
+        const currentHash = window.location.hash;
+        if (currentHash) {
+            const hashIdx = Array.from(navLinks).findIndex(l => l.getAttribute('href') === currentHash);
+            if (hashIdx !== -1) {
+                activeIdx = hashIdx;
+                const targetSec = document.querySelector(currentHash);
+                if (targetSec) {
+                    const targetScroll = Math.max(0, targetSec.offsetTop - 72);
+                    window.scrollTo({ top: targetScroll, behavior: 'instant' });
+                    state.scrollY = targetScroll;
+                    state.lastScrollY = targetScroll;
+                }
+            }
+        } else {
+            const currentScroll = window.scrollY || window.pageYOffset || 0;
+            if (cachedSectionMetrics.length) {
+                for (let i = 0; i < cachedSectionMetrics.length; i++) {
+                    if (currentScroll >= cachedSectionMetrics[i].target - 10) {
+                        activeIdx = i;
+                    }
+                }
+            }
+        }
+
+        if (cachedNavMetrics[activeIdx]) {
+            const target = cachedNavMetrics[activeIdx];
+            glider.style.transition = 'none'; // Instant placement without leaping animation
+            glider.style.transform = `translate3d(${Math.round(target.left)}px, 0, 0)`;
+            glider.style.width = `${Math.round(target.width)}px`;
+            glider.classList.add('visible');
+
+            navLinks.forEach((link, idx) => {
+                link.classList.toggle('active', idx === activeIdx);
+            });
+
+            // Smooth transitions enabled for subsequent user interactions
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    if (glider) glider.style.transition = '';
+                    document.documentElement.style.scrollBehavior = '';
+                });
+            });
+        }
     };
 
     const updateGliderSync = () => {
@@ -287,11 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
             glider.classList.add('visible');
 
             navLinks.forEach((link, idx) => {
-                if (idx === activeIdx) {
-                    if (!link.classList.contains('active')) link.classList.add('active');
-                } else {
-                    if (link.classList.contains('active')) link.classList.remove('active');
-                }
+                link.classList.toggle('active', idx === activeIdx);
             });
         }
     };
@@ -302,24 +341,25 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             navLinks.forEach(l => l.classList.remove('active'));
             softwareHqLink.classList.add('active');
-            if (glider) {
+            if (glider && window.innerWidth >= 1024) {
                 glider.style.transform = `translate3d(${Math.round(softwareHqLink.offsetLeft)}px, 0, 0)`;
                 glider.style.width = `${Math.round(softwareHqLink.offsetWidth)}px`;
                 glider.classList.add('visible');
             }
             sessionStorage.setItem('page-transition-dir', 'to-files');
-            document.body.classList.add('page-exit-left');
+            if (pageMain) {
+                pageMain.classList.add('page-exit-left');
+            }
             setTimeout(() => {
                 window.location.href = softwareHqLink.href;
-            }, 240);
+            }, 180);
         });
     }
 
-    window.addEventListener('resize', () => {
-        computePositions();
-        refreshMetrics();
-        updateGliderSync();
-    }, { passive: true });
+    // Initialize metrics and glider immediately
+    computePositions();
+    initGliderTarget();
+    if (window.innerWidth >= 1024) startLoop();
 
     // 6. Copy to Clipboard Utility with Safe Fallback
     window.copyContact = (text, btn) => {

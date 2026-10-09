@@ -1017,14 +1017,15 @@ document.addEventListener('DOMContentLoaded', () => {
         history.replaceState({ view: 'explorer' }, '', window.location.pathname);
     }
 
-    // Page Slide In Transition
+    // Page Slide In Transition for Main Content
+    const pageMain = document.querySelector('.page-main');
     const transitionDir = sessionStorage.getItem('page-transition-dir');
-    if (transitionDir === 'to-files' || !transitionDir) {
-        document.body.classList.add('page-slide-in-right');
+    if (pageMain && (transitionDir === 'to-files' || !transitionDir)) {
+        pageMain.classList.add('page-slide-in-right');
         sessionStorage.removeItem('page-transition-dir');
         setTimeout(() => {
-            document.body.classList.remove('page-slide-in-right');
-        }, 400);
+            pageMain.classList.remove('page-slide-in-right');
+        }, 360);
     }
 
     // Top Nav Selection Pill (Glider) Positioning
@@ -1032,12 +1033,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const softwareHqTab = document.getElementById('navSoftwareHq') || document.querySelector('.nav a.active');
     const syncGlider = () => {
         if (glider && softwareHqTab && window.innerWidth >= 1024) {
+            glider.style.transition = 'none';
             glider.style.transform = `translate3d(${Math.round(softwareHqTab.offsetLeft)}px, 0, 0)`;
             glider.style.width = `${Math.round(softwareHqTab.offsetWidth)}px`;
             glider.classList.add('visible');
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    if (glider) glider.style.transition = '';
+                });
+            });
         }
     };
-    setTimeout(syncGlider, 50);
+    syncGlider();
     window.addEventListener('resize', syncGlider, { passive: true });
 
     // Smooth Page Exit Slide When Clicking Back to Main Tabs
@@ -1052,10 +1059,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 glider.style.width = `${Math.round(link.offsetWidth)}px`;
             }
             sessionStorage.setItem('page-transition-dir', 'to-index');
-            document.body.classList.add('page-exit-right');
+            if (pageMain) {
+                pageMain.classList.add('page-exit-right');
+            }
             setTimeout(() => {
                 window.location.href = targetHref;
-            }, 240);
+            }, 180);
         });
     });
 
@@ -1064,10 +1073,12 @@ document.addEventListener('DOMContentLoaded', () => {
         brandLink.addEventListener('click', (e) => {
             e.preventDefault();
             sessionStorage.setItem('page-transition-dir', 'to-index');
-            document.body.classList.add('page-exit-right');
+            if (pageMain) {
+                pageMain.classList.add('page-exit-right');
+            }
             setTimeout(() => {
                 window.location.href = 'index.html';
-            }, 240);
+            }, 180);
         });
     }
 
