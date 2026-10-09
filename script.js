@@ -96,14 +96,46 @@ const translations = {
         lnk_cash_memo: "Cash Memo Design",
 
         // Contact Section
+        contact_title: "Let's build<br>something great.",
+
+        // Social Media Grid
+        social_github: "GitHub",
+        social_linkedin: "LinkedIn",
+        social_behance: "Behance",
+        social_dribbble: "Dribbble",
+        social_upwork: "Upwork",
+        social_reddit: "Reddit",
+        social_discord: "Discord",
+        social_stackoverflow: "Stack Overflow",
+        social_softwarehq: "Software HQ",
+        social_quran: "Read Quran",
+        social_dawah: "Dawah Files",
+        social_app_dl: "App Download",
+
+        // Project Tags (Engla / English)
+        tag_webapp: "Web App",
+        tag_wasm: "WASM",
+        tag_clientside: "Client-Side",
+        tag_powershell: "PowerShell",
+        tag_hardware: "Hardware",
+        tag_3d_webgl: "3D WebGL",
+        tag_threejs: "Three.js",
+        tag_react: "React",
+        tag_cpp: "C / C++",
+        tag_algorithms: "Algorithms",
+        tag_bentoui: "Bento UI",
+        tag_countdown: "Countdown",
+        tag_banner: "Banner",
+        tag_poster: "Poster",
+        tag_logo: "Logo",
+        tag_corporate: "Corporate",
+        tag_ads: "Ads",
+        tag_bcard: "Business Card",
+
         contact_title: "Let's build something great.",
         contact_text: "Open for collaborations, freelance projects, or just a coffee chat about tech and design.",
         contact_email_btn: "Click here to Email",
         contact_wa_btn: "Click here to WhatsApp",
-        social_quran: "Read Quran",
-        social_dawah: "Dawah Files",
-        social_softwarehq: "Software HQ",
-        social_app_dl: "App Download",
 
         // Footer
         footer_copyright: "© 2026 Humayoun Kobir. All rights reserved.",
@@ -200,14 +232,46 @@ const translations = {
         lnk_cash_memo: "ক্যাশ মেমো ডিজাইন",
 
         // Contact Section
-        contact_title: "একসাথে দারুণ কিছু তৈরি করি।",
+        contact_title: "একসাথে<br>দারুণ কিছু<br>তৈরি করি",
+
+        // Social Media Grid (Engla / Bengali Transliteration)
+        social_github: "গিটহাব",
+        social_linkedin: "লিঙ্কডইন",
+        social_behance: "বিহ্যান্স",
+        social_dribbble: "ড্রিবল",
+        social_upwork: "আপওয়ার্ক",
+        social_reddit: "রেডিট",
+        social_discord: "ডিসকর্ড",
+        social_stackoverflow: "স্ট্যাক ওভারফ্লো",
+        social_softwarehq: "সফটওয়্যার HQ",
+        social_quran: "কুরআন পড়ুন",
+        social_dawah: "দাওয়াহ ফাইল",
+        social_app_dl: "অ্যাপ ডাউনলোড",
+
+        // Project Tags (Engla / Bengali)
+        tag_webapp: "ওয়েব অ্যাপ",
+        tag_wasm: "WASM",
+        tag_clientside: "ক্লায়েন্ট-সাইড",
+        tag_powershell: "পাওয়ারশেল",
+        tag_hardware: "হার্ডওয়্যার",
+        tag_3d_webgl: "৩ডি WebGL",
+        tag_threejs: "Three.js",
+        tag_react: "রিঅ্যাক্ট",
+        tag_cpp: "C / C++",
+        tag_algorithms: "অ্যালগরিদম",
+        tag_bentoui: "বেন্টো UI",
+        tag_countdown: "কাউন্টডাউন",
+        tag_banner: "ব্যানার",
+        tag_poster: "পোস্টার",
+        tag_logo: "লোগো",
+        tag_corporate: "কর্পোরেট",
+        tag_ads: "বিজ্ঞাপন",
+        tag_bcard: "বিজনেস কার্ড",
+
+        contact_title: "একসাথে<br>দারুণ কিছু<br>তৈরি করি",
         contact_text: "যেকোনো কোলাবোরেশন, ফ্রিল্যান্স প্রজেক্ট বা প্রযুক্তি ও ডিজাইন নিয়ে আলোচনার জন্য আমি সদা উন্মুক্ত।",
         contact_email_btn: "ইমেইল করতে ক্লিক করুন",
         contact_wa_btn: "হোয়াটসঅ্যাপ করতে ক্লিক করুন",
-        social_quran: "কুরআন পড়ুন",
-        social_dawah: "দাওয়াহ ফাইল",
-        social_softwarehq: "সফটওয়্যার HQ",
-        social_app_dl: "অ্যাপ ডাউনলোড",
 
         // Footer
         footer_copyright: "© ২০২৬ হুমায়ূন কবির। সর্বস্বত্ব সংরক্ষিত।",
@@ -306,6 +370,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Navigation metrics already initialized and synced above
+
+    const syncActiveGlider = () => {
+        if (!glider || window.innerWidth < 1024) return;
+        const activeLink = document.querySelector('.nav a.active') || navLinks[0];
+        if (activeLink) {
+            glider.style.transform = `translate3d(${Math.round(activeLink.offsetLeft)}px, 0, 0)`;
+            glider.style.width = `${Math.round(activeLink.offsetWidth)}px`;
+            glider.classList.add('visible');
+        }
+    };
+
+    const updateGliderSync = () => {
+        if (!glider || window.innerWidth < 1024) return;
+        if (softwareHqLink && softwareHqLink.classList.contains('active')) {
+            syncActiveGlider();
+            return;
+        }
+
+        const sy = state ? state.scrollY : (window.scrollY || window.pageYOffset || 0);
+        const sMetrics = cachedSectionMetrics;
+        const nMetrics = cachedNavMetrics;
+
+        if (!sMetrics.length || !nMetrics.length) return;
+
+        let activeIdx = 0;
+        const bodyHeight = (document.body && document.body.offsetHeight) || document.documentElement.scrollHeight || 0;
+        const isAtBottom = (window.innerHeight + sy) >= bodyHeight - 80;
+
+        if (isAtBottom) {
+            activeIdx = sMetrics.length - 1;
+        } else {
+            for (let i = sMetrics.length - 1; i >= 0; i--) {
+                if (sy >= sMetrics[i].target - 20) {
+                    activeIdx = i;
+                    break;
+                }
+            }
+        }
+
+        const target = nMetrics[activeIdx];
+        if (target) {
+            glider.style.transform = `translate3d(${Math.round(target.left)}px, 0, 0)`;
+            glider.style.width = `${Math.round(target.width)}px`;
+            glider.classList.add('visible');
+
+            navLinks.forEach((link, idx) => {
+                link.classList.toggle('active', idx === activeIdx);
+            });
+        }
+    };
+
     const applyLanguage = (lang) => {
         activeLang = lang;
         root.setAttribute('data-lang', lang);
@@ -316,8 +432,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const dict = translations[lang] || translations.en;
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (dict[key]) {
-                el.textContent = dict[key];
+            if (dict[key] !== undefined) {
+                if (dict[key].includes('<br>') || dict[key].includes('<span')) {
+                    el.innerHTML = dict[key];
+                } else {
+                    el.textContent = dict[key];
+                }
             }
         });
 
@@ -330,14 +450,27 @@ document.addEventListener('DOMContentLoaded', () => {
         isDeleting = false;
 
         // Recompute navigation glider dimensions immediately to accommodate new text length
-        computePositions();
+        if (typeof computePositions === 'function') computePositions();
         refreshMetrics();
+        syncActiveGlider();
         updateGliderSync();
 
         requestAnimationFrame(() => {
+            if (typeof computePositions === 'function') computePositions();
             refreshMetrics();
+            syncActiveGlider();
             updateGliderSync();
+            requestAnimationFrame(() => {
+                refreshMetrics();
+                syncActiveGlider();
+                updateGliderSync();
+            });
         });
+        setTimeout(() => {
+            refreshMetrics();
+            syncActiveGlider();
+            updateGliderSync();
+        }, 60);
     };
 
     const toggleLanguage = () => {
@@ -621,42 +754,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const updateGliderSync = () => {
-        if (!glider || window.innerWidth < 1024) return;
-        if (softwareHqLink && softwareHqLink.classList.contains('active')) return;
-
-        const sy = state.scrollY;
-        const sMetrics = cachedSectionMetrics;
-        const nMetrics = cachedNavMetrics;
-
-        if (!sMetrics.length || !nMetrics.length) return;
-
-        let activeIdx = 0;
-        const bodyHeight = (document.body && document.body.offsetHeight) || document.documentElement.scrollHeight || 0;
-        const isAtBottom = (window.innerHeight + sy) >= bodyHeight - 80;
-
-        if (isAtBottom) {
-            activeIdx = sMetrics.length - 1;
-        } else {
-            for (let i = sMetrics.length - 1; i >= 0; i--) {
-                if (sy >= sMetrics[i].target - 20) {
-                    activeIdx = i;
-                    break;
-                }
-            }
-        }
-
-        const target = nMetrics[activeIdx];
-        if (target) {
-            glider.style.transform = `translate3d(${Math.round(target.left)}px, 0, 0)`;
-            glider.style.width = `${Math.round(target.width)}px`;
-            glider.classList.add('visible');
-
-            navLinks.forEach((link, idx) => {
-                link.classList.toggle('active', idx === activeIdx);
-            });
-        }
-    };
+    // updateGliderSync already defined above
 
     if (softwareHqLink && !softwareHqLink.classList.contains('active')) {
         softwareHqLink.addEventListener('click', (e) => {

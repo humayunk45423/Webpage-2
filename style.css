@@ -991,19 +991,39 @@
             margin: 0 0 0.5rem;
             color: var(--accent);
             font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
         }
 
         .hero-copy h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            line-height: 1;
-            letter-spacing: -0.05em;
-            margin: 0 0 0.75rem;
-            font-weight: 900;
+            font-size: clamp(2.4rem, 5.8vw, 4.8rem);
+            line-height: 1.14;
+            letter-spacing: -0.015em;
+            margin: 0 0 0.8rem;
+            font-weight: 800;
             color: #000;
             transition: color 0.5s var(--bezier);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+        }
+
+        /* Bengali Typography: Golden Ratio Proportions & Crisp Diacritic Breathing Room */
+        html[data-lang="bn"] .hero-copy h2 {
+            letter-spacing: 0.02em;
+            margin-bottom: 0.55rem;
+        }
+
+        html[data-lang="bn"] .hero-copy h1 {
+            letter-spacing: 0.008em;
+            line-height: 1.20;
+            margin-bottom: 0.85rem;
+            font-weight: 700;
+            word-spacing: 0.08em;
+        }
+
+        html[data-lang="bn"] #typing {
+            letter-spacing: 0.01em;
+            margin-bottom: 1.35rem;
+            line-height: 1.35;
         }
 
         html[data-theme=dark] .hero-copy h1 {
@@ -1022,7 +1042,7 @@
             font-size: clamp(1.1rem, 2.2vw, 1.5rem);
             letter-spacing: 0.02em;
             min-height: 1.8rem;
-            margin: 0 0 1.25rem;
+            margin: 0 0 1.3rem;
             background: var(--vibrant-gradient);
             -webkit-background-clip: text;
             background-clip: text;
@@ -1472,28 +1492,44 @@
             display: grid;
             grid-template-columns: 1fr 1.2fr;
             gap: clamp(2rem, 5vw, 5rem);
-            align-items: center;
+            align-items: stretch;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100%;
         }
 
         .contact-info h2 {
-            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-size: clamp(2.8rem, 5.5vw, 4.4rem);
             font-weight: 800;
-            margin: 0 0 1.5rem;
-            line-height: 1
+            margin: 0 0 1.25rem;
+            line-height: 1.16;
+            letter-spacing: -0.015em;
+        }
+
+        /* Bengali Typography: Breathable row spacing preventing vowel / diacritic overlaps */
+        html[data-lang="bn"] .contact-info h2 {
+            line-height: 1.25;
+            letter-spacing: 0.01em;
+            word-spacing: 0.04em;
+            margin-bottom: 1.25rem;
         }
 
         .contact-info p {
             font-size: clamp(0.95rem, 1.8vw, 1.1rem);
             line-height: 1.65;
             color: var(--muted);
-            margin: 0 0 2rem;
-            max-width: 40rem
+            margin: 0 0 1.5rem;
+            max-width: 40rem;
         }
 
         .contact-methods {
             display: grid;
             gap: 1rem;
-            margin-top: 1.5rem
+            margin-top: auto;
         }
 
         .method {
@@ -1772,6 +1808,11 @@
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
+                height: auto;
+            }
+
+            .contact-methods {
+                margin-top: 1.5rem;
             }
 
             .contact-methods,
@@ -1908,22 +1949,30 @@
             }
 
             .hero-copy h2 {
-                font-size: 0.75rem;
-                margin-bottom: 0.2rem;
-                letter-spacing: 0.1em;
+                font-size: 0.85rem;
+                margin-bottom: 0.55rem;
+                letter-spacing: 0.04em;
             }
 
             .hero-copy h1 {
-                margin: 0 0 0.2rem;
-                font-size: 2rem;
-                letter-spacing: -0.04em;
-                line-height: 1.05;
+                margin: 0 0 0.75rem;
+                font-size: 2.15rem;
+                letter-spacing: -0.01em;
+                line-height: 1.22;
+            }
+
+            html[data-lang="bn"] .hero-copy h1 {
+                letter-spacing: 0.015em;
+                line-height: 1.28;
+                word-spacing: 0.12em;
+                margin-bottom: 0.85rem;
             }
 
             #typing {
-                margin: 0 0 0.5rem;
-                font-size: 0.9rem;
-                min-height: 1.1rem;
+                margin: 0 0 0.85rem;
+                font-size: 0.95rem;
+                min-height: 1.35rem;
+                line-height: 1.4;
             }
 
             .about-text {

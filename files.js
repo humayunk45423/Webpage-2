@@ -27,6 +27,11 @@ const translations = {
         shq_title: "Software HQ",
         cat_all: "All Tools",
         cat_select: "Select Category",
+        btn_back_explorer: "Back to Explorer",
+        btn_download_file: "Download File",
+        btn_open_resource: "Open Resource",
+        btn_copy_cmd: "Copy Command",
+        btn_copy_code: "Copy Code",
         footer_copyright: "© 2026 Humayoun Kobir. All rights reserved."
     },
     bn: {
@@ -48,6 +53,11 @@ const translations = {
         shq_title: "সফটওয়্যার HQ",
         cat_all: "সকল টুলস",
         cat_select: "ক্যাটাগরি বাছাই করুন",
+        btn_back_explorer: "ভান্ডারে ফিরে যান",
+        btn_download_file: "ফাইল ডাউনলোড",
+        btn_open_resource: "রিসোর্স খুলুন",
+        btn_copy_cmd: "কমান্ড কপি",
+        btn_copy_code: "কোড কপি",
         footer_copyright: "© ২০২৬ হুমায়ূন কবির। সর্বস্বত্ব সংরক্ষিত।"
     }
 };
@@ -79,6 +89,8 @@ const fileData = [
         name: "Avro Keyboard",
         category: "utilities",
         badge: "Phonetic Bangla Keyboard",
+        name_bn: "অভ্র কীবোর্ড",
+        badge_bn: "ফোনেটিক বাংলা কীবোর্ড",
         icon: "fa-solid fa-keyboard",
         path: "assets/Avro/setup_avrokeyboard_5.6.0.exe",
         keywords: "bangla bengali phonetic keyboard typing unicode omicronlab",
@@ -89,6 +101,8 @@ const fileData = [
         name: "DirectX 11 Setup",
         category: "utilities",
         badge: "DirectX Gaming Runtime",
+        name_bn: "ডাইরেক্টএক্স ১১ সেটআপ",
+        badge_bn: "ডাইরেক্টএক্স গেমিং রানটাইম",
         icon: "fa-solid fa-gamepad",
         path: "assets/DirectX 11 Setup.rar",
         keywords: "directx 11 dx11 runtime gaming 3d libraries graphics",
@@ -99,6 +113,8 @@ const fileData = [
         name: "Everything (Voidtools)",
         category: "utilities",
         badge: "Instant Desktop Search",
+        name_bn: "এভরিথিং (Voidtools)",
+        badge_bn: "ইনস্ট্যান্ট ডেস্কটপ সার্চ",
         icon: "fa-solid fa-magnifying-glass",
         path: "https://www.voidtools.com/downloads/",
         keywords: "everything voidtools instant desktop search file search indexer fast regex windows query locate files",
@@ -109,6 +125,8 @@ const fileData = [
         name: "Good Bye DPI",
         category: "utilities",
         badge: "DPI Bypass Utility",
+        name_bn: "গুড বাই DPI",
+        badge_bn: "DPI বাইপাস ইউটিলিটি",
         icon: "fa-solid fa-unlock",
         path: "assets/Good Bye DPI/goodbyedpi-0.2.2.rar",
         keywords: "dpi censorship bypass packet inspection network throttling vpn free",
@@ -119,6 +137,8 @@ const fileData = [
         name: "Humayoun's Master Macro",
         category: "utilities",
         badge: "AutoHotkey Macro Pack",
+        name_bn: "হুমায়ূন'স মাস্টার ম্যাক্রো",
+        badge_bn: "অটোহটকি ম্যাক্রো প্যাক",
         icon: "fa-solid fa-keyboard",
         path: "assets/scripts/master-productivity-macro.ahk",
         keywords: "humayoun master productivity macro autohotkey ahk shortcuts window always on top quick launch plain text paste transparency",
@@ -129,6 +149,8 @@ const fileData = [
         name: "qBittorrent",
         category: "utilities",
         badge: "Ad-Free Torrent Client",
+        name_bn: "কিউবিটটরেন্ট (qBittorrent)",
+        badge_bn: "বিজ্ঞাপনমুক্ত টরেন্ট ক্লায়েন্ট",
         icon: "fa-solid fa-cloud-arrow-down",
         path: "https://www.qbittorrent.org/download",
         links: [
@@ -143,6 +165,8 @@ const fileData = [
         name: "Visual C++ Runtimes All-in-One",
         category: "utilities",
         badge: "All-in-One VC++ Runtimes",
+        name_bn: "ভিজ্যুয়াল C++ রানটাইমস অল-ইন-ওয়ান",
+        badge_bn: "অল-ইন-ওয়ান VC++ রানটাইমস",
         icon: "fa-brands fa-microsoft",
         path: "assets/Visual C++ Runtimes All-in-One-Jun-2026.zip",
         keywords: "vcredist visual c++ redistributable runtimes 2005 2022 x86 x64 dll fix",
@@ -153,6 +177,8 @@ const fileData = [
         name: "Windows & Office Activator",
         category: "utilities",
         badge: "MAS PowerShell Script",
+        name_bn: "উইন্ডোজ ও অফিস অ্যাক্টিভেটর",
+        badge_bn: "MAS পাওয়ারশেল স্ক্রিপ্ট",
         icon: "fa-solid fa-key",
         path: "assets/Windows Office Activation Script.txt",
         keywords: "activation mas massgrave windows office powershell script",
@@ -164,6 +190,8 @@ const fileData = [
         name: "WinRAR Pro",
         category: "utilities",
         badge: "Archive & Compression",
+        name_bn: "উইনরার প্রো (WinRAR Pro)",
+        badge_bn: "আর্কাইভ ও কম্প্রেশন",
         icon: "fa-solid fa-file-zipper",
         path: "assets/Winrar/rarreg.rar",
         officialUrl: "https://www.win-rar.com/fileadmin/winrar-versions/winrar-x64-701.exe",
@@ -180,6 +208,8 @@ const fileData = [
         name: "BIOS Enter Button",
         category: "system",
         badge: "One-Click UEFI Reboot",
+        name_bn: "BIOS এন্টার বাটন",
+        badge_bn: "ওয়ান-ক্লিক UEFI রিবুট",
         icon: "fa-solid fa-microchip",
         path: "assets/BIOS enter button/One click to Bios.rar",
         keywords: "uefi bios fastboot restart bootloader firmware motherboard",
@@ -190,6 +220,8 @@ const fileData = [
         name: "Bulk Crap Uninstaller (BCU)",
         category: "system",
         badge: "FOSS Batch Uninstaller",
+        name_bn: "বাল্ক ক্র্যাপ আনইনস্টলার (BCU)",
+        badge_bn: "FOSS ব্যাচ আনইনস্টলার",
         icon: "fa-solid fa-trash-can",
         path: "https://www.bcuninstaller.com/",
         links: [
@@ -204,6 +236,8 @@ const fileData = [
         name: "Context Menu Registry",
         category: "system",
         badge: "Registry Directory Reference",
+        name_bn: "কনটেক্সট মেনু রেজিস্ট্রি",
+        badge_bn: "রেজিস্ট্রি ডিরেক্টরি রেফারেন্স",
         icon: "fa-solid fa-code",
         path: "assets/Registry path of context menu.txt",
         keywords: "registry path context menu background shell windows tweak",
@@ -214,6 +248,8 @@ const fileData = [
         name: "Deep Clean & Cache Purger",
         category: "system",
         badge: "Cache & Temp Purger",
+        name_bn: "ডিপ ক্লিন ও ক্যাশ পার্জার",
+        badge_bn: "ক্যাশ ও টেম্প ফাইল ক্লিনার",
         icon: "fa-solid fa-broom",
         path: "assets/scripts/clean-cache-purger.bat",
         keywords: "deep clean cache purger temp files prefetch thumbnail directx delivery optimization windows update dns bat script",
@@ -228,6 +264,8 @@ const fileData = [
         name: "Glary Utility Pro",
         category: "system",
         badge: "System Cleaner & Speedup",
+        name_bn: "গ্ল্যারি ইউটিলিটি প্রো",
+        badge_bn: "সিস্টেম ক্লিনার ও স্পিডআপ",
         icon: "fa-solid fa-broom",
         path: "assets/Glary Utility/Glary_Utilities_v5.211.0.240.exe",
         copyLabel: "Serial Key",
@@ -240,6 +278,8 @@ const fileData = [
         name: "GodMode Admin Panel Creator",
         category: "system",
         badge: "Master Control Panel",
+        name_bn: "গডমোড অ্যাডমিন প্যানেল ক্রিয়েটর",
+        badge_bn: "মাস্টার কন্ট্রোল প্যানেল",
         icon: "fa-solid fa-sliders",
         path: "assets/scripts/godmode-creator.bat",
         keywords: "godmode all tasks master admin panel control panel guid windows 10 11 batch bat shortcut",
@@ -253,6 +293,8 @@ const fileData = [
         name: "O&O ShutUp10++",
         category: "system",
         badge: "Privacy & Anti-Telemetry",
+        name_bn: "O&O শাটআপ ১০++",
+        badge_bn: "প্রাইভেসি ও অ্যান্টি-টেলিমেট্রি",
         icon: "fa-solid fa-user-shield",
         path: "https://www.oo-software.com/en/shutup10",
         keywords: "o&o shutup10 shutup10++ privacy antitelemetry telemetry windows 10 windows 11 disable tracking spy cortana edge bloatware",
@@ -263,6 +305,8 @@ const fileData = [
         name: "Power User Context Menu Pack",
         category: "system",
         badge: "Power User Registry Pack",
+        name_bn: "পাওয়ার ইউজার কনটেক্সট মেনু প্যাক",
+        badge_bn: "পাওয়ার ইউজার রেজিস্ট্রি প্যাক",
         icon: "fa-solid fa-wand-magic-sparkles",
         path: "assets/scripts/power-context-menu.reg",
         keywords: "context menu power user right click take ownership restart explorer command prompt godmode registry reg tweak",
@@ -273,6 +317,8 @@ const fileData = [
         name: "Revo Uninstaller Pro",
         category: "system",
         badge: "Deep Software Uninstaller",
+        name_bn: "রেভো আনইনস্টলার প্রো",
+        badge_bn: "ডিপ সফটওয়্যার আনইনস্টলার",
         icon: "fa-solid fa-eraser",
         path: "assets/Revo Uninstaller Pro 5.4.3 FINAL/Revo Uninsataller.rar",
         copyLabel: "License Path",
@@ -285,6 +331,8 @@ const fileData = [
         name: "Right Click Repair Code",
         category: "system",
         badge: "Explorer Context Menu Fix",
+        name_bn: "রাইট ক্লিক রিপেয়ার কোড",
+        badge_bn: "এক্সপ্লোরার কনটেক্সট মেনু ফিক্স",
         icon: "fa-solid fa-wrench",
         path: "assets/Right click repair code.txt",
         keywords: "right click context menu explorer fix guid clsid repair",
@@ -295,6 +343,8 @@ const fileData = [
         name: "Win10 Right Click Menu",
         category: "system",
         badge: "Classic Context Menu",
+        name_bn: "উইন ১০ রাইট ক্লিক মেনু",
+        badge_bn: "ক্লাসিক কনটেক্সট মেনু",
         icon: "fa-solid fa-window-restore",
         path: "assets/Windows 10 Right click menu/Old-Right-Click-Menu-WIndows-11.zip",
         keywords: "windows 10 classic context menu windows 11 restore old right click",
@@ -305,6 +355,8 @@ const fileData = [
         name: "Win11 Rounded Cursor",
         category: "system",
         badge: "HD Rounded Cursor Set",
+        name_bn: "উইন ১১ রাউন্ডেড কার্সার",
+        badge_bn: "HD রাউন্ডেড কার্সার সেট",
         icon: "fa-solid fa-arrow-pointer",
         path: "assets/Windows 11 rounded Cursor/windows_11 cursors.zip",
         keywords: "cursor mouse rounded theme pointers win11 customization",
@@ -315,6 +367,8 @@ const fileData = [
         name: "Win11 Search & Web Bloat Remover",
         category: "system",
         badge: "Start Menu Search Fix",
+        name_bn: "উইন ১১ সার্চ ও ওয়েব ব্লোট রিমুভার",
+        badge_bn: "স্টার্ট মেনু সার্চ ফিক্স",
         icon: "fa-solid fa-shield-halved",
         path: "assets/scripts/disable-web-search.reg",
         keywords: "windows 11 disable bing search web search cortana bloat privacy start menu reg registry tweak speedup",
@@ -329,6 +383,8 @@ const fileData = [
         name: "CrystalDiskInfo",
         category: "storage",
         badge: "S.M.A.R.T. Health Monitor",
+        name_bn: "ক্রিস্টালডিস্কইনফো (CrystalDiskInfo)",
+        badge_bn: "S.M.A.R.T. ড্রাইভ হেলথ মনিটর",
         icon: "fa-solid fa-hard-drive",
         path: "assets/CrystalDiskInfo/CDI.rar",
         keywords: "smart hdd ssd nvme disk health temperature telemetry crystal",
@@ -339,6 +395,8 @@ const fileData = [
         name: "CrystalDiskMark",
         category: "storage",
         badge: "Disk Speed Benchmark",
+        name_bn: "ক্রিস্টালডিস্কমার্ক (CrystalDiskMark)",
+        badge_bn: "ডিস্ক স্পিড বেঞ্চমার্ক",
         icon: "fa-solid fa-gauge-high",
         path: "assets/CrystalDiskMark/CDM.rar",
         keywords: "benchmark speed read write test storage ssd hdd nvme",
@@ -349,6 +407,8 @@ const fileData = [
         name: "EaseUS Data Recovery",
         category: "storage",
         badge: "Deep File Recovery",
+        name_bn: "ইজআস ডাটা রিকভারি",
+        badge_bn: "ডিপ ফাইল রিকভারি",
         icon: "fa-solid fa-database",
         path: "assets/EaseUS_Data_Recovery_Wizard_Technician_12.8.0_Multilingual/EaseUS_Data_Recovery_Wizard_Technician_12.8.0_Multilingual.rar",
         keywords: "data recovery restore lost deleted formatted raw partition files",
@@ -359,6 +419,8 @@ const fileData = [
         name: "EaseUS Partition Master",
         category: "storage",
         badge: "Disk & Partition Master",
+        name_bn: "ইজআস পার্টিশন মাস্টার",
+        badge_bn: "ডিস্ক ও পার্টিশন ম্যানেজার",
         icon: "fa-solid fa-layer-group",
         path: "assets/EaseUS_Partition_Master_13.0_Technician_Edition/EPM Technical Edition.rar",
         keywords: "partition master disk manager format resize clone mbr gpt 4k alignment",
@@ -369,6 +431,8 @@ const fileData = [
         name: "GooglePhotos TakeoutRestorer",
         category: "storage",
         badge: "EXIF & Metadata Fixer",
+        name_bn: "গুগল ফটোস টেকআউট রিস্টোরার",
+        badge_bn: "EXIF ও মেটাডাটা ফিক্সার",
         icon: "fa-solid fa-images",
         path: "https://github.com/GurutejaReddy-04/GooglePhotos-TakeoutRestorer",
         links: [
@@ -383,6 +447,8 @@ const fileData = [
         name: "Picture Recovery Software",
         category: "storage",
         badge: "PhotoRec / TestDisk Carving",
+        name_bn: "পিকচার রিকভারি সফটওয়্যার",
+        badge_bn: "PhotoRec / TestDisk কার্ভিং",
         icon: "fa-solid fa-image",
         path: "assets/Picture Recovery Software/testdisk-7.3-WIP.rar",
         keywords: "photorec testdisk data recovery image photo file carving open source",
@@ -393,6 +459,8 @@ const fileData = [
         name: "WizTree / TreeSize Free",
         category: "storage",
         badge: "NTFS Disk Visualizer",
+        name_bn: "উইজট্রি / ট্রিসাইজ ফ্রি",
+        badge_bn: "NTFS ডিস্ক স্পেস ভিজ্যুয়ালাইজার",
         icon: "fa-solid fa-chart-pie",
         path: "https://diskanalyzer.com/download",
         links: [
@@ -411,6 +479,8 @@ const fileData = [
         name: "Custom CRU Esports Resolution Pack",
         category: "optimization",
         badge: "Esports Resolution Pack",
+        name_bn: "কাস্টম CRU ইস্পোর্টস রেজোলিউশন প্যাক",
+        badge_bn: "ইস্পোর্টস রেজোলিউশন প্যাক",
         icon: "fa-solid fa-tv",
         path: "assets/scripts/cru-esports-resolutions.txt",
         keywords: "cru custom resolution utility esports stretched res pubg steam 1728x1080 1440x1080 2304x1440 1920x1440 16:10 4:3 144hz 240hz 165hz 75hz 60hz 120hz 360hz fov competitive gaming",
@@ -421,6 +491,8 @@ const fileData = [
         name: "Custom Resolution Utility",
         category: "optimization",
         badge: "Display & Refresh Rate",
+        name_bn: "কাস্টম রেজোলিউশন ইউটিলিটি (CRU)",
+        badge_bn: "ডিসপ্লে ও রিফ্রেশ রেট টিউনিং",
         icon: "fa-solid fa-tv",
         path: "assets/cru-1.5.3/CRU.rar",
         keywords: "cru toastyx custom resolution refresh rate monitor overclock edid freesync",
@@ -431,6 +503,8 @@ const fileData = [
         name: "PC Optimisation Guide",
         category: "optimization",
         badge: "PowerShell Performance Guide",
+        name_bn: "পিসি অপ্টিমাইজেশন গাইড",
+        badge_bn: "পাওয়ারশেল পারফরম্যান্স গাইড",
         icon: "fa-solid fa-bolt-lightning",
         path: "assets/Pc optimisation.txt",
         keywords: "powershell tweaks debloat sfc dism dynamic tick power plan optimization scripts",
@@ -450,6 +524,8 @@ const fileData = [
         name: "RAM Standby Memory Flusher",
         category: "optimization",
         badge: "Standby RAM Flusher",
+        name_bn: "র‍্যাম স্ট্যান্ডবাই মেমরি ফ্লাশার",
+        badge_bn: "স্ট্যান্ডবাই র‍্যাম ক্লিনার",
         icon: "fa-solid fa-memory",
         path: "assets/scripts/ram-cache-flusher.bat",
         keywords: "ram standby memory empty standby list auto flusher working set memory leak stutter fix vbs bat script",
@@ -463,6 +539,8 @@ const fileData = [
         name: "ThrottleStop / QuickCPU",
         category: "optimization",
         badge: "CPU Power & Undervolting",
+        name_bn: "থ্রটলস্টপ / কুইকসিপিইউ",
+        badge_bn: "CPU পাওয়ার ও আন্ডারভোল্টিং",
         icon: "fa-solid fa-gauge-high",
         path: "https://www.techpowerup.com/download/techpowerup-throttlestop/",
         links: [
@@ -477,6 +555,8 @@ const fileData = [
         name: "Ultimate Windows Latency Fixer",
         category: "optimization",
         badge: "Latency & Stutter Fixer",
+        name_bn: "আলটিমেট উইন্ডোজ ল্যাটেন্সি ফিক্সার",
+        badge_bn: "ল্যাটেন্সি ও স্টাটার ফিক্সার",
         icon: "fa-solid fa-bolt-lightning",
         path: "assets/scripts/latency-optimizer.bat",
         keywords: "latency microstutter fix bcdedit msi mode timer resolution disabledynamictick dpc latency gaming fps bat batch script",
@@ -497,6 +577,8 @@ const fileData = [
         name: "Autoruns",
         category: "diagnostics",
         badge: "Startup & Boot Monitor",
+        name_bn: "অটোরানস (Autoruns)",
+        badge_bn: "স্টার্টআপ ও বুট মনিটর",
         icon: "fa-solid fa-bolt",
         path: "assets/Autoruns/Autoruns.rar",
         keywords: "startup boot autostart sysinternals windows microsoft services drivers tasks",
@@ -507,6 +589,8 @@ const fileData = [
         name: "CPU-Z & GPU-Z",
         category: "diagnostics",
         badge: "Hardware Profiler & Clocks",
+        name_bn: "CPU-Z এবং GPU-Z",
+        badge_bn: "হার্ডওয়্যার প্রোফাইলার ও ক্লক মনিটর",
         icon: "fa-solid fa-microchip",
         path: "https://www.cpuid.com/softwares/cpu-z.html",
         links: [
@@ -521,6 +605,8 @@ const fileData = [
         name: "HitmanPro Scanner",
         category: "diagnostics",
         badge: "Second-Opinion Scanner",
+        name_bn: "হিটম্যানপ্রো স্ক্যানার",
+        badge_bn: "সেকেন্ড-অপিনিয়ন ক্লাউড স্ক্যানার",
         icon: "fa-solid fa-bug-slash",
         path: "assets/HitmanPro_3.8.28_Build_324/HitmanPro 3.8.rar",
         keywords: "antivirus malware scanner cloud second opinion security virus trojan",
@@ -531,6 +617,8 @@ const fileData = [
         name: "HWiNFO",
         category: "diagnostics",
         badge: "Sensor Telemetry & Diagnostics",
+        name_bn: "হার্ডওয়্যার ইনফো (HWiNFO)",
+        badge_bn: "সেন্সর টেলিমেট্রি ও ডায়াগনস্টিক",
         icon: "fa-solid fa-microchip",
         path: "https://www.hwinfo.com/download/",
         installerUrl: "https://www.hwinfo.com/download/",
@@ -543,6 +631,8 @@ const fileData = [
         name: "Process Explorer",
         category: "diagnostics",
         badge: "Sysinternals Task Manager",
+        name_bn: "প্রসেস এক্সপ্লোরার",
+        badge_bn: "Sysinternals টাস্ক ম্যানেজার",
         icon: "fa-solid fa-list-check",
         path: "assets/ProcessExplorer/PE.rar",
         keywords: "process explorer task manager sysinternals handles dll cpu gpu",
@@ -553,6 +643,8 @@ const fileData = [
         name: "Process Monitor",
         category: "diagnostics",
         badge: "Real-Time Registry & I/O",
+        name_bn: "প্রসেস মনিটর",
+        badge_bn: "রিয়েল-টাইম রেজিস্ট্রি ও ফাইল I/O",
         icon: "fa-solid fa-desktop",
         path: "assets/ProcessMonitor.zip",
         keywords: "procmon process monitor sysinternals registry file thread real-time",
@@ -567,6 +659,8 @@ const fileData = [
         name: "Adobe Software Suite",
         category: "creative",
         badge: "Photoshop & Illustrator 2020",
+        name_bn: "অ্যাডোবি সফটওয়্যার সুইট",
+        badge_bn: "ফটোশপ ও ইলাস্ট্রেটর ২০২০",
         icon: "fa-solid fa-palette",
         path: "Adobe Software",
         photoshopUrl: "https://getitintopc.com/adobe-photoshop-cc-2020-free-download/",
@@ -579,6 +673,8 @@ const fileData = [
         name: "FontLab",
         category: "creative",
         badge: "OpenType Font Designer",
+        name_bn: "ফন্টল্যাব (FontLab)",
+        badge_bn: "ওপেনটাইপ ফন্ট ডিজাইনার",
         icon: "fa-solid fa-font",
         path: "assets/FontLab.rar",
         keywords: "fontlab typography font creator opentype truetype woff editor design",
@@ -589,6 +685,8 @@ const fileData = [
         name: "Foxit PDF Editor",
         category: "creative",
         badge: "PDF Editor & Signer",
+        name_bn: "ফক্সইট PDF এডিটর",
+        badge_bn: "PDF এডিটর ও সিগনেচার",
         icon: "fa-solid fa-file-pdf",
         path: "assets/Foxit pdf editor.rar",
         keywords: "foxit pdf editor convert merge annotate sign documents",
@@ -672,7 +770,15 @@ function createCard(item) {
     card.className = 'file-card';
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', `View details for ${item.name}`);
+
+    const curLang = document.documentElement.getAttribute('data-lang') || 'en';
+    const itemName = (curLang === 'bn' && item.name_bn) ? item.name_bn : item.name;
+    const categoryObj = categoryList.find(c => c.id === item.category);
+    const categoryLabel = (categoryNames[item.category] && categoryNames[item.category][curLang]) || (categoryObj ? categoryObj.name : 'Utility');
+    const badgeText = (curLang === 'bn' && item.badge_bn) ? item.badge_bn : item.badge;
+    const subLabel = badgeText || categoryLabel;
+
+    card.setAttribute('aria-label', `View details for ${itemName}`);
 
     card.onclick = () => showDetail(item.id);
     card.onkeydown = (e) => {
@@ -682,14 +788,11 @@ function createCard(item) {
         }
     };
 
-    const categoryObj = categoryList.find(c => c.id === item.category);
-    const subLabel = item.badge || (categoryObj ? categoryObj.name : 'Utility');
-
     card.innerHTML = `
         <div class="file-info">
             <div class="file-icon"><i class="${item.icon}"></i></div>
             <div class="file-meta">
-                <h3>${escapeHtml(item.name)}</h3>
+                <h3>${escapeHtml(itemName)}</h3>
                 <span>${escapeHtml(subLabel)}</span>
             </div>
         </div>
@@ -710,9 +813,12 @@ function renderExplorer() {
         const categoryObj = categoryList.find(c => c.id === item.category);
         const searchableText = [
             item.name,
+            item.name_bn || '',
             item.category,
             categoryObj ? categoryObj.name : '',
+            categoryObj && categoryNames[item.category] ? (categoryNames[item.category].bn || '') : '',
             item.badge || '',
+            item.badge_bn || '',
             item.keywords || '',
             item.readme || '',
             item.content || '',
@@ -792,13 +898,15 @@ function showDetail(id, isFromPopstate = false) {
 
     const categoryObj = categoryList.find(c => c.id === item.category);
     const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
+    const itemName = (currentLang === 'bn' && item.name_bn) ? item.name_bn : item.name;
     const categoryLabel = (categoryNames[item.category] && categoryNames[item.category][currentLang]) || (categoryObj ? categoryObj.name : 'Software Utility');
-    const versionBadge = item.badge ? `${categoryLabel} • ${item.badge}` : categoryLabel;
+    const badgeText = (currentLang === 'bn' && item.badge_bn) ? item.badge_bn : item.badge;
+    const versionBadge = badgeText ? `${categoryLabel} • ${badgeText}` : categoryLabel;
 
     let heroHtml = `
         <div class="detail-hero-info">
             <div class="detail-icon"><i class="${item.icon}"></i></div>
-            <h1>${escapeHtml(item.name)}</h1>
+            <h1>${escapeHtml(itemName)}</h1>
             <span class="version-badge">${escapeHtml(versionBadge)}</span>
         </div>
     `;
@@ -844,13 +952,13 @@ function showDetail(id, isFromPopstate = false) {
     } else if (item.path.startsWith('http')) {
         heroHtml += `
             <a href="${item.path}" target="_blank" rel="noopener noreferrer" class="download-hero">
-                <i class="fa-solid fa-up-right-from-square"></i> Open Resource
+                <i class="fa-solid fa-up-right-from-square"></i> ${translations[currentLang] && translations[currentLang].btn_open_resource ? translations[currentLang].btn_open_resource : 'Open Resource'}
             </a>
         `;
     } else {
         heroHtml += `
             <a href="${item.path}" class="download-hero" download>
-                <i class="fa-solid fa-download"></i> Download File
+                <i class="fa-solid fa-download"></i> ${translations[currentLang] && translations[currentLang].btn_download_file ? translations[currentLang].btn_download_file : 'Download File'}
             </a>
         `;
     }
@@ -914,7 +1022,7 @@ function showDetail(id, isFromPopstate = false) {
 
     detailContent.innerHTML = `
         <button class="back-btn" onclick="hideDetail()" aria-label="Back to Explorer Grid">
-            <i class="fa-solid fa-arrow-left"></i> Back to Explorer
+            <i class="fa-solid fa-arrow-left"></i> ${translations[currentLang] && translations[currentLang].btn_back_explorer ? translations[currentLang].btn_back_explorer : 'Back to Explorer'}
         </button>
         <div class="detail-grid">
             <aside class="detail-hero-column">${heroHtml}</aside>
@@ -1045,6 +1153,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileDrawer = document.getElementById('mobileDrawer');
     const drawerBackdrop = document.getElementById('drawerBackdrop');
 
+    // Top Nav Selection Pill (Glider) Positioning
+    const glider = document.getElementById('navGlider');
+    const syncGlider = () => {
+        if (!glider || window.innerWidth < 1024) return;
+        const activeTab = document.querySelector('.nav a.active') || document.getElementById('navSoftwareHq');
+        if (activeTab) {
+            glider.style.transform = `translate3d(${Math.round(activeTab.offsetLeft)}px, 0, 0)`;
+            glider.style.width = `${Math.round(activeTab.offsetWidth)}px`;
+            glider.classList.add('visible');
+        }
+    };
+
     const updateLangToggleUi = (lang) => {
         const isBn = lang === 'bn';
         [langToggle, langToggleMobile].forEach(t => {
@@ -1093,6 +1213,14 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLangToggleUi(lang);
         updateSearchPlaceholder();
         renderExplorer();
+
+        // Immediately update top navigation glider with new tab widths
+        syncGlider();
+        requestAnimationFrame(() => {
+            syncGlider();
+            requestAnimationFrame(syncGlider);
+        });
+        setTimeout(syncGlider, 60);
 
         if (detailView && detailView.classList.contains('active') && window.location.hash) {
             showDetail(window.location.hash.substring(1), true);
@@ -1231,22 +1359,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 360);
     }
 
-    // Top Nav Selection Pill (Glider) Positioning
-    const glider = document.getElementById('navGlider');
-    const softwareHqTab = document.getElementById('navSoftwareHq') || document.querySelector('.nav a.active');
-    const syncGlider = () => {
-        if (glider && softwareHqTab && window.innerWidth >= 1024) {
-            glider.style.transition = 'none';
-            glider.style.transform = `translate3d(${Math.round(softwareHqTab.offsetLeft)}px, 0, 0)`;
-            glider.style.width = `${Math.round(softwareHqTab.offsetWidth)}px`;
-            glider.classList.add('visible');
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    if (glider) glider.style.transition = '';
-                });
-            });
-        }
-    };
+    // Top Nav Selection Pill (Glider) Initial Positioning
     syncGlider();
     if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(syncGlider);
