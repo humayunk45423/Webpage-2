@@ -169,6 +169,11 @@ const fileData = [
         badge_bn: "অল-ইন-ওয়ান VC++ রানটাইমস",
         icon: "fa-brands fa-microsoft",
         path: "assets/Visual C++ Runtimes All-in-One-Jun-2026.zip",
+        links: [
+            { label: "Official TechPowerUp Direct", url: "https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/", icon: "fa-solid fa-download", primary: true },
+            { label: "GitHub Source & Releases (FOSS)", url: "https://github.com/abbodi1406/vcredist/releases", icon: "fa-brands fa-github" },
+            { label: "Local Direct Archive (82 MB)", url: "assets/Visual C++ Runtimes All-in-One-Jun-2026.zip", icon: "fa-solid fa-file-zipper", download: true }
+        ],
         keywords: "vcredist visual c++ redistributable runtimes 2005 2022 x86 x64 dll fix",
         readme: "## Overview\nAll-in-One package containing every Visual C++ Redistributable runtime (2005–2022), both x86 and x64.\n\n## Instructions\n1. Extract the ZIP file.\n2. Run the included batch installer to install all runtimes at once.\n\n## Why You Need This\nFixes common 'VCRUNTIME140.dll missing' or 'MSVCP.dll not found' errors."
     },
@@ -911,53 +916,62 @@ function showDetail(id, isFromPopstate = false) {
         </div>
     `;
 
+function safeAssetUrl(url) {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('#') || url.startsWith('mailto:')) {
+        return url;
+    }
+    return encodeURI(url).replace(/\+/g, '%2B');
+}
+
     if (item.links && item.links.length > 0) {
         item.links.forEach(link => {
+            const finalUrl = safeAssetUrl(link.url);
             heroHtml += `
-                <a href="${link.url}" ${link.download ? 'download' : 'target="_blank" rel="noopener noreferrer"'} class="${link.primary ? 'download-hero' : 'btn-secondary-soft'}">
+                <a href="${finalUrl}" ${link.download ? 'download' : 'target="_blank" rel="noopener noreferrer"'} class="${link.primary ? 'download-hero' : 'btn-secondary-soft'}">
                     <i class="${link.icon || 'fa-solid fa-download'}"></i> ${escapeHtml(link.label)}
                 </a>
             `;
         });
     } else if (item.id === "adobe-suite") {
         heroHtml += `
-            <a href="${item.photoshopUrl}" target="_blank" rel="noopener noreferrer" class="download-hero adobe-ps">
+            <a href="${safeAssetUrl(item.photoshopUrl)}" target="_blank" rel="noopener noreferrer" class="download-hero adobe-ps">
                 <i class="fa-solid fa-download"></i> Photoshop 2020
             </a>
-            <a href="${item.illustratorUrl}" target="_blank" rel="noopener noreferrer" class="download-hero adobe-ai">
+            <a href="${safeAssetUrl(item.illustratorUrl)}" target="_blank" rel="noopener noreferrer" class="download-hero adobe-ai">
                 <i class="fa-solid fa-download"></i> Illustrator 2020
             </a>
         `;
     } else if (item.id === "winrar") {
         heroHtml += `
-            <a href="${item.path}" class="download-hero" download>
+            <a href="${safeAssetUrl(item.path)}" class="download-hero" download>
                 <i class="fa-solid fa-key"></i> Activation Fix
             </a>
-            <a href="${item.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
+            <a href="${safeAssetUrl(item.officialUrl)}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
                 <i class="fa-solid fa-download"></i> Official WinRAR
             </a>
-            <a href="${item.sevenZipUrl}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
+            <a href="${safeAssetUrl(item.sevenZipUrl)}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
                 <i class="fa-solid fa-box-open"></i> Get 7-Zip (FOSS)
             </a>
         `;
     } else if (item.id === "hwinfo") {
         heroHtml += `
-            <a href="${item.installerUrl}" target="_blank" rel="noopener noreferrer" class="download-hero">
+            <a href="${safeAssetUrl(item.installerUrl)}" target="_blank" rel="noopener noreferrer" class="download-hero">
                 <i class="fa-solid fa-download"></i> Official Installer
             </a>
-            <a href="${item.portableUrl}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
+            <a href="${safeAssetUrl(item.portableUrl)}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
                 <i class="fa-solid fa-box-archive"></i> Portable Version
             </a>
         `;
-    } else if (item.path.startsWith('http')) {
+    } else if (item.path && item.path.startsWith('http')) {
         heroHtml += `
             <a href="${item.path}" target="_blank" rel="noopener noreferrer" class="download-hero">
                 <i class="fa-solid fa-up-right-from-square"></i> ${translations[currentLang] && translations[currentLang].btn_open_resource ? translations[currentLang].btn_open_resource : 'Open Resource'}
             </a>
         `;
-    } else {
+    } else if (item.path) {
         heroHtml += `
-            <a href="${item.path}" class="download-hero" download>
+            <a href="${safeAssetUrl(item.path)}" class="download-hero" download>
                 <i class="fa-solid fa-download"></i> ${translations[currentLang] && translations[currentLang].btn_download_file ? translations[currentLang].btn_download_file : 'Download File'}
             </a>
         `;
