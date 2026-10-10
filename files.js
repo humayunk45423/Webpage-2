@@ -988,7 +988,7 @@ function safeAssetUrl(url) {
                     <span class="doc-key-label"><i class="fa-solid fa-key"></i> ${escapeHtml(item.copyLabel || 'License / Serial Key')}</span>
                     <code class="doc-key-code">${escapeHtml(item.copyText)}</code>
                 </div>
-                <button class="doc-key-copy-btn" onclick="doCopy('${escapeJsString(item.copyText)}')">
+                <button class="doc-key-copy-btn" data-copy="${escapeHtml(item.copyText)}" onclick="doCopy(this.getAttribute('data-copy'))">
                     <i class="fa-solid fa-copy"></i> Copy ${escapeHtml(item.copyLabel || 'Key')}
                 </button>
             </div>
@@ -1005,7 +1005,7 @@ function safeAssetUrl(url) {
                     <div class="code-box">
                         <code>${escapeHtml(cmd.code)}</code>
                     </div>
-                    <button class="code-copy-btn" onclick="doCopy('${escapeJsString(cmd.code)}')">
+                    <button class="code-copy-btn" data-copy="${escapeHtml(cmd.code)}" onclick="doCopy(this.getAttribute('data-copy'))">
                         <i class="fa-solid fa-copy"></i> Copy Command
                     </button>
                 </div>
