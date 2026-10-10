@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- Critical: Theme Sync (runs before render to prevent flash) -->
+    <!-- Critical: Theme & Language Sync (runs before render to prevent flash) -->
     <script>
     (function(){
-        var saved = localStorage.getItem('portfolio-theme');
-        var preferred = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', preferred);
+        var savedTheme = localStorage.getItem('portfolio-theme');
+        var preferredTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', preferredTheme);
         var meta = document.querySelector('meta[name="theme-color"]');
-        if(meta) meta.setAttribute('content', preferred === 'dark' ? '#0b0b0b' : '#ffffff');
+        if(meta) meta.setAttribute('content', preferredTheme === 'dark' ? '#0b0b0b' : '#ffffff');
         if (window.location.hash) { document.documentElement.style.scrollBehavior = 'auto'; }
         var savedLang = localStorage.getItem('portfolio-lang') || 'en';
         document.documentElement.setAttribute('data-lang', savedLang);
