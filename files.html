@@ -504,9 +504,9 @@
         .file-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-            content-visibility: auto;
-            contain-intrinsic-size: 1px 500px;
+            gap: 1.15rem;
+            position: relative;
+            overflow: visible;
         }
 
         .file-card {
@@ -514,17 +514,19 @@
             border: 1px solid var(--line);
             border-radius: 1.75rem;
             padding: 1.25rem;
-            transition: all 0.45s var(--bezier);
+            transition: transform 0.4s var(--bezier), background 0.4s var(--bezier), box-shadow 0.4s var(--bezier), border-color 0.4s var(--bezier);
             cursor: pointer;
             position: relative;
-            overflow: hidden;
+            z-index: 1;
             backdrop-filter: blur(10px);
         }
 
         .file-card:hover {
             transform: translateY(-8px);
             background: var(--bg2);
-            box-shadow: 0 25px 50px -10px var(--soft);
+            border-color: var(--accent);
+            box-shadow: 0 25px 50px -10px var(--soft), 0 0 30px -5px var(--soft);
+            z-index: 10;
         }
 
         .file-info {
@@ -758,6 +760,9 @@
         .section-group {
             margin-bottom: 2.75rem;
             width: 100%;
+            position: relative;
+            overflow: visible;
+            padding-top: 0.25rem;
         }
 
         .group-header {
