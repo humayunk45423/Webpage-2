@@ -169,11 +169,6 @@ const fileData = [
         badge_bn: "অল-ইন-ওয়ান VC++ রানটাইমস",
         icon: "fa-brands fa-microsoft",
         path: "assets/Visual C++ Runtimes All-in-One-Jun-2026.zip",
-        links: [
-            { label: "Official TechPowerUp Direct", url: "https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one/", icon: "fa-solid fa-download", primary: true },
-            { label: "GitHub Source & Releases (FOSS)", url: "https://github.com/abbodi1406/vcredist/releases", icon: "fa-brands fa-github" },
-            { label: "Local Direct Archive (82 MB)", url: "assets/Visual C++ Runtimes All-in-One-Jun-2026.zip", icon: "fa-solid fa-file-zipper", download: true }
-        ],
         keywords: "vcredist visual c++ redistributable runtimes 2005 2022 x86 x64 dll fix",
         readme: "## Overview\nAll-in-One package containing every Visual C++ Redistributable runtime (2005–2022), both x86 and x64.\n\n## Instructions\n1. Extract the ZIP file.\n2. Run the included batch installer to install all runtimes at once.\n\n## Why You Need This\nFixes common 'VCRUNTIME140.dll missing' or 'MSVCP.dll not found' errors."
     },
