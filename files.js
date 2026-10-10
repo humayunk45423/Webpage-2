@@ -706,12 +706,20 @@ const detailView = document.getElementById('detailView');
 const fileGrid = document.getElementById('fileGrid');
 const detailContent = document.getElementById('detailContent');
 const fileSearch = document.getElementById('fileSearch');
+const searchKbd = document.getElementById('searchKbd');
 const copyToast = document.getElementById('copyToast');
 const pillAll = document.getElementById('pillAll');
 const catDropdownBtn = document.getElementById('catDropdownBtn');
 const catDropdownMenu = document.getElementById('catDropdownMenu');
 const catDropdownIcon = document.getElementById('catDropdownIcon');
 const catDropdownLabel = document.getElementById('catDropdownLabel');
+
+function updateSearchBoxState() {
+    const searchBox = fileSearch ? fileSearch.closest('.search-box') : null;
+    if (searchBox && fileSearch) {
+        searchBox.classList.toggle('has-text', Boolean(fileSearch.value.trim()));
+    }
+}
 
 let currentCategory = 'all';
 let explorerScrollPos = 0;
@@ -801,6 +809,7 @@ function createCard(item) {
 }
 
 function renderExplorer() {
+    updateSearchBoxState();
     const query = (fileSearch && fileSearch.value ? fileSearch.value : '').toLowerCase().trim();
     if (explorerView) explorerView.innerHTML = '';
 
@@ -876,6 +885,7 @@ function renderExplorer() {
 function clearSearch() {
     if (fileSearch) {
         fileSearch.value = '';
+        updateSearchBoxState();
         fileSearch.focus();
     }
     renderExplorer();
@@ -1314,6 +1324,58 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateSearchPlaceholder);
 
     renderExplorer();
+
+    // Detect macOS to display ⌘ K instead of Ctrl K
+    const isMac = (typeof navigator !== 'undefined') && (
+        (navigator.userAgentData && navigator.userAgentData.platform === 'macOS') ||
+        (/Mac|iPod|iPhone|iPad/.test(navigator.platform || ''))
+    );
+    if (searchKbd && isMac) {
+        const kbdMod = searchKbd.querySelector('.kbd-mod');
+        if (kbdMod) kbdMod.textContent = '⌘';
+    }
+
+    // Search Power Shortcuts (Ctrl + K, Cmd + K, / and Escape)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (catDropdownMenu && catDropdownMenu.classList.contains('show')) {
+                closeDropdown();
+                return;
+            }
+            if (fileSearch && (document.activeElement === fileSearch || fileSearch.value)) {
+                fileSearch.value = '';
+                updateSearchBoxState();
+                renderExplorer();
+                fileSearch.blur();
+                return;
+            }
+            return;
+        }
+
+        const activeEl = document.activeElement;
+        const isInputActive = activeEl && (
+            activeEl.tagName === 'INPUT' ||
+            activeEl.tagName === 'TEXTAREA' ||
+            activeEl.isContentEditable
+        );
+
+        const isCmdK = (e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K');
+        const isSlash = e.key === '/' && !isInputActive && !e.ctrlKey && !e.metaKey && !e.altKey;
+
+        if (isCmdK || isSlash) {
+            e.preventDefault();
+
+            if (detailView && detailView.classList.contains('active')) {
+                hideDetail();
+            }
+
+            if (fileSearch) {
+                fileSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                fileSearch.focus();
+                fileSearch.select();
+            }
+        }
+    });
 
     if (fileSearch) {
         fileSearch.addEventListener('input', renderExplorer);

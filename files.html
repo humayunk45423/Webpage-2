@@ -1125,7 +1125,7 @@
 
         .search-box input {
             width: 100%;
-            padding: 1.1rem 1.5rem 1.1rem 3.5rem;
+            padding: 1.1rem 4.75rem 1.1rem 3.5rem;
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: 1.25rem;
@@ -1144,6 +1144,44 @@
             background: var(--bg2);
             box-shadow: 0 0 0 4px var(--soft), 0 15px 30px -5px var(--soft);
             transform: translateY(-2px);
+        }
+
+        .search-kbd {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+            padding: 0.25rem 0.55rem;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+            color: var(--muted);
+            background: var(--surface2);
+            border: 1px solid var(--line);
+            border-radius: 0.5rem;
+            pointer-events: none;
+            transition: opacity 0.25s var(--bezier), transform 0.25s var(--bezier);
+            user-select: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+        }
+
+        .search-box input:focus ~ .search-kbd,
+        .search-box.has-text .search-kbd {
+            opacity: 0;
+            transform: translateY(-50%) scale(0.85);
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .search-kbd {
+                display: none !important;
+            }
+            .search-box input {
+                padding-right: 1.5rem !important;
+            }
         }
 
         .footer {
@@ -1571,6 +1609,7 @@
                         <div class="search-box" role="search">
                             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                             <input type="text" id="fileSearch" placeholder="Search essential tools, scripts, commands..." aria-label="Search tools and utilities">
+                            <kbd class="search-kbd" id="searchKbd" title="Press Ctrl+K or / to search"><span class="kbd-mod">Ctrl</span> K</kbd>
                         </div>
 
                         <div class="category-pills" role="tablist" aria-label="Filter software categories">
@@ -1645,7 +1684,7 @@
         <div class="drawer-header">
             <a class="brand" href="index.html#top" aria-label="Go to top">
                 <span class="mark">
-                    <img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir Logo" width="34" height="34" loading="lazy">
+                    <img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir Logo" width="34" height="34" loading="lazy" decoding="async">
                 </span>
                 <span class="brand-text">
                     <strong data-i18n="brand_name">Humayoun Kobir</strong>
