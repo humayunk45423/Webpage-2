@@ -95,8 +95,6 @@ const translations = {
         lnk_card_design: "Business Card Design",
         lnk_cash_memo: "Cash Memo Design",
 
-        // Contact Section
-        contact_title: "Let's build<br>something great.",
 
         // Social Media Grid
         social_github: "GitHub",
@@ -132,7 +130,8 @@ const translations = {
         tag_ads: "Ads",
         tag_bcard: "Business Card",
 
-        contact_title: "Let's build something great.",
+        // Contact Section
+        contact_title: "Let's build<br>something great.",
         contact_text: "Open for collaborations, freelance projects, or just a coffee chat about tech and design.",
         contact_email_btn: "Click here to Email",
         contact_wa_btn: "Click here to WhatsApp",
@@ -231,9 +230,6 @@ const translations = {
         lnk_card_design: "বিজনেস কার্ড ডিজাইন",
         lnk_cash_memo: "ক্যাশ মেমো ডিজাইন",
 
-        // Contact Section
-        contact_title: "একসাথে<br>দারুণ কিছু<br>তৈরি করি",
-
         // Social Media Grid (Engla / Bengali Transliteration)
         social_github: "গিটহাব",
         social_linkedin: "লিঙ্কডইন",
@@ -268,6 +264,7 @@ const translations = {
         tag_ads: "বিজ্ঞাপন",
         tag_bcard: "বিজনেস কার্ড",
 
+        // Contact Section
         contact_title: "একসাথে<br>দারুণ কিছু<br>তৈরি করি",
         contact_text: "যেকোনো কোলাবোরেশন, ফ্রিল্যান্স প্রজেক্ট বা প্রযুক্তি ও ডিজাইন নিয়ে আলোচনার জন্য আমি সদা উন্মুক্ত।",
         contact_email_btn: "ইমেইল করতে ক্লিক করুন",
