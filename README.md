@@ -107,8 +107,6 @@ sequenceDiagram
 - **Speculation Rules Prerendering**: Chromium-based browsers preload and prerender `files.html` from `index.html` (and vice versa) for instant page transitions.
 - **Adaptive Mobile Mode**: Continuous scroll animations and expensive background blur filters are disabled for screen widths below 1024px to preserve battery life and maintain 120 FPS on mobile devices.
 - **Client-Side Hash Router**: `files.html` listens to `hashchange` and `popstate` events to render dedicated detail pages (`#cdi`, `#pc-opt`, `#hwinfo`) with full browser history support.
-- **Software HQ Power Shortcuts**: Integrated `Ctrl + K` / `Cmd + K` and `/` quick search triggers with platform-specific badge switching (`⌘` on macOS) and `Escape` reset handling.
-- **Next-Gen Asset Pipeline**: WebP image delivery, prioritized above-the-fold hero rendering with `fetchpriority="high"`, and `decoding="async"` across all media.
 
 ---
 
