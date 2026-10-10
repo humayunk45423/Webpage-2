@@ -1205,7 +1205,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (dict[key]) {
-                el.textContent = dict[key];
+                if (dict[key].includes('<')) {
+                    el.innerHTML = dict[key];
+                } else {
+                    el.textContent = dict[key];
+                }
             }
         });
 

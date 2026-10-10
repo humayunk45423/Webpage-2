@@ -74,6 +74,16 @@
             border-width: 0;
         }
 
+        .show-mobile,
+        .br-mobile {
+            display: none !important;
+        }
+
+        .hide-mobile,
+        .br-desktop {
+            display: inline !important;
+        }
+
         * {
             box-sizing: border-box;
             outline: none;
@@ -2156,11 +2166,13 @@
                 border-radius: 999px;
             }
 
-            .hide-mobile {
+            .hide-mobile,
+            .br-desktop {
                 display: none !important;
             }
 
-            .show-mobile {
+            .show-mobile,
+            .br-mobile {
                 display: inline !important;
             }
 
@@ -2214,24 +2226,29 @@
             }
 
             .contact-info h2 {
-                font-size: clamp(2.1rem, 8.5vw, 2.75rem);
-                line-height: 1.18;
-                letter-spacing: -0.015em;
+                font-size: clamp(2.4rem, 10.5vw, 3.4rem);
+                line-height: 1.15;
+                letter-spacing: -0.02em;
                 margin-bottom: 0.65rem;
+                text-align: center;
+                width: 100%;
             }
 
             html[data-lang="bn"] .contact-info h2 {
-                font-size: clamp(2.2rem, 9vw, 2.85rem);
-                line-height: 1.25;
-                letter-spacing: 0.005em;
-                word-spacing: 0.04em;
+                font-size: clamp(2.65rem, 11.5vw, 3.65rem);
+                line-height: 1.2;
+                letter-spacing: -0.005em;
+                word-spacing: 0.05em;
                 margin-bottom: 0.65rem;
+                text-align: center;
+                width: 100%;
             }
 
             .contact-info p {
                 font-size: clamp(0.85rem, 3.2vw, 0.95rem);
                 line-height: 1.55;
                 margin-bottom: 1.15rem;
+                text-align: center;
             }
 
             .contact-methods {

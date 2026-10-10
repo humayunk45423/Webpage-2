@@ -265,7 +265,7 @@ const translations = {
         tag_bcard: "বিজনেস কার্ড",
 
         // Contact Section
-        contact_title: "একসাথে<br>দারুণ কিছু<br>তৈরি করি",
+        contact_title: 'চলুন একসাথে<br class="br-desktop"> দারুণ<br class="br-mobile"> কিছু<br class="br-desktop"> তৈরি করি।',
         contact_text: "যেকোনো কোলাবোরেশন, ফ্রিল্যান্স প্রজেক্ট বা প্রযুক্তি ও ডিজাইন নিয়ে আলোচনার জন্য আমি সদা উন্মুক্ত।",
         contact_email_btn: "ইমেইল করতে ক্লিক করুন",
         contact_wa_btn: "হোয়াটসঅ্যাপ করতে ক্লিক করুন",
@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (dict[key] !== undefined) {
-                if (dict[key].includes('<br>') || dict[key].includes('<span')) {
+                if (dict[key].includes('<')) {
                     el.innerHTML = dict[key];
                 } else {
                     el.textContent = dict[key];
