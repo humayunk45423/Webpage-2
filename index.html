@@ -759,97 +759,230 @@
                 </div>
             </section>
 
-            <section class="section split-section" id="contact" style="min-height: 82vh;">
-                <div class="container contact-layout">
-                    <div class="contact-info reveal">
-                        <h2 data-i18n="contact_title">Let's build<br>something great.</h2>
-                        <p class="about-text" data-i18n="contact_text">Open for collaborations, freelance projects, or just a coffee chat about tech and design.</p>
-                        <div class="contact-methods">
-                            <div class="method" id="mailMethod">
-                                <a href="mailto:humayunk45423@gmail.com" class="method-main" aria-label="Send email">
-                                    <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
-                                    <div class="method-text">
-                                        <strong data-i18n="contact_email_btn">Click here to Email</strong>
-                                        <span id="emailText">humayunk45423@gmail.com</span>
-                                    </div>
-                                </a>
-                                <button class="copy-btn" title="Copy Email"
-                                    onclick="copyContact('humayunk45423@gmail.com', this)">
-                                    <i class="fa-solid fa-copy"></i>
-                                </button>
+            <section class="section split-section" id="contact"
+                style="content-visibility: auto; contain-intrinsic-size: 1px 900px;">
+                <div class="container">
+                    <!-- Section Header with Real-Time Availability & Meta -->
+                    <div class="contact-header-wrap">
+                        <div class="contact-header-left">
+                            <h2 class="section-title reveal" data-i18n="contact_section_title">Contact</h2>
+                            <h3 class="contact-hero-title reveal" data-i18n="contact_title">Let's build<br>something great.</h3>
+                            <p class="contact-hero-subtitle reveal" data-i18n="contact_text">Open for collaborations, freelance projects, or just a coffee chat about tech and design.</p>
+                        </div>
+                        <div class="contact-header-right reveal d1">
+                            <div class="contact-status-pill">
+                                <span class="status-pulse"></span>
+                                <span class="status-text" data-i18n="contact_status">Available for freelance & full-time roles</span>
                             </div>
-                            <div class="method" id="waMethod">
-                                <a href="https://wa.me/8801721445207" target="_blank" rel="noopener noreferrer nofollow"
-                                    class="method-main" aria-label="Chat on WhatsApp">
-                                    <div class="method-icon">
-                                        <svg viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M20 10C20 15.51 15.51 20 10 20C7.97 20 6.08 19.39 4.5 18.35L0.66 19.58L1.9 15.86C0.7 14.22 0 12.19 0 10C0 4.49 4.48 0 10 0L10 0C15.51 0 20 4.49 20 10ZM15.99 12.73C15.89 12.56 13.62 11.51 13.44 11.45C13.18 11.35 12.92 11.38 12.72 11.66C12.44 12.06 12.16 12.46 11.94 12.7C11.77 12.89 11.48 12.91 11.24 12.81C10.91 12.67 10.01 12.36 8.89 11.36C8.03 10.59 7.44 9.64 7.27 9.35C7.1 9.05 7.25 8.88 7.39 8.72C7.81 8.2 8.39 7.85 8.1 7.24C8.03 7.1 7.45 5.66 7.2 5.08C7 4.59 6.86 4.57 6.23 4.57C4.93 4.57 4.19 6.08 4.19 7.37C4.19 9.9 7.77 13.71 10.35 14.78C12.65 15.73 13.33 15.64 13.86 15.53C14.62 15.37 15.58 14.8 15.82 14.12C16.06 13.44 16.06 12.86 15.99 12.73Z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                    <div class="method-text">
-                                        <strong data-i18n="contact_wa_btn">Click here to WhatsApp</strong>
-                                        <span id="waText">+8801721445207</span>
-                                    </div>
-                                </a>
-                                <button class="copy-btn" title="Copy Number"
-                                    onclick="copyContact('+8801721445207', this)">
-                                    <i class="fa-solid fa-copy"></i>
-                                </button>
+                            <div class="contact-meta-chips">
+                                <span class="meta-chip"><i class="fa-solid fa-location-dot"></i> <span data-i18n="contact_location">Dhaka, Bangladesh (UTC+6)</span></span>
+                                <span class="meta-chip"><i class="fa-solid fa-bolt"></i> <span data-i18n="contact_response_time">Typically responds within 12 hours</span></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="social-grid reveal d1">
-                        <a href="https://github.com/humayunk45423" target="_blank" rel="noopener noreferrer nofollow"
-                            class="social-item">
-                            <i class="fa-brands fa-github"></i><span data-i18n="social_github">GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/humayounkobir/" target="_blank"
-                            rel="noopener noreferrer nofollow" class="social-item">
-                            <i class="fa-brands fa-linkedin"></i><span data-i18n="social_linkedin">LinkedIn</span>
-                        </a>
-                        <a href="https://www.behance.net/humayunk45423" target="_blank"
-                            rel="noopener noreferrer nofollow" class="social-item">
-                            <i class="fa-brands fa-behance"></i><span data-i18n="social_behance">Behance</span>
-                        </a>
-                        <a href="https://dribbble.com/humayunk45423" target="_blank" rel="noopener noreferrer nofollow"
-                            class="social-item">
-                            <i class="fa-brands fa-dribbble"></i><span data-i18n="social_dribbble">Dribbble</span>
-                        </a>
-                        <a href="https://www.upwork.com/freelancers/~019f94538da41f401d" target="_blank"
-                            rel="noopener noreferrer nofollow" class="social-item">
-                            <i class="fa-brands fa-upwork"></i><span data-i18n="social_upwork">Upwork</span>
-                        </a>
-                        <a href="https://www.reddit.com/user/Great_Media_7280/" target="_blank"
-                            rel="noopener noreferrer nofollow" class="social-item">
-                            <i class="fa-brands fa-reddit"></i><span data-i18n="social_reddit">Reddit</span>
-                        </a>
-                        <a href="https://discord.gg/t6SJQwdj" target="_blank" rel="noopener noreferrer nofollow"
-                            class="social-item">
-                            <i class="fa-brands fa-discord"></i><span data-i18n="social_discord">Discord</span>
-                        </a>
-                        <a href="https://stackoverflow.com/users/20905785" target="_blank"
-                            rel="noopener noreferrer nofollow" class="social-item">
-                            <i class="fa-brands fa-stack-overflow"></i><span data-i18n="social_stackoverflow">Stack Overflow</span>
-                        </a>
-                        <a href="https://muslimbangla.com/quran" target="_blank" rel="noopener noreferrer nofollow"
-                            class="social-item">
-                            <i class="fa-solid fa-book-open"></i><span data-i18n="social_quran">Read Quran</span>
-                        </a>
-                        <a href="https://drive.google.com/drive/folders/13VIzyy7N3K6mcx4eBnc7XTe4E-SxVGEG"
-                            target="_blank" rel="noopener noreferrer nofollow" class="social-item">
-                            <i class="fa-solid fa-mosque"></i><span data-i18n="social_dawah">Dawah Files</span>
-                        </a>
-                        <a href="files.html" class="social-item">
-                            <i class="fa-solid fa-folder-open"></i><span data-i18n="social_softwarehq">Software HQ</span>
-                        </a>
-                        <a href="https://github.com/humayunk45423/Webpage-2/releases/download/v1.0/Humayoun.Kobir.apk"
-                            class="social-item" aria-label="Download Humayoun Kobir Android App" role="link"
-                            rel="nofollow">
-                            <i class="fa-brands fa-android" aria-hidden="true"></i><span data-i18n="social_app_dl">App Download</span>
-                        </a>
+                    <!-- Bento Grid Architecture -->
+                    <div class="contact-bento-grid">
+                        <!-- Direct Communication Tile (Balanced, No Truncation, Triple-Card Structure) -->
+                        <div class="bento-tile direct-tile reveal">
+                            <div class="tile-header">
+                                <div class="tile-tag">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span data-i18n="contact_direct_heading">Direct Channels</span>
+                                </div>
+                            </div>
+                            
+                            <div class="direct-methods-list">
+                                <!-- Email Card -->
+                                <div class="direct-card" id="mailMethod">
+                                    <div class="direct-card-glow mail-glow"></div>
+                                    <div class="direct-card-head">
+                                        <div class="direct-icon-mini mail"><i class="fa-solid fa-envelope"></i></div>
+                                        <span class="direct-label" data-i18n="contact_email_title">Email Address</span>
+                                        <span class="direct-badge primary-badge" data-i18n="contact_email_badge">Primary • Official</span>
+                                    </div>
+                                    <div class="direct-card-main">
+                                        <span class="direct-value" id="emailText">humayunk45423@gmail.com</span>
+                                    </div>
+                                    <div class="direct-card-foot">
+                                        <a href="mailto:humayunk45423@gmail.com" class="direct-action-btn primary" aria-label="Send email">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                            <span data-i18n="contact_email_btn">Send Email</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                        <button class="direct-copy-btn" title="Copy Email" onclick="copyContact('humayunk45423@gmail.com', this)" aria-label="Copy Email">
+                                            <i class="fa-solid fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- WhatsApp Card -->
+                                <div class="direct-card" id="waMethod">
+                                    <div class="direct-card-glow wa-glow"></div>
+                                    <div class="direct-card-head">
+                                        <div class="direct-icon-mini wa">
+                                            <svg viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M20 10C20 15.51 15.51 20 10 20C7.97 20 6.08 19.39 4.5 18.35L0.66 19.58L1.9 15.86C0.7 14.22 0 12.19 0 10C0 4.49 4.48 0 10 0L10 0C15.51 0 20 4.49 20 10ZM15.99 12.73C15.89 12.56 13.62 11.51 13.44 11.45C13.18 11.35 12.92 11.38 12.72 11.66C12.44 12.06 12.16 12.46 11.94 12.7C11.77 12.89 11.48 12.91 11.24 12.81C10.91 12.67 10.01 12.36 8.89 11.36C8.03 10.59 7.44 9.64 7.27 9.35C7.1 9.05 7.25 8.88 7.39 8.72C7.81 8.2 8.39 7.85 8.1 7.24C8.03 7.1 7.45 5.66 7.2 5.08C7 4.59 6.86 4.57 6.23 4.57C4.93 4.57 4.19 6.08 4.19 7.37C4.19 9.9 7.77 13.71 10.35 14.78C12.65 15.73 13.33 15.64 13.86 15.53C14.62 15.37 15.58 14.8 15.82 14.12C16.06 13.44 16.06 12.86 15.99 12.73Z"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="direct-label" data-i18n="contact_wa_title">WhatsApp / Phone</span>
+                                        <span class="direct-badge wa-badge" data-i18n="contact_wa_badge">Instant • Fast Reply</span>
+                                    </div>
+                                    <div class="direct-card-main">
+                                        <span class="direct-value" id="waText">+8801721445207</span>
+                                    </div>
+                                    <div class="direct-card-foot">
+                                        <a href="https://wa.me/8801721445207" target="_blank" rel="noopener noreferrer nofollow" class="direct-action-btn wa-btn" aria-label="Chat on WhatsApp">
+                                            <i class="fa-brands fa-whatsapp"></i>
+                                            <span data-i18n="contact_wa_btn">Chat on WhatsApp</span>
+                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                        </a>
+                                        <button class="direct-copy-btn" title="Copy Number" onclick="copyContact('+8801721445207', this)" aria-label="Copy Phone Number">
+                                            <i class="fa-solid fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Collaboration & Working Terms Card (Balances Left & Right Heights perfectly) -->
+                                <div class="direct-meta-card">
+                                    <div class="meta-card-head">
+                                        <i class="fa-solid fa-shield-halved"></i>
+                                        <strong data-i18n="contact_collab_title">Availability & Working Terms</strong>
+                                    </div>
+                                    <div class="meta-card-body">
+                                        <div class="meta-info-row">
+                                            <div class="meta-info-icon"><i class="fa-solid fa-clock"></i></div>
+                                            <div class="meta-info-content">
+                                                <small data-i18n="contact_tz_label">Timezone & Hours</small>
+                                                <strong data-i18n="contact_tz_val">UTC+6 (Dhaka) • Mon - Sat</strong>
+                                            </div>
+                                        </div>
+                                        <div class="meta-info-row">
+                                            <div class="meta-info-icon"><i class="fa-solid fa-bolt"></i></div>
+                                            <div class="meta-info-content">
+                                                <small data-i18n="contact_turnaround_label">Turnaround Speed</small>
+                                                <strong data-i18n="contact_turnaround_val">&lt;12h Reply • 24-48h Kickoff</strong>
+                                            </div>
+                                        </div>
+                                        <div class="meta-info-row">
+                                            <div class="meta-info-icon"><i class="fa-solid fa-handshake"></i></div>
+                                            <div class="meta-info-content">
+                                                <small data-i18n="contact_modes_label">Preferred Collaboration</small>
+                                                <strong data-i18n="contact_modes_val">Email, WhatsApp, Google Meet</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social & Digital Ecosystem Bento Hub (12 Items) -->
+                        <div class="bento-tile social-tile reveal d1">
+                            <div class="tile-header">
+                                <div class="tile-tag">
+                                    <i class="fa-solid fa-globe"></i>
+                                    <span data-i18n="contact_social_heading">Digital Presence &amp; Ecosystem</span>
+                                </div>
+                            </div>
+                            <div class="bento-social-grid">
+                                <a href="https://github.com/humayunk45423" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-github">
+                                    <div class="item-icon-wrap"><i class="fa-brands fa-github"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_github">GitHub</span>
+                                        <small class="item-sub">Code &amp; Repos</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/humayounkobir/" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-linkedin">
+                                    <div class="item-icon-wrap"><i class="fa-brands fa-linkedin"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_linkedin">LinkedIn</span>
+                                        <small class="item-sub">Professional</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                                <a href="https://www.behance.net/humayunk45423" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-behance">
+                                    <div class="item-icon-wrap"><i class="fa-brands fa-behance"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_behance">Behance</span>
+                                        <small class="item-sub">Design Portfolio</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                                <a href="https://dribbble.com/humayunk45423" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-dribbble">
+                                    <div class="item-icon-wrap"><i class="fa-brands fa-dribbble"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_dribbble">Dribbble</span>
+                                        <small class="item-sub">Shots &amp; Art</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                                <a href="https://www.upwork.com/freelancers/~019f94538da41f401d" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-upwork">
+                                    <div class="item-icon-wrap"><i class="fa-brands fa-upwork"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_upwork">Upwork</span>
+                                        <small class="item-sub">Hire Freelancer</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                                <a href="https://stackoverflow.com/users/20905785" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-stack">
+                                    <div class="item-icon-wrap"><i class="fa-brands fa-stack-overflow"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_stackoverflow">Stack Overflow</span>
+                                        <small class="item-sub">Dev Community</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                                <a href="files.html" class="bento-social-item brand-softwarehq featured-link">
+                                    <div class="item-icon-wrap"><i class="fa-solid fa-folder-open"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_softwarehq">Software HQ</span>
+                                        <small class="item-sub">Tools &amp; Scripts</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right item-arrow"></i>
+                                </a>
+                                <a href="https://github.com/humayunk45423/Webpage-2/releases/download/v1.0/Humayoun.Kobir.apk" class="bento-social-item brand-android" aria-label="Download Humayoun Kobir Android App" rel="nofollow">
+                                    <div class="item-icon-wrap"><i class="fa-brands fa-android"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_app_dl">App Download</span>
+                                        <small class="item-sub">Android APK</small>
+                                    </div>
+                                    <i class="fa-solid fa-download item-arrow"></i>
+                                </a>
+                                <a href="https://discord.gg/t6SJQwdj" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-discord">
+                                    <div class="item-icon-wrap"><i class="fa-brands fa-discord"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_discord">Discord</span>
+                                        <small class="item-sub">Chat Server</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                                <a href="https://reddit.com/user/Great_Media_7280/" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-reddit">
+                                    <div class="item-icon-wrap"><i class="fa-brands fa-reddit"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_reddit">Reddit</span>
+                                        <small class="item-sub">Discussions</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                                <a href="https://muslimbangla.com/quran" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-quran">
+                                    <div class="item-icon-wrap"><i class="fa-solid fa-book-open"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_quran">Read Quran</span>
+                                        <small class="item-sub">Al-Quran Online</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/13VIzyy7N3K6mcx4eBnc7XTe4E-SxVGEG" target="_blank" rel="noopener noreferrer nofollow" class="bento-social-item brand-dawah">
+                                    <div class="item-icon-wrap"><i class="fa-solid fa-mosque"></i></div>
+                                    <div class="item-meta">
+                                        <span class="item-label" data-i18n="social_dawah">Dawah Files</span>
+                                        <small class="item-sub">Islamic Resources</small>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square item-arrow"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -862,6 +995,9 @@
             </div>
         </footer>
     </div>
+
+    <!-- Global Floating Toast Notification -->
+    <div class="copy-toast" id="copyToast"><i class="fa-solid fa-circle-check"></i> <span data-i18n="toast_copied">Copied to clipboard!</span></div>
 
     <script src="script.js" defer></script>
 
