@@ -132,26 +132,10 @@ const translations = {
 
         // Contact Section
         contact_section_title: "Contact",
-        contact_status: "Available for freelance & full-time roles",
         contact_title: "Let's build<br>something great.",
         contact_text: "Open for collaborations, freelance projects, or just a coffee chat about tech and design.",
-        contact_direct_heading: "Direct Channels",
-        contact_social_heading: "Digital Presence & Ecosystem",
-        contact_email_badge: "Primary • Official",
-        contact_wa_badge: "Instant • Fast Reply",
-        contact_email_btn: "Send Email",
-        contact_wa_btn: "Chat on WhatsApp",
-        contact_copy_tooltip: "Copy",
-        contact_response_time: "Typically responds within 12 hours",
-        contact_location: "Dhaka, Bangladesh (UTC+6)",
-        contact_collab_title: "Availability & Working Terms",
-        contact_tz_label: "Timezone & Hours",
-        contact_tz_val: "UTC+6 (Dhaka) • Mon - Sat",
-        contact_turnaround_label: "Turnaround Speed",
-        contact_turnaround_val: "<12h Reply • 24-48h Kickoff",
-        contact_modes_label: "Preferred Collaboration",
-        contact_modes_val: "Email, WhatsApp, Google Meet",
-        toast_copied: "Copied to clipboard!",
+        contact_email_btn: "Click here to Email",
+        contact_wa_btn: "Click here to WhatsApp",
 
         // Footer
         footer_copyright: "© 2026 Humayoun Kobir. All rights reserved.",
@@ -283,26 +267,10 @@ const translations = {
 
         // Contact Section
         contact_section_title: "যোগাযোগ",
-        contact_status: "ফ্রিল্যান্স ও ফুল-টাইম কাজের জন্য প্রস্তুত",
         contact_title: 'চলুন একসাথে<br class="br-desktop"> দারুণ<br class="br-mobile"> কিছু<br class="br-desktop"> তৈরি করি।',
         contact_text: "যেকোনো কোলাবোরেশন, ফ্রিল্যান্স প্রজেক্ট বা প্রযুক্তি ও ডিজাইন নিয়ে আলোচনার জন্য আমি সদা উন্মুক্ত।",
-        contact_direct_heading: "সরাসরি যোগাযোগ",
-        contact_social_heading: "ডিজিটাল প্ল্যাটফর্ম ও লিংকসমূহ",
-        contact_email_badge: "প্রধান • অফিশিয়াল",
-        contact_wa_badge: "তাৎক্ষণিক • দ্রুত রিপ্লাই",
-        contact_email_btn: "ইমেইল পাঠান",
-        contact_wa_btn: "হোয়াটসঅ্যাপে কথা বলুন",
-        contact_copy_tooltip: "কপি",
-        contact_response_time: "সাধারণত ১২ ঘণ্টার মধ্যে উত্তর দেওয়া হয়",
-        contact_location: "ঢাকা, বাংলাদেশ (UTC+6)",
-        contact_collab_title: "কাজের নিশ্চয়তা ও প্রাপ্যতা",
-        contact_tz_label: "টাইমজোন ও সময়সূচি",
-        contact_tz_val: "UTC+6 (ঢাকা) • সোম - শনি",
-        contact_turnaround_label: "যোগাযোগের গতি",
-        contact_turnaround_val: "<১২ ঘণ্টায় উত্তর • দ্রুত শুরু",
-        contact_modes_label: "পছন্দের মাধ্যম",
-        contact_modes_val: "ইমেইল, হোয়াটসঅ্যাপ, গুগল মিট",
-        toast_copied: "ক্লিপবোর্ডে কপি করা হয়েছে!",
+        contact_email_btn: "ইমেইল করতে ক্লিক করুন",
+        contact_wa_btn: "হোয়াটসঅ্যাপ করতে ক্লিক করুন",
 
         // Footer
         footer_copyright: "© ২০২৬ হুমায়ূন কবির। সর্বস্বত্ব সংরক্ষিত।",
@@ -724,7 +692,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let cachedSectionMetrics = [];
 
     const refreshMetrics = () => {
-        const scrollMargin = 96;
+        const scrollMargin = 72;
         cachedNavMetrics = Array.from(navLinks).map(link => ({
             left: link.offsetLeft,
             width: link.offsetWidth
@@ -747,7 +715,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeIdx = hashIdx;
                 const targetSec = document.querySelector(currentHash);
                 if (targetSec) {
-                    const targetScroll = Math.max(0, targetSec.offsetTop - 96);
+                    const targetScroll = Math.max(0, targetSec.offsetTop - 72);
                     window.scrollTo({ top: targetScroll, behavior: 'instant' });
                     state.scrollY = targetScroll;
                     state.lastScrollY = targetScroll;
@@ -829,22 +797,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================================================
-    // 8. Copy to Clipboard Utility with Safe Fallback & Global Toast
+    // 8. Copy to Clipboard Utility with Safe Fallback
     // =========================================================================
-    let toastTimer;
-    function triggerCopyToast() {
-        const toast = document.getElementById('copyToast');
-        if (!toast) return;
-        clearTimeout(toastTimer);
-        toast.classList.add('show');
-        toastTimer = setTimeout(() => {
-            toast.classList.remove('show');
-        }, 2200);
-    }
-
     window.copyContact = (text, btn) => {
         const updateBtnUi = () => {
-            triggerCopyToast();
             if (!btn) return;
             const icon = btn.querySelector('i');
             if (!icon) return;
