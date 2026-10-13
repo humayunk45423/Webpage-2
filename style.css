@@ -426,8 +426,8 @@
             background-color: #ffffff;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
             pointer-events: none;
-            transform: translateX(0);
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease, box-shadow 0.25s ease;
+            transform: translate3d(0, 0, 0);
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease, box-shadow 0.25s ease;
             will-change: transform;
             z-index: 1;
         }
@@ -442,18 +442,28 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 10px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.16);
         }
 
-        /* When state is right or dark mode: animate slider to right */
-        .segmented-toggle[data-state="right"] .toggle-slider,
-        .segmented-toggle[data-state="right"] .toggle-thumb,
-        .toggle[data-state="right"] .toggle-slider,
-        .toggle[data-state="right"] .toggle-thumb,
-        html[data-theme="dark"] .segmented-toggle .toggle-slider,
-        html[data-theme="dark"] .segmented-toggle .toggle-thumb,
-        html[data-theme="dark"] .toggle .toggle-slider,
-        html[data-theme="dark"] .toggle .toggle-thumb,
-        html[data-theme="dark"] .theme-switch .toggle-slider,
-        html[data-theme="dark"] .theme-switch .toggle-thumb {
-            transform: translateX(100%);
+        /* ─── 1. Theme Toggle Slider Movement (Strictly Independent) ─── */
+        #themeToggle[data-state="left"] .toggle-slider,
+        #themeToggleMobile[data-state="left"] .toggle-slider {
+            transform: translate3d(0, 0, 0);
+        }
+
+        #themeToggle[data-state="right"] .toggle-slider,
+        #themeToggleMobile[data-state="right"] .toggle-slider {
+            transform: translate3d(100%, 0, 0);
+        }
+
+        /* ─── 2. Language Toggle Slider Movement (Strictly Independent) ─── */
+        .lang-toggle[data-state="left"] .toggle-slider,
+        #langToggle[data-state="left"] .toggle-slider,
+        #langToggleMobile[data-state="left"] .toggle-slider {
+            transform: translate3d(0, 0, 0);
+        }
+
+        .lang-toggle[data-state="right"] .toggle-slider,
+        #langToggle[data-state="right"] .toggle-slider,
+        #langToggleMobile[data-state="right"] .toggle-slider {
+            transform: translate3d(100%, 0, 0);
         }
 
         /* Option slots */
@@ -469,7 +479,7 @@
             font-weight: 700;
             letter-spacing: 0.04em;
             color: #475569;
-            transition: color 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             line-height: 1;
             pointer-events: none;
             position: relative;
@@ -479,80 +489,56 @@
             width: auto;
         }
 
-        .toggle-opt i,
-        .toggle-opt svg,
-        .toggle-icon i,
-        .toggle-icon svg {
+        /* ─── Theme Toggle Icons (Sun / Moon) ─── */
+        #themeToggle .sun i,
+        #themeToggleMobile .sun i,
+        #themeToggle .sun svg,
+        #themeToggleMobile .sun svg,
+        #themeToggle .moon i,
+        #themeToggleMobile .moon i,
+        #themeToggle .moon svg,
+        #themeToggleMobile .moon svg {
             flex-shrink: 0;
             font-size: 13px;
-            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease, opacity 0.25s ease;
         }
 
-        /* Active option states */
-        .segmented-toggle[data-state="left"] .opt-left,
-        .segmented-toggle[data-state="right"] .opt-right,
-        .toggle[data-state="left"] .opt-left,
-        .toggle[data-state="right"] .opt-right,
-        html[data-theme="light"] .opt-left,
-        html[data-theme="dark"] .opt-right,
-        html[data-theme="light"] .sun,
-        html[data-theme="dark"] .moon {
-            font-weight: 800;
-        }
-
-        /* Light mode active Sun: Black */
-        .segmented-toggle[data-state="left"] .opt-left i,
-        .segmented-toggle[data-state="left"] .opt-left svg,
-        .toggle[data-state="left"] .opt-left i,
-        .toggle[data-state="left"] .opt-left svg,
-        html[data-theme="light"] .opt-left i,
-        html[data-theme="light"] .opt-left svg,
-        html[data-theme="light"] .sun i,
-        html[data-theme="light"] .sun svg {
+        /* Light state active Sun (Black) */
+        #themeToggle[data-state="left"] .sun i,
+        #themeToggleMobile[data-state="left"] .sun i,
+        #themeToggle[data-state="left"] .sun svg,
+        #themeToggleMobile[data-state="left"] .sun svg {
             color: #000000 !important;
             transform: scale(1.12);
             filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
             opacity: 1;
         }
 
-        /* Dark mode active Moon: White */
-        .segmented-toggle[data-state="right"] .opt-right i,
-        .segmented-toggle[data-state="right"] .opt-right svg,
-        .toggle[data-state="right"] .opt-right i,
-        .toggle[data-state="right"] .opt-right svg,
-        html[data-theme="dark"] .opt-right i,
-        html[data-theme="dark"] .opt-right svg,
-        html[data-theme="dark"] .moon i,
-        html[data-theme="dark"] .moon svg {
-            color: #ffffff !important;
-            transform: scale(1.12);
-            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
-            opacity: 1;
-        }
-
-        /* Inactive muted icons */
-        .segmented-toggle[data-state="left"] .opt-right i,
-        .segmented-toggle[data-state="left"] .opt-right svg,
-        .segmented-toggle[data-state="right"] .opt-left i,
-        .segmented-toggle[data-state="right"] .opt-left svg,
-        .toggle[data-state="left"] .opt-right i,
-        .toggle[data-state="left"] .opt-right svg,
-        .toggle[data-state="right"] .opt-left i,
-        .toggle[data-state="right"] .opt-left svg,
-        html[data-theme="light"] .opt-right i,
-        html[data-theme="light"] .opt-right svg,
-        html[data-theme="light"] .moon i,
-        html[data-theme="light"] .moon svg {
+        #themeToggle[data-state="left"] .moon i,
+        #themeToggleMobile[data-state="left"] .moon i,
+        #themeToggle[data-state="left"] .moon svg,
+        #themeToggleMobile[data-state="left"] .moon svg {
             color: #94a3b8 !important;
             transform: scale(0.9);
             filter: none;
             opacity: 0.65;
         }
 
-        html[data-theme="dark"] .opt-left i,
-        html[data-theme="dark"] .opt-left svg,
-        html[data-theme="dark"] .sun i,
-        html[data-theme="dark"] .sun svg {
+        /* Dark state active Moon (White) */
+        #themeToggle[data-state="right"] .moon i,
+        #themeToggleMobile[data-state="right"] .moon i,
+        #themeToggle[data-state="right"] .moon svg,
+        #themeToggleMobile[data-state="right"] .moon svg {
+            color: #ffffff !important;
+            transform: scale(1.12);
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+            opacity: 1;
+        }
+
+        #themeToggle[data-state="right"] .sun i,
+        #themeToggleMobile[data-state="right"] .sun i,
+        #themeToggle[data-state="right"] .sun svg,
+        #themeToggleMobile[data-state="right"] .sun svg {
             color: #64748b !important;
             transform: scale(0.9);
             filter: none;
@@ -577,41 +563,58 @@
         .lang-toggle {
             width: 68px;
             height: 32px;
+            cursor: pointer;
         }
 
         .lang-toggle .toggle-opt {
             font-size: 11.5px;
-            font-weight: 800;
-            letter-spacing: 0.02em;
-            color: #64748b !important;
-            opacity: 0.6;
-            transition: all 0.25s ease;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: #94a3b8 !important;
+            opacity: 0.65;
+            cursor: pointer;
+            pointer-events: none; /* Anywhere clickable: clicks pass directly to button */
+            transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+            user-select: none;
         }
 
-        /* Active Left (BN / বাং) */
+        html[data-theme="dark"] .lang-toggle .toggle-opt {
+            color: #64748b !important;
+            opacity: 0.55;
+        }
+
+        /* Active Left (BN) */
         .lang-toggle[data-state="left"] .opt-left {
             color: var(--text) !important;
             opacity: 1 !important;
-            font-weight: 800;
-            transform: scale(1.05);
+            font-weight: 800 !important;
+            transform: scale(1.06);
         }
         .lang-toggle[data-state="left"] .opt-right {
-            color: #64748b !important;
+            color: #94a3b8 !important;
             opacity: 0.55 !important;
-            transform: scale(0.92);
+            font-weight: 600 !important;
+            transform: scale(0.94);
+        }
+        html[data-theme="dark"] .lang-toggle[data-state="left"] .opt-right {
+            color: #64748b !important;
         }
 
-        /* Active Right (EN / ইং) */
+        /* Active Right (EN) */
         .lang-toggle[data-state="right"] .opt-right {
             color: var(--text) !important;
             opacity: 1 !important;
-            font-weight: 800;
-            transform: scale(1.05);
+            font-weight: 800 !important;
+            transform: scale(1.06);
         }
         .lang-toggle[data-state="right"] .opt-left {
-            color: #64748b !important;
+            color: #94a3b8 !important;
             opacity: 0.55 !important;
-            transform: scale(0.92);
+            font-weight: 600 !important;
+            transform: scale(0.94);
+        }
+        html[data-theme="dark"] .lang-toggle[data-state="right"] .opt-left {
+            color: #64748b !important;
         }
 
         /* ─── Mobile Hamburger Menu Button ─── */

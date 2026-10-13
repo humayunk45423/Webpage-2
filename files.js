@@ -1189,20 +1189,14 @@ document.addEventListener('DOMContentLoaded', () => {
         [langToggle, langToggleMobile].forEach(t => {
             if (!t) return;
             t.setAttribute('data-state', isBn ? 'left' : 'right');
-            t.setAttribute('aria-label', isBn ? 'Switch to English' : 'Switch to Bangla');
-            t.setAttribute('title', isBn ? 'Switch to English' : 'Switch to Bangla');
+            t.setAttribute('aria-label', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('title', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('aria-checked', isBn ? 'false' : 'true');
 
             const optLeft = t.querySelector('.opt-left');
             const optRight = t.querySelector('.opt-right');
-            if (optLeft && optRight) {
-                if (isBn) {
-                    optLeft.textContent = 'বাং';
-                    optRight.textContent = 'ইং';
-                } else {
-                    optLeft.textContent = 'BN';
-                    optRight.textContent = 'EN';
-                }
-            }
+            if (optLeft) optLeft.textContent = 'BN';
+            if (optRight) optRight.textContent = 'EN';
         });
     };
 
@@ -1257,7 +1251,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     [langToggle, langToggleMobile].forEach(btn => {
-        if (btn) btn.addEventListener('click', toggleLanguage);
+        if (btn) {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleLanguage();
+            });
+        }
     });
 
     const updateThemeToggleUi = (theme) => {
@@ -1279,7 +1278,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     [themeToggle, themeToggleMobile].forEach(btn => {
         if (btn) {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
                 const newTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
                 applyTheme(newTheme);
             });
