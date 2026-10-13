@@ -80,6 +80,15 @@ const translations = {
 
         // Projects Section
         projects_title: "Projects",
+        proj1_title: "SnapSignFit",
+        proj2_title: "HK-Tool",
+        proj3_title: "SthapattoShoili",
+        proj4_title: "DUET C & C++ Programs",
+        proj5_title: "DUET Admission Timer",
+        proj6_title: "Sadia Variety Store",
+        proj7_title: "Mobile Express",
+        proj8_title: "Tadrib Academy",
+        proj9_title: "Fuad Mobile Point",
         lnk_live_website: "Live Website",
         lnk_live_webapp: "Live Web App",
         lnk_github_repo: "GitHub Repository",
@@ -215,6 +224,15 @@ const translations = {
 
         // Projects Section
         projects_title: "নির্বাচিত প্রকল্পসমূহ",
+        proj1_title: "স্ন্যাপসাইনফিট",
+        proj2_title: "এইচকে-টুল",
+        proj3_title: "স্থাপত্যশৈলী",
+        proj4_title: "ডুয়েট সি ও সি++ প্রোগ্রামসমূহ",
+        proj5_title: "ডুয়েট অ্যাডমিশন টাইমার",
+        proj6_title: "সাদিয়া ভ্যারাইটি স্টোর",
+        proj7_title: "মোবাইল এক্সপ্রেস",
+        proj8_title: "তাদরিব একাডেমি",
+        proj9_title: "ফুয়াদ মোবাইল পয়েন্ট",
         lnk_live_website: "লাইভ ওয়েবসাইট",
         lnk_live_webapp: "লাইভ ওয়েব অ্যাপ",
         lnk_github_repo: "গিটহাব রেপো",

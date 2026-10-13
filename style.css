@@ -1094,9 +1094,16 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) auto;
-            gap: clamp(2rem, 3.5vw, 3rem);
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: clamp(2rem, 4vw, 3.5rem);
             align-items: center
+        }
+
+        .hero-side {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
         }
 
         .hero-copy h2 {
@@ -1298,7 +1305,7 @@
             position: relative;
             width: 100%;
             max-width: 380px;
-            margin: 0 auto;
+            margin: 0 0 0 auto;
             padding: 1rem;
             background: var(--surface);
             border: 1px solid var(--line);
@@ -1977,6 +1984,13 @@
 
             .hero-side {
                 order: -1;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .portrait {
+                margin: 0 auto;
             }
 
             .actions,
