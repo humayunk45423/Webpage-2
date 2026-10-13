@@ -33,6 +33,7 @@ const translations = {
         btn_open_resource: "Open Resource",
         btn_copy_cmd: "Copy Command",
         btn_copy_code: "Copy Code",
+        toast_copied: "Copied to clipboard!",
         footer_copyright: "© 2026 Humayoun Kobir. All rights reserved."
     },
     bn: {
@@ -60,6 +61,7 @@ const translations = {
         btn_open_resource: "রিসোর্স খুলুন",
         btn_copy_cmd: "কমান্ড কপি",
         btn_copy_code: "কোড কপি",
+        toast_copied: "ক্লিপবোর্ডে কপি হয়েছে!",
         footer_copyright: "© ২০২৬ হুমায়ূন কবির। সর্বস্বত্ব সংরক্ষিত।"
     }
 };
@@ -321,8 +323,8 @@ const fileData = [
         icon: "fa-solid fa-cloud-arrow-down",
         path: "https://www.qbittorrent.org/download",
         links: [
-            { label: "Official Download", url: "https://www.qbittorrent.org/download", icon: "fa-solid fa-download", primary: true },
-            { label: "GitHub Source (FOSS)", url: "https://github.com/qbittorrent/qBittorrent", icon: "fa-brands fa-github" }
+            { label: "Official Download", label_bn: "অফিসিয়াল ডাউনলোড", url: "https://www.qbittorrent.org/download", icon: "fa-solid fa-download", primary: true },
+            { label: "GitHub Source (FOSS)", label_bn: "গিটহাব সোর্স (FOSS)", url: "https://github.com/qbittorrent/qBittorrent", icon: "fa-brands fa-github" }
         ],
         keywords: "qbittorrent foss torrent client clean no ads open source bittorrent p2p libtorrent fast client",
         readme: "## Overview\nqBittorrent is an ad-free, open-source BitTorrent client aimed at providing a clean alternative to µTorrent and proprietary software.\n\n## Key Advantages\n- Clean, polished µTorrent-like user interface without ads or bundled junk.\n- Integrated search engine and RSS feed reader.\n- Sequential downloading (watch while downloading).\n- Advanced IP filtering and bandwidth scheduling."
@@ -392,8 +394,8 @@ const fileData = [
         icon: "fa-solid fa-trash-can",
         path: "https://www.bcuninstaller.com/",
         links: [
-            { label: "Official Website", url: "https://www.bcuninstaller.com/", icon: "fa-solid fa-download", primary: true },
-            { label: "GitHub Releases (FOSS)", url: "https://github.com/Klocman/Bulk-Crap-Uninstaller/releases", icon: "fa-brands fa-github" }
+            { label: "Official Website", label_bn: "অফিসিয়াল ওয়েবসাইট", url: "https://www.bcuninstaller.com/", icon: "fa-solid fa-download", primary: true },
+            { label: "GitHub Releases (FOSS)", label_bn: "গিটহাব রিলিজ (FOSS)", url: "https://github.com/Klocman/Bulk-Crap-Uninstaller/releases", icon: "fa-brands fa-github" }
         ],
         keywords: "bulk crap uninstaller bcuninstaller bcu open source foss deep uninstaller batch remove leftovers registry windows store steam games",
         readme: "## Overview\nBulk Crap Uninstaller is a free and open-source (FOSS) mass uninstaller for Windows. It excels at removing large amounts of applications, remnants, orphan files, and hidden registry keys in batch mode with zero user intervention.\n\n## Key Features\n- Batch uninstall hundreds of programs simultaneously.\n- Automatically cleans leftover files and registry entries.\n- Uninstalls Windows Store apps, Oculus, Steam games, and portable apps.\n- Automated quiet uninstallation routines."
@@ -604,8 +606,8 @@ const fileData = [
         icon: "fa-solid fa-images",
         path: "https://github.com/GurutejaReddy-04/GooglePhotos-TakeoutRestorer",
         links: [
-            { label: "GitHub Repository", url: "https://github.com/GurutejaReddy-04/GooglePhotos-TakeoutRestorer", icon: "fa-brands fa-github", primary: true },
-            { label: "Releases & Download", url: "https://github.com/GurutejaReddy-04/GooglePhotos-TakeoutRestorer/releases", icon: "fa-solid fa-download" }
+            { label: "GitHub Repository", label_bn: "গিটহাব রিপোজিটরি", url: "https://github.com/GurutejaReddy-04/GooglePhotos-TakeoutRestorer", icon: "fa-brands fa-github", primary: true },
+            { label: "Releases & Download", label_bn: "রিলিজ ও ডাউনলোড", url: "https://github.com/GurutejaReddy-04/GooglePhotos-TakeoutRestorer/releases", icon: "fa-solid fa-download" }
         ],
         keywords: "google photos takeout restorer exif metadata json timestamp fixer gallery backup media photos videos gurutejareddy",
         readme: "## Overview\nWhen you download your media archive via Google Takeout, the original capture timestamps, GPS coordinates, and metadata are detached into separate `.json` files. This tool automatically merges all JSON metadata back into your photos and videos EXIF tags.\n\n## Instructions\n1. Extract your Google Takeout archive folders.\n2. Run `GooglePhotos-TakeoutRestorer.exe`.\n3. Select your input Google Takeout folder.\n4. Click Start to re-embed all metadata into the photos and videos seamlessly."
@@ -632,8 +634,8 @@ const fileData = [
         icon: "fa-solid fa-chart-pie",
         path: "https://diskanalyzer.com/download",
         links: [
-            { label: "Download WizTree", url: "https://diskanalyzer.com/download", icon: "fa-solid fa-bolt", primary: true },
-            { label: "Download TreeSize Free", url: "https://www.jam-software.com/treesize_free", icon: "fa-solid fa-hard-drive" }
+            { label: "Download WizTree", label_bn: "WizTree ডাউনলোড", url: "https://diskanalyzer.com/download", icon: "fa-solid fa-bolt", primary: true },
+            { label: "Download TreeSize Free", label_bn: "TreeSize Free ডাউনলোড", url: "https://www.jam-software.com/treesize_free", icon: "fa-solid fa-hard-drive" }
         ],
         keywords: "wiztree treesize disk space visualizer mft master file table fast storage cleaner space sniffer directory size tree map",
         readme: "## Overview\nWizTree is the world's fastest disk space analyzer. By reading the Master File Table (MFT) directly from NTFS drives, it scans massive multi-terabyte hard drives in less than 2 seconds.\n\n## Tools Comparison\n- **WizTree**: Direct NTFS MFT scanning for lightning-fast visual treemap of large files.\n- **TreeSize Free**: Classic folder-based disk size breakdown with context menu integration."
@@ -712,8 +714,8 @@ const fileData = [
         icon: "fa-solid fa-gauge-high",
         path: "https://www.techpowerup.com/download/techpowerup-throttlestop/",
         links: [
-            { label: "ThrottleStop (TechPowerUp)", url: "https://www.techpowerup.com/download/techpowerup-throttlestop/", icon: "fa-solid fa-bolt", primary: true },
-            { label: "QuickCPU (CoderBag)", url: "https://coderbag.com/product/quickcpu", icon: "fa-solid fa-gauge" }
+            { label: "ThrottleStop (TechPowerUp)", label_bn: "থ্রটলস্টপ (ThrottleStop)", url: "https://www.techpowerup.com/download/techpowerup-throttlestop/", icon: "fa-solid fa-bolt", primary: true },
+            { label: "QuickCPU (CoderBag)", label_bn: "কুইকসিপিইউ (QuickCPU)", url: "https://coderbag.com/product/quickcpu", icon: "fa-solid fa-gauge" }
         ],
         keywords: "throttlestop quickcpu undervolt thermal throttling pl1 pl2 cpu power limit core parking turbo boost intel temperature",
         readme: "## Overview\nAdvanced processor performance, undervolting, and thermal throttling management tools designed to bypass aggressive OEM power limiters.\n\n## What They Do\n- **ThrottleStop**: Undervolt Intel CPU cores/cache, adjust PL1/PL2 power limits, disable BD PROCHOT, and eliminate thermal throttling.\n- **QuickCPU**: Fine-tune Core Parking, Frequency Scaling, Turbo Boost index, and energy performance preferences in real time."
@@ -762,8 +764,8 @@ const fileData = [
         icon: "fa-solid fa-microchip",
         path: "https://www.cpuid.com/softwares/cpu-z.html",
         links: [
-            { label: "Download CPU-Z", url: "https://www.cpuid.com/softwares/cpu-z.html", icon: "fa-solid fa-microchip", primary: true },
-            { label: "Download GPU-Z", url: "https://www.techpowerup.com/download/techpowerup-gpu-z/", icon: "fa-solid fa-desktop" }
+            { label: "Download CPU-Z", label_bn: "CPU-Z ডাউনলোড", url: "https://www.cpuid.com/softwares/cpu-z.html", icon: "fa-solid fa-microchip", primary: true },
+            { label: "Download GPU-Z", label_bn: "GPU-Z ডাউনলোড", url: "https://www.techpowerup.com/download/techpowerup-gpu-z/", icon: "fa-solid fa-desktop" }
         ],
         keywords: "cpuz gpuz cpu-z gpu-z techpowerup processor graphics card vram bios clocks telemetry hardware sensors diagnostics",
         readme: "## Overview\nThe definitive pair for PC hardware profiling and diagnostics.\n\n## Tools Included\n- **CPU-Z (CPUID)**: Provides real-time clock frequencies, memory timings, motherboard chipset details, and single/multi-thread benchmarks.\n- **GPU-Z (TechPowerUp)**: Delivers exhaustive GPU telemetry, VRAM memory clock, BIOS version, PCIe bus interface load, thermal sensors, and ASIC quality."
@@ -826,7 +828,7 @@ const fileData = [
         id: "adobe-suite",
         name: "Adobe Software Suite",
         category: "creative",
-        badge: "Photoshop & ${currentLang === 'bn' ? 'ইলাস্ট্রেটর ২০২০' : 'Illustrator 2020'}",
+        badge: "Photoshop & Illustrator 2020",
         name_bn: "অ্যাডোবি সফটওয়্যার সুইট",
         badge_bn: "ফটোশপ ও ইলাস্ট্রেটর ২০২০",
         icon: "fa-solid fa-palette",
@@ -1105,7 +1107,7 @@ function safeAssetUrl(url) {
             const finalUrl = safeAssetUrl(link.url);
             heroHtml += `
                 <a href="${finalUrl}" ${link.download ? 'download' : 'target="_blank" rel="noopener noreferrer"'} class="${link.primary ? 'download-hero' : 'btn-secondary-soft'}">
-                    <i class="${link.icon || 'fa-solid fa-download'}"></i> ${escapeHtml(link.label)}
+                    <i class="${link.icon || 'fa-solid fa-download'}"></i> ${escapeHtml((currentLang === 'bn' && link.label_bn) ? link.label_bn : link.label)}
                 </a>
             `;
         });
@@ -1115,7 +1117,7 @@ function safeAssetUrl(url) {
                 <i class="fa-solid fa-download"></i> ${currentLang === 'bn' ? 'ফটোশপ ২০২০' : 'Photoshop 2020'}
             </a>
             <a href="${safeAssetUrl(item.illustratorUrl)}" target="_blank" rel="noopener noreferrer" class="download-hero adobe-ai">
-                <i class="fa-solid fa-download"></i> Illustrator 2020
+                <i class="fa-solid fa-download"></i> ${currentLang === 'bn' ? 'ইলাস্ট্রেটর ২০২০' : 'Illustrator 2020'}
             </a>
         `;
     } else if (item.id === "winrar") {
@@ -1272,6 +1274,9 @@ let toastTimer;
 function doCopy(text) {
     function showToast() {
         clearTimeout(toastTimer);
+        const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
+        const isBn = currentLang === 'bn';
+        copyToast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${isBn ? 'ক্লিপবোর্ডে কপি হয়েছে!' : 'Copied to clipboard!'}`;
         copyToast.classList.add('show');
         toastTimer = setTimeout(() => copyToast.classList.remove('show'), 2000);
     }
