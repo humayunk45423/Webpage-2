@@ -1094,8 +1094,8 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: clamp(2rem, 5vw, 4rem);
+            grid-template-columns: 1.35fr 0.85fr;
+            gap: clamp(2rem, 4vw, 3.5rem);
             align-items: center
         }
 
@@ -1109,14 +1109,19 @@
         }
 
         .hero-copy h1 {
-            font-size: clamp(2.4rem, 5.8vw, 4.8rem);
-            line-height: 1.14;
+            font-size: clamp(2.2rem, 4.2vw, 3.85rem);
+            line-height: 1.15;
             letter-spacing: -0.015em;
             margin: 0 0 0.8rem;
             font-weight: 800;
             color: #000;
             transition: color 0.5s var(--bezier);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
+        }
+
+        .hero-copy h1 .hero-name {
+            white-space: nowrap;
+            display: inline-block;
         }
 
         /* Bengali Typography: Golden Ratio Proportions & Crisp Diacritic Breathing Room */
@@ -2072,7 +2077,7 @@
 
             .hero-copy h1 {
                 margin: 0 0 0.75rem;
-                font-size: 2.15rem;
+                font-size: clamp(1.85rem, 6.8vw, 2.15rem);
                 letter-spacing: -0.01em;
                 line-height: 1.22;
             }
