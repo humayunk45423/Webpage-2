@@ -1174,12 +1174,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Top Nav Selection Pill (Glider) Positioning
     const glider = document.getElementById('navGlider');
-    const syncGlider = () => {
+    let gliderInitialized = false;
+
+    const syncGlider = (immediate = false) => {
         if (!glider || window.innerWidth < 1024) return;
         const activeTab = document.querySelector('.nav a.active') || document.getElementById('navSoftwareHq');
         if (activeTab) {
-            glider.style.transform = `translate3d(${Math.round(activeTab.offsetLeft)}px, 0, 0)`;
-            glider.style.width = `${Math.round(activeTab.offsetWidth)}px`;
+            const left = Math.round(activeTab.offsetLeft);
+            const width = Math.round(activeTab.offsetWidth);
+            if (immediate || !gliderInitialized) {
+                glider.style.transition = 'none';
+                glider.style.transform = `translate3d(${left}px, 0, 0)`;
+                glider.style.width = `${width}px`;
+                glider.classList.add('visible');
+                gliderInitialized = true;
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        if (glider) glider.style.transition = '';
+                    });
+                });
+                return;
+            }
+            glider.style.transform = `translate3d(${left}px, 0, 0)`;
+            glider.style.width = `${width}px`;
             glider.classList.add('visible');
         }
     };
@@ -1189,14 +1206,16 @@ document.addEventListener('DOMContentLoaded', () => {
         [langToggle, langToggleMobile].forEach(t => {
             if (!t) return;
             t.setAttribute('data-state', isBn ? 'left' : 'right');
-            t.setAttribute('aria-label', isBn ? 'Switch to English (ইং)' : 'Switch to Bangla (বাং)');
-            t.setAttribute('title', isBn ? 'Switch to English (ইং)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('aria-label', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('title', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
             t.setAttribute('aria-checked', isBn ? 'false' : 'true');
 
             const optLeft = t.querySelector('.opt-left');
             const optRight = t.querySelector('.opt-right');
-            if (optLeft && optLeft.textContent !== 'বাং') optLeft.textContent = 'বাং';
-            if (optRight && optRight.textContent !== 'ইং') optRight.textContent = 'ইং';
+            const leftText = isBn ? 'বাং' : 'BN';
+            const rightText = isBn ? 'ইং' : 'EN';
+            if (optLeft && optLeft.textContent !== leftText) optLeft.textContent = leftText;
+            if (optRight && optRight.textContent !== rightText) optRight.textContent = rightText;
         });
     };
 
@@ -1436,12 +1455,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Top Nav Selection Pill (Glider) Initial Positioning
-    syncGlider();
+    syncGlider(true);
     if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(syncGlider);
+        document.fonts.ready.then(() => syncGlider(true));
     }
-    window.addEventListener('load', syncGlider);
-    window.addEventListener('resize', syncGlider, { passive: true });
+    window.addEventListener('load', () => syncGlider(true));
+    window.addEventListener('resize', () => syncGlider(false), { passive: true });
 
     // Smooth Page Exit Slide When Clicking Back to Main Tabs
     document.querySelectorAll('.nav a[href^="index.html"]').forEach(link => {
@@ -1460,7 +1479,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             setTimeout(() => {
                 window.location.href = targetHref;
-            }, 180);
+            }, 200);
         });
     });
 

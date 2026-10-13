@@ -346,14 +346,16 @@ document.addEventListener('DOMContentLoaded', () => {
         [langToggle, langToggleMobile].forEach(t => {
             if (!t) return;
             t.setAttribute('data-state', isBn ? 'left' : 'right');
-            t.setAttribute('aria-label', isBn ? 'Switch to English (ইং)' : 'Switch to Bangla (বাং)');
-            t.setAttribute('title', isBn ? 'Switch to English (ইং)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('aria-label', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('title', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
             t.setAttribute('aria-checked', isBn ? 'false' : 'true');
 
             const optLeft = t.querySelector('.opt-left');
             const optRight = t.querySelector('.opt-right');
-            if (optLeft && optLeft.textContent !== 'বাং') optLeft.textContent = 'বাং';
-            if (optRight && optRight.textContent !== 'ইং') optRight.textContent = 'ইং';
+            const leftText = isBn ? 'বাং' : 'BN';
+            const rightText = isBn ? 'ইং' : 'EN';
+            if (optLeft && optLeft.textContent !== leftText) optLeft.textContent = leftText;
+            if (optRight && optRight.textContent !== rightText) optRight.textContent = rightText;
         });
     };
 
@@ -763,7 +765,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             setTimeout(() => {
                 window.location.href = softwareHqLink.href;
-            }, 180);
+            }, 200);
         });
     }
 
