@@ -526,6 +526,7 @@ const fileData = [
         badge_bn: "HD রাউন্ডেড কার্সার সেট",
         icon: "fa-solid fa-arrow-pointer",
         path: "assets/Windows 11 rounded Cursor/windows_11 cursors.zip",
+        previewImage: "assets/Windows 11 rounded Cursor/cursor-preview.webp",
         keywords: "cursor mouse rounded theme pointers win11 customization",
         readme: "## Overview\nClean rounded high-DPI cursor set for Windows desktop customization."
     },
@@ -1162,6 +1163,14 @@ function safeAssetUrl(url) {
         bodyHtml += `
             <div class="readme-title"><i class="fa-solid fa-circle-info"></i> ${isBn ? 'ডকুমেন্টেশন' : 'Documentation'}</div>
             <div class="readme-content">${formatMarkdown(activeReadme)}</div>
+        `;
+    }
+
+    if (item.previewImage) {
+        bodyHtml += `
+            <div class="doc-preview-wrapper">
+                <img src="${safeAssetUrl(item.previewImage)}" alt="${escapeHtml(item.name)} Preview" class="doc-preview-img" loading="lazy" decoding="async">
+            </div>
         `;
     }
 

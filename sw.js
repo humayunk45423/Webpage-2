@@ -3,7 +3,7 @@
  * Stale-while-revalidate & Cache-first offline PWA architecture.
  */
 
-const CACHE_NAME = 'hk-portfolio-v6';
+const CACHE_NAME = 'hk-portfolio-v7';
 const CORE_ASSETS = [
     './',
     './index.html',
@@ -15,7 +15,8 @@ const CORE_ASSETS = [
     './assets/site-images/Logo-Animation.gif',
     './assets/site-images/refined.webp',
     './assets/site-images/Artboard_1logo_border_radious.png',
-    './assets/site-images/projects-meta.json'
+    './assets/site-images/projects-meta.json',
+    './assets/Windows 11 rounded Cursor/cursor-preview.webp'
 ];
 
 self.addEventListener('install', (event) => {
