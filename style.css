@@ -570,51 +570,78 @@
             font-size: 11.5px;
             font-weight: 700;
             letter-spacing: 0.04em;
-            color: #94a3b8 !important;
+            color: #94a3b8;
             opacity: 0.65;
             cursor: pointer;
             pointer-events: none; /* Anywhere clickable: clicks pass directly to button */
-            transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+            transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, filter 0.25s ease;
             user-select: none;
         }
 
-        html[data-theme="dark"] .lang-toggle .toggle-opt {
-            color: #64748b !important;
-            opacity: 0.55;
-        }
-
-        /* Active Left (BN) */
+        /* ─── Light Mode Active & Inactive Language States ─── */
+        /* Active Left (BN) in Light Mode */
         .lang-toggle[data-state="left"] .opt-left {
-            color: var(--text) !important;
+            color: #000000 !important;
             opacity: 1 !important;
             font-weight: 800 !important;
-            transform: scale(1.06);
+            transform: scale(1.1);
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
         }
         .lang-toggle[data-state="left"] .opt-right {
             color: #94a3b8 !important;
-            opacity: 0.55 !important;
+            opacity: 0.6 !important;
             font-weight: 600 !important;
-            transform: scale(0.94);
-        }
-        html[data-theme="dark"] .lang-toggle[data-state="left"] .opt-right {
-            color: #64748b !important;
+            transform: scale(0.92);
+            filter: none;
         }
 
-        /* Active Right (EN) */
+        /* Active Right (EN) in Light Mode */
         .lang-toggle[data-state="right"] .opt-right {
-            color: var(--text) !important;
+            color: #000000 !important;
             opacity: 1 !important;
             font-weight: 800 !important;
-            transform: scale(1.06);
+            transform: scale(1.1);
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
         }
         .lang-toggle[data-state="right"] .opt-left {
             color: #94a3b8 !important;
-            opacity: 0.55 !important;
+            opacity: 0.6 !important;
             font-weight: 600 !important;
-            transform: scale(0.94);
+            transform: scale(0.92);
+            filter: none;
+        }
+
+        /* ─── Dark Mode Active & Inactive Language States (Matches White Moon) ─── */
+        /* Active Left (BN) in Dark Mode: Pure White with Soft Glow */
+        html[data-theme="dark"] .lang-toggle[data-state="left"] .opt-left {
+            color: #ffffff !important;
+            opacity: 1 !important;
+            font-weight: 800 !important;
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+        }
+        html[data-theme="dark"] .lang-toggle[data-state="left"] .opt-right {
+            color: #64748b !important;
+            opacity: 0.5 !important;
+            font-weight: 600 !important;
+            transform: scale(0.92);
+            filter: none;
+        }
+
+        /* Active Right (EN) in Dark Mode: Pure White with Soft Glow */
+        html[data-theme="dark"] .lang-toggle[data-state="right"] .opt-right {
+            color: #ffffff !important;
+            opacity: 1 !important;
+            font-weight: 800 !important;
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
         }
         html[data-theme="dark"] .lang-toggle[data-state="right"] .opt-left {
             color: #64748b !important;
+            opacity: 0.5 !important;
+            font-weight: 600 !important;
+            transform: scale(0.92);
+            filter: none;
         }
 
         /* ─── Mobile Hamburger Menu Button ─── */
