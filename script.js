@@ -24,7 +24,7 @@ const translations = {
 
         hero_greeting: "Assalamu Alaikum (Greetings)!",
         hero_iam: 'I\'m <span class="hero-name">Humayoun Kobir</span>',
-        hero_about_text: "A Diploma Engineer in Computer Science with a focus on smart strategies and efficient solutions. Bridging the gap between technical engineering and creative design through 3D modeling, branding, and data optimization.",
+        hero_about_text: "A Computer Technology Diploma Engineer by training, a designer by eye. From logos and branding to Excel automation, web tools, and hardware fixes, my goal is the same: smart strategy delivering accurate, reliable results.",
         btn_skills: "Skills",
         btn_projects: "Projects",
         btn_connect: "Connect",
@@ -168,7 +168,7 @@ const translations = {
 
         hero_greeting: "আসসালামু আলাইকুম!",
         hero_iam: 'আমি <span class="hero-name">হুমায়ুন কবির</span>',
-        hero_about_text: "কম্পিউটার সায়েন্সে ডিপ্লোমা ইঞ্জিনিয়ার, এবং স্মার্ট স্ট্র্যাটেজি ও দক্ষ সমাধান সৃষ্টিতে নিবেদিত। ৩ডি মডেলিং, ব্র্যান্ডিং এবং ডাটা অপ্টিমাইজেশনের মাধ্যমে টেকনিক্যাল ইঞ্জিনিয়ারিং ও ক্রিয়েটিভ ডিজাইনের মেলবন্ধন ঘটাই।",
+        hero_about_text: "কম্পিউটার টেকনোলজিতে ডিপ্লোমা ইঞ্জিনিয়ার হিসেবে প্রযুক্তি বুঝি, ডিজাইনার হিসেবে সৌন্দর্য। লোগো ও ব্র্যান্ডিং থেকে এক্সেল অটোমেশন, ওয়েব টুল ও হার্ডওয়্যার সমাধান পর্যন্ত, আমার লক্ষ্য একটাই: স্মার্ট কৌশলে নির্ভুল ও নির্ভরযোগ্য ফলাফল।",
         btn_skills: "দক্ষতা",
         btn_projects: "প্রকল্পসমূহ",
         btn_connect: "যোগাযোগ",
