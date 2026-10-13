@@ -25,7 +25,8 @@ const translations = {
         toggle_language_label: "Language",
         toggle_theme_label: "Theme",
         shq_title: "Software HQ",
-        cat_all: "All Tools",
+        cat_all: "All",
+        cat_categories: "Categories",
         cat_select: "Select Category",
         btn_back_explorer: "Back to Explorer",
         btn_download_file: "Download File",
@@ -51,7 +52,8 @@ const translations = {
         toggle_language_label: "ভাষা",
         toggle_theme_label: "থিম",
         shq_title: "সফটওয়্যার HQ",
-        cat_all: "সকল টুলস",
+        cat_all: "সকল",
+        cat_categories: "ক্যাটাগরি",
         cat_select: "ক্যাটাগরি বাছাই করুন",
         btn_back_explorer: "ভান্ডারে ফিরে যান",
         btn_download_file: "ফাইল ডাউনলোড",
@@ -726,19 +728,22 @@ let explorerScrollPos = 0;
 
 function selectCategory(catId) {
     currentCategory = catId;
+    const curLang = document.documentElement.getAttribute('data-lang') || 'en';
 
     if (catId === 'all') {
         if (pillAll) pillAll.classList.add('active');
         if (catDropdownBtn) catDropdownBtn.classList.remove('active');
         if (catDropdownIcon) catDropdownIcon.className = 'fa-solid fa-sliders';
-        if (catDropdownLabel) catDropdownLabel.textContent = 'Categories';
+        if (catDropdownLabel) catDropdownLabel.textContent = curLang === 'bn' ? 'ক্যাটাগরি' : 'Categories';
     } else {
         if (pillAll) pillAll.classList.remove('active');
         if (catDropdownBtn) catDropdownBtn.classList.add('active');
         const cat = categoryList.find(c => c.id === catId);
         if (cat) {
             if (catDropdownIcon) catDropdownIcon.className = cat.icon;
-            if (catDropdownLabel) catDropdownLabel.textContent = cat.name;
+            if (catDropdownLabel) {
+                catDropdownLabel.textContent = (categoryNames[catId] && categoryNames[catId][curLang]) || cat.name;
+            }
         }
     }
 
@@ -1246,6 +1251,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.innerHTML = `${iconHtml} ${categoryNames[catId][lang] || categoryNames[catId].en}`;
             }
         });
+
+        // Update dropdown button label to match active language
+        if (catDropdownLabel) {
+            if (currentCategory === 'all') {
+                catDropdownLabel.textContent = lang === 'bn' ? 'ক্যাটাগরি' : 'Categories';
+            } else if (categoryNames[currentCategory]) {
+                catDropdownLabel.textContent = categoryNames[currentCategory][lang] || categoryNames[currentCategory].en;
+            }
+        }
 
         updateLangToggleUi(lang);
         updateSearchPlaceholder();

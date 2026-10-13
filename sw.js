@@ -3,7 +3,7 @@
  * Stale-while-revalidate & Cache-first offline PWA architecture.
  */
 
-const CACHE_NAME = 'hk-portfolio-v2';
+const CACHE_NAME = 'hk-portfolio-v5';
 const CORE_ASSETS = [
     './',
     './index.html',

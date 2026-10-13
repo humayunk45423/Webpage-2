@@ -1550,6 +1550,24 @@
             user-select: text !important;
             -webkit-user-select: text !important;
         }
+
+        /* Harmonized Bengali Typography: Apply Tool Font ("Hind Siliguri") to Category & UI elements */
+        html[data-lang="bn"] button,
+        html[data-lang="bn"] .pill,
+        html[data-lang="bn"] .dropdown-btn,
+        html[data-lang="bn"] .dropdown-item,
+        html[data-lang="bn"] .search-box input,
+        html[data-lang="bn"] .file-meta h3,
+        html[data-lang="bn"] .file-meta span,
+        html[data-lang="bn"] .group-title,
+        html[data-lang="bn"] .detail-page h1,
+        html[data-lang="bn"] .detail-page p,
+        html[data-lang="bn"] .readme-title,
+        html[data-lang="bn"] .readme-content,
+        html[data-lang="bn"] .category-chip,
+        html[data-lang="bn"] .doc-key-label {
+            font-family: 'Hind Siliguri', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        }
     </style>
     <!-- Instant Page Transitions: Chromium Speculation Rules -->
     <script type="speculationrules">
@@ -1625,12 +1643,12 @@
                         </div>
 
                         <div class="category-pills" role="tablist" aria-label="Filter software categories">
-                            <button class="pill active" id="pillAll" data-category="all" role="tab" aria-selected="true" type="button"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> All</button>
+                            <button class="pill active" id="pillAll" data-category="all" role="tab" aria-selected="true" type="button"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <span data-i18n="cat_all">All</span></button>
                             
                             <div class="category-dropdown-wrapper">
                                 <button class="pill dropdown-btn" id="catDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select category">
                                     <i class="fa-solid fa-sliders" id="catDropdownIcon" aria-hidden="true"></i>
-                                    <span id="catDropdownLabel">Categories</span>
+                                    <span id="catDropdownLabel" data-i18n="cat_categories">Categories</span>
                                     <i class="fa-solid fa-chevron-down chevron-icon" aria-hidden="true"></i>
                                 </button>
                                 <div class="category-dropdown-menu" id="catDropdownMenu" role="menu" aria-label="Categories menu">
