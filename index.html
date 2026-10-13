@@ -703,6 +703,11 @@
                                         loading="lazy">
                                         <span data-i18n="lnk_business_card">Business Card</span><i class="fa-solid fa-arrow-right"></i>
                                     </a>
+                                    <a href="assets/site-images/Mobile_Express_Cash_Memo.png" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link" decoding="async"
+                                        loading="lazy">
+                                        <span data-i18n="lnk_cash_memo">Cash Memo Design</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </article>
@@ -960,6 +965,75 @@
             </div>
         </div>
     </aside>
+
+    <!-- Interactive Photo Viewer / Lightbox Modal -->
+    <div id="photoViewerModal" class="photo-viewer-modal" role="dialog" aria-modal="true" aria-label="Photo Viewer" hidden>
+        <!-- Blurred Backdrop -->
+        <div class="photo-viewer-backdrop" id="photoViewerBackdrop"></div>
+
+        <!-- Header Bar -->
+        <header class="photo-viewer-header">
+            <div class="photo-viewer-info">
+                <div class="photo-viewer-badge">
+                    <i class="fa-solid fa-image" aria-hidden="true"></i>
+                    <span id="photoViewerCounter">1 / 1</span>
+                </div>
+                <div class="photo-viewer-text">
+                    <h3 id="photoViewerTitle" class="photo-viewer-title">Project Graphic</h3>
+                    <span id="photoViewerSubtitle" class="photo-viewer-subtitle">Design Preview</span>
+                </div>
+            </div>
+
+            <div class="photo-viewer-actions">
+                <!-- Zoom Controls -->
+                <div class="photo-viewer-zoom-bar" role="toolbar" aria-label="Zoom controls">
+                    <button type="button" class="photo-viewer-btn" id="photoViewerZoomOut" title="Zoom Out (-)" aria-label="Zoom Out">
+                        <i class="fa-solid fa-minus" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="photo-viewer-btn zoom-level-btn" id="photoViewerZoomReset" title="Reset Zoom (100%)" aria-label="Reset Zoom">
+                        <span id="photoViewerZoomText">100%</span>
+                    </button>
+                    <button type="button" class="photo-viewer-btn" id="photoViewerZoomIn" title="Zoom In (+)" aria-label="Zoom In">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <!-- Download / Open Original -->
+                <a id="photoViewerDownload" href="#" download class="photo-viewer-btn" title="Download Image" aria-label="Download Image" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-download" aria-hidden="true"></i>
+                </a>
+
+                <!-- Top Right Cross / Close Button -->
+                <button type="button" class="photo-viewer-btn photo-viewer-close" id="photoViewerClose" title="Close (Esc)" aria-label="Close viewer">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Stage -->
+        <div class="photo-viewer-stage" id="photoViewerStage">
+            <button type="button" class="photo-viewer-nav-btn prev" id="photoViewerPrev" title="Previous Image (Left Arrow)" aria-label="Previous image">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+
+            <div class="photo-viewer-viewport" id="photoViewerViewport">
+                <div class="photo-viewer-img-wrap" id="photoViewerImgWrap">
+                    <img id="photoViewerImg" class="photo-viewer-img" src="" alt="" draggable="false">
+                </div>
+            </div>
+
+            <button type="button" class="photo-viewer-nav-btn next" id="photoViewerNext" title="Next Image (Right Arrow)" aria-label="Next image">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <!-- Footer Hint -->
+        <footer class="photo-viewer-footer">
+            <span class="photo-viewer-hint">
+                <kbd>Scroll</kbd> or <kbd>Double-click</kbd> to zoom &bull; <kbd>Drag</kbd> to pan &bull; <kbd>←</kbd> <kbd>→</kbd> navigate &bull; <kbd>Esc</kbd> to close
+            </span>
+        </footer>
+    </div>
 
     <!-- Vercel Web Analytics -->
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>

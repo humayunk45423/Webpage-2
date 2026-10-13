@@ -847,7 +847,383 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // 9. Register PWA Service Worker
+    // 10. Photo Viewer / Lightbox with Zoom, Pan, and Blur Backdrop
+    // =========================================================================
+    const modal = document.getElementById('photoViewerModal');
+    if (modal) {
+        const backdrop = document.getElementById('photoViewerBackdrop');
+        const imgWrap = document.getElementById('photoViewerImgWrap');
+        const img = document.getElementById('photoViewerImg');
+        const titleEl = document.getElementById('photoViewerTitle');
+        const subtitleEl = document.getElementById('photoViewerSubtitle');
+        const counterEl = document.getElementById('photoViewerCounter');
+        const zoomText = document.getElementById('photoViewerZoomText');
+        const closeBtn = document.getElementById('photoViewerClose');
+        const prevBtn = document.getElementById('photoViewerPrev');
+        const nextBtn = document.getElementById('photoViewerNext');
+        const zoomInBtn = document.getElementById('photoViewerZoomIn');
+        const zoomOutBtn = document.getElementById('photoViewerZoomOut');
+        const zoomResetBtn = document.getElementById('photoViewerZoomReset');
+        const downloadBtn = document.getElementById('photoViewerDownload');
+        const stage = document.getElementById('photoViewerStage');
+
+        let gallery = [];
+        let currentIndex = 0;
+        let scale = 1;
+        let panX = 0;
+        let panY = 0;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let prevPanX = 0;
+        let prevPanY = 0;
+        let lastFocusedEl = null;
+
+        const isImageHref = (url) => /\.(png|jpe?g|webp|svg|gif)(\?.*)?$/i.test(url);
+
+        // Discover all project graphic links
+        const setupGallery = () => {
+            const projectSec = document.getElementById('projects');
+            if (!projectSec) return;
+
+            const links = projectSec.querySelectorAll('a.project-link');
+            gallery = [];
+
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && isImageHref(href)) {
+                    const card = link.closest('.project-card');
+                    const idx = gallery.length;
+                    gallery.push({ href, link, card });
+
+                    // Enhance link icon to expand icon
+                    const icon = link.querySelector('i');
+                    if (icon) {
+                        icon.className = 'fa-solid fa-expand';
+                    }
+
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        lastFocusedEl = link;
+                        openViewer(idx);
+                    });
+                }
+            });
+        };
+
+        const updateTransform = (smooth = true) => {
+            if (!imgWrap) return;
+            imgWrap.style.transition = smooth ? 'transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none';
+            imgWrap.style.transform = `translate3d(${panX}px, ${panY}px, 0) scale(${scale})`;
+            if (scale > 1.05) {
+                imgWrap.classList.add('is-zoomed');
+            } else {
+                imgWrap.classList.remove('is-zoomed');
+            }
+            if (zoomText) {
+                zoomText.textContent = `${Math.round(scale * 100)}%`;
+            }
+        };
+
+        const setZoom = (newScale, smooth = true) => {
+            scale = Math.min(Math.max(newScale, 0.5), 4.5);
+            if (scale <= 1) {
+                panX = 0;
+                panY = 0;
+            }
+            updateTransform(smooth);
+        };
+
+        const resetZoom = (smooth = true) => {
+            scale = 1;
+            panX = 0;
+            panY = 0;
+            updateTransform(smooth);
+        };
+
+        const loadCurrentImage = () => {
+            if (!gallery.length) return;
+            const item = gallery[currentIndex];
+            if (!item) return;
+
+            img.classList.add('is-loading');
+            img.src = item.href;
+            img.onload = () => img.classList.remove('is-loading');
+
+            // Dynamic titles respecting active language
+            const cardTitle = item.card?.querySelector('h3')?.textContent?.trim() || 'Project Graphic';
+            const linkText = item.link?.querySelector('span')?.textContent?.trim() || item.link?.textContent?.trim() || 'Design';
+
+            if (titleEl) titleEl.textContent = cardTitle;
+            if (subtitleEl) subtitleEl.textContent = linkText;
+            if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${gallery.length}`;
+            if (downloadBtn) {
+                downloadBtn.href = item.href;
+                const filename = item.href.split('/').pop() || 'project-graphic.png';
+                downloadBtn.setAttribute('download', filename);
+            }
+
+            resetZoom(false);
+        };
+
+        const openViewer = (index) => {
+            if (index < 0 || index >= gallery.length) return;
+            currentIndex = index;
+            modal.hidden = false;
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => {
+                modal.classList.add('is-open');
+                loadCurrentImage();
+                if (closeBtn) closeBtn.focus();
+            });
+        };
+
+        const closeViewer = () => {
+            modal.classList.remove('is-open');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                modal.hidden = true;
+                img.src = '';
+                resetZoom(false);
+                if (lastFocusedEl) {
+                    lastFocusedEl.focus();
+                }
+            }, 300);
+        };
+
+        const prevImage = () => {
+            if (gallery.length <= 1) return;
+            currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+            loadCurrentImage();
+        };
+
+        const nextImage = () => {
+            if (gallery.length <= 1) return;
+            currentIndex = (currentIndex + 1) % gallery.length;
+            loadCurrentImage();
+        };
+
+        // Event Listeners
+        if (closeBtn) closeBtn.addEventListener('click', closeViewer);
+        if (backdrop) backdrop.addEventListener('click', closeViewer);
+        if (prevBtn) prevBtn.addEventListener('click', prevImage);
+        if (nextBtn) nextBtn.addEventListener('click', nextImage);
+
+        if (zoomInBtn) zoomInBtn.addEventListener('click', () => setZoom(scale + 0.35));
+        if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => setZoom(scale - 0.35));
+        if (zoomResetBtn) zoomResetBtn.addEventListener('click', () => resetZoom(true));
+
+        // Double Click to toggle zoom
+        if (stage) {
+            stage.addEventListener('dblclick', (e) => {
+                if (e.target.closest('.photo-viewer-nav-btn') || e.target.closest('.photo-viewer-header') || e.target.closest('.photo-viewer-footer')) return;
+                if (scale > 1.05) {
+                    resetZoom(true);
+                } else {
+                    setZoom(2.2, true);
+                }
+            });
+
+            // Mouse wheel zooming
+            stage.addEventListener('wheel', (e) => {
+                if (!modal.classList.contains('is-open')) return;
+                e.preventDefault();
+                const delta = e.deltaY < 0 ? 0.25 : -0.25;
+                setZoom(scale + delta, true);
+            }, { passive: false });
+        }
+
+        // Mouse Drag to Pan when zoomed
+        if (imgWrap) {
+            imgWrap.addEventListener('mousedown', (e) => {
+                if (scale <= 1 || e.button !== 0) return;
+                e.preventDefault();
+                isDragging = true;
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+                prevPanX = panX;
+                prevPanY = panY;
+                imgWrap.classList.add('is-dragging');
+            });
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            panX = prevPanX + (e.clientX - dragStartX);
+            panY = prevPanY + (e.clientY - dragStartY);
+            updateTransform(false);
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                if (imgWrap) imgWrap.classList.remove('is-dragging');
+            }
+        });
+
+        // =========================================================================
+        // Touch Gestures: 2-finger & 3-finger pinch-to-zoom, pan & double-tap
+        // =========================================================================
+        let initialSpread = 0;
+        let initialScale = 1;
+        let initialPanX = 0;
+        let initialPanY = 0;
+        let initialCentroid = { x: 0, y: 0 };
+        let activeTouchCount = 0;
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let lastTapTime = 0;
+
+        // Computes centroid and spread radius for 2, 3, or more fingers
+        const computeTouchMetrics = (touches) => {
+            const count = touches.length;
+            if (count === 0) return { count: 0, centroid: { x: 0, y: 0 }, spread: 0 };
+            let sumX = 0;
+            let sumY = 0;
+            for (let i = 0; i < count; i++) {
+                sumX += touches[i].clientX;
+                sumY += touches[i].clientY;
+            }
+            const centroid = { x: sumX / count, y: sumY / count };
+            let sumDist = 0;
+            for (let i = 0; i < count; i++) {
+                sumDist += Math.hypot(touches[i].clientX - centroid.x, touches[i].clientY - centroid.y);
+            }
+            const spread = count > 1 ? sumDist / count : 0;
+            return { count, centroid, spread };
+        };
+
+        if (stage) {
+            stage.addEventListener('touchstart', (e) => {
+                const metrics = computeTouchMetrics(e.touches);
+                activeTouchCount = metrics.count;
+
+                if (metrics.count >= 2) {
+                    // 2 or 3-finger pinch zoom
+                    initialSpread = metrics.spread;
+                    initialScale = scale;
+                    initialPanX = panX;
+                    initialPanY = panY;
+                    initialCentroid = metrics.centroid;
+                } else if (metrics.count === 1) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    prevPanX = panX;
+                    prevPanY = panY;
+                }
+            }, { passive: false });
+
+            stage.addEventListener('touchmove', (e) => {
+                if (!modal.classList.contains('is-open')) return;
+                const metrics = computeTouchMetrics(e.touches);
+
+                if (metrics.count >= 2 && initialSpread > 0) {
+                    e.preventDefault();
+                    // Pinch zoom ratio (works for 2 or 3 fingers)
+                    const factor = metrics.spread / initialSpread;
+                    setZoom(initialScale * factor, false);
+
+                    // Also follow centroid translation
+                    const deltaX = metrics.centroid.x - initialCentroid.x;
+                    const deltaY = metrics.centroid.y - initialCentroid.y;
+                    panX = initialPanX + deltaX;
+                    panY = initialPanY + deltaY;
+                    updateTransform(false);
+                } else if (metrics.count === 1 && scale > 1.05) {
+                    e.preventDefault();
+                    panX = prevPanX + (e.touches[0].clientX - touchStartX);
+                    panY = prevPanY + (e.touches[0].clientY - touchStartY);
+                    updateTransform(false);
+                }
+            }, { passive: false });
+
+            stage.addEventListener('touchend', (e) => {
+                const remaining = e.touches.length;
+                if (remaining >= 2) {
+                    // Finger lifted while still 2+ fingers down: re-anchor pinch baseline
+                    const metrics = computeTouchMetrics(e.touches);
+                    initialSpread = metrics.spread;
+                    initialScale = scale;
+                    initialPanX = panX;
+                    initialPanY = panY;
+                    initialCentroid = metrics.centroid;
+                } else if (remaining === 1) {
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    prevPanX = panX;
+                    prevPanY = panY;
+                    initialSpread = 0;
+                } else if (remaining === 0) {
+                    // Snap back if pinched below 100%
+                    if (scale < 1) {
+                        resetZoom(true);
+                    }
+
+                    // Single-touch gesture handling
+                    if (e.changedTouches.length === 1 && activeTouchCount === 1) {
+                        const endTouch = e.changedTouches[0];
+                        const moveDist = Math.hypot(endTouch.clientX - touchStartX, endTouch.clientY - touchStartY);
+
+                        // Double tap detection
+                        const now = Date.now();
+                        if (moveDist < 15) {
+                            if (now - lastTapTime < 320) {
+                                if (scale > 1.05) resetZoom(true);
+                                else setZoom(2.2, true);
+                                lastTapTime = 0;
+                                return;
+                            }
+                            lastTapTime = now;
+                        }
+
+                        // Swipe left/right when not zoomed
+                        if (scale <= 1.05 && moveDist > 35) {
+                            const diffX = endTouch.clientX - touchStartX;
+                            const diffY = endTouch.clientY - touchStartY;
+                            if (Math.abs(diffX) > Math.abs(diffY) * 1.2) {
+                                if (diffX < 0) nextImage();
+                                else prevImage();
+                            }
+                        }
+                    }
+
+                    initialSpread = 0;
+                    activeTouchCount = 0;
+                }
+            });
+        }
+
+        // Global Keyboard Controls (Esc to close, Arrows to navigate, +/- to zoom)
+        window.addEventListener('keydown', (e) => {
+            if (!modal.classList.contains('is-open')) return;
+
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                closeViewer();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevImage();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextImage();
+            } else if (e.key === '+' || e.key === '=') {
+                e.preventDefault();
+                setZoom(scale + 0.35);
+            } else if (e.key === '-' || e.key === '_') {
+                e.preventDefault();
+                setZoom(scale - 0.35);
+            } else if (e.key === '0' || e.key.toLowerCase() === 'r') {
+                e.preventDefault();
+                resetZoom(true);
+            }
+        });
+
+        // Initialize gallery links
+        setupGallery();
+    }
+
+    // =========================================================================
+    // 11. Register PWA Service Worker & Idle Optimizations
     // =========================================================================
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {

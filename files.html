@@ -1121,6 +1121,11 @@
             font-size: 1.1rem;
             pointer-events: none;
             transition: color 0.3s ease;
+            z-index: 2;
+        }
+
+        .search-box:focus-within i {
+            color: var(--accent);
         }
 
         .search-box input {
@@ -1136,6 +1141,11 @@
             backdrop-filter: blur(10px);
             transition: all 0.4s var(--bezier);
             box-shadow: var(--shadow);
+        }
+
+        .search-box input::placeholder {
+            color: var(--muted);
+            opacity: 0.75;
         }
 
         .search-box input:focus {
@@ -1166,6 +1176,7 @@
             transition: opacity 0.25s var(--bezier), transform 0.25s var(--bezier);
             user-select: none;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+            z-index: 2;
         }
 
         .search-box input:focus ~ .search-kbd,
@@ -1287,15 +1298,16 @@
             }
 
             .search-box input {
-                padding: 0.85rem 1rem;
+                padding: 0.85rem 1rem 0.85rem 2.85rem;
                 font-size: 0.95rem;
                 border-radius: 1rem;
-                text-align: center;
+                text-align: left;
             }
 
             .search-box i {
-                left: 1.25rem;
-                opacity: 0.5;
+                left: 1.1rem;
+                opacity: 0.9;
+                z-index: 2;
             }
 
             .category-pills {
