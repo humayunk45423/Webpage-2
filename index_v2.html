@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Critical: Theme & Language Sync (runs before render to prevent flash) -->
+    <script>
+    (function(){
+        var savedTheme = localStorage.getItem('portfolio-theme');
+        var preferredTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', preferredTheme);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if(meta) meta.setAttribute('content', preferredTheme === 'dark' ? '#0b0b0b' : '#ffffff');
+        if (window.location.hash) { document.documentElement.style.scrollBehavior = 'auto'; }
+        var savedLang = localStorage.getItem('portfolio-lang') || 'en';
+        document.documentElement.setAttribute('data-lang', savedLang);
+        document.documentElement.setAttribute('lang', savedLang);
+    })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="canonical" href="https://humayounkobir.vercel.app/">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="author" content="Humayoun Kobir (Humayun Kabir / হুমায়ূন কবির)">
+    <title>Humayoun Kobir | Diploma Engineer & Designer Portfolio</title>
+    <meta name="google-site-verification" content="gbt7W1P_KD8WHElfmbnvi2pdLBGnUWCK617A8bAZdS8" />
+    <meta name="description"
+        content="Official portfolio of Humayoun Kobir (Humayun Kabir / হুমায়ূন কবির) — Diploma Engineer, Designer, 3D Visualizer, and Software HQ creator in Bangladesh.">
+    <meta name="keywords"
+        content="Humayoun Kobir, Humayun Kabir, Humayun Kobir, Humayoun Kabir, Humaun Kabir, Humaun Kobir, Humauin Kabir, Humauin Kobir, Humayun Kabeer, Humayoun Kabeer, Humayon Kabir, Humayon Kobir, Md Humayun Kabir, Md. Humayun Kabir, Md Humayoun Kobir, Md. Humayoun Kobir, Mohammad Humayun Kabir, Mohammad Humayoun Kobir, Mohammed Humayun Kabir, Engr Humayun Kabir, Engr. Humayun Kabir, Engr Humayoun Kobir, Engr. Humayoun Kobir, হুমায়ূন কবির, হুমায়ুন কবির, হুমায়ূন কবির, হুমায়ুন কবির, হুমায়ুন কবীর, হুমায়ূন কবীর, হুমায়ূন কবীর, মোঃ হুমায়ুন কবির, মো: হুমায়ুন কবির, মোহাম্মদ হুমায়ূন কবির, মোহাম্মদ হুমায়ুন কবির, Humayun Kabir Designer, humayun kabir designer, Humayun Kabir Engineer, humayun kabir engineer, Humayoun Kobir Designer, humayoun kobir designer, Humayoun Kobir Engineer, humayoun kobir engineer, Humayun Kabir Graphic Designer, Humayun Kabir 3D Artist, Humayun Kabir Bangladesh, Humayun Kabir Portfolio, Humayoun Kobir Portfolio, Software HQ, Software HQ Humayun Kabir, Humayun Kabir Software HQ, Humayunk45423, Diploma Engineer Bangladesh, Computer Science Engineer Bangladesh">
+
+    <!-- Dublin Core Metadata (Semantic Web / Academic & Entity Crawlers) -->
+    <meta name="DC.title" content="Humayoun Kobir | Diploma Engineer & Designer Portfolio">
+    <meta name="DC.creator" content="Humayoun Kobir (Humayun Kabir)">
+    <meta name="DC.subject" content="Computer Science, Graphic Design, 3D Modeling, Blender, Software HQ, PC Hardware Optimization">
+    <meta name="DC.description" content="Official website and portfolio of Humayoun Kobir (Humayun Kabir / হুমায়ূন কবির), Computer Science Diploma Engineer and Graphic Designer in Bangladesh.">
+    <meta name="DC.publisher" content="Humayoun Kobir">
+    <meta name="DC.language" content="en, bn">
+
+    <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Humayoun Kobir Portfolio">
+    <meta property="og:title" content="Humayoun Kobir | Diploma Engineer & Designer Portfolio">
+    <meta property="og:description"
+        content="Official portfolio of Humayoun Kobir (Humayun Kabir / হুমায়ূন কবির) — Diploma Engineer, Graphic Designer, and 3D Visualizer.">
+    <meta property="og:url" content="https://humayounkobir.vercel.app/">
+    <meta property="og:image" content="https://humayounkobir.vercel.app/assets/site-images/refined.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Humayoun Kobir - Portfolio Preview">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="bn_BD">
+    <meta property="profile:first_name" content="Humayoun">
+    <meta property="profile:last_name" content="Kobir">
+    <meta property="profile:username" content="humayunk45423">
+    <meta property="og:see_also" content="https://github.com/humayunk45423">
+    <meta property="og:see_also" content="https://www.linkedin.com/in/humayounkobir/">
+    <meta property="og:see_also" content="https://www.behance.net/humayunk45423">
+    <meta property="og:see_also" content="https://dribbble.com/humayunk45423">
+    <meta property="og:see_also" content="https://www.upwork.com/freelancers/~019f94538da41f401d">
+
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://humayounkobir.vercel.app/">
+    <meta name="twitter:title" content="Humayoun Kobir | Diploma Engineer & Designer Portfolio">
+    <meta name="twitter:description"
+        content="Official portfolio of Humayoun Kobir (Humayun Kabir) — Computer Science Engineer, Graphic Designer, and Software HQ Creator.">
+    <meta name="twitter:image" content="https://humayounkobir.vercel.app/assets/site-images/refined.webp">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- SEO JSON-LD Master Entity Graph (State-of-the-art Knowledge Graph Entity Resolution) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://humayounkobir.vercel.app/#person",
+          "name": "Humayoun Kobir",
+          "givenName": "Humayoun",
+          "familyName": "Kobir",
+          "additionalName": "Kabir",
+          "alternateName": [
+            "Humayun Kabir",
+            "Humayun Kobir",
+            "Humayoun Kabir",
+            "Humaun Kabir",
+            "Humaun Kobir",
+            "Humauin Kabir",
+            "Humauin Kobir",
+            "Humayun Kabeer",
+            "Humayoun Kabeer",
+            "Humayon Kabir",
+            "Humayon Kobir",
+            "Md Humayun Kabir",
+            "Md. Humayun Kabir",
+            "Md Humayoun Kobir",
+            "Md. Humayoun Kobir",
+            "Mohammad Humayun Kabir",
+            "Mohammad Humayoun Kobir",
+            "Mohammed Humayun Kabir",
+            "Engr Humayun Kabir",
+            "Engr. Humayun Kabir",
+            "Engr Humayoun Kobir",
+            "Engr. Humayoun Kobir",
+            "হুমায়ূন কবির",
+            "হুমায়ুন কবির",
+            "হুমায়ূন কবির",
+            "হুমায়ুন কবির",
+            "হুমায়ুন কবীর",
+            "হুমায়ূন কবীর",
+            "হুমায়ূন কবীর",
+            "মোঃ হুমায়ুন কবির",
+            "মো: হুমায়ুন কবির",
+            "মোহাম্মদ হুমায়ূন কবির",
+            "মোহাম্মদ হুমায়ুন কবির",
+            "হুমায়ুন কবির ইঞ্জিনিয়ার",
+            "হুমায়ুন কবির ডিজাইনার",
+            "Humayun Kabir Designer",
+            "humayun kabir designer",
+            "Humayun Kabir Engineer",
+            "humayun kabir engineer",
+            "Humayoun Kobir Designer",
+            "humayoun kobir designer",
+            "Humayoun Kobir Engineer",
+            "humayoun kobir engineer",
+            "Humayun Kabir Graphic Designer",
+            "Humayun Kabir 3D Artist",
+            "Humayun Kabir Bangladesh",
+            "Humayun Kabir Portfolio",
+            "Humayoun Kobir Portfolio",
+            "Software HQ Humayun Kabir",
+            "Humayun Kabir Software HQ",
+            "Humayoun Kobir Software HQ",
+            "Humayun Kobir Software HQ",
+            "Software HQ Humayoun Kobir",
+            "SoftwareHQ Humayun Kabir",
+            "SoftwareHQ Humayoun Kobir",
+            "Humain Kabir Software HQ",
+            "হুমায়ূন কবির সফটওয়্যার এইচকিউ",
+            "হুমায়ুন কবির সফটওয়্যার এইচকিউ",
+            "সফটওয়্যার এইচকিউ হুমায়ুন কবির",
+            "humayunk45423"
+          ],
+          "disambiguatingDescription": "Humayoun Kobir (widely known as Humayun Kabir or হুমায়ূন কবির) is a Bangladeshi Computer Science Diploma Engineer, Graphic Designer, 3D Visualizer, and creator of Software HQ.",
+          "jobTitle": [
+            "Computer Science Engineer",
+            "Diploma Engineer",
+            "Graphic Designer",
+            "3D Visualizer",
+            "Hardware Specialist"
+          ],
+          "hasOccupation": [
+            {
+              "@type": "Occupation",
+              "name": "Graphic Designer",
+              "skills": "Logo Design, Branding, Banner Design, Adobe Illustrator, Adobe Photoshop"
+            },
+            {
+              "@type": "Occupation",
+              "name": "Computer Science Diploma Engineer",
+              "skills": "Hardware Diagnostics, Windows Optimization, PC Maintenance, Scripting, Python, C, C++"
+            },
+            {
+              "@type": "Occupation",
+              "name": "3D Visualizer",
+              "skills": "Blender 3D, Architectural Visuals, Product Modeling, Scene Lighting"
+            }
+          ],
+          "url": "https://humayounkobir.vercel.app/",
+          "image": "https://humayounkobir.vercel.app/assets/site-images/refined.webp",
+          "nationality": {
+            "@type": "Country",
+            "name": "Bangladesh"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "Bangladesh"
+          },
+          "knowsLanguage": ["en", "bn"],
+          "sameAs": [
+            "https://github.com/humayunk45423",
+            "https://www.linkedin.com/in/humayounkobir/",
+            "https://www.behance.net/humayunk45423",
+            "https://dribbble.com/humayunk45423",
+            "https://www.upwork.com/freelancers/~019f94538da41f401d",
+            "https://stackoverflow.com/users/20905785",
+            "https://www.reddit.com/user/Great_Media_7280/"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Published Web Applications & Software Utilities",
+            "itemListElement": [
+              {
+                "@type": "WebApplication",
+                "name": "DUET Code",
+                "url": "https://duetcode.vercel.app/",
+                "description": "DUET admission syllabus basic C & C++ programming platform with offline PDF and APK."
+              },
+              {
+                "@type": "WebApplication",
+                "name": "SnapSignFit",
+                "url": "https://snapsignfit.vercel.app/",
+                "description": "100% client-side photo & signature auto-formatter for Bangladesh govt forms."
+              },
+              {
+                "@type": "SoftwareApplication",
+                "name": "HK-Tool",
+                "url": "https://hktool.vercel.app/",
+                "description": "Zero-install Windows hardware health inspection & resale valuation utility."
+              }
+            ]
+          },
+          "knowsAbout": [
+            "Computer Science", 
+            "Graphic Design", 
+            "3D Modeling", 
+            "Blender", 
+            "Microsoft Excel", 
+            "Hardware Optimization",
+            "PC Maintenance",
+            "Android ROM Flashing",
+            "Software HQ",
+            "Software Architecture"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Professional Engineering & Creative Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Graphic Design & Branding",
+                  "description": "Logos, banners, brand identity packages, business cards, and social media advertising."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "3D Modeling & Rendering",
+                  "description": "Blender 3D visual models, architectural previews, and realistic rendering."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Data Management & Office Support",
+                  "description": "Advanced Microsoft Excel, Google Sheets, lead generation, and structured data entry."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Hardware & PC Optimization",
+                  "description": "Hardware diagnostics, thermal optimization, BIOS setup, and Windows maintenance."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://humayounkobir.vercel.app/#website",
+          "url": "https://humayounkobir.vercel.app/",
+          "name": "Humayoun Kobir (Humayun Kabir) - Official Portfolio & Software HQ",
+          "alternateName": [
+            "Humayun Kabir Portfolio",
+            "Humayun Kobir Portfolio",
+            "Humayoun Kabir Website",
+            "হুমায়ূন কবির ওয়েবসাইট",
+            "হুমায়ুন কবির পোর্টফোলিও",
+            "Humayun Kabir Engineer Website",
+            "Humayun Kabir Designer Website",
+            "Software HQ by Humayoun Kobir",
+            "Software HQ Humayun Kabir",
+            "Software HQ Humayoun Kobir",
+            "Humayun Kabir Software HQ",
+            "Humayoun Kobir Software HQ",
+            "SoftwareHQ Humayun Kabir",
+            "হুমায়ূন কবির সফটওয়্যার এইচকিউ",
+            "হুমায়ুন কবির সফটওয়্যার এইচকিউ",
+            "সফটওয়্যার এইচকিউ হুমায়ুন কবির"
+          ],
+          "description": "Official website and portfolio of Humayoun Kobir (Humayun Kabir / হুমায়ূন কবির), featuring computer engineering projects, creative design work, 3D modeling, and Software HQ repository.",
+          "publisher": {"@id": "https://humayounkobir.vercel.app/#person"},
+          "inLanguage": ["en", "bn"]
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://humayounkobir.vercel.app/#profilepage",
+          "url": "https://humayounkobir.vercel.app/",
+          "name": "Humayoun Kobir (Humayun Kabir) - Official Portfolio & Profile",
+          "isPartOf": {"@id": "https://humayounkobir.vercel.app/#website"},
+          "about": {"@id": "https://humayounkobir.vercel.app/#person"},
+          "mainEntity": {"@id": "https://humayounkobir.vercel.app/#person"},
+          "inLanguage": ["en", "bn"]
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "Sadia Variety Store Branding",
+          "author": {"@id": "https://humayounkobir.vercel.app/#person"},
+          "description": "Full branding and visual identity for Sadia Variety Store.",
+          "url": "https://sadiastore.vercel.app"
+        }
+      ]
+    }
+    </script>
+
+    <link rel="icon" type="image/png" href="assets/site-images/Artboard_1logo_border_radious.png">
+    <link rel="apple-touch-icon" href="assets/site-images/Artboard_1logo_border_radious.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Ultra Performance: Resource Hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%20%21%40%23%24%25%5E%26%2A%28%29-_%2B%3D%5B%5D%7B%7D%7C%3B%3A%27%22%2C.%3C%3E%3F%2F%5C"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet">
+        <style>
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            #typing {
+                display: none !important;
+            }
+        </style>
+    </noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+
+    <link rel="stylesheet" href="style.css">
+    <!-- Instant Page Transitions: Chromium Speculation Rules -->
+    <script type="speculationrules">
+    {
+      "prerender": [
+        {
+          "source": "list",
+          "urls": ["files.html"]
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <div class="bg" aria-hidden="true">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
+    </div>
+
+    <div class="shell" id="top">
+        <header class="header">
+            <div class="container nav-wrap">
+                <a class="brand" href="#top" aria-label="Go to top">
+                    <span class="mark">
+                        <img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir - Animated Brand Logo"
+                            width="44" height="44" decoding="async" fetchpriority="high">
+                    </span>
+                    <span class="brand-text">
+                        <strong data-i18n="brand_name">Humayoun Kobir</strong>
+                        <small data-i18n="brand_title">Engineer & Designer</small>
+                    </span>
+                </a>
+                <nav class="nav" aria-label="Primary navigation">
+                    <a href="#about" data-i18n="nav_about">About</a>
+                    <a href="#skills" data-i18n="nav_skills">Skills</a>
+                    <a href="#projects" data-i18n="nav_projects">Projects</a>
+                    <a href="#contact" data-i18n="nav_contact">Contact</a>
+                    <a href="files.html" id="navSoftwareHq" data-i18n="nav_softwarehq">Software HQ</a>
+                    <div class="glider" id="navGlider"></div>
+                </nav>
+                <div class="header-controls">
+                    <button type="button" class="segmented-toggle lang-toggle" id="langToggle" data-state="right" aria-label="Toggle Language (English / Bangla)" title="Toggle Language (English / Bangla)">
+                        <div class="toggle-slider" aria-hidden="true"></div>
+                        <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
+                        <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
+                    </button>
+                    <button type="button" class="segmented-toggle" id="themeToggle" data-state="left" aria-label="Toggle Theme (Light / Dark)" title="Toggle Theme (Light / Dark)">
+                        <div class="toggle-slider" aria-hidden="true"></div>
+                        <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
+                            <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                        </span>
+                        <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
+                            <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                    <button type="button" class="hamburger-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu" title="Menu">
+                        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="page-main">
+            <section class="section hero" id="about" style="content-visibility: visible; contain: none;">
+                <div class="container hero-grid">
+                    <div class="hero-copy reveal">
+                        <h2 data-i18n="hero_greeting">Assalamu Alaikum (Greetings)!</h2>
+                        <h1 data-i18n="hero_iam">I'm <span class="hero-name">Humayoun Kobir</span></h1>
+                        <div id="typing" aria-hidden="true"></div>
+                        <div class="sr-only">
+                            <p>Humayoun Kobir (widely written as Humayun Kabir, Humayun Kobir, Humayoun Kabir, or in Bengali as হুমায়ূন কবির / হুমায়ুন কবির / মো: হুমায়ুন কবির) is a professional Computer Science Diploma Engineer, Creative Graphic Designer, 3D Visualizer, and Windows Hardware Specialist from Bangladesh.</p>
+                            <p>Specializations: Humayun Kabir Designer (Logo, Branding, Business Cards, Posters, Social Ads), Humayun Kabir Engineer (PC Hardware Diagnostics, BIOS Optimization, Custom Scripts, Software HQ Utilities), 3D Blender Artist, and Excel Data Specialist.</p>
+                        </div>
+                        <p class="about-text" data-i18n="hero_about_text">
+                            A Diploma Engineer in Computer Science with a focus on smart strategies and efficient solutions. Bridging the gap between technical engineering and creative design through 3D modeling, branding, and data optimization.
+                        </p>
+                        <div class="actions">
+                            <a href="#skills" class="btn primary">
+                                <i class="fa-solid fa-layer-group"></i>
+                                <span data-i18n="btn_skills">Skills</span>
+                            </a>
+                            <a href="#projects" class="btn secondary">
+                                <i class="fa-solid fa-briefcase"></i>
+                                <span data-i18n="btn_projects">Projects</span>
+                            </a>
+                            <a href="#contact" class="btn outline">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span data-i18n="btn_connect">Connect</span>
+                            </a>
+                        </div>
+                        <div class="hero-notes">
+                            <span class="hero-note" data-i18n="chip_gd">Graphic Design</span>
+                            <span class="hero-note" data-i18n="chip_3d">3D Modeling & Blender</span>
+                            <span class="hero-note" data-i18n="chip_excel">Excel & Data Specialists</span>
+                            <span class="hero-note" data-i18n="chip_hw">Hardware Solutions</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-side reveal d1">
+                        <div class="portrait">
+                            <div class="frame">
+                                <img src="assets/site-images/refined.webp"
+                                    alt="Humayoun Kobir - Computer Science Engineer & Graphic Designer" width="380"
+                                    height="380" decoding="async" loading="eager" fetchpriority="high">
+                            </div>
+                            <div class="portrait-meta" style="contain: content;">
+                                <div class="available">
+                                    <span class="dot"></span>
+                                    <span data-i18n="available_badge">Available for Hire</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section split-section" id="skills"
+                style="content-visibility: auto; contain-intrinsic-size: 1px 1000px;">
+                <div class="container">
+                    <h2 class="section-title reveal" data-i18n="skills_title">Skills</h2>
+                    <div class="services-grid">
+                        <article class="service-card reveal">
+                            <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                            <h3 data-i18n="svc1_title">Graphic Design</h3>
+                            <p data-i18n="svc1_desc">Visual assets built for promotion, branding, and polished communication.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc1_c1">Logo design</li>
+                                <li data-i18n="svc1_c2">Banner design</li>
+                                <li data-i18n="svc1_c3">Business cards</li>
+                                <li data-i18n="svc1_c4">Social ads</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal d1">
+                            <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+                            <h3 data-i18n="svc2_title">Programming & Web Basics</h3>
+                            <p data-i18n="svc2_desc">Comfortable with core languages and practical scripting for small projects.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc2_c1">C and C++</li>
+                                <li data-i18n="svc2_c2">Python</li>
+                                <li data-i18n="svc2_c3">HTML, CSS, JavaScript</li>
+                                <li data-i18n="svc2_c4">VBS for Windows</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal d2">
+                            <div class="service-icon"><i class="fa-solid fa-sheet-plastic"></i></div>
+                            <h3 data-i18n="svc3_title">Data & Office Work</h3>
+                            <p data-i18n="svc3_desc">Spreadsheet-heavy tasks delivered with accuracy, structure, and clean formatting.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc3_c1">Microsoft Excel</li>
+                                <li data-i18n="svc3_c2">Google Sheets</li>
+                                <li data-i18n="svc3_c3">Data entry</li>
+                                <li data-i18n="svc3_c4">Lead generation</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal">
+                            <div class="service-icon"><i class="fa-solid fa-cube"></i></div>
+                            <h3 data-i18n="svc4_title">3D & Blender</h3>
+                            <p data-i18n="svc4_desc">Entry-level 3D work with attention to form, scene lighting, and presentation.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc4_c1">3D modeling</li>
+                                <li data-i18n="svc4_c2">Rendering</li>
+                                <li data-i18n="svc4_c3">Lighting</li>
+                                <li data-i18n="svc4_c4">Architectural visuals</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal d1">
+                            <div class="service-icon"><i class="fa-solid fa-desktop"></i></div>
+                            <h3 data-i18n="svc5_title">PC Software & Hardware</h3>
+                            <p data-i18n="svc5_desc">Hands-on setup, diagnostics, optimization, and maintenance across devices.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc5_c1">Hardware diagnostics</li>
+                                <li data-i18n="svc5_c2">BIOS and thermals</li>
+                                <li data-i18n="svc5_c3">OS installs</li>
+                                <li data-i18n="svc5_c4">Custom ROM flashing</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal d2">
+                            <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
+                            <h3 data-i18n="svc6_title">Electronics & DIY</h3>
+                            <p data-i18n="svc6_desc">Practical builds using core electronics knowledge and reliable component testing.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc6_c1">Breadboard prototyping</li>
+                                <li data-i18n="svc6_c2">DC-DC systems</li>
+                                <li data-i18n="svc6_c3">Charging modules</li>
+                                <li data-i18n="svc6_c4">Basic soldering</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section split-section" id="projects"
+                style="content-visibility: auto; contain-intrinsic-size: 1px 1200px;">
+                <div class="container">
+                    <h2 class="section-title reveal" data-i18n="projects_title">Projects</h2>
+                    <div class="projects-grid">
+                        <article class="project-card reveal">
+                            <div class="project-content">
+                                <h3 data-i18n="proj1_title">SnapSignFit</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_wasm">WASM</span><span class="tag" data-i18n="tag_clientside">Client-Side</span></div>
+                                <div class="project-links">
+                                    <a href="https://snapsignfit.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit SnapSignFit Live Website">
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/SnapSignFit" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View SnapSignFit GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d1">
+                            <div class="project-content">
+                                <h3 data-i18n="proj2_title">HK-Tool</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_powershell">PowerShell</span><span class="tag" data-i18n="tag_hardware">Hardware</span></div>
+                                <div class="project-links">
+                                    <a href="https://hktool.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit HK-Tool Live Web App">
+                                        <span data-i18n="lnk_live_webapp">Live Web App</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/HK-Tool" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View HK-Tool GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://hktool.vercel.app/i" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Direct PowerShell Install Script">
+                                        <span data-i18n="lnk_ps_script">PowerShell Script</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d2">
+                            <div class="project-content">
+                                <h3 data-i18n="proj3_title">SthapattoShoili</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_3d_webgl">3D WebGL</span><span class="tag" data-i18n="tag_threejs">Three.js</span><span class="tag" data-i18n="tag_react">React</span></div>
+                                <div class="project-links">
+                                    <a href="https://sthapottoshoili.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit SthapottoShoili Live 3D Experience">
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/SthapottoShoili" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View SthapottoShoili GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal">
+                            <div class="project-content">
+                                <h3 data-i18n="proj4_title">DUET C & C++ Programs</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_cpp">C / C++</span><span class="tag" data-i18n="tag_algorithms">Algorithms</span></div>
+                                <div class="project-links">
+                                    <a href="https://duetcode.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit DUET Code Live Explorer Web App">
+                                        <span data-i18n="lnk_live_webapp">Live Web App</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/C-Cpp-Basic-programmes" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View DUET C & C++ Programs GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/C-Cpp-Basic-programmes/raw/main/DUET%20C%20%26%20C%2B%2B%20Programs.pdf" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Download DUET Admission C & C++ PDF">
+                                        <span data-i18n="lnk_download_pdf">Download PDF</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d1">
+                            <div class="project-content">
+                                <h3 data-i18n="proj5_title">DUET Admission Timer</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_bentoui">Bento UI</span><span class="tag" data-i18n="tag_countdown">Countdown</span></div>
+                                <div class="project-links">
+                                    <a href="https://duettimer.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit DUET Timer Live Web App">
+                                        <span data-i18n="lnk_live_webapp">Live Web App</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/DUET-Timer" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View DUET Timer GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d2">
+                            <div class="project-content">
+                                <h3 data-i18n="proj6_title">Sadia Variety Store</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_banner">Banner</span><span class="tag" data-i18n="tag_poster">Poster</span></div>
+                                <div class="project-links">
+                                    <a href="https://sadiastore.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit Sadia Variety Store Live Website">
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/SadiaVarietyStore" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Sadia Variety Store GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://maps.app.goo.gl/M4JL9vnC1bjpBjrp7" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Sadia Variety Store Banner Design">
+                                        <span data-i18n="lnk_banner_design">Banner Design</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="assets/site-images/sadia-variety-store-poster.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Sadia Variety Store Poster Work">
+                                        <span data-i18n="lnk_poster_design">Poster Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal">
+                            <div class="project-content">
+                                <h3 data-i18n="proj7_title">Mobile Express</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_logo">Logo</span><span class="tag" data-i18n="tag_ads">Ads</span><span class="tag" data-i18n="tag_corporate">Corporate</span></div>
+                                <div class="project-links">
+                                    <a href="https://mobileexpress.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit Mobile Express Live Web App">
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/Webpage-T" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Mobile Express GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="assets/site-images/mobile-express-logo.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Mobile Express Logo Design">
+                                        <span data-i18n="lnk_logo_design">Logo Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/mobile-express-business-card.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link" decoding="async"
+                                        loading="lazy" title="View Mobile Express Business Card">
+                                        <span data-i18n="lnk_business_card">Business Card</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/mobile-express-cash-memo.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link" decoding="async"
+                                        loading="lazy" title="View Mobile Express Cash Memo Design">
+                                        <span data-i18n="lnk_cash_memo">Cash Memo Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/mobile-express-facebook-ad.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link" decoding="async"
+                                        loading="lazy" title="View Mobile Express Facebook Ads">
+                                        <span data-i18n="lnk_fb_ads">Facebook Ads</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d1">
+                            <div class="project-content">
+                                <h3 data-i18n="proj8_title">Tadrib Academy</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_logo">Logo</span><span class="tag" data-i18n="tag_poster">Poster</span><span class="tag" data-i18n="tag_ads">Ads</span></div>
+                                <div class="project-links">
+                                    <a href="assets/site-images/tadrib-academy-logo.webp"
+                                        target="_blank" rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Tadrib Academy Logo Project">
+                                        <span data-i18n="lnk_logo_design">Logo Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/tadrib-academy-facebook-ad.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Facebook Ads Designs">
+                                        <span data-i18n="lnk_fb_ads">Facebook Ads Poster</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/tadrib-academy-marketplace-ad.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Marketplace Marketing Work">
+                                        <span data-i18n="lnk_mkt_ads">Marketplace Ads Run</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d2">
+                            <div class="project-content">
+                                <h3 data-i18n="proj9_title">Fuad Mobile Point</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_logo">Logo</span><span class="tag" data-i18n="tag_banner">Banner</span><span class="tag" data-i18n="tag_bcard">Business Card</span></div>
+                                <div class="project-links">
+                                    <a href="assets/site-images/fuad-mobile-point-logo.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Fuad Mobile Point Logo Design">
+                                        <span data-i18n="lnk_logo_design">Logo Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/fuad-mobile-point-banner.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Fuad Mobile Point Banner Design">
+                                        <span data-i18n="lnk_banner_design">Banner Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/fuad-mobile-point-business-card.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Fuad Mobile Point Business Card Design">
+                                        <span data-i18n="lnk_card_design">Business Card Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/fuad-mobile-point-cash-memo.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Fuad Mobile Point Cash Memo Design">
+                                        <span data-i18n="lnk_cash_memo">Cash Memo Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section split-section" id="contact"
+                style="content-visibility: auto; contain-intrinsic-size: 1px 900px;">
+                <div class="container">
+                    <h2 class="section-title reveal" data-i18n="contact_section_title">Contact</h2>
+                    <div class="contact-layout">
+                        <div class="contact-info reveal">
+                            <h3 data-i18n="contact_title">Let's build<br>something great.</h3>
+                        <p class="about-text" data-i18n="contact_text">Open for collaborations, freelance projects, or just a coffee chat about tech and design.</p>
+                        <div class="contact-methods">
+                            <div class="method" id="mailMethod">
+                                <a href="mailto:humayunk45423@gmail.com" class="method-main" aria-label="Send email">
+                                    <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
+                                    <div class="method-text">
+                                        <strong data-i18n="contact_email_btn">Click here to Email</strong>
+                                        <span id="emailText">humayunk45423@gmail.com</span>
+                                    </div>
+                                </a>
+                                <button class="copy-btn" title="Copy Email"
+                                    onclick="copyContact('humayunk45423@gmail.com', this)">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="method" id="waMethod">
+                                <a href="https://wa.me/8801721445207" target="_blank" rel="noopener noreferrer nofollow"
+                                    class="method-main" aria-label="Chat on WhatsApp">
+                                    <div class="method-icon">
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M20 10C20 15.51 15.51 20 10 20C7.97 20 6.08 19.39 4.5 18.35L0.66 19.58L1.9 15.86C0.7 14.22 0 12.19 0 10C0 4.49 4.48 0 10 0L10 0C15.51 0 20 4.49 20 10ZM15.99 12.73C15.89 12.56 13.62 11.51 13.44 11.45C13.18 11.35 12.92 11.38 12.72 11.66C12.44 12.06 12.16 12.46 11.94 12.7C11.77 12.89 11.48 12.91 11.24 12.81C10.91 12.67 10.01 12.36 8.89 11.36C8.03 10.59 7.44 9.64 7.27 9.35C7.1 9.05 7.25 8.88 7.39 8.72C7.81 8.2 8.39 7.85 8.1 7.24C8.03 7.1 7.45 5.66 7.2 5.08C7 4.59 6.86 4.57 6.23 4.57C4.93 4.57 4.19 6.08 4.19 7.37C4.19 9.9 7.77 13.71 10.35 14.78C12.65 15.73 13.33 15.64 13.86 15.53C14.62 15.37 15.58 14.8 15.82 14.12C16.06 13.44 16.06 12.86 15.99 12.73Z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="method-text">
+                                        <strong data-i18n="contact_wa_btn">Click here to WhatsApp</strong>
+                                        <span id="waText">+8801721445207</span>
+                                    </div>
+                                </a>
+                                <button class="copy-btn" title="Copy Number"
+                                    onclick="copyContact('+8801721445207', this)">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-grid reveal d1">
+                        <a href="https://github.com/humayunk45423" target="_blank" rel="noopener noreferrer nofollow"
+                            class="social-item">
+                            <i class="fa-brands fa-github"></i><span data-i18n="social_github">GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/humayounkobir/" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-linkedin"></i><span data-i18n="social_linkedin">LinkedIn</span>
+                        </a>
+                        <a href="https://www.behance.net/humayunk45423" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-behance"></i><span data-i18n="social_behance">Behance</span>
+                        </a>
+                        <a href="https://dribbble.com/humayunk45423" target="_blank" rel="noopener noreferrer nofollow"
+                            class="social-item">
+                            <i class="fa-brands fa-dribbble"></i><span data-i18n="social_dribbble">Dribbble</span>
+                        </a>
+                        <a href="https://www.upwork.com/freelancers/~019f94538da41f401d" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-upwork"></i><span data-i18n="social_upwork">Upwork</span>
+                        </a>
+                        <a href="https://www.reddit.com/user/Great_Media_7280/" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-reddit"></i><span data-i18n="social_reddit">Reddit</span>
+                        </a>
+                        <a href="https://discord.gg/t6SJQwdj" target="_blank" rel="noopener noreferrer nofollow"
+                            class="social-item">
+                            <i class="fa-brands fa-discord"></i><span data-i18n="social_discord">Discord</span>
+                        </a>
+                        <a href="https://stackoverflow.com/users/20905785" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-stack-overflow"></i><span data-i18n="social_stackoverflow">Stack Overflow</span>
+                        </a>
+                        <a href="https://muslimbangla.com/quran" target="_blank" rel="noopener noreferrer nofollow"
+                            class="social-item">
+                            <i class="fa-solid fa-book-open"></i><span data-i18n="social_quran">Read Quran</span>
+                        </a>
+                        <a href="https://drive.google.com/drive/folders/13VIzyy7N3K6mcx4eBnc7XTe4E-SxVGEG"
+                            target="_blank" rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-solid fa-mosque"></i><span data-i18n="social_dawah">Dawah Files</span>
+                        </a>
+                        <a href="files.html" class="social-item">
+                            <i class="fa-solid fa-folder-open"></i><span data-i18n="social_softwarehq">Software HQ</span>
+                        </a>
+                        <a href="https://github.com/humayunk45423/Webpage-2/releases/download/v1.0/Humayoun.Kobir.apk"
+                            class="social-item" aria-label="Download Humayoun Kobir Android App" role="link"
+                            rel="nofollow">
+                            <i class="fa-brands fa-android" aria-hidden="true"></i><span data-i18n="social_app_dl">App Download</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </main>
+
+        <footer class="container footer">
+            <span data-i18n="footer_copyright">&copy; 2026 Humayoun Kobir. All rights reserved.</span>
+            <div class="footer-links">
+                <a href="#top" data-i18n="footer_back_top">Back to top</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js" defer></script>
+
+
+    <!-- Mobile Navigation Drawer & Backdrop -->
+    <div class="mobile-drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+    <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation Drawer" aria-hidden="true">
+        <div class="drawer-header">
+            <a class="brand" href="#top" aria-label="Go to top">
+                <span class="mark">
+                    <img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir Logo" width="34" height="34" loading="lazy" decoding="async">
+                </span>
+                <span class="brand-text">
+                    <strong data-i18n="brand_name">Humayoun Kobir</strong>
+                    <small data-i18n="brand_title">Engineer & Designer</small>
+                </span>
+            </a>
+            <button type="button" class="drawer-close-btn" id="closeMenuBtn" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="drawer-body">
+            <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_preferences_title">Preferences</div>
+                <div class="drawer-toggles">
+                    <div class="drawer-toggle-row">
+                        <span data-i18n="toggle_language_label">Language</span>
+                        <button type="button" class="segmented-toggle lang-toggle" id="langToggleMobile" data-state="right" aria-label="Toggle Language" title="Toggle Language">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
+                            <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
+                        </button>
+                    </div>
+                    <div class="drawer-toggle-row">
+                        <span data-i18n="toggle_theme_label">Theme</span>
+                        <button type="button" class="segmented-toggle" id="themeToggleMobile" data-state="left" aria-label="Toggle Theme" title="Toggle Theme">
+                            <div class="toggle-slider" aria-hidden="true"></div>
+                            <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
+                                <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                            </span>
+                            <span class="toggle-opt opt-right moon" data-val="dark" aria-label="Dark mode">
+                                <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_nav_title">Navigation</div>
+                <nav class="drawer-nav">
+                    <a href="#about" class="drawer-nav-item"><i class="fa-solid fa-user"></i><span data-i18n="nav_about">About</span></a>
+                    <a href="#skills" class="drawer-nav-item"><i class="fa-solid fa-layer-group"></i><span data-i18n="nav_skills">Skills</span></a>
+                    <a href="#projects" class="drawer-nav-item"><i class="fa-solid fa-briefcase"></i><span data-i18n="nav_projects">Projects</span></a>
+                    <a href="#contact" class="drawer-nav-item"><i class="fa-solid fa-paper-plane"></i><span data-i18n="nav_contact">Contact</span></a>
+                    <a href="files.html" class="drawer-nav-item"><i class="fa-solid fa-folder-open"></i><span data-i18n="nav_softwarehq">Software HQ</span></a>
+                </nav>
+            </div>
+
+            <div class="drawer-section">
+                <div class="drawer-section-title" data-i18n="drawer_contact_title">Direct Contact</div>
+                <div class="drawer-contacts">
+                    <div class="method">
+                        <a href="mailto:humayunk45423@gmail.com" class="method-main" aria-label="Send email">
+                            <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="method-text">
+                                <strong data-i18n="contact_email_title">Email Address</strong>
+                                <span>humayunk45423@gmail.com</span>
+                            </div>
+                        </a>
+                        <button class="copy-btn" title="Copy Email" onclick="copyContact('humayunk45423@gmail.com', this)">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="method">
+                        <a href="https://wa.me/8801721445207" target="_blank" rel="noopener noreferrer nofollow" class="method-main" aria-label="Chat on WhatsApp">
+                            <div class="method-icon">
+                                <svg viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M20 10C20 15.51 15.51 20 10 20C7.97 20 6.08 19.39 4.5 18.35L0.66 19.58L1.9 15.86C0.7 14.22 0 12.19 0 10C0 4.49 4.48 0 10 0L10 0C15.51 0 20 4.49 20 10ZM15.99 12.73C15.89 12.56 13.62 11.51 13.44 11.45C13.18 11.35 12.92 11.38 12.72 11.66C12.44 12.06 12.16 12.46 11.94 12.7C11.77 12.89 11.48 12.91 11.24 12.81C10.91 12.67 10.01 12.36 8.89 11.36C8.03 10.59 7.44 9.64 7.27 9.35C7.1 9.05 7.25 8.88 7.39 8.72C7.81 8.2 8.39 7.85 8.1 7.24C8.03 7.1 7.45 5.66 7.2 5.08C7 4.59 6.86 4.57 6.23 4.57C4.93 4.57 4.19 6.08 4.19 7.37C4.19 9.9 7.77 13.71 10.35 14.78C12.65 15.73 13.33 15.64 13.86 15.53C14.62 15.37 15.58 14.8 15.82 14.12C16.06 13.44 16.06 12.86 15.99 12.73Z"></path>
+                                </svg>
+                            </div>
+                            <div class="method-text">
+                                <strong data-i18n="contact_wa_title">WhatsApp / Phone</strong>
+                                <span>+8801721445207</span>
+                            </div>
+                        </a>
+                        <button class="copy-btn" title="Copy Number" onclick="copyContact('+8801721445207', this)">
+                            <i class="fa-solid fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Interactive Photo Viewer / Lightbox Modal -->
+    <div id="photoViewerModal" class="photo-viewer-modal" role="dialog" aria-modal="true" aria-label="Photo Viewer" hidden>
+        <!-- Blurred Backdrop -->
+        <div class="photo-viewer-backdrop" id="photoViewerBackdrop"></div>
+
+        <!-- Header Bar -->
+        <header class="photo-viewer-header">
+            <div class="photo-viewer-info">
+                <div class="photo-viewer-badge">
+                    <i class="fa-solid fa-image" aria-hidden="true"></i>
+                    <span id="photoViewerCounter">1 / 1</span>
+                </div>
+                <div class="photo-viewer-text">
+                    <h3 id="photoViewerTitle" class="photo-viewer-title">Project Graphic</h3>
+                    <span id="photoViewerSubtitle" class="photo-viewer-subtitle">Design Preview</span>
+                </div>
+            </div>
+
+            <div class="photo-viewer-actions">
+                <!-- Zoom Controls -->
+                <div class="photo-viewer-zoom-bar" role="toolbar" aria-label="Zoom controls">
+                    <button type="button" class="photo-viewer-btn" id="photoViewerZoomOut" title="Zoom Out (-)" aria-label="Zoom Out">
+                        <i class="fa-solid fa-minus" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="photo-viewer-btn zoom-level-btn" id="photoViewerZoomReset" title="Reset Zoom (100%)" aria-label="Reset Zoom">
+                        <span id="photoViewerZoomText">100%</span>
+                    </button>
+                    <button type="button" class="photo-viewer-btn" id="photoViewerZoomIn" title="Zoom In (+)" aria-label="Zoom In">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <!-- Download / Open Original -->
+                <a id="photoViewerDownload" href="#" download class="photo-viewer-btn" title="Download Image" aria-label="Download Image" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-download" aria-hidden="true"></i>
+                </a>
+
+                <!-- Top Right Cross / Close Button -->
+                <button type="button" class="photo-viewer-btn photo-viewer-close" id="photoViewerClose" title="Close (Esc)" aria-label="Close viewer">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Stage -->
+        <div class="photo-viewer-stage" id="photoViewerStage">
+            <button type="button" class="photo-viewer-nav-btn prev" id="photoViewerPrev" title="Previous Image (Left Arrow)" aria-label="Previous image">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+
+            <div class="photo-viewer-viewport" id="photoViewerViewport">
+                <div class="photo-viewer-track" id="photoViewerTrack">
+                    <!-- Dynamic 3-slide window (prev, curr, next) -->
+                </div>
+            </div>
+
+            <button type="button" class="photo-viewer-nav-btn next" id="photoViewerNext" title="Next Image (Right Arrow)" aria-label="Next image">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <!-- Footer Hint -->
+        <footer class="photo-viewer-footer">
+            <span class="photo-viewer-hint">
+                <kbd>Scroll</kbd> or <kbd>Double-click</kbd> to zoom &bull; <kbd>Drag</kbd> to pan &bull; <kbd>←</kbd> <kbd>→</kbd> navigate &bull; <kbd>Esc</kbd> to close
+            </span>
+        </footer>
+    </div>
+
+    <!-- Vercel Web Analytics -->
+    <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+</body>
+
+</html>

@@ -847,13 +847,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // 10. Photo Viewer / Lightbox with Zoom, Pan, and Blur Backdrop
+    // 10. Photo Viewer / Lightbox: Top-Tier 60fps 3-Slide Engine (Task 3.1 - 3.5)
     // =========================================================================
     const modal = document.getElementById('photoViewerModal');
     if (modal) {
         const backdrop = document.getElementById('photoViewerBackdrop');
-        const imgWrap = document.getElementById('photoViewerImgWrap');
-        const img = document.getElementById('photoViewerImg');
+        const stage = document.getElementById('photoViewerStage');
+        const viewport = document.getElementById('photoViewerViewport');
+        const track = document.getElementById('photoViewerTrack');
         const titleEl = document.getElementById('photoViewerTitle');
         const subtitleEl = document.getElementById('photoViewerSubtitle');
         const counterEl = document.getElementById('photoViewerCounter');
@@ -865,63 +866,306 @@ document.addEventListener('DOMContentLoaded', () => {
         const zoomOutBtn = document.getElementById('photoViewerZoomOut');
         const zoomResetBtn = document.getElementById('photoViewerZoomReset');
         const downloadBtn = document.getElementById('photoViewerDownload');
-        const stage = document.getElementById('photoViewerStage');
+
+        // Embedded image metadata for instant zero-latency blur-up (<6KB payload)
+        const PROJECTS_IMAGE_META = {"sadia-variety-store-poster.webp": {"old_name": "Artboard_1logo_name_choto.png", "new_name": "sadia-variety-store-poster.webp", "path": "assets/site-images/sadia-variety-store-poster.webp", "width": 1280, "height": 640, "aspect_ratio": 2.0, "srcset": "assets/site-images/sadia-variety-store-poster-480w.webp 480w, assets/site-images/sadia-variety-store-poster-800w.webp 800w, assets/site-images/sadia-variety-store-poster-1200w.webp 1200w, assets/site-images/sadia-variety-store-poster.webp 1280w", "lqip": "data:image/webp;base64,UklGRsoAAABXRUJQVlA4WAoAAAAQAAAAFwAACwAAQUxQSBkAAAABF9D/iAgoaNuGMbRBK/o9BBH9D5CXarMBAFZQOCCKAAAA0AMAnQEqGAAMAD7tZqpOKaWjojAIATAdiUAToAQ72ts3Ln7EpPoAAPlYCLInntbcYKBjINmvgbAGgxjo+LvrKoyheOZ5tIL0bR8sPHU9+9mBuZNnddI120D1fxl2A71Uik2hN5S68pjJXsY+4hM/Sx8o8zIeaz7pUf1NdGc9qC/f+5x9xxSWgAAA", "title": "Sadia Variety Store", "subtitle": "Poster Design", "orig_size_kb": 984.5, "webp_size_kb": 125.1, "savings_pct": 87.3}, "mobile-express-logo.webp": {"old_name": "Mobile Express Logo.png", "new_name": "mobile-express-logo.webp", "path": "assets/site-images/mobile-express-logo.webp", "width": 1080, "height": 1080, "aspect_ratio": 1.0, "srcset": "assets/site-images/mobile-express-logo-480w.webp 480w, assets/site-images/mobile-express-logo-800w.webp 800w, assets/site-images/mobile-express-logo.webp 1080w", "lqip": "data:image/webp;base64,UklGRpQBAABXRUJQVlA4WAoAAAAQAAAAFwAAFwAAQUxQSIYAAAABgCoAoMHozbb3B27LrtYvqK4yL+5P1tfdbONsGw/nqxExAeBTWUoVtpKFkBSabexmQQJzXTwTXrhgvjuSO99/x31LcuuG6WckazOMnjjGu84xYYAV3cO5zAsBmhGZoPaTPIBLtTae3j31QwyAT9EV75+f70sWKiBWZmrllBZ8JE0ipoIvCFZQOCDoAAAAkAUAnQEqGAAYAD7tZqpPKaWjoigNUTAdiWwAtPQT0iJwv9r6oLpXUWbQTv0/hHyot0PnIAAA/q/YGfDTkOrK2LujO+fMyBrSjeYzZOUfL/RbUCyyG0iXEBp03eC6FEj85gEoQEN6cD16WcJU+87l3toYajzPU9wFro7/HYB7ejDC+n19MrjxupEjXKT0QfsU+J8vLuxSiKtbo0ayEPlCBchb85jJjdomm50Qw54FfP2wBGZc4uh/PacCKurI3jBG90YNBKSneVzsCGXlRPGuxNLy8+N9AZEuZFZRdv0tXNiHSS0MUAAAAA==", "title": "Mobile Express", "subtitle": "Logo Design", "orig_size_kb": 71.9, "webp_size_kb": 34.0, "savings_pct": 52.7}, "mobile-express-business-card.webp": {"old_name": "Mobile_Express_Business_Card.png", "new_name": "mobile-express-business-card.webp", "path": "assets/site-images/mobile-express-business-card.webp", "width": 1152, "height": 720, "aspect_ratio": 1.6, "srcset": "assets/site-images/mobile-express-business-card-480w.webp 480w, assets/site-images/mobile-express-business-card-800w.webp 800w, assets/site-images/mobile-express-business-card.webp 1152w", "lqip": "data:image/webp;base64,UklGRiwBAABXRUJQVlA4WAoAAAAQAAAAFwAADgAAQUxQSHEAAAANcFtr29J8H+4OQ1AzDQuyQOrUqXQO9/z6VfGkj4gJMLNcnAQ8GoZasj3L+w4vnB4wfI+IjUfQFlYT4gMAYNrJbXJjKbzSU6TNlyDB/8ZXmfarIudFWi2vLqrr8cDueKljKadYDVNNhmnbxh3JFJm5CQBWUDgglAAAANADAJ0BKhgADwA+7WKqTamlpCIwCAEwHYlAAAtQ16WRsqKscj6gAAD+8x1gOpaqrp61HPCDs+91LrnSU07Y8BTXlZoKpJFLZQjx9njuf7I1f89Ye+B+e0BQsdEUcPtR3M3Vl3KUMuzNNz/VIr3AK2QiGR1oMF+7j+OywSN71Ryt1I1m70WzRgNb/C6lU+c+1ZTEkAA=", "title": "Mobile Express", "subtitle": "Business Card", "orig_size_kb": 190.5, "webp_size_kb": 77.1, "savings_pct": 59.5}, "mobile-express-cash-memo.webp": {"old_name": "Mobile_Express_Cash_Memo.png", "new_name": "mobile-express-cash-memo.webp", "path": "assets/site-images/mobile-express-cash-memo.webp", "width": 1280, "height": 905, "aspect_ratio": 1.4144, "srcset": "assets/site-images/mobile-express-cash-memo-480w.webp 480w, assets/site-images/mobile-express-cash-memo-800w.webp 800w, assets/site-images/mobile-express-cash-memo-1200w.webp 1200w, assets/site-images/mobile-express-cash-memo.webp 1280w", "lqip": "data:image/webp;base64,UklGRsIAAABXRUJQVlA4WAoAAAAQAAAAFwAADwAAQUxQSEIAAAABX6AokqQ2ejl8EwL44oyIiI9SQXYe5QWr2rYBhRBBAcsJI4IClhNGBAWsuR3nO6L/sVTnVh0vSe6XJOffGkDtAAVWUDggWgAAAHADAJ0BKhgAEAA+7WKpTamlpCIwCAEwHYllALDsIcMjiM6jAAD+k2gzVs4phoirN115ZceFTj4VWBHbrL1sxQ+9N0Pa1h0t9HDplZep6/B+jROrXzOegt2AAA==", "title": "Mobile Express", "subtitle": "Cash Memo Design", "orig_size_kb": 309.2, "webp_size_kb": 87.2, "savings_pct": 71.8}, "mobile-express-facebook-ad.webp": {"old_name": "Mobile express facebook ad.png", "new_name": "mobile-express-facebook-ad.webp", "path": "assets/site-images/mobile-express-facebook-ad.webp", "width": 1000, "height": 1000, "aspect_ratio": 1.0, "srcset": "assets/site-images/mobile-express-facebook-ad-480w.webp 480w, assets/site-images/mobile-express-facebook-ad-800w.webp 800w, assets/site-images/mobile-express-facebook-ad.webp 1000w", "lqip": "data:image/webp;base64,UklGRgQBAABXRUJQVlA4IPgAAAAQBgCdASoYABgAPu1wsFIppiSiqAgBMB2JagC26O6qQApTiP5bWCp9bvTNW3FMaxPlmdhqpP7VZwAA/sJPu8MwLNWs6lqeYmJwBIyKEmpLxLevvxyDutH8zEDPJasUqBQgF88yywDvqLW2Iw3puAaxybqRU/cwO/J5eSM98qIUfzvQOzSoRNqqsguMCtgz8tr/AaS+Uyz8N7ah0sb+ppn0K+dY3LRvGYRUiInLtwL8emRL/fJK/c9ez4x30WvbjknOCQtoxd3expmItNn8U9ZFBkaqXpE4XO/Lv92I5+kF3pMogW4UwPw/C+H/03AEKb0KLMJj+TJAAA==", "title": "Mobile Express", "subtitle": "Facebook Ads", "orig_size_kb": 481.0, "webp_size_kb": 97.1, "savings_pct": 79.8}, "tadrib-academy-logo.webp": {"old_name": "415043082_122093206244186305_1002341150726708714_n.jpg", "new_name": "tadrib-academy-logo.webp", "path": "assets/site-images/tadrib-academy-logo.webp", "width": 800, "height": 800, "aspect_ratio": 1.0, "srcset": "assets/site-images/tadrib-academy-logo-480w.webp 480w, assets/site-images/tadrib-academy-logo.webp 800w", "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAAAwBACdASoYABgAPu1opU2ppiMiMBgMATAdiUAZVoId+2FLEOOXE6REK4AA/vQZ6LtJTIbtlj9auf0PCGzzxWnlnJ6BxMhB107GWVAhUWGjIJSQSq1VvqNT/ISGmqsgyWrX7tKScgj40DWPNzwWpkhZ8SRjoQAA", "title": "Tadrib Academy", "subtitle": "Logo Design", "orig_size_kb": 33.9, "webp_size_kb": 8.8, "savings_pct": 73.9}, "tadrib-academy-facebook-ad.webp": {"old_name": "Artboard_1.png", "new_name": "tadrib-academy-facebook-ad.webp", "path": "assets/site-images/tadrib-academy-facebook-ad.webp", "width": 800, "height": 800, "aspect_ratio": 1.0, "srcset": "assets/site-images/tadrib-academy-facebook-ad-480w.webp 480w, assets/site-images/tadrib-academy-facebook-ad.webp 800w", "lqip": "data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAAAQBQCdASoYABgAPu1sq1EppaOiqAqpMB2JZgC2yA/RX6AFblot6aDDkYwmXkPrDdqAAP5rSpQ7l9pG0PtVxS417C5FqNeEolwSi/DLWjLCSc9sf81q1Muv/rxzdI+3SGWuZ3pSv0qn7kfAFvX+AQTpkHjczMeknNgFT/Znp0XSfZa5NERMHOK6njFaWJ6RIaTlkCSXOsDqp+V77ytoYdpo4h2d2IsgQEisy/tHds3T30jhuHLmAzhUNBN0GfOpM2kqdrSsH9/OkAAA", "title": "Tadrib Academy", "subtitle": "Facebook Ads Poster", "orig_size_kb": 610.3, "webp_size_kb": 112.6, "savings_pct": 81.5}, "tadrib-academy-marketplace-ad.webp": {"old_name": "Artboard_1_4x.png", "new_name": "tadrib-academy-marketplace-ad.webp", "path": "assets/site-images/tadrib-academy-marketplace-ad.webp", "width": 800, "height": 800, "aspect_ratio": 1.0, "srcset": "assets/site-images/tadrib-academy-marketplace-ad-480w.webp 480w, assets/site-images/tadrib-academy-marketplace-ad.webp 800w", "lqip": "data:image/webp;base64,UklGRvAAAABXRUJQVlA4IOQAAACQBgCdASoYABgAPu1qrFEppaQiqAqpMB2JagCdMoR1B7pTS/+IBHPa6sYF8Xq0kC9hs0gDeDXyBf3dAFBgAP7sV9uYCE4tXnzNrYz2bDlGyZFYKb6KCWBeWBnuwmPxh7I9ib62DU2J7O/bkok7nA2X4fN85sJF0xVNQGYrtjxkVeEJSE9g3Y9ON0dOVA8hmcVXoPZo+EfR92sQrfouNIUoTGeAoG6mxndHu560oNnyRJaiZbvYmL2x/P+SFo25AMubiMQ9W6ycGPlSlhUazfrF95OpL4KfgxuVJTLWJD8BSmAcAAA=", "title": "Tadrib Academy", "subtitle": "Marketplace Ads Run", "orig_size_kb": 455.5, "webp_size_kb": 102.3, "savings_pct": 77.5}, "fuad-mobile-point-logo.webp": {"old_name": "Artboard_1logo_wng_bn_Card.png", "new_name": "fuad-mobile-point-logo.webp", "path": "assets/site-images/fuad-mobile-point-logo.webp", "width": 800, "height": 800, "aspect_ratio": 1.0, "srcset": "assets/site-images/fuad-mobile-point-logo-480w.webp 480w, assets/site-images/fuad-mobile-point-logo.webp 800w", "lqip": "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAADwBQCdASoYABgAPu1qrVCppaQiqAqpMB2JbAC09iM1ABYAe94eAoegnJKeXENW31rBU7ac+B/TQAD+8d3QuQ2IFhg5bc+boJYpiCZoetnzbnzOAzCaR7Bu+7JpOQEdfvXjHMN0L+Jan+v9Ibp1BlOeAD8zU0bBrVuEyqwRCFEq+hfq95F66sBIfS7Jbgag+WrcxxfcD7RKA+SihM9XHyVIXOa9MjEcvPT1paoWTEWv+DuLv7ZBeiUnZM25BJtM3nrxynVo8WY/FW3IfONIoyO4Z6os+3a11yZFbMtKAat5w2gn/FpUaTnLYeLV0zBz2/oFALU3JBvEeyLHVPPvER27c4AAAA==", "title": "Fuad Mobile Point", "subtitle": "Logo Design", "orig_size_kb": 93.8, "webp_size_kb": 20.0, "savings_pct": 78.7}, "fuad-mobile-point-banner.webp": {"old_name": "Fuad_Mobile_Point_Banner.png", "new_name": "fuad-mobile-point-banner.webp", "path": "assets/site-images/fuad-mobile-point-banner.webp", "width": 1280, "height": 576, "aspect_ratio": 2.2222, "srcset": "assets/site-images/fuad-mobile-point-banner-480w.webp 480w, assets/site-images/fuad-mobile-point-banner-800w.webp 800w, assets/site-images/fuad-mobile-point-banner-1200w.webp 1200w, assets/site-images/fuad-mobile-point-banner.webp 1280w", "lqip": "data:image/webp;base64,UklGRgABAABXRUJQVlA4WAoAAAAQAAAAFwAACQAAQUxQSFYAAAABcBsAANkEs23jb2vLC95Q8xa7PSAiJgBWPVW85dhLTpLvmjLElcfV4nYcLqfl6nK5XG4LXBpOb+0opn9PS+LVv0P85fVierxY3sYYSEvXIvdYupU5CFZQOCCEAAAA0AMAnQEqGAAKAD7tYqlNqaWjojAIATAdiUAVgAPx7+rPqzmTgJ8AAP6tPAoAG3xhUzB5uoICcayClz6KcnLmZjD3wEBjBSbNm3p57MYG/N/kozWzoDATpHI8+Z3g+jDAv4s9fwlF47ZbrzZh+rqcOsPLNZB6Bpn6XLPO3OtEmo8BQAAA", "title": "Fuad Mobile Point", "subtitle": "Banner Design", "orig_size_kb": 731.0, "webp_size_kb": 91.3, "savings_pct": 87.5}, "fuad-mobile-point-business-card.webp": {"old_name": "Artboard_1B_Card.png", "new_name": "fuad-mobile-point-business-card.webp", "path": "assets/site-images/fuad-mobile-point-business-card.webp", "width": 1008, "height": 576, "aspect_ratio": 1.75, "srcset": "assets/site-images/fuad-mobile-point-business-card-480w.webp 480w, assets/site-images/fuad-mobile-point-business-card-800w.webp 800w, assets/site-images/fuad-mobile-point-business-card.webp 1008w", "lqip": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAABQAwCdASoYAA0ALrV2u12jqampiYC0SzAAA2T+H1pbFkxCqAD+7uWlg+iM/mNg4ojpXumQan5MLWBk8zAKlMfFb02FJGS9FBAFAP58GnM0+bNtk2BNgGj2il5/KlLRCN7J86UEKRQMK8EBmGGtVpMXqH5VcNFbLR0wc+N4nEAAAA==", "title": "Fuad Mobile Point", "subtitle": "Business Card Design", "orig_size_kb": 179.7, "webp_size_kb": 58.5, "savings_pct": 67.4}, "fuad-mobile-point-cash-memo.webp": {"old_name": "Screenshot_2026_03_25_172443.png", "new_name": "fuad-mobile-point-cash-memo.webp", "path": "assets/site-images/fuad-mobile-point-cash-memo.webp", "width": 1192, "height": 840, "aspect_ratio": 1.419, "srcset": "assets/site-images/fuad-mobile-point-cash-memo-480w.webp 480w, assets/site-images/fuad-mobile-point-cash-memo-800w.webp 800w, assets/site-images/fuad-mobile-point-cash-memo.webp 1192w", "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADQAwCdASoYABAAPu1iqU2ppaOiMAgBMB2JaQAAW9x2EYigRT6w9sAA/tXc5aRDcrDYh8cD/t/FtfEFaiKO2X9iJJa0BItAPtJ9Z2BqbRRFmOWoKmd89RG+AKnCgAAA", "title": "Fuad Mobile Point", "subtitle": "Cash Memo Design", "orig_size_kb": 126.8, "webp_size_kb": 92.0, "savings_pct": 27.5}};
 
         let gallery = [];
         let currentIndex = 0;
         let scale = 1;
         let panX = 0;
         let panY = 0;
-        let isDragging = false;
-        let dragStartX = 0;
-        let dragStartY = 0;
+        let isPanning = false;
+        let isSwiping = false;
+        let isMouseSwiping = false;
+        let isMousePanning = false;
+        let panStartX = 0;
+        let panStartY = 0;
         let prevPanX = 0;
         let prevPanY = 0;
+        let swipeStartX = 0;
+        let swipeStartY = 0;
+        let swipeStartTime = 0;
+        let swipeDeltaX = 0;
         let lastFocusedEl = null;
+        let isTransitioning = false;
+        const activeControllers = new Map();
+
+        const prefersReducedMotion = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const isSlowConnection = () => {
+            const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            if (!conn) return false;
+            if (conn.saveData) return true;
+            return ['slow-2g', '2g', '3g'].includes(conn.effectiveType);
+        };
 
         const isImageHref = (url) => /\.(png|jpe?g|webp|svg|gif)(\?.*)?$/i.test(url);
 
-        // Discover all project graphic links
-        const setupGallery = () => {
-            const projectSec = document.getElementById('projects');
-            if (!projectSec) return;
+        const getMeta = (href) => {
+            if (!href) return null;
+            const filename = href.split('/').pop().split('?')[0];
+            return PROJECTS_IMAGE_META[filename] || null;
+        };
 
-            const links = projectSec.querySelectorAll('a.project-link');
-            gallery = [];
+        // Cache of preloaded URLs to avoid duplicate fetches
+        const preloadedUrls = new Set();
+        const preloadImage = (item, highRes = false) => {
+            if (!item || !item.href || preloadedUrls.has(item.href)) return;
+            const meta = getMeta(item.href);
+            const img = new Image();
+            if (meta && meta.srcset && (highRes || !isSlowConnection())) {
+                img.srcset = meta.srcset;
+                img.sizes = '(max-width: 768px) 100vw, 1200px';
+            }
+            img.src = item.href;
+            img.onload = () => preloadedUrls.add(item.href);
+        };
 
-            links.forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && isImageHref(href)) {
-                    const card = link.closest('.project-card');
-                    const idx = gallery.length;
-                    gallery.push({ href, link, card });
+        // Idle-time preloading of adjacent images (Task 3.1 & 3.3)
+        const scheduleIdlePreload = () => {
+            const runner = () => {
+                if (!gallery.length) return;
+                const slow = isSlowConnection();
+                const nextIdx = (currentIndex + 1) % gallery.length;
+                preloadImage(gallery[nextIdx], !slow);
 
-                    // Enhance link icon to expand icon
-                    const icon = link.querySelector('i');
-                    if (icon) {
-                        icon.className = 'fa-solid fa-expand';
-                    }
-
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        lastFocusedEl = link;
-                        openViewer(idx);
-                    });
+                // On fast connection, also preload previous slide
+                if (!slow && gallery.length > 2) {
+                    const prevIdx = (currentIndex - 1 + gallery.length) % gallery.length;
+                    preloadImage(gallery[prevIdx], false);
                 }
+            };
+            if (typeof requestIdleCallback === 'function') {
+                requestIdleCallback(runner, { timeout: 1200 });
+            } else {
+                setTimeout(runner, 200);
+            }
+        };
+
+        // Aspect-ratio aware dimension fitting with zero layout shift (Task 3.2)
+        const computeFitDimensions = (meta) => {
+            if (!viewport) return { width: 'auto', height: 'auto', ratio: 'auto' };
+            const vpW = Math.max(viewport.clientWidth - (window.innerWidth <= 768 ? 16 : 48), 260);
+            const vpH = Math.max(viewport.clientHeight - (window.innerWidth <= 768 ? 16 : 48), 260);
+            const ratio = (meta && meta.width && meta.height) ? (meta.width / meta.height) : (vpW / vpH);
+            let w = vpW;
+            let h = w / ratio;
+            if (h > vpH) {
+                h = vpH;
+                w = h * ratio;
+            }
+            return {
+                width: Math.round(w) + 'px',
+                height: Math.round(h) + 'px',
+                ratio: ratio
+            };
+        };
+
+        // Create individual slide element (prev, curr, or next)
+        const createSlideElement = (itemIndex, slot) => {
+            const item = gallery[itemIndex];
+            if (!item) return null;
+
+            const meta = getMeta(item.href);
+            const slide = document.createElement('div');
+            slide.className = 'photo-viewer-slide';
+            slide.setAttribute('data-slot', slot);
+            slide.setAttribute('data-index', itemIndex);
+
+            const fit = computeFitDimensions(meta);
+
+            const frame = document.createElement('div');
+            frame.className = 'photo-viewer-frame';
+            frame.style.width = fit.width;
+            frame.style.height = fit.height;
+            if (fit.ratio !== 'auto') frame.style.aspectRatio = fit.ratio;
+
+            // LQIP Blur placeholder (<1KB inlined base64, Task 3.2)
+            if (meta && meta.lqip) {
+                const lqip = document.createElement('img');
+                lqip.className = 'pv-lqip';
+                lqip.src = meta.lqip;
+                lqip.alt = '';
+                lqip.setAttribute('aria-hidden', 'true');
+                lqip.setAttribute('draggable', 'false');
+                frame.appendChild(lqip);
+            }
+
+            // Skeleton Shimmer Background
+            const skeleton = document.createElement('div');
+            skeleton.className = 'pv-skeleton';
+            skeleton.setAttribute('aria-hidden', 'true');
+            frame.appendChild(skeleton);
+
+            // Subtle loading indicator (>300ms load time)
+            const spinner = document.createElement('div');
+            spinner.className = 'pv-spinner';
+            spinner.setAttribute('aria-hidden', 'true');
+            frame.appendChild(spinner);
+
+            // Error state fallback with 'Tap to retry'
+            const errorBox = document.createElement('div');
+            errorBox.className = 'pv-error';
+            errorBox.innerHTML = `
+                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                <span>Failed to load image</span>
+                <button type="button" class="pv-retry-btn">Tap to retry</button>
+            `;
+            frame.appendChild(errorBox);
+
+            // High-res Image
+            const img = document.createElement('img');
+            img.className = 'pv-img';
+            img.alt = item.card?.querySelector('h3')?.textContent?.trim() || 'Project Graphic';
+            img.setAttribute('draggable', 'false');
+            frame.appendChild(img);
+
+            slide.appendChild(frame);
+
+            // Trigger decode() loading
+            loadSlideImage(frame, img, item, meta, errorBox);
+
+            return slide;
+        };
+
+        const loadSlideImage = (frame, img, item, meta, errorBox) => {
+            const controller = new AbortController();
+            activeControllers.set(frame, controller);
+
+            // Show spinner only if load takes longer than 300ms
+            const slowTimer = setTimeout(() => {
+                if (!frame.classList.contains('is-loaded')) {
+                    frame.classList.add('is-slow');
+                }
+            }, 300);
+
+            const loader = new Image();
+            const slowNet = isSlowConnection();
+
+            if (meta && meta.srcset) {
+                loader.srcset = meta.srcset;
+                loader.sizes = slowNet
+                    ? '(max-width: 768px) 480px, 800px'
+                    : '(max-width: 768px) 100vw, 1200px';
+            }
+            loader.src = item.href;
+
+            loader.decode().then(() => {
+                clearTimeout(slowTimer);
+                if (controller.signal.aborted) return;
+                img.src = loader.currentSrc || item.href;
+                if (loader.srcset) {
+                    img.srcset = loader.srcset;
+                    img.sizes = loader.sizes;
+                }
+                frame.classList.remove('is-slow', 'has-error');
+                frame.classList.add('is-loaded');
+            }).catch(() => {
+                clearTimeout(slowTimer);
+                if (controller.signal.aborted) return;
+                // Direct fallback
+                img.src = item.href;
+                img.onload = () => {
+                    frame.classList.remove('is-slow', 'has-error');
+                    frame.classList.add('is-loaded');
+                };
+                img.onerror = () => {
+                    frame.classList.remove('is-slow', 'is-loaded');
+                    frame.classList.add('has-error');
+                };
             });
+
+            const retryBtn = errorBox.querySelector('.pv-retry-btn');
+            if (retryBtn) {
+                retryBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    frame.classList.remove('has-error');
+                    loadSlideImage(frame, img, item, meta, errorBox);
+                };
+            }
+        };
+
+        // Render exactly 3 slides (prev, curr, next) into DOM (Task 3.1 & 3.4)
+        const renderSlides = () => {
+            if (!track || !gallery.length) return;
+
+            // Release memory of off-screen slides
+            track.querySelectorAll('.photo-viewer-frame').forEach(f => {
+                const ctrl = activeControllers.get(f);
+                if (ctrl) ctrl.abort();
+                activeControllers.delete(f);
+                const i = f.querySelector('.pv-img');
+                if (i) { i.src = ''; i.srcset = ''; }
+            });
+            track.innerHTML = '';
+
+            const n = gallery.length;
+            const prevIdx = (currentIndex - 1 + n) % n;
+            const currIdx = currentIndex;
+            const nextIdx = (currentIndex + 1) % n;
+
+            if (n > 1) {
+                const prevSlide = createSlideElement(prevIdx, 'prev');
+                if (prevSlide) track.appendChild(prevSlide);
+            }
+
+            const currSlide = createSlideElement(currIdx, 'curr');
+            if (currSlide) track.appendChild(currSlide);
+
+            if (n > 1) {
+                const nextSlide = createSlideElement(nextIdx, 'next');
+                if (nextSlide) track.appendChild(nextSlide);
+            }
+
+            updateHeaderInfo();
+            resetZoom(false);
+            scheduleIdlePreload();
+        };
+
+        const getCurrentFrame = () => {
+            return track ? track.querySelector('.photo-viewer-slide[data-slot="curr"] .photo-viewer-frame') : null;
+        };
+
+        const updateHeaderInfo = () => {
+            const item = gallery[currentIndex];
+            if (!item) return;
+
+            const cardTitle = item.card?.querySelector('h3')?.textContent?.trim() || 'Project Graphic';
+            const linkText = item.link?.querySelector('span')?.textContent?.trim() || item.link?.textContent?.trim() || 'Design';
+
+            if (titleEl) titleEl.textContent = cardTitle;
+            if (subtitleEl) subtitleEl.textContent = linkText;
+            if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${gallery.length}`;
+            if (downloadBtn) {
+                downloadBtn.href = item.href;
+                const filename = item.href.split('/').pop() || 'project-graphic.webp';
+                downloadBtn.setAttribute('download', filename);
+            }
         };
 
         const updateTransform = (smooth = true) => {
-            if (!imgWrap) return;
-            imgWrap.style.transition = smooth ? 'transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none';
-            imgWrap.style.transform = `translate3d(${panX}px, ${panY}px, 0) scale(${scale})`;
+            const frame = getCurrentFrame();
+            if (!frame) return;
+
+            frame.style.transition = smooth ? 'transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none';
+            frame.style.transform = `translate3d(${panX}px, ${panY}px, 0) scale(${scale})`;
+
             if (scale > 1.05) {
-                imgWrap.classList.add('is-zoomed');
+                frame.classList.add('is-zoomed');
             } else {
-                imgWrap.classList.remove('is-zoomed');
+                frame.classList.remove('is-zoomed');
             }
             if (zoomText) {
                 zoomText.textContent = `${Math.round(scale * 100)}%`;
+            }
+
+            // High-res upgrade on zoom (Task 3.3)
+            if (scale > 1.2) {
+                const currImg = frame.querySelector('.pv-img');
+                if (currImg && currImg.sizes && currImg.sizes !== '100vw') {
+                    currImg.sizes = '100vw';
+                }
             }
         };
 
@@ -941,30 +1185,42 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTransform(smooth);
         };
 
-        const loadCurrentImage = () => {
-            if (!gallery.length) return;
-            const item = gallery[currentIndex];
-            if (!item) return;
+        // Navigation between slides with GPU acceleration (Task 3.1)
+        const navigateTo = (direction) => {
+            if (isTransitioning || gallery.length <= 1 || !track) return;
+            isTransitioning = true;
 
-            img.classList.add('is-loading');
-            img.src = item.href;
-            img.onload = () => img.classList.remove('is-loading');
+            const offset = direction === 'next' ? -100 : 100;
+            const reduced = prefersReducedMotion();
 
-            // Dynamic titles respecting active language
-            const cardTitle = item.card?.querySelector('h3')?.textContent?.trim() || 'Project Graphic';
-            const linkText = item.link?.querySelector('span')?.textContent?.trim() || item.link?.textContent?.trim() || 'Design';
+            track.style.willChange = 'transform';
+            track.style.transition = reduced ? 'none' : 'transform 0.24s cubic-bezier(0.25, 1, 0.5, 1)';
+            track.style.transform = `translate3d(${offset}%, 0, 0)`;
 
-            if (titleEl) titleEl.textContent = cardTitle;
-            if (subtitleEl) subtitleEl.textContent = linkText;
-            if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${gallery.length}`;
-            if (downloadBtn) {
-                downloadBtn.href = item.href;
-                const filename = item.href.split('/').pop() || 'project-graphic.png';
-                downloadBtn.setAttribute('download', filename);
+            const finalize = () => {
+                track.removeEventListener('transitionend', finalize);
+                if (direction === 'next') {
+                    currentIndex = (currentIndex + 1) % gallery.length;
+                } else {
+                    currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+                }
+                track.style.transition = 'none';
+                track.style.transform = 'translate3d(0, 0, 0)';
+                track.style.willChange = 'auto';
+                renderSlides();
+                isTransitioning = false;
+            };
+
+            if (reduced) {
+                finalize();
+            } else {
+                track.addEventListener('transitionend', finalize, { once: true });
+                setTimeout(finalize, 300); // Safety fallback
             }
-
-            resetZoom(false);
         };
+
+        const prevImage = () => navigateTo('prev');
+        const nextImage = () => navigateTo('next');
 
         const openViewer = (index) => {
             if (index < 0 || index >= gallery.length) return;
@@ -973,7 +1229,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
             requestAnimationFrame(() => {
                 modal.classList.add('is-open');
-                loadCurrentImage();
+                renderSlides();
                 if (closeBtn) closeBtn.focus();
             });
         };
@@ -983,27 +1239,52 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = '';
             setTimeout(() => {
                 modal.hidden = true;
-                img.src = '';
-                resetZoom(false);
-                if (lastFocusedEl) {
-                    lastFocusedEl.focus();
+                if (track) {
+                    track.querySelectorAll('.photo-viewer-frame').forEach(f => {
+                        const ctrl = activeControllers.get(f);
+                        if (ctrl) ctrl.abort();
+                        activeControllers.delete(f);
+                        const i = f.querySelector('.pv-img');
+                        if (i) { i.src = ''; i.srcset = ''; }
+                    });
+                    track.innerHTML = '';
                 }
+                resetZoom(false);
+                if (lastFocusedEl) lastFocusedEl.focus();
             }, 300);
         };
 
-        const prevImage = () => {
-            if (gallery.length <= 1) return;
-            currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
-            loadCurrentImage();
+        // Discover all project graphic links
+        const setupGallery = () => {
+            const projectSec = document.getElementById('projects');
+            if (!projectSec) return;
+
+            const links = projectSec.querySelectorAll('a.project-link');
+            gallery = [];
+
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && isImageHref(href)) {
+                    const card = link.closest('.project-card');
+                    const idx = gallery.length;
+                    gallery.push({ href, link, card });
+
+                    // Expand icon for image links
+                    const icon = link.querySelector('i');
+                    if (icon) {
+                        icon.className = 'fa-solid fa-expand';
+                    }
+
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        lastFocusedEl = link;
+                        openViewer(idx);
+                    });
+                }
+            });
         };
 
-        const nextImage = () => {
-            if (gallery.length <= 1) return;
-            currentIndex = (currentIndex + 1) % gallery.length;
-            loadCurrentImage();
-        };
-
-        // Event Listeners
+        // Button Click Listeners
         if (closeBtn) closeBtn.addEventListener('click', closeViewer);
         if (backdrop) backdrop.addEventListener('click', closeViewer);
         if (prevBtn) prevBtn.addEventListener('click', prevImage);
@@ -1013,7 +1294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => setZoom(scale - 0.35));
         if (zoomResetBtn) zoomResetBtn.addEventListener('click', () => resetZoom(true));
 
-        // Double Click to toggle zoom
+        // Desktop Double Click to toggle zoom
         if (stage) {
             stage.addEventListener('dblclick', (e) => {
                 if (e.target.closest('.photo-viewer-nav-btn') || e.target.closest('.photo-viewer-header') || e.target.closest('.photo-viewer-footer')) return;
@@ -1024,62 +1305,82 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Mouse wheel zooming
+            // Desktop Mouse Wheel Zoom
             stage.addEventListener('wheel', (e) => {
                 if (!modal.classList.contains('is-open')) return;
                 e.preventDefault();
                 const delta = e.deltaY < 0 ? 0.25 : -0.25;
                 setZoom(scale + delta, true);
             }, { passive: false });
-        }
 
-        // Mouse Drag to Pan when zoomed
-        if (imgWrap) {
-            imgWrap.addEventListener('mousedown', (e) => {
-                if (scale <= 1 || e.button !== 0) return;
-                e.preventDefault();
-                isDragging = true;
-                dragStartX = e.clientX;
-                dragStartY = e.clientY;
-                prevPanX = panX;
-                prevPanY = panY;
-                imgWrap.classList.add('is-dragging');
+            // Desktop Click & Drag (Pan when zoomed, Swipe when unzoomed)
+            stage.addEventListener('mousedown', (e) => {
+                if (e.button !== 0 || isTransitioning) return;
+                if (e.target.closest('.photo-viewer-nav-btn') || e.target.closest('.photo-viewer-header') || e.target.closest('.photo-viewer-footer')) return;
+
+                if (scale > 1.05) {
+                    isMousePanning = true;
+                    panStartX = e.clientX;
+                    panStartY = e.clientY;
+                    prevPanX = panX;
+                    prevPanY = panY;
+                    const frame = getCurrentFrame();
+                    if (frame) frame.classList.add('is-dragging');
+                } else {
+                    isMouseSwiping = true;
+                    swipeStartX = e.clientX;
+                    swipeStartTime = Date.now();
+                    swipeDeltaX = 0;
+                    if (track) {
+                        track.style.transition = 'none';
+                        track.style.willChange = 'transform';
+                    }
+                }
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (isMousePanning && scale > 1.05) {
+                    panX = prevPanX + (e.clientX - panStartX);
+                    panY = prevPanY + (e.clientY - panStartY);
+                    updateTransform(false);
+                } else if (isMouseSwiping && scale <= 1.05 && track) {
+                    swipeDeltaX = e.clientX - swipeStartX;
+                    track.style.transform = `translate3d(${swipeDeltaX}px, 0, 0)`;
+                }
+            });
+
+            window.addEventListener('mouseup', () => {
+                if (isMousePanning) {
+                    isMousePanning = false;
+                    const frame = getCurrentFrame();
+                    if (frame) frame.classList.remove('is-dragging');
+                }
+                if (isMouseSwiping && track) {
+                    isMouseSwiping = false;
+                    const duration = Math.max(Date.now() - swipeStartTime, 1);
+                    const velocity = Math.abs(swipeDeltaX) / duration;
+                    const threshold = Math.min(window.innerWidth * 0.2, 80);
+
+                    if (gallery.length > 1 && (swipeDeltaX < -threshold || (swipeDeltaX < -25 && velocity > 0.45))) {
+                        nextImage();
+                    } else if (gallery.length > 1 && (swipeDeltaX > threshold || (swipeDeltaX > 25 && velocity > 0.45))) {
+                        prevImage();
+                    } else {
+                        track.style.transition = 'transform 0.2s ease-out';
+                        track.style.transform = 'translate3d(0, 0, 0)';
+                        setTimeout(() => { if (track) track.style.willChange = 'auto'; }, 200);
+                    }
+                }
             });
         }
 
-        window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            panX = prevPanX + (e.clientX - dragStartX);
-            panY = prevPanY + (e.clientY - dragStartY);
-            updateTransform(false);
-        });
-
-        window.addEventListener('mouseup', () => {
-            if (isDragging) {
-                isDragging = false;
-                if (imgWrap) imgWrap.classList.remove('is-dragging');
-            }
-        });
-
         // =========================================================================
-        // Touch Gestures: 2-finger & 3-finger pinch-to-zoom, pan & double-tap
+        // Mobile Touch Gestures: 2-finger & 3-finger pinch zoom, pan & swipe (Task 3.1)
         // =========================================================================
-        let initialSpread = 0;
-        let initialScale = 1;
-        let initialPanX = 0;
-        let initialPanY = 0;
-        let initialCentroid = { x: 0, y: 0 };
-        let activeTouchCount = 0;
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let lastTapTime = 0;
-
-        // Computes centroid and spread radius for 2, 3, or more fingers
         const computeTouchMetrics = (touches) => {
             const count = touches.length;
             if (count === 0) return { count: 0, centroid: { x: 0, y: 0 }, spread: 0 };
-            let sumX = 0;
-            let sumY = 0;
+            let sumX = 0, sumY = 0;
             for (let i = 0; i < count; i++) {
                 sumX += touches[i].clientX;
                 sumY += touches[i].clientY;
@@ -1089,82 +1390,104 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < count; i++) {
                 sumDist += Math.hypot(touches[i].clientX - centroid.x, touches[i].clientY - centroid.y);
             }
-            const spread = count > 1 ? sumDist / count : 0;
-            return { count, centroid, spread };
+            return { count, centroid, spread: count > 1 ? sumDist / count : 0 };
         };
+
+        let initialSpread = 0;
+        let initialScale = 1;
+        let initialPanX = 0;
+        let initialPanY = 0;
+        let initialCentroid = { x: 0, y: 0 };
+        let activeTouchCount = 0;
+        let lastTapTime = 0;
 
         if (stage) {
             stage.addEventListener('touchstart', (e) => {
+                if (isTransitioning) return;
                 const metrics = computeTouchMetrics(e.touches);
                 activeTouchCount = metrics.count;
 
                 if (metrics.count >= 2) {
                     // 2 or 3-finger pinch zoom
+                    isSwiping = false;
+                    isPanning = false;
                     initialSpread = metrics.spread;
                     initialScale = scale;
                     initialPanX = panX;
                     initialPanY = panY;
                     initialCentroid = metrics.centroid;
                 } else if (metrics.count === 1) {
-                    touchStartX = e.touches[0].clientX;
-                    touchStartY = e.touches[0].clientY;
-                    prevPanX = panX;
-                    prevPanY = panY;
+                    const touch = e.touches[0];
+                    if (scale > 1.05) {
+                        isPanning = true;
+                        isSwiping = false;
+                        panStartX = touch.clientX;
+                        panStartY = touch.clientY;
+                        prevPanX = panX;
+                        prevPanY = panY;
+                    } else {
+                        isSwiping = true;
+                        isPanning = false;
+                        swipeStartX = touch.clientX;
+                        swipeStartY = touch.clientY;
+                        swipeDeltaX = 0;
+                        swipeStartTime = Date.now();
+                        if (track) {
+                            track.style.transition = 'none';
+                            track.style.willChange = 'transform';
+                        }
+                    }
                 }
-            }, { passive: false });
+            }, { passive: true });
 
             stage.addEventListener('touchmove', (e) => {
-                if (!modal.classList.contains('is-open')) return;
+                if (!modal.classList.contains('is-open') || isTransitioning) return;
                 const metrics = computeTouchMetrics(e.touches);
 
                 if (metrics.count >= 2 && initialSpread > 0) {
-                    e.preventDefault();
-                    // Pinch zoom ratio (works for 2 or 3 fingers)
+                    if (e.cancelable) e.preventDefault();
                     const factor = metrics.spread / initialSpread;
-                    setZoom(initialScale * factor, false);
-
-                    // Also follow centroid translation
+                    scale = Math.min(Math.max(initialScale * factor, 0.5), 4.5);
                     const deltaX = metrics.centroid.x - initialCentroid.x;
                     const deltaY = metrics.centroid.y - initialCentroid.y;
                     panX = initialPanX + deltaX;
                     panY = initialPanY + deltaY;
                     updateTransform(false);
-                } else if (metrics.count === 1 && scale > 1.05) {
-                    e.preventDefault();
-                    panX = prevPanX + (e.touches[0].clientX - touchStartX);
-                    panY = prevPanY + (e.touches[0].clientY - touchStartY);
-                    updateTransform(false);
+                } else if (metrics.count === 1) {
+                    const touch = e.touches[0];
+                    if (isPanning && scale > 1.05) {
+                        if (e.cancelable) e.preventDefault();
+                        panX = prevPanX + (touch.clientX - panStartX);
+                        panY = prevPanY + (touch.clientY - panStartY);
+                        updateTransform(false);
+                    } else if (isSwiping && scale <= 1.05 && track) {
+                        const dx = touch.clientX - swipeStartX;
+                        const dy = touch.clientY - swipeStartY;
+                        if (Math.abs(dx) > Math.abs(dy) * 1.2 && Math.abs(dx) > 6) {
+                            if (e.cancelable) e.preventDefault();
+                        }
+                        swipeDeltaX = dx;
+                        track.style.transform = `translate3d(${dx}px, 0, 0)`;
+                    }
                 }
             }, { passive: false });
 
             stage.addEventListener('touchend', (e) => {
                 const remaining = e.touches.length;
                 if (remaining >= 2) {
-                    // Finger lifted while still 2+ fingers down: re-anchor pinch baseline
                     const metrics = computeTouchMetrics(e.touches);
                     initialSpread = metrics.spread;
                     initialScale = scale;
                     initialPanX = panX;
                     initialPanY = panY;
                     initialCentroid = metrics.centroid;
-                } else if (remaining === 1) {
-                    touchStartX = e.touches[0].clientX;
-                    touchStartY = e.touches[0].clientY;
-                    prevPanX = panX;
-                    prevPanY = panY;
-                    initialSpread = 0;
                 } else if (remaining === 0) {
-                    // Snap back if pinched below 100%
-                    if (scale < 1) {
-                        resetZoom(true);
-                    }
+                    if (scale < 1) resetZoom(true);
 
-                    // Single-touch gesture handling
+                    // Double-tap toggle (mobile)
                     if (e.changedTouches.length === 1 && activeTouchCount === 1) {
                         const endTouch = e.changedTouches[0];
-                        const moveDist = Math.hypot(endTouch.clientX - touchStartX, endTouch.clientY - touchStartY);
-
-                        // Double tap detection
+                        const moveDist = Math.hypot(endTouch.clientX - swipeStartX, endTouch.clientY - swipeStartY);
                         const now = Date.now();
                         if (moveDist < 15) {
                             if (now - lastTapTime < 320) {
@@ -1175,19 +1498,27 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                             lastTapTime = now;
                         }
+                    }
 
-                        // Swipe left/right when not zoomed
-                        if (scale <= 1.05 && moveDist > 35) {
-                            const diffX = endTouch.clientX - touchStartX;
-                            const diffY = endTouch.clientY - touchStartY;
-                            if (Math.abs(diffX) > Math.abs(diffY) * 1.2) {
-                                if (diffX < 0) nextImage();
-                                else prevImage();
-                            }
+                    // Complete mobile swipe gesture
+                    if (isSwiping && track) {
+                        isSwiping = false;
+                        const duration = Math.max(Date.now() - swipeStartTime, 1);
+                        const velocity = Math.abs(swipeDeltaX) / duration;
+                        const threshold = Math.min(window.innerWidth * 0.2, 80);
+
+                        if (gallery.length > 1 && (swipeDeltaX < -threshold || (swipeDeltaX < -25 && velocity > 0.45))) {
+                            nextImage();
+                        } else if (gallery.length > 1 && (swipeDeltaX > threshold || (swipeDeltaX > 25 && velocity > 0.45))) {
+                            prevImage();
+                        } else {
+                            track.style.transition = 'transform 0.2s ease-out';
+                            track.style.transform = 'translate3d(0, 0, 0)';
+                            setTimeout(() => { if (track) track.style.willChange = 'auto'; }, 200);
                         }
                     }
 
-                    initialSpread = 0;
+                    isPanning = false;
                     activeTouchCount = 0;
                 }
             });
@@ -1218,11 +1549,31 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Debounced resize & orientation handler (Task 3.4)
+        let resizeTimer = null;
+        window.addEventListener('resize', () => {
+            if (!modal.classList.contains('is-open')) return;
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (!track) return;
+                track.querySelectorAll('.photo-viewer-slide').forEach(slide => {
+                    const idx = parseInt(slide.getAttribute('data-index'), 10);
+                    const item = gallery[idx];
+                    const frame = slide.querySelector('.photo-viewer-frame');
+                    if (item && frame) {
+                        const fit = computeFitDimensions(getMeta(item.href));
+                        frame.style.width = fit.width;
+                        frame.style.height = fit.height;
+                    }
+                });
+            }, 100);
+        });
+
         // Initialize gallery links
         setupGallery();
     }
 
-    // =========================================================================
+
     // 11. Register PWA Service Worker & Idle Optimizations
     // =========================================================================
     if ('serviceWorker' in navigator) {

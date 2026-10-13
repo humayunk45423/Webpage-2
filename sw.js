@@ -3,7 +3,7 @@
  * Stale-while-revalidate & Cache-first offline PWA architecture.
  */
 
-const CACHE_NAME = 'hk-portfolio-v1';
+const CACHE_NAME = 'hk-portfolio-v2';
 const CORE_ASSETS = [
     './',
     './index.html',
@@ -14,7 +14,8 @@ const CORE_ASSETS = [
     './site.webmanifest',
     './assets/site-images/Logo-Animation.gif',
     './assets/site-images/refined.webp',
-    './assets/site-images/Artboard_1logo_border_radious.png'
+    './assets/site-images/Artboard_1logo_border_radious.png',
+    './assets/site-images/projects-meta.json'
 ];
 
 self.addEventListener('install', (event) => {
@@ -59,6 +60,26 @@ self.addEventListener('fetch', (event) => {
                         return caches.match('./files.html');
                     }
                     return caches.match('./index.html');
+                });
+            })
+        );
+        return;
+    }
+
+    // Cache-first strategy for images (Task 3.3)
+    if (request.destination === 'image' || /\.(webp|png|jpg|jpeg|gif|svg|ico)$/i.test(url.pathname)) {
+        event.respondWith(
+            caches.open(CACHE_NAME).then((cache) => {
+                return cache.match(request).then((cachedResponse) => {
+                    if (cachedResponse) {
+                        return cachedResponse;
+                    }
+                    return fetch(request).then((networkResponse) => {
+                        if (networkResponse && networkResponse.status === 200) {
+                            cache.put(request, networkResponse.clone());
+                        }
+                        return networkResponse;
+                    }).catch(() => cachedResponse);
                 });
             })
         );
