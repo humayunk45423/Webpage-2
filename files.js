@@ -1182,11 +1182,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeTab) {
             const left = Math.round(activeTab.offsetLeft);
             const width = Math.round(activeTab.offsetWidth);
+            if (width <= 0) return;
+            glider.style.removeProperty('opacity');
+            glider.classList.add('visible');
             if (immediate || !gliderInitialized) {
                 glider.style.transition = 'none';
                 glider.style.transform = `translate3d(${left}px, 0, 0)`;
                 glider.style.width = `${width}px`;
-                glider.classList.add('visible');
                 gliderInitialized = true;
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
@@ -1197,7 +1199,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             glider.style.transform = `translate3d(${left}px, 0, 0)`;
             glider.style.width = `${width}px`;
-            glider.classList.add('visible');
         }
     };
 
