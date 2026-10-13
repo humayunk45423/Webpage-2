@@ -847,7 +847,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // 10. Photo Viewer / Lightbox: Top-Tier 60fps 3-Slide Engine (Task 3.1 - 3.5)
+    // 10. Photo Viewer / Lightbox: Fast, Direct 60fps Viewer (Zero Stutter / No Skeleton)
     // =========================================================================
     const modal = document.getElementById('photoViewerModal');
     if (modal) {
@@ -866,9 +866,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const zoomOutBtn = document.getElementById('photoViewerZoomOut');
         const zoomResetBtn = document.getElementById('photoViewerZoomReset');
         const downloadBtn = document.getElementById('photoViewerDownload');
-
-        // Embedded image metadata for instant zero-latency blur-up (<6KB payload)
-        const PROJECTS_IMAGE_META = {"sadia-variety-store-poster.webp": {"old_name": "Artboard_1logo_name_choto.png", "new_name": "sadia-variety-store-poster.webp", "path": "assets/site-images/sadia-variety-store-poster.webp", "width": 1280, "height": 640, "aspect_ratio": 2.0, "srcset": "assets/site-images/sadia-variety-store-poster-480w.webp 480w, assets/site-images/sadia-variety-store-poster-800w.webp 800w, assets/site-images/sadia-variety-store-poster-1200w.webp 1200w, assets/site-images/sadia-variety-store-poster.webp 1280w", "lqip": "data:image/webp;base64,UklGRsoAAABXRUJQVlA4WAoAAAAQAAAAFwAACwAAQUxQSBkAAAABF9D/iAgoaNuGMbRBK/o9BBH9D5CXarMBAFZQOCCKAAAA0AMAnQEqGAAMAD7tZqpOKaWjojAIATAdiUAToAQ72ts3Ln7EpPoAAPlYCLInntbcYKBjINmvgbAGgxjo+LvrKoyheOZ5tIL0bR8sPHU9+9mBuZNnddI120D1fxl2A71Uik2hN5S68pjJXsY+4hM/Sx8o8zIeaz7pUf1NdGc9qC/f+5x9xxSWgAAA", "title": "Sadia Variety Store", "subtitle": "Poster Design", "orig_size_kb": 984.5, "webp_size_kb": 125.1, "savings_pct": 87.3}, "mobile-express-logo.webp": {"old_name": "Mobile Express Logo.png", "new_name": "mobile-express-logo.webp", "path": "assets/site-images/mobile-express-logo.webp", "width": 1080, "height": 1080, "aspect_ratio": 1.0, "srcset": "assets/site-images/mobile-express-logo-480w.webp 480w, assets/site-images/mobile-express-logo-800w.webp 800w, assets/site-images/mobile-express-logo.webp 1080w", "lqip": "data:image/webp;base64,UklGRpQBAABXRUJQVlA4WAoAAAAQAAAAFwAAFwAAQUxQSIYAAAABgCoAoMHozbb3B27LrtYvqK4yL+5P1tfdbONsGw/nqxExAeBTWUoVtpKFkBSabexmQQJzXTwTXrhgvjuSO99/x31LcuuG6WckazOMnjjGu84xYYAV3cO5zAsBmhGZoPaTPIBLtTae3j31QwyAT9EV75+f70sWKiBWZmrllBZ8JE0ipoIvCFZQOCDoAAAAkAUAnQEqGAAYAD7tZqpPKaWjoigNUTAdiWwAtPQT0iJwv9r6oLpXUWbQTv0/hHyot0PnIAAA/q/YGfDTkOrK2LujO+fMyBrSjeYzZOUfL/RbUCyyG0iXEBp03eC6FEj85gEoQEN6cD16WcJU+87l3toYajzPU9wFro7/HYB7ejDC+n19MrjxupEjXKT0QfsU+J8vLuxSiKtbo0ayEPlCBchb85jJjdomm50Qw54FfP2wBGZc4uh/PacCKurI3jBG90YNBKSneVzsCGXlRPGuxNLy8+N9AZEuZFZRdv0tXNiHSS0MUAAAAA==", "title": "Mobile Express", "subtitle": "Logo Design", "orig_size_kb": 71.9, "webp_size_kb": 34.0, "savings_pct": 52.7}, "mobile-express-business-card.webp": {"old_name": "Mobile_Express_Business_Card.png", "new_name": "mobile-express-business-card.webp", "path": "assets/site-images/mobile-express-business-card.webp", "width": 1152, "height": 720, "aspect_ratio": 1.6, "srcset": "assets/site-images/mobile-express-business-card-480w.webp 480w, assets/site-images/mobile-express-business-card-800w.webp 800w, assets/site-images/mobile-express-business-card.webp 1152w", "lqip": "data:image/webp;base64,UklGRiwBAABXRUJQVlA4WAoAAAAQAAAAFwAADgAAQUxQSHEAAAANcFtr29J8H+4OQ1AzDQuyQOrUqXQO9/z6VfGkj4gJMLNcnAQ8GoZasj3L+w4vnB4wfI+IjUfQFlYT4gMAYNrJbXJjKbzSU6TNlyDB/8ZXmfarIudFWi2vLqrr8cDueKljKadYDVNNhmnbxh3JFJm5CQBWUDgglAAAANADAJ0BKhgADwA+7WKqTamlpCIwCAEwHYlAAAtQ16WRsqKscj6gAAD+8x1gOpaqrp61HPCDs+91LrnSU07Y8BTXlZoKpJFLZQjx9njuf7I1f89Ye+B+e0BQsdEUcPtR3M3Vl3KUMuzNNz/VIr3AK2QiGR1oMF+7j+OywSN71Ryt1I1m70WzRgNb/C6lU+c+1ZTEkAA=", "title": "Mobile Express", "subtitle": "Business Card", "orig_size_kb": 190.5, "webp_size_kb": 77.1, "savings_pct": 59.5}, "mobile-express-cash-memo.webp": {"old_name": "Mobile_Express_Cash_Memo.png", "new_name": "mobile-express-cash-memo.webp", "path": "assets/site-images/mobile-express-cash-memo.webp", "width": 1280, "height": 905, "aspect_ratio": 1.4144, "srcset": "assets/site-images/mobile-express-cash-memo-480w.webp 480w, assets/site-images/mobile-express-cash-memo-800w.webp 800w, assets/site-images/mobile-express-cash-memo-1200w.webp 1200w, assets/site-images/mobile-express-cash-memo.webp 1280w", "lqip": "data:image/webp;base64,UklGRsIAAABXRUJQVlA4WAoAAAAQAAAAFwAADwAAQUxQSEIAAAABX6AokqQ2ejl8EwL44oyIiI9SQXYe5QWr2rYBhRBBAcsJI4IClhNGBAWsuR3nO6L/sVTnVh0vSe6XJOffGkDtAAVWUDggWgAAAHADAJ0BKhgAEAA+7WKpTamlpCIwCAEwHYllALDsIcMjiM6jAAD+k2gzVs4phoirN115ZceFTj4VWBHbrL1sxQ+9N0Pa1h0t9HDplZep6/B+jROrXzOegt2AAA==", "title": "Mobile Express", "subtitle": "Cash Memo Design", "orig_size_kb": 309.2, "webp_size_kb": 87.2, "savings_pct": 71.8}, "mobile-express-facebook-ad.webp": {"old_name": "Mobile express facebook ad.png", "new_name": "mobile-express-facebook-ad.webp", "path": "assets/site-images/mobile-express-facebook-ad.webp", "width": 1000, "height": 1000, "aspect_ratio": 1.0, "srcset": "assets/site-images/mobile-express-facebook-ad-480w.webp 480w, assets/site-images/mobile-express-facebook-ad-800w.webp 800w, assets/site-images/mobile-express-facebook-ad.webp 1000w", "lqip": "data:image/webp;base64,UklGRgQBAABXRUJQVlA4IPgAAAAQBgCdASoYABgAPu1wsFIppiSiqAgBMB2JagC26O6qQApTiP5bWCp9bvTNW3FMaxPlmdhqpP7VZwAA/sJPu8MwLNWs6lqeYmJwBIyKEmpLxLevvxyDutH8zEDPJasUqBQgF88yywDvqLW2Iw3puAaxybqRU/cwO/J5eSM98qIUfzvQOzSoRNqqsguMCtgz8tr/AaS+Uyz8N7ah0sb+ppn0K+dY3LRvGYRUiInLtwL8emRL/fJK/c9ez4x30WvbjknOCQtoxd3expmItNn8U9ZFBkaqXpE4XO/Lv92I5+kF3pMogW4UwPw/C+H/03AEKb0KLMJj+TJAAA==", "title": "Mobile Express", "subtitle": "Facebook Ads", "orig_size_kb": 481.0, "webp_size_kb": 97.1, "savings_pct": 79.8}, "tadrib-academy-logo.webp": {"old_name": "415043082_122093206244186305_1002341150726708714_n.jpg", "new_name": "tadrib-academy-logo.webp", "path": "assets/site-images/tadrib-academy-logo.webp", "width": 800, "height": 800, "aspect_ratio": 1.0, "srcset": "assets/site-images/tadrib-academy-logo-480w.webp 480w, assets/site-images/tadrib-academy-logo.webp 800w", "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAAAwBACdASoYABgAPu1opU2ppiMiMBgMATAdiUAZVoId+2FLEOOXE6REK4AA/vQZ6LtJTIbtlj9auf0PCGzzxWnlnJ6BxMhB107GWVAhUWGjIJSQSq1VvqNT/ISGmqsgyWrX7tKScgj40DWPNzwWpkhZ8SRjoQAA", "title": "Tadrib Academy", "subtitle": "Logo Design", "orig_size_kb": 33.9, "webp_size_kb": 8.8, "savings_pct": 73.9}, "tadrib-academy-facebook-ad.webp": {"old_name": "Artboard_1.png", "new_name": "tadrib-academy-facebook-ad.webp", "path": "assets/site-images/tadrib-academy-facebook-ad.webp", "width": 800, "height": 800, "aspect_ratio": 1.0, "srcset": "assets/site-images/tadrib-academy-facebook-ad-480w.webp 480w, assets/site-images/tadrib-academy-facebook-ad.webp 800w", "lqip": "data:image/webp;base64,UklGRtYAAABXRUJQVlA4IMoAAAAQBQCdASoYABgAPu1sq1EppaOiqAqpMB2JZgC2yA/RX6AFblot6aDDkYwmXkPrDdqAAP5rSpQ7l9pG0PtVxS417C5FqNeEolwSi/DLWjLCSc9sf81q1Muv/rxzdI+3SGWuZ3pSv0qn7kfAFvX+AQTpkHjczMeknNgFT/Znp0XSfZa5NERMHOK6njFaWJ6RIaTlkCSXOsDqp+V77ytoYdpo4h2d2IsgQEisy/tHds3T30jhuHLmAzhUNBN0GfOpM2kqdrSsH9/OkAAA", "title": "Tadrib Academy", "subtitle": "Facebook Ads Poster", "orig_size_kb": 610.3, "webp_size_kb": 112.6, "savings_pct": 81.5}, "tadrib-academy-marketplace-ad.webp": {"old_name": "Artboard_1_4x.png", "new_name": "tadrib-academy-marketplace-ad.webp", "path": "assets/site-images/tadrib-academy-marketplace-ad.webp", "width": 800, "height": 800, "aspect_ratio": 1.0, "srcset": "assets/site-images/tadrib-academy-marketplace-ad-480w.webp 480w, assets/site-images/tadrib-academy-marketplace-ad.webp 800w", "lqip": "data:image/webp;base64,UklGRvAAAABXRUJQVlA4IOQAAACQBgCdASoYABgAPu1qrFEppaQiqAqpMB2JagCdMoR1B7pTS/+IBHPa6sYF8Xq0kC9hs0gDeDXyBf3dAFBgAP7sV9uYCE4tXnzNrYz2bDlGyZFYKb6KCWBeWBnuwmPxh7I9ib62DU2J7O/bkok7nA2X4fN85sJF0xVNQGYrtjxkVeEJSE9g3Y9ON0dOVA8hmcVXoPZo+EfR92sQrfouNIUoTGeAoG6mxndHu560oNnyRJaiZbvYmL2x/P+SFo25AMubiMQ9W6ycGPlSlhUazfrF95OpL4KfgxuVJTLWJD8BSmAcAAA=", "title": "Tadrib Academy", "subtitle": "Marketplace Ads Run", "orig_size_kb": 455.5, "webp_size_kb": 102.3, "savings_pct": 77.5}, "fuad-mobile-point-logo.webp": {"old_name": "Artboard_1logo_wng_bn_Card.png", "new_name": "fuad-mobile-point-logo.webp", "path": "assets/site-images/fuad-mobile-point-logo.webp", "width": 800, "height": 800, "aspect_ratio": 1.0, "srcset": "assets/site-images/fuad-mobile-point-logo-480w.webp 480w, assets/site-images/fuad-mobile-point-logo.webp 800w", "lqip": "data:image/webp;base64,UklGRhABAABXRUJQVlA4IAQBAADwBQCdASoYABgAPu1qrVCppaQiqAqpMB2JbAC09iM1ABYAe94eAoegnJKeXENW31rBU7ac+B/TQAD+8d3QuQ2IFhg5bc+boJYpiCZoetnzbnzOAzCaR7Bu+7JpOQEdfvXjHMN0L+Jan+v9Ibp1BlOeAD8zU0bBrVuEyqwRCFEq+hfq95F66sBIfS7Jbgag+WrcxxfcD7RKA+SihM9XHyVIXOa9MjEcvPT1paoWTEWv+DuLv7ZBeiUnZM25BJtM3nrxynVo8WY/FW3IfONIoyO4Z6os+3a11yZFbMtKAat5w2gn/FpUaTnLYeLV0zBz2/oFALU3JBvEeyLHVPPvER27c4AAAA==", "title": "Fuad Mobile Point", "subtitle": "Logo Design", "orig_size_kb": 93.8, "webp_size_kb": 20.0, "savings_pct": 78.7}, "fuad-mobile-point-banner.webp": {"old_name": "Fuad_Mobile_Point_Banner.png", "new_name": "fuad-mobile-point-banner.webp", "path": "assets/site-images/fuad-mobile-point-banner.webp", "width": 1280, "height": 576, "aspect_ratio": 2.2222, "srcset": "assets/site-images/fuad-mobile-point-banner-480w.webp 480w, assets/site-images/fuad-mobile-point-banner-800w.webp 800w, assets/site-images/fuad-mobile-point-banner-1200w.webp 1200w, assets/site-images/fuad-mobile-point-banner.webp 1280w", "lqip": "data:image/webp;base64,UklGRgABAABXRUJQVlA4WAoAAAAQAAAAFwAACQAAQUxQSFYAAAABcBsAANkEs23jb2vLC95Q8xa7PSAiJgBWPVW85dhLTpLvmjLElcfV4nYcLqfl6nK5XG4LXBpOb+0opn9PS+LVv0P85fVierxY3sYYSEvXIvdYupU5CFZQOCCEAAAA0AMAnQEqGAAKAD7tYqlNqaWjojAIATAdiUAVgAPx7+rPqzmTgJ8AAP6tPAoAG3xhUzB5uoICcayClz6KcnLmZjD3wEBjBSbNm3p57MYG/N/kozWzoDATpHI8+Z3g+jDAv4s9fwlF47ZbrzZh+rqcOsPLNZB6Bpn6XLPO3OtEmo8BQAAA", "title": "Fuad Mobile Point", "subtitle": "Banner Design", "orig_size_kb": 731.0, "webp_size_kb": 91.3, "savings_pct": 87.5}, "fuad-mobile-point-business-card.webp": {"old_name": "Artboard_1B_Card.png", "new_name": "fuad-mobile-point-business-card.webp", "path": "assets/site-images/fuad-mobile-point-business-card.webp", "width": 1008, "height": 576, "aspect_ratio": 1.75, "srcset": "assets/site-images/fuad-mobile-point-business-card-480w.webp 480w, assets/site-images/fuad-mobile-point-business-card-800w.webp 800w, assets/site-images/fuad-mobile-point-business-card.webp 1008w", "lqip": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAABQAwCdASoYAA0ALrV2u12jqampiYC0SzAAA2T+H1pbFkxCqAD+7uWlg+iM/mNg4ojpXumQan5MLWBk8zAKlMfFb02FJGS9FBAFAP58GnM0+bNtk2BNgGj2il5/KlLRCN7J86UEKRQMK8EBmGGtVpMXqH5VcNFbLR0wc+N4nEAAAA==", "title": "Fuad Mobile Point", "subtitle": "Business Card Design", "orig_size_kb": 179.7, "webp_size_kb": 58.5, "savings_pct": 67.4}, "fuad-mobile-point-cash-memo.webp": {"old_name": "Screenshot_2026_03_25_172443.png", "new_name": "fuad-mobile-point-cash-memo.webp", "path": "assets/site-images/fuad-mobile-point-cash-memo.webp", "width": 1192, "height": 840, "aspect_ratio": 1.419, "srcset": "assets/site-images/fuad-mobile-point-cash-memo-480w.webp 480w, assets/site-images/fuad-mobile-point-cash-memo-800w.webp 800w, assets/site-images/fuad-mobile-point-cash-memo.webp 1192w", "lqip": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAADQAwCdASoYABAAPu1iqU2ppaOiMAgBMB2JaQAAW9x2EYigRT6w9sAA/tXc5aRDcrDYh8cD/t/FtfEFaiKO2X9iJJa0BItAPtJ9Z2BqbRRFmOWoKmd89RG+AKnCgAAA", "title": "Fuad Mobile Point", "subtitle": "Cash Memo Design", "orig_size_kb": 126.8, "webp_size_kb": 92.0, "savings_pct": 27.5}};
 
         let gallery = [];
         let currentIndex = 0;
@@ -889,77 +886,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let swipeDeltaX = 0;
         let lastFocusedEl = null;
         let isTransitioning = false;
-        const activeControllers = new Map();
-
-        const prefersReducedMotion = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        const isSlowConnection = () => {
-            const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-            if (!conn) return false;
-            if (conn.saveData) return true;
-            return ['slow-2g', '2g', '3g'].includes(conn.effectiveType);
-        };
 
         const isImageHref = (url) => /\.(png|jpe?g|webp|svg|gif)(\?.*)?$/i.test(url);
 
-        const getMeta = (href) => {
-            if (!href) return null;
-            const filename = href.split('/').pop().split('?')[0];
-            return PROJECTS_IMAGE_META[filename] || null;
-        };
-
-        // Cache of preloaded URLs to avoid duplicate fetches
-        const preloadedUrls = new Set();
-        const preloadImage = (item, highRes = false) => {
-            if (!item || !item.href || preloadedUrls.has(item.href)) return;
-            const meta = getMeta(item.href);
-            const img = new Image();
-            if (meta && meta.srcset && (highRes || !isSlowConnection())) {
-                img.srcset = meta.srcset;
-                img.sizes = '(max-width: 768px) 100vw, 1200px';
-            }
-            img.src = item.href;
-            img.onload = () => preloadedUrls.add(item.href);
-        };
-
-        // Idle-time preloading of adjacent images (Task 3.1 & 3.3)
-        const scheduleIdlePreload = () => {
-            const runner = () => {
-                if (!gallery.length) return;
-                const slow = isSlowConnection();
-                const nextIdx = (currentIndex + 1) % gallery.length;
-                preloadImage(gallery[nextIdx], !slow);
-
-                // On fast connection, also preload previous slide
-                if (!slow && gallery.length > 2) {
-                    const prevIdx = (currentIndex - 1 + gallery.length) % gallery.length;
-                    preloadImage(gallery[prevIdx], false);
-                }
-            };
-            if (typeof requestIdleCallback === 'function') {
-                requestIdleCallback(runner, { timeout: 1200 });
-            } else {
-                setTimeout(runner, 200);
-            }
-        };
-
-        // Aspect-ratio aware dimension fitting with zero layout shift (Task 3.2)
-        const computeFitDimensions = (meta) => {
-            if (!viewport) return { width: 'auto', height: 'auto', ratio: 'auto' };
-            const vpW = Math.max(viewport.clientWidth - (window.innerWidth <= 768 ? 16 : 48), 260);
-            const vpH = Math.max(viewport.clientHeight - (window.innerWidth <= 768 ? 16 : 48), 260);
-            const ratio = (meta && meta.width && meta.height) ? (meta.width / meta.height) : (vpW / vpH);
-            let w = vpW;
-            let h = w / ratio;
-            if (h > vpH) {
-                h = vpH;
-                w = h * ratio;
-            }
-            return {
-                width: Math.round(w) + 'px',
-                height: Math.round(h) + 'px',
-                ratio: ratio
-            };
+        // Preload all gallery images immediately into memory so slide transitions are instant
+        const prewarmGalleryImages = () => {
+            gallery.forEach(item => {
+                const img = new Image();
+                img.src = item.href;
+            });
         };
 
         // Create individual slide element (prev, curr, or next)
@@ -967,137 +902,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const item = gallery[itemIndex];
             if (!item) return null;
 
-            const meta = getMeta(item.href);
             const slide = document.createElement('div');
             slide.className = 'photo-viewer-slide';
             slide.setAttribute('data-slot', slot);
             slide.setAttribute('data-index', itemIndex);
 
-            const fit = computeFitDimensions(meta);
-
             const frame = document.createElement('div');
             frame.className = 'photo-viewer-frame';
-            frame.style.width = fit.width;
-            frame.style.height = fit.height;
-            if (fit.ratio !== 'auto') frame.style.aspectRatio = fit.ratio;
 
-            // LQIP Blur placeholder (<1KB inlined base64, Task 3.2)
-            if (meta && meta.lqip) {
-                const lqip = document.createElement('img');
-                lqip.className = 'pv-lqip';
-                lqip.src = meta.lqip;
-                lqip.alt = '';
-                lqip.setAttribute('aria-hidden', 'true');
-                lqip.setAttribute('draggable', 'false');
-                frame.appendChild(lqip);
-            }
-
-            // Skeleton Shimmer Background
-            const skeleton = document.createElement('div');
-            skeleton.className = 'pv-skeleton';
-            skeleton.setAttribute('aria-hidden', 'true');
-            frame.appendChild(skeleton);
-
-            // Subtle loading indicator (>300ms load time)
-            const spinner = document.createElement('div');
-            spinner.className = 'pv-spinner';
-            spinner.setAttribute('aria-hidden', 'true');
-            frame.appendChild(spinner);
-
-            // Error state fallback with 'Tap to retry'
-            const errorBox = document.createElement('div');
-            errorBox.className = 'pv-error';
-            errorBox.innerHTML = `
-                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-                <span>Failed to load image</span>
-                <button type="button" class="pv-retry-btn">Tap to retry</button>
-            `;
-            frame.appendChild(errorBox);
-
-            // High-res Image
+            // Direct high-res sharp image (no blur, no skeleton, no flash)
             const img = document.createElement('img');
             img.className = 'pv-img';
+            img.src = item.href;
             img.alt = item.card?.querySelector('h3')?.textContent?.trim() || 'Project Graphic';
             img.setAttribute('draggable', 'false');
+
             frame.appendChild(img);
-
             slide.appendChild(frame);
-
-            // Trigger decode() loading
-            loadSlideImage(frame, img, item, meta, errorBox);
-
             return slide;
         };
 
-        const loadSlideImage = (frame, img, item, meta, errorBox) => {
-            const controller = new AbortController();
-            activeControllers.set(frame, controller);
-
-            // Show spinner only if load takes longer than 300ms
-            const slowTimer = setTimeout(() => {
-                if (!frame.classList.contains('is-loaded')) {
-                    frame.classList.add('is-slow');
-                }
-            }, 300);
-
-            const loader = new Image();
-            const slowNet = isSlowConnection();
-
-            if (meta && meta.srcset) {
-                loader.srcset = meta.srcset;
-                loader.sizes = slowNet
-                    ? '(max-width: 768px) 480px, 800px'
-                    : '(max-width: 768px) 100vw, 1200px';
-            }
-            loader.src = item.href;
-
-            loader.decode().then(() => {
-                clearTimeout(slowTimer);
-                if (controller.signal.aborted) return;
-                img.src = loader.currentSrc || item.href;
-                if (loader.srcset) {
-                    img.srcset = loader.srcset;
-                    img.sizes = loader.sizes;
-                }
-                frame.classList.remove('is-slow', 'has-error');
-                frame.classList.add('is-loaded');
-            }).catch(() => {
-                clearTimeout(slowTimer);
-                if (controller.signal.aborted) return;
-                // Direct fallback
-                img.src = item.href;
-                img.onload = () => {
-                    frame.classList.remove('is-slow', 'has-error');
-                    frame.classList.add('is-loaded');
-                };
-                img.onerror = () => {
-                    frame.classList.remove('is-slow', 'is-loaded');
-                    frame.classList.add('has-error');
-                };
-            });
-
-            const retryBtn = errorBox.querySelector('.pv-retry-btn');
-            if (retryBtn) {
-                retryBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    frame.classList.remove('has-error');
-                    loadSlideImage(frame, img, item, meta, errorBox);
-                };
-            }
-        };
-
-        // Render exactly 3 slides (prev, curr, next) into DOM (Task 3.1 & 3.4)
+        // Render exactly 3 slides (prev, curr, next) into DOM
         const renderSlides = () => {
             if (!track || !gallery.length) return;
-
-            // Release memory of off-screen slides
-            track.querySelectorAll('.photo-viewer-frame').forEach(f => {
-                const ctrl = activeControllers.get(f);
-                if (ctrl) ctrl.abort();
-                activeControllers.delete(f);
-                const i = f.querySelector('.pv-img');
-                if (i) { i.src = ''; i.srcset = ''; }
-            });
             track.innerHTML = '';
 
             const n = gallery.length;
@@ -1120,7 +947,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             updateHeaderInfo();
             resetZoom(false);
-            scheduleIdlePreload();
         };
 
         const getCurrentFrame = () => {
@@ -1159,14 +985,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (zoomText) {
                 zoomText.textContent = `${Math.round(scale * 100)}%`;
             }
-
-            // High-res upgrade on zoom (Task 3.3)
-            if (scale > 1.2) {
-                const currImg = frame.querySelector('.pv-img');
-                if (currImg && currImg.sizes && currImg.sizes !== '100vw') {
-                    currImg.sizes = '100vw';
-                }
-            }
         };
 
         const setZoom = (newScale, smooth = true) => {
@@ -1185,20 +1003,24 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTransform(smooth);
         };
 
-        // Navigation between slides with GPU acceleration (Task 3.1)
+        // Navigation between slides with smooth GPU transform
         const navigateTo = (direction) => {
             if (isTransitioning || gallery.length <= 1 || !track) return;
             isTransitioning = true;
 
             const offset = direction === 'next' ? -100 : 100;
-            const reduced = prefersReducedMotion();
-
             track.style.willChange = 'transform';
-            track.style.transition = reduced ? 'none' : 'transform 0.24s cubic-bezier(0.25, 1, 0.5, 1)';
+            track.style.transition = 'transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1)';
             track.style.transform = `translate3d(${offset}%, 0, 0)`;
 
+            let hasFinalized = false;
+            let timer = null;
             const finalize = () => {
+                if (hasFinalized) return;
+                hasFinalized = true;
+                if (timer) clearTimeout(timer);
                 track.removeEventListener('transitionend', finalize);
+
                 if (direction === 'next') {
                     currentIndex = (currentIndex + 1) % gallery.length;
                 } else {
@@ -1211,12 +1033,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 isTransitioning = false;
             };
 
-            if (reduced) {
-                finalize();
-            } else {
-                track.addEventListener('transitionend', finalize, { once: true });
-                setTimeout(finalize, 300); // Safety fallback
-            }
+            track.addEventListener('transitionend', finalize, { once: true });
+            timer = setTimeout(finalize, 250);
         };
 
         const prevImage = () => navigateTo('prev');
@@ -1239,19 +1057,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = '';
             setTimeout(() => {
                 modal.hidden = true;
-                if (track) {
-                    track.querySelectorAll('.photo-viewer-frame').forEach(f => {
-                        const ctrl = activeControllers.get(f);
-                        if (ctrl) ctrl.abort();
-                        activeControllers.delete(f);
-                        const i = f.querySelector('.pv-img');
-                        if (i) { i.src = ''; i.srcset = ''; }
-                    });
-                    track.innerHTML = '';
-                }
+                if (track) track.innerHTML = '';
                 resetZoom(false);
                 if (lastFocusedEl) lastFocusedEl.focus();
-            }, 300);
+            }, 250);
         };
 
         // Discover all project graphic links
@@ -1282,6 +1091,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
+
+            // Prewarm all images in background
+            prewarmGalleryImages();
         };
 
         // Button Click Listeners
@@ -1374,9 +1186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // =========================================================================
-        // Mobile Touch Gestures: 2-finger & 3-finger pinch zoom, pan & swipe (Task 3.1)
-        // =========================================================================
+        // Mobile Touch Gestures: 2-finger & 3-finger pinch zoom, pan & swipe
         const computeTouchMetrics = (touches) => {
             const count = touches.length;
             if (count === 0) return { count: 0, centroid: { x: 0, y: 0 }, spread: 0 };
@@ -1408,7 +1218,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 activeTouchCount = metrics.count;
 
                 if (metrics.count >= 2) {
-                    // 2 or 3-finger pinch zoom
                     isSwiping = false;
                     isPanning = false;
                     initialSpread = metrics.spread;
@@ -1484,7 +1293,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (remaining === 0) {
                     if (scale < 1) resetZoom(true);
 
-                    // Double-tap toggle (mobile)
+                    // Double-tap toggle
                     if (e.changedTouches.length === 1 && activeTouchCount === 1) {
                         const endTouch = e.changedTouches[0];
                         const moveDist = Math.hypot(endTouch.clientX - swipeStartX, endTouch.clientY - swipeStartY);
@@ -1547,26 +1356,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 resetZoom(true);
             }
-        });
-
-        // Debounced resize & orientation handler (Task 3.4)
-        let resizeTimer = null;
-        window.addEventListener('resize', () => {
-            if (!modal.classList.contains('is-open')) return;
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                if (!track) return;
-                track.querySelectorAll('.photo-viewer-slide').forEach(slide => {
-                    const idx = parseInt(slide.getAttribute('data-index'), 10);
-                    const item = gallery[idx];
-                    const frame = slide.querySelector('.photo-viewer-frame');
-                    if (item && frame) {
-                        const fit = computeFitDimensions(getMeta(item.href));
-                        frame.style.width = fit.width;
-                        frame.style.height = fit.height;
-                    }
-                });
-            }, 100);
         });
 
         // Initialize gallery links
