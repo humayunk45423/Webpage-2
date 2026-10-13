@@ -1189,14 +1189,14 @@ document.addEventListener('DOMContentLoaded', () => {
         [langToggle, langToggleMobile].forEach(t => {
             if (!t) return;
             t.setAttribute('data-state', isBn ? 'left' : 'right');
-            t.setAttribute('aria-label', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
-            t.setAttribute('title', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('aria-label', isBn ? 'Switch to English (ইং)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('title', isBn ? 'Switch to English (ইং)' : 'Switch to Bangla (বাং)');
             t.setAttribute('aria-checked', isBn ? 'false' : 'true');
 
             const optLeft = t.querySelector('.opt-left');
             const optRight = t.querySelector('.opt-right');
-            if (optLeft && optLeft.textContent !== 'BN') optLeft.textContent = 'BN';
-            if (optRight && optRight.textContent !== 'EN') optRight.textContent = 'EN';
+            if (optLeft && optLeft.textContent !== 'বাং') optLeft.textContent = 'বাং';
+            if (optRight && optRight.textContent !== 'ইং') optRight.textContent = 'ইং';
         });
     };
 
@@ -1319,6 +1319,7 @@ document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(savedLang);
     const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
     applyTheme(savedTheme);
+
 
     updateSearchPlaceholder();
     window.addEventListener('resize', updateSearchPlaceholder);

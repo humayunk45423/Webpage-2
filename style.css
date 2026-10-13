@@ -441,23 +441,33 @@
         }
 
         /* ─── 1. Theme Toggle Slider Movement (Strictly Independent) ─── */
+        html[data-theme="light"] #themeToggle .toggle-slider,
+        html[data-theme="light"] #themeToggleMobile .toggle-slider,
         #themeToggle[data-state="left"] .toggle-slider,
         #themeToggleMobile[data-state="left"] .toggle-slider {
             transform: translate3d(0, 0, 0) !important;
         }
 
+        html[data-theme="dark"] #themeToggle .toggle-slider,
+        html[data-theme="dark"] #themeToggleMobile .toggle-slider,
         #themeToggle[data-state="right"] .toggle-slider,
         #themeToggleMobile[data-state="right"] .toggle-slider {
             transform: translate3d(100%, 0, 0) !important;
         }
 
         /* ─── 2. Language Toggle Slider Movement (Strictly Independent) ─── */
+        html[data-lang="bn"] .lang-toggle .toggle-slider,
+        html[data-lang="bn"] #langToggle .toggle-slider,
+        html[data-lang="bn"] #langToggleMobile .toggle-slider,
         .lang-toggle[data-state="left"] .toggle-slider,
         #langToggle[data-state="left"] .toggle-slider,
         #langToggleMobile[data-state="left"] .toggle-slider {
             transform: translate3d(0, 0, 0) !important;
         }
 
+        html[data-lang="en"] .lang-toggle .toggle-slider,
+        html[data-lang="en"] #langToggle .toggle-slider,
+        html[data-lang="en"] #langToggleMobile .toggle-slider,
         .lang-toggle[data-state="right"] .toggle-slider,
         #langToggle[data-state="right"] .toggle-slider,
         #langToggleMobile[data-state="right"] .toggle-slider {
@@ -502,6 +512,10 @@
         }
 
         /* Light state active Sun (Black) */
+        html[data-theme="light"] #themeToggle .sun i,
+        html[data-theme="light"] #themeToggleMobile .sun i,
+        html[data-theme="light"] #themeToggle .sun svg,
+        html[data-theme="light"] #themeToggleMobile .sun svg,
         #themeToggle[data-state="left"] .sun i,
         #themeToggleMobile[data-state="left"] .sun i,
         #themeToggle[data-state="left"] .sun svg,
@@ -512,6 +526,10 @@
             opacity: 1;
         }
 
+        html[data-theme="light"] #themeToggle .moon i,
+        html[data-theme="light"] #themeToggleMobile .moon i,
+        html[data-theme="light"] #themeToggle .moon svg,
+        html[data-theme="light"] #themeToggleMobile .moon svg,
         #themeToggle[data-state="left"] .moon i,
         #themeToggleMobile[data-state="left"] .moon i,
         #themeToggle[data-state="left"] .moon svg,
@@ -523,6 +541,10 @@
         }
 
         /* Dark state active Moon (White) */
+        html[data-theme="dark"] #themeToggle .moon i,
+        html[data-theme="dark"] #themeToggleMobile .moon i,
+        html[data-theme="dark"] #themeToggle .moon svg,
+        html[data-theme="dark"] #themeToggleMobile .moon svg,
         #themeToggle[data-state="right"] .moon i,
         #themeToggleMobile[data-state="right"] .moon i,
         #themeToggle[data-state="right"] .moon svg,
@@ -533,6 +555,10 @@
             opacity: 1;
         }
 
+        html[data-theme="dark"] #themeToggle .sun i,
+        html[data-theme="dark"] #themeToggleMobile .sun i,
+        html[data-theme="dark"] #themeToggle .sun svg,
+        html[data-theme="dark"] #themeToggleMobile .sun svg,
         #themeToggle[data-state="right"] .sun i,
         #themeToggleMobile[data-state="right"] .sun i,
         #themeToggle[data-state="right"] .sun svg,
@@ -562,14 +588,14 @@
             width: 68px;
             height: 32px;
             cursor: pointer;
-            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-family: 'Hind Siliguri', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
         }
 
         .lang-toggle .toggle-opt {
-            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
-            font-size: 10.5px;
+            font-family: 'Hind Siliguri', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.01em;
             color: #94a3b8;
             opacity: 0.65;
             cursor: pointer;
@@ -578,10 +604,16 @@
             user-select: none;
             line-height: 1;
             transform: none !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 1px;
         }
 
         /* ─── Light Mode Active & Inactive Language States ─── */
-        /* Active Left (BN) in Light Mode */
+        /* Active Left (বাং) in Light Mode */
+        html[data-theme="light"][data-lang="bn"] .lang-toggle .opt-left,
+        html[data-theme="light"] .lang-toggle[data-state="left"] .opt-left,
         .lang-toggle[data-state="left"] .opt-left {
             color: #000000 !important;
             opacity: 1 !important;
@@ -589,6 +621,8 @@
             transform: none !important;
             text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
         }
+        html[data-theme="light"][data-lang="bn"] .lang-toggle .opt-right,
+        html[data-theme="light"] .lang-toggle[data-state="left"] .opt-right,
         .lang-toggle[data-state="left"] .opt-right {
             color: #94a3b8 !important;
             opacity: 0.6 !important;
@@ -597,7 +631,9 @@
             text-shadow: none !important;
         }
 
-        /* Active Right (EN) in Light Mode */
+        /* Active Right (ইং) in Light Mode */
+        html[data-theme="light"][data-lang="en"] .lang-toggle .opt-right,
+        html[data-theme="light"] .lang-toggle[data-state="right"] .opt-right,
         .lang-toggle[data-state="right"] .opt-right {
             color: #000000 !important;
             opacity: 1 !important;
@@ -605,6 +641,8 @@
             transform: none !important;
             text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
         }
+        html[data-theme="light"][data-lang="en"] .lang-toggle .opt-left,
+        html[data-theme="light"] .lang-toggle[data-state="right"] .opt-left,
         .lang-toggle[data-state="right"] .opt-left {
             color: #94a3b8 !important;
             opacity: 0.6 !important;
@@ -614,7 +652,8 @@
         }
 
         /* ─── Dark Mode Active & Inactive Language States (Matches White Moon) ─── */
-        /* Active Left (BN) in Dark Mode: Pure White with Soft Glow */
+        /* Active Left (বাং) in Dark Mode: Pure White with Soft Glow */
+        html[data-theme="dark"][data-lang="bn"] .lang-toggle .opt-left,
         html[data-theme="dark"] .lang-toggle[data-state="left"] .opt-left {
             color: #ffffff !important;
             opacity: 1 !important;
@@ -622,6 +661,7 @@
             transform: none !important;
             text-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
         }
+        html[data-theme="dark"][data-lang="bn"] .lang-toggle .opt-right,
         html[data-theme="dark"] .lang-toggle[data-state="left"] .opt-right {
             color: #64748b !important;
             opacity: 0.5 !important;
@@ -630,7 +670,8 @@
             text-shadow: none !important;
         }
 
-        /* Active Right (EN) in Dark Mode: Pure White with Soft Glow */
+        /* Active Right (ইং) in Dark Mode: Pure White with Soft Glow */
+        html[data-theme="dark"][data-lang="en"] .lang-toggle .opt-right,
         html[data-theme="dark"] .lang-toggle[data-state="right"] .opt-right {
             color: #ffffff !important;
             opacity: 1 !important;
@@ -638,6 +679,7 @@
             transform: none !important;
             text-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
         }
+        html[data-theme="dark"][data-lang="en"] .lang-toggle .opt-left,
         html[data-theme="dark"] .lang-toggle[data-state="right"] .opt-left {
             color: #64748b !important;
             opacity: 0.5 !important;

@@ -21,7 +21,7 @@ const translations = {
         contact_wa_title: "WhatsApp / Phone",
         toggle_language_label: "Language",
         toggle_theme_label: "Theme",
-        
+
         // Hero Section
         hero_greeting: "Assalamu Alaikum (Greetings)!",
         hero_iam: "I'm Humayoun Kobir",
@@ -161,7 +161,7 @@ const translations = {
         // Hero Section
         hero_greeting: "আসসালামু আলাইকুম!",
         hero_iam: "আমি হুমায়ূন কবির",
-        hero_about_text: "কম্পিউটার সায়েন্সে ডিপ্লোমা ইঞ্জিনিয়ার, যিনি স্মার্ট স্ট্র্যাটেজি ও দক্ষ সমাধান সৃষ্টিতে নিবেদিত। ৩ডি মডেলিং, ব্র্যান্ডিং এবং ডাটা অপ্টিমাইজেশনের মাধ্যমে টেকনিক্যাল ইঞ্জিনিয়ারিং ও ক্রিয়েটিভ ডিজাইনের মেলবন্ধন ঘটাই।",
+        hero_about_text: "কম্পিউটার সায়েন্সে ডিপ্লোমা ইঞ্জিনিয়ার, এবং স্মার্ট স্ট্র্যাটেজি ও দক্ষ সমাধান সৃষ্টিতে নিবেদিত। ৩ডি মডেলিং, ব্র্যান্ডিং এবং ডাটা অপ্টিমাইজেশনের মাধ্যমে টেকনিক্যাল ইঞ্জিনিয়ারিং ও ক্রিয়েটিভ ডিজাইনের মেলবন্ধন ঘটাই।",
         btn_skills: "দক্ষতা",
         btn_projects: "প্রকল্পসমূহ",
         btn_connect: "যোগাযোগ",
@@ -346,14 +346,14 @@ document.addEventListener('DOMContentLoaded', () => {
         [langToggle, langToggleMobile].forEach(t => {
             if (!t) return;
             t.setAttribute('data-state', isBn ? 'left' : 'right');
-            t.setAttribute('aria-label', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
-            t.setAttribute('title', isBn ? 'Switch to English (EN)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('aria-label', isBn ? 'Switch to English (ইং)' : 'Switch to Bangla (বাং)');
+            t.setAttribute('title', isBn ? 'Switch to English (ইং)' : 'Switch to Bangla (বাং)');
             t.setAttribute('aria-checked', isBn ? 'false' : 'true');
 
             const optLeft = t.querySelector('.opt-left');
             const optRight = t.querySelector('.opt-right');
-            if (optLeft && optLeft.textContent !== 'BN') optLeft.textContent = 'BN';
-            if (optRight && optRight.textContent !== 'EN') optRight.textContent = 'EN';
+            if (optLeft && optLeft.textContent !== 'বাং') optLeft.textContent = 'বাং';
+            if (optRight && optRight.textContent !== 'ইং') optRight.textContent = 'ইং';
         });
     };
 
@@ -473,6 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+
 
     // =========================================================================
     // 3. Mobile Navigation Drawer & Backdrop Logic
@@ -823,7 +824,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(ta);
         ta.focus();
         ta.select();
-        try { document.execCommand('copy'); } catch (e) {}
+        try { document.execCommand('copy'); } catch (e) { }
         document.body.removeChild(ta);
     }
 
@@ -832,7 +833,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').catch(() => {});
+            navigator.serviceWorker.register('./sw.js').catch(() => { });
         });
     }
 
