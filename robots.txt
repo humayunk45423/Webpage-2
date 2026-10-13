@@ -11,6 +11,15 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
+User-agent: Bravebot
+Allow: /
+
+User-agent: MojeekBot
+Allow: /
+
+User-agent: KagiBot
+Allow: /
+
 User-agent: Slurp
 Allow: /
 
