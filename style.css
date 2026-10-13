@@ -436,34 +436,32 @@
         html[data-theme="dark"] .toggle-thumb,
         [data-theme="dark"] .toggle-slider,
         [data-theme="dark"] .toggle-thumb {
-            background: rgba(255, 255, 255, 0.18);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 10px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.22);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
         }
 
         /* ─── 1. Theme Toggle Slider Movement (Strictly Independent) ─── */
         #themeToggle[data-state="left"] .toggle-slider,
         #themeToggleMobile[data-state="left"] .toggle-slider {
-            transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0) !important;
         }
 
         #themeToggle[data-state="right"] .toggle-slider,
         #themeToggleMobile[data-state="right"] .toggle-slider {
-            transform: translate3d(100%, 0, 0);
+            transform: translate3d(100%, 0, 0) !important;
         }
 
         /* ─── 2. Language Toggle Slider Movement (Strictly Independent) ─── */
         .lang-toggle[data-state="left"] .toggle-slider,
         #langToggle[data-state="left"] .toggle-slider,
         #langToggleMobile[data-state="left"] .toggle-slider {
-            transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0) !important;
         }
 
         .lang-toggle[data-state="right"] .toggle-slider,
         #langToggle[data-state="right"] .toggle-slider,
         #langToggleMobile[data-state="right"] .toggle-slider {
-            transform: translate3d(100%, 0, 0);
+            transform: translate3d(100%, 0, 0) !important;
         }
 
         /* Option slots */
@@ -564,18 +562,22 @@
             width: 68px;
             height: 32px;
             cursor: pointer;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
         }
 
         .lang-toggle .toggle-opt {
-            font-size: 11.5px;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-size: 10.5px;
             font-weight: 700;
             letter-spacing: 0.04em;
             color: #94a3b8;
             opacity: 0.65;
             cursor: pointer;
             pointer-events: none; /* Anywhere clickable: clicks pass directly to button */
-            transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, filter 0.25s ease;
+            transition: color 0.25s ease, opacity 0.25s ease, text-shadow 0.25s ease;
             user-select: none;
+            line-height: 1;
+            transform: none !important;
         }
 
         /* ─── Light Mode Active & Inactive Language States ─── */
@@ -583,32 +585,32 @@
         .lang-toggle[data-state="left"] .opt-left {
             color: #000000 !important;
             opacity: 1 !important;
-            font-weight: 800 !important;
-            transform: scale(1.1);
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+            font-weight: 700 !important;
+            transform: none !important;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
         }
         .lang-toggle[data-state="left"] .opt-right {
             color: #94a3b8 !important;
             opacity: 0.6 !important;
             font-weight: 600 !important;
-            transform: scale(0.92);
-            filter: none;
+            transform: none !important;
+            text-shadow: none !important;
         }
 
         /* Active Right (EN) in Light Mode */
         .lang-toggle[data-state="right"] .opt-right {
             color: #000000 !important;
             opacity: 1 !important;
-            font-weight: 800 !important;
-            transform: scale(1.1);
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+            font-weight: 700 !important;
+            transform: none !important;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.12);
         }
         .lang-toggle[data-state="right"] .opt-left {
             color: #94a3b8 !important;
             opacity: 0.6 !important;
             font-weight: 600 !important;
-            transform: scale(0.92);
-            filter: none;
+            transform: none !important;
+            text-shadow: none !important;
         }
 
         /* ─── Dark Mode Active & Inactive Language States (Matches White Moon) ─── */
@@ -616,32 +618,32 @@
         html[data-theme="dark"] .lang-toggle[data-state="left"] .opt-left {
             color: #ffffff !important;
             opacity: 1 !important;
-            font-weight: 800 !important;
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+            font-weight: 700 !important;
+            transform: none !important;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
         }
         html[data-theme="dark"] .lang-toggle[data-state="left"] .opt-right {
             color: #64748b !important;
             opacity: 0.5 !important;
             font-weight: 600 !important;
-            transform: scale(0.92);
-            filter: none;
+            transform: none !important;
+            text-shadow: none !important;
         }
 
         /* Active Right (EN) in Dark Mode: Pure White with Soft Glow */
         html[data-theme="dark"] .lang-toggle[data-state="right"] .opt-right {
             color: #ffffff !important;
             opacity: 1 !important;
-            font-weight: 800 !important;
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+            font-weight: 700 !important;
+            transform: none !important;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
         }
         html[data-theme="dark"] .lang-toggle[data-state="right"] .opt-left {
             color: #64748b !important;
             opacity: 0.5 !important;
             font-weight: 600 !important;
-            transform: scale(0.92);
-            filter: none;
+            transform: none !important;
+            text-shadow: none !important;
         }
 
         /* ─── Mobile Hamburger Menu Button ─── */

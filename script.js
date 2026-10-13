@@ -352,8 +352,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const optLeft = t.querySelector('.opt-left');
             const optRight = t.querySelector('.opt-right');
-            if (optLeft) optLeft.textContent = 'BN';
-            if (optRight) optRight.textContent = 'EN';
+            if (optLeft && optLeft.textContent !== 'BN') optLeft.textContent = 'BN';
+            if (optRight && optRight.textContent !== 'EN') optRight.textContent = 'EN';
         });
     };
 
