@@ -82,6 +82,171 @@ const categoryList = [
     { id: "creative", name: "Creative & Design", icon: "fa-solid fa-palette" }
 ];
 
+// =========================================================================
+// Complete Bengali Translations for All Tool Documentations & Commands
+// =========================================================================
+const documentationTranslations = {
+    "avro": {
+        "readme_bn": "## ওভারভিউ\nসম্পূর্ণ ইউনিকোড এবং এএনএসআই (ANSI) টাইপিং সমর্থনকারী আদর্শ বাংলা ফোনেটিক কীবোর্ড সফটওয়্যার।"
+    },
+    "directx": {
+        "readme_bn": "## ওভারভিউ\nআধুনিক গেমস এবং হাই-পারফরম্যান্স গ্রাফিক্স অ্যাপ্লিকেশনগুলো সঠিকভাবে চালনার জন্য প্রয়োজনীয় অপরিহার্য DirectX 11 রানটাইম কম্পোনেন্ট।"
+    },
+    "everything": {
+        "readme_bn": "## ওভারভিউ\nএভরিথিং (Everything) হলো একটি অত্যন্ত দ্রুতগতির সার্চ ইঞ্জিন যা উইন্ডোজের NTFS ড্রাইভে চোখের পলকে ফাইল এবং ফোল্ডার নাম দিয়ে খুঁজে বের করে।\n\n## প্রধান সুবিধাসমূহ\n- টাইপ করার সাথে সাথেই রিয়েল-টাইমে তাৎক্ষণিক ফলাফল।\n- অত্যন্ত কম সিস্টেম রিসোর্স ব্যবহার (খুবই কম মেমরি ও সিপিইউ খরচ)।\n- শক্তিশালী সার্চ সিনট্যাক্স, ওয়াইল্ডকার্ড, রেজেক্স এবং ফাইল সাইজ/তারিখ অনুযায়ী ফিল্টার করার সুবিধা।"
+    },
+    "goodbyedpi": {
+        "readme_bn": "## ওভারভিউ\nকোনো প্রকার ধীরগতির প্রক্সি বা ভিপিএন ছাড়াই ডিপ প্যাকেট ইন্সপেকশন (DPI) সেন্সরশিপ এবং আইএসপি থ্রটলিং বাইপাস করার সেরা ইউটিলিটি।"
+    },
+    "productivity-macro": {
+        "readme_bn": "## ওভারভিউ\nদৈনন্দিন উইন্ডোজের কাজ, উইন্ডো ব্যবস্থাপনা এবং দ্রুত টাইপিং গতি বাড়ানোর জন্য হুমায়ূন কবিরের তৈরি একটি বিশেষ অটো-হটকি (AutoHotkey) ম্যাক্রো স্ক্রিপ্ট।\n\n## অন্তর্ভুক্ত শর্টকাটসমূহ\n- `Win + A`: যেকোনো সক্রিয় উইন্ডোকে সবসময় উপরে (Always-on-Top) পিন করে রাখা।\n- `Ctrl + Shift + V`: কোনো ফরম্যাটিং ছাড়া সরাসরি প্লেইন টেক্সট পেস্ট করা।\n- `Ctrl + Alt + Shift + E`: উইন্ডোজ এক্সপ্লোরার (Explorer) এক ক্লিকে রিস্টার্ট করা।\n- `Win + Mouse Scroll`: যেকোনো উইন্ডোর ট্রান্সপারেন্সি (স্বচ্ছতা) তাৎক্ষণিকভাবে কমানো বা বাড়ানো।\n- `;d` / `;dt`: চ্যাট বা ডকুমেন্টে স্বয়ংক্রিয়ভাবে বর্তমান তারিখ ও সময় ইনপুট দেওয়া।"
+    },
+    "qbittorrent": {
+        "readme_bn": "## ওভারভিউ\nবিজ্ঞাপনমুক্ত, ওপেন সোর্স বিটটরেন্ট ক্লায়েন্ট যা মিউটরেন্ট এবং অন্যান্য পেইড সফটওয়্যারের সেরা এবং নিরাপদ বিকল্প।\n\n## মূল সুবিধাসমূহ\n- কোনো প্রকার বিজ্ঞাপন বা অবাঞ্ছিত সফটওয়্যার ছাড়া পরিষ্কার ও পরিচ্ছন্ন ইউজার ইন্টারফেস।\n- সরাসরি ইন্টিগ্রেটেড সার্চ ইঞ্জিন এবং আরএসএস (RSS) ফিড রিডার।\n- সিকোয়েন্সিয়াল ডাউনলোড (ডাউনলোড চলাকালীন অবস্থাতেই ভিডিও দেখার সুবিধা)।\n- উন্নত আইপি ফিল্টারিং এবং ব্যান্ডউইথ শিডিউলিং।"
+    },
+    "vcredist": {
+        "readme_bn": "## ওভারভিউ\n২০০৫ থেকে ২০২২ সাল পর্যন্ত সমস্ত ভিজ্যুয়াল সি++ রিডিস্ট্রিবিউটেবল রানটাইম (উভয় x86 এবং x64) এর অল-ইন-ওয়ান পূর্ণাঙ্গ প্যাকেজ।\n\n## নির্দেশিকা\n১. জিপ (ZIP) ফাইলটি আনজিপ করুন।\n২. অন্তর্ভুক্ত ব্যাচ ইনস্টলারটি রান করে এক ক্লিকেই সবগুলো রানটাইম ইনস্টল করুন।\n\n## কেন এটি প্রয়োজন\nএটি গেমস বা সফটওয়্যার চালু করার সময় আসা সাধারণ 'VCRUNTIME140.dll missing' বা 'MSVCP.dll not found' এর মতো এররগুলো পুরোপুরি সমাধান করে।"
+    },
+    "win-office-act": {
+        "readme_bn": "## নির্দেশিকা\nএই স্ক্রিপ্টটি চালানোর জন্য পাওয়ারশেল (PowerShell) অ্যাডমিনিস্ট্রেটর হিসেবে রান করুন।"
+    },
+    "winrar": {
+        "readme_bn": "## নির্দেশিকা\n১. অফিসিয়াল WinRAR ইনস্টল করুন।\n২. ডাউনলোড করা RAR থেকে 'rarreg.key' ফাইলটি এক্সট্র্যাক্ট করুন।\n৩. 'rarreg.key' ফাইলটি WinRAR ইনস্টলেশন ফোল্ডারে (`C:\\Program Files\\WinRAR`) পেস্ট করুন।\n\n## ৭-জিপ (7-Zip) সুপারিশ\nআপনি যদি সম্পূর্ণ ফ্রি এবং ওপেন সোর্স সফটওয়্যার পছন্দ করেন, তবে 7-Zip হলো WinRAR-এর সেরা হালকা বিকল্প।"
+    },
+    "bios-button": {
+        "readme_bn": "## এটি যা করে\nবারবার কিবোর্ডের বাটন না চেপে সরাসরি এক ক্লিকেই পিসি রিস্টার্ট করে UEFI/BIOS সেটিংসে প্রবেশ করার দ্রুত সমাধান।"
+    },
+    "bcuninstaller": {
+        "readme_bn": "## ওভারভিউ\nবাল্ক ক্র্যাপ আনইনস্টলার হলো উইন্ডোজের জন্য একটি ফ্রি এবং ওপেন-সোর্স (FOSS) আনইনস্টলার। এটি একসাথে একাধিক অ্যাপ্লিকেশন, অবশিষ্ট ফাইল, আবর্জনা এবং রেজিস্ট্রি কি স্বয়ংক্রিয়ভাবে কোনো ঝামেলা ছাড়াই পরিষ্কার করতে সক্ষম।\n\n## প্রধান সুবিধাসমূহ\n- একসাথে শত শত প্রোগ্রাম ব্যাচ আকারে আনইনস্টল করার সুবিধা।\n- স্বয়ংক্রিয়ভাবে অবশিষ্ট ফাইল ও রেজিস্ট্রি এন্ট্রি পরিষ্কার করে।\n- উইন্ডোজ স্টোর অ্যাপস, ওকুলাস, স্টিম গেমস এবং পোর্টেবল অ্যাপস আনইনস্টল করতে পারে।\n- স্বয়ংক্রিয় ব্যাকগ্রাউন্ড সাইলেন্ট আনইনস্টল সুবিধা।"
+    },
+    "registry-path": {
+        "readme_bn": ""
+    },
+    "clean-purger": {
+        "readme_bn": "## ওভারভিউ\nআপনার ব্যক্তিগত ডকুমেন্টে কোনো হাত না দিয়েই উইন্ডোজের অপ্রয়োজনীয় আবর্জনা, টেম্পোরারি ফাইল, শেডার ক্যাশ এবং নষ্ট আপডেট ফাইল এক ক্লিকে সম্পূর্ণ পরিষ্কার করার শক্তিশালী ব্যাচ ইউটিলিটি।\n\n## যে স্থানগুলো পরিষ্কার করে\n- ইউজার ও সিস্টেমের `%temp%` ফোল্ডার।\n- উইন্ডোজ প্রিফেচ (Prefetch) ক্যাশ।\n- ডাইরেক্টএক্স, এনভিডিয়া এবং এএমডি শেডার ক্যাশ (`DXCache`)।\n- উইন্ডোজ ডেলিভারি অপটিমাইজেশন ও সফটওয়্যার ডিস্ট্রিবিউশন ডাউনলোড ক্যাশ।\n- এক্সপ্লোরার থাম্বনেইল ডাটাবেস ও ডিএনএস রিজলভার ক্যাশ।",
+        "commands_bn": [
+            "ডিএনএস রিজলভার ক্যাশ ফ্লাশ করুন",
+            "কম্পোনেন্ট স্টোর ক্লিনআপ (DISM ক্লিনআপ)"
+        ]
+    },
+    "glary": {
+        "readme_bn": "## অ্যাক্টিভেশন\nসিস্টেম ক্লিনিং এবং ফুল অপটিমাইজেশন ফিচারের সুবিধা আনলক করতে নিচে দেওয়া সিরিয়াল কি (Serial Key) ব্যবহার করুন।",
+        "copyLabel_bn": "লাইসেন্স / সিরিয়াল কি"
+    },
+    "godmode-creator": {
+        "readme_bn": "## ওভারভিউ\nউইন্ডোজের ২০০টিরও বেশি লুকানো কেন্দ্রীয় সিস্টেম অ্যাডমিনিস্ট্রেশন সেটিংস সম্বলিত 'All Tasks' মাস্টার কন্ট্রোল প্যানেলের সরাসরি ডেস্কটপ শর্টকাট তৈরি করে।\n\n## ম্যানুয়াল তৈরির নিয়ম\nযেকোনো জায়গায় একটি নতুন ফোল্ডার তৈরি করুন এবং এর নাম ঠিক এটি দিন:\n`GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}`",
+        "commands_bn": [
+            "রান ডায়ালগের মাধ্যমে গডমোড খুলুন (Win + R)"
+        ]
+    },
+    "ooshutup10": {
+        "readme_bn": "## ওভারভিউ\nও অ্যান্ড ও শাটআপ১০++ উইন্ডোজ ১০ এবং ১১-এর ডেটা ট্র্যাকিং এবং প্রাইভেসি সেটিংসের উপর আপনার পূর্ণ নিয়ন্ত্রণ এনে দেয়, যাতে মাইক্রোসফটের কাছে অপ্রয়োজনীয় ডেটা না যায়।\n\n## মূল সুবিধাসমূহ\n- ১০০% ফ্রি এবং পোর্টেবল (ইনস্টল করার প্রয়োজন নেই)।\n- টেলিমেট্রি, ডায়াগনস্টিক ডেটা কালেকশন এবং ট্র্যাকিং সম্পূর্ণ বন্ধ করে।\n- কর্টানা, এজ ব্যাকগ্রাউন্ড অ্যাক্টিভিটি এবং লক স্ক্রিন ওয়েব সার্চ নিয়ন্ত্রণ করে।\n- ১-ক্লিকে প্রস্তাবিত সুরক্ষিত সেটিংস এবং প্রয়োজনে রিভার্ট করার সুবিধা।"
+    },
+    "power-context-menu": {
+        "readme_bn": "## ওভারভিউ\nএকটি পরিচ্ছন্ন এবং হালকা রেজিস্ট্রি ফাইল যা মাউসের রাইট-ক্লিক মেনুতে অত্যন্ত প্রয়োজনীয় পাওয়ার-ইউজার শর্টকাট যোগ করে।\n\n## যুক্ত হওয়া শর্টকাটসমূহ\n- **টেক ওনারশিপ (Take Ownership)**: লক করা সিস্টেম ফাইল ও ফোল্ডারে তাৎক্ষণিক অ্যাডমিন পারমিশন লাভ।\n- **রিস্টার্ট এক্সপ্লোরার**: উইন্ডোজের টাস্কবার বা আইকন হ্যাং হলে এক ক্লিকেই রিস্টার্ট।\n- **পাওয়ারশেল অ্যাডমিন হিসেবে খুলুন**: বর্তমান ফোল্ডারেই অ্যাডমিন মোডে টার্মিনাল চালু।\n- **গডমোড প্যানেল**: উইন্ডোজের ২০০+ মাস্টার সেটিংসে সরাসরি প্রবেশ।"
+    },
+    "revo": {
+        "readme_bn": "## নির্দেশিকা\nসফটওয়্যারটি ইনস্টল করার পর লাইসেন্স ফাইলটি নির্দিষ্ট ডিরেক্টরিতে কপি করুন।",
+        "copyLabel_bn": "লাইসেন্স ফাইলের লোকেশন"
+    },
+    "right-click-repair": {
+        "readme_bn": ""
+    },
+    "win10-menu": {
+        "readme_bn": "## ওভারভিউ\nউইন্ডোজ ১১-এ ক্লাসিক উইন্ডোজ ১০ এর মতো সম্পূর্ণ রাইট-ক্লিক কনটেক্সট মেনু ফিরিয়ে আনে।"
+    },
+    "cursor": {
+        "readme_bn": "## ওভারভিউ\nউইন্ডোজ ডেস্কটপ কাস্টমাইজেশনের জন্য আকর্ষণীয় রাউন্ডেড হাই-ডিপিআই (High-DPI) কার্সর সেট।"
+    },
+    "win11-debloat-search": {
+        "readme_bn": "## ওভারভিউ\nউইন্ডোজ ১১ স্টার্ট মেনু থেকে বিং ওয়েব সার্চ, কর্টানা, সার্চ হাইলাইটস এবং বিজ্ঞাপন বন্ধ করে সম্পূর্ণ অফলাইন ও দ্রুতগতির সার্চ নিশ্চিত করে।\n\n## নির্দেশিকা\n১. `.reg` ফাইলটি ডাউনলোড করুন।\n২. উইন্ডোজ রেজিস্ট্রিতে ইমপোর্ট করতে ডাবল ক্লিক করুন।\n৩. `explorer.exe` রিস্টার্ট করুন অথবা পিসি রিবুট করুন।"
+    },
+    "cdi": {
+        "readme_bn": "## ওভারভিউ\nএকটি পেশাদার এইচডিডি/এসএসডি হেলথ মনিটরিং টুল যা ড্রাইভের বিস্তারিত তথ্য এবং এস.এম.এ.আর.টি. (S.M.A.R.T.) স্ট্যাটাস প্রদর্শন করে ডেটা নষ্ট হওয়া প্রতিরোধ করে।"
+    },
+    "cdm": {
+        "readme_bn": "## ওভারভিউ\nস্টোরেজ ড্রাইভের সিকোয়েন্সিয়াল এবং র‍্যান্ডম রিড/রাইট স্পিড নিখুঁতভাবে মাপার জন্য বিশ্বমানের ডিস্ক বেঞ্চমার্ক ইউটিলিটি।"
+    },
+    "easeus-recovery": {
+        "readme_bn": "## ওভারভিউ\nযেকোনো স্টোরেজ ডিভাইস থেকে হারিয়ে যাওয়া, ভুলবশত মুছে ফেলা বা ফরম্যাট হওয়া ফাইল রিকভার করার উন্নত ডেটা রিকভারি সফটওয়্যার।"
+    },
+    "easeus-partition": {
+        "readme_bn": "## ওভারভিউ\nহার্ড ড্রাইভ ও এসএসডি পার্টিশন তৈরি, মার্জ এবং অপটিমাইজ করার পূর্ণাঙ্গ ডিস্ক ম্যানেজমেন্ট টুল।"
+    },
+    "google-photos-restorer": {
+        "readme_bn": "## ওভারভিউ\nগুগল টেকআউট (Google Takeout) থেকে মিডিয়া ডাউনলোড করলে ফটোর আসল সময় ও জিপিএস কোঅর্ডিনেট আলাদা `.json` ফাইলে চলে যায়। এই টুলটি স্বয়ংক্রিয়ভাবে সেই মেটাডেটা পুনরায় ফটোর ভেতরে যুক্ত করে দেয়।\n\n## নির্দেশিকা\n১. আপনার গুগল টেকআউটের ফোল্ডারটি আনজিপ করুন।\n২. `GooglePhotos-TakeoutRestorer.exe` চালু করুন।\n৩. গুগল টেকআউটের ফোল্ডারটি সিলেক্ট করুন।\n৪. স্টার্ট বাটনে ক্লিক করে সব মেটাডেটা ফটো ও ভিডিওতে ফিরিয়ে আনুন।"
+    },
+    "pic-recovery": {
+        "readme_bn": "## ওভারভিউ\nনষ্ট বা করাপ্ট স্টোরেজ থেকে হারিয়ে যাওয়া ফাইল ও ছবি উদ্ধারের জন্য ওপেন সোর্স ডেটা রিকভারি টুল।"
+    },
+    "wiztree": {
+        "readme_bn": "## ওভারভিউ\nউইজট্রি (WizTree) হলো বিশ্বের দ্রুততম ডিস্ক স্পেস অ্যানালাইজার। সরাসরি NTFS ড্রাইভের মাস্টার ফাইল টেবিল (MFT) পড়ে এটি ২ সেকেন্ডেরও কম সময়ে বিশাল টেরাবাইট ড্রাইভ স্ক্যান করতে পারে।\n\n## টুলস তুলনা\n- **WizTree**: সরাসরি MFT স্ক্যানিংয়ের মাধ্যমে বড় বড় ফাইলের চমৎকার ভিজ্যুয়াল ম্যাপ প্রদর্শন করে।\n- **TreeSize Free**: ক্লাসিক ফোল্ডার-ভিত্তিক ডিস্ক সাইজ বিশ্লেষণ এবং রাইট-ক্লিক মেনু সুবিধা।"
+    },
+    "cru-esports-pack": {
+        "readme_bn": "## ওভারভিউ\nকাস্টম রেজোলিউশন ইউটিলিটি (CRU) এর জন্য সম্পূর্ণ প্রফেশনাল ইস্পোর্টস স্ট্রেচড রেজোলিউশন ম্যাট্রিক্স ও নির্দেশিকা। যার মধ্যে রয়েছে প্রো-পরীক্ষিত অ্যাসপেক্ট রেশিও, মনিটর সমতুল্য প্রোফাইল এবং টাইমিং কনফিগারেশন।\n\n## ১০৮০পি মনিটর প্রোফাইল (১৬:৯ নেটিভ)\n- **১৭২৮ x ১০৮০ (১৬:১০ স্ট্রেচড)**: পাবজি স্টিম প্রো মেটা। কোনো প্রকার ভার্টিক্যাল এফওভি (FOV) ক্ষতি ছাড়াই ক্যারেক্টার হিটবক্স প্রায় ১০% চওড়া করে এবং ক্রসহেয়ার ডট সম্পূর্ণ পরিষ্কার রাখে।\n- **১৪৪০ x ১০৮০ (৪:৩ স্ট্রেচড)**: সিএস২ এবং ভ্যালোরেন্টের ক্লাসিক স্ট্রেচড রেজোলিউশন, যা সর্বোচ্চ টার্গেট সাইজ প্রদান করে।\n- **১৬০০ x ১০৮০ (৪:৩ ওয়াইড)**: নিখুঁত ব্যালেন্সড হাইব্রিড প্রোফাইল।\n- **১২৮০ x ৯৬০ (৪:৩ ক্লাসিক)**: লো-এন্ড পিসিতে সর্বোচ্চ এফপিএস (FPS) বুস্ট পাওয়ার জন্য সেরা।\n\n## ১৪৪০পি (২কে) মনিটর প্রোফাইল (১৬:৯ নেটিভ)\n- **২৩০৪ x ১৪৪০ (১৬:১০ স্ট্রেচড)**: ২কে প্যানেলের জন্য ১৭২৮x১০৮০ এর নিখুঁত গাণিতিক সমতুল্য রেজোলিউশন।\n- **১৯২০ x ১৪৪০ (৪:৩ স্ট্রেচড)**: কিউএইচডি ২কে মনিটরের জন্য আসল ৪:৩ স্ট্রেচড রেজোলিউশন।\n\n## সমর্থিত রিফ্রেশ রেটসমূহ\nপ্রতিটি রেজোলিউশন প্রোফাইল **৬০Hz, ৭৫Hz, ১২০Hz, ১৪৪Hz, ১৬৫Hz, ২৪০Hz, ২৮০Hz এবং ৩৬০Hz** পুরোপুরি সাপোর্ট করে।\n\n## ব্ল্যাক বার দূর করার জিপিইউ স্কেলিং সেটআপ\n১. এনভিডিয়া কন্ট্রোল প্যানেল খুলুন -> **Adjust desktop size and position** এ যান।\n২. Scaling Mode দিন **Full-screen**।\n৩. Perform scaling on নির্ধারণ করুন: **GPU** (অথবা Display)।\n৪. **Override the scaling mode set by games and programs** বক্সে টিক দিন।\n*(AMD ব্যবহারকারীরা: 'GPU Scaling' অন করুন এবং Scaling Mode দিন 'Full panel')*"
+    },
+    "cru": {
+        "readme_bn": "## ওভারভিউ\nমনিটরের কাস্টম রেজোলিউশন কনফিগার করা, ডিসপ্লের রিফ্রেশ রেট ওভারক্লক করা এবং EDID ডিসপ্লে টাইমিং টিউন করার সেরা সফটওয়্যার।"
+    },
+    "pc-opt": {
+        "readme_bn": "## নির্দেশিকা\nপাওয়ারশেল (PowerShell) অ্যাডমিনিস্ট্রেটর হিসেবে চালু করুন এবং নিচের কমান্ডগুলো এক এক করে রান করুন।",
+        "commands_bn": [
+            "ক্রিস টাইটাস টেক উইন্ডোজ ইউটিলিটি",
+            "উইন্ডোজ ও অফিস অ্যাক্টিভেশন (MAS)",
+            "ডায়নামিক টিক বন্ধ করুন (স্টাটার ফিক্স)",
+            "আলটিমেট পারফরম্যান্স পাওয়ার প্ল্যান তৈরি",
+            "সিস্টেম ফাইল চেকার (SFC স্ক্যান)",
+            "DISM ইমেজ হেলথ রিস্টোর",
+            "ড্রাইভ হেলথ স্ট্যাটাস চেক"
+        ]
+    },
+    "ram-flusher": {
+        "readme_bn": "## ওভারভিউ\nআধুনিক গেমগুলোতে উইন্ডোজ যখন স্ট্যান্ডবাই র‍্যাম (Standby RAM) থেকে মেমরি ঠিক সময়ে রিলিজ করতে পারে না, তখন যে ফ্রেম ড্রপ বা স্টাটারিং হয় তা পুরোপুরি সমাধান করে।\n\n## নির্দেশিকা\n১. ভারী গেমস বা ভিডিও এডিটিং শুরু করার আগে `.bat` স্ক্রিপ্টটি অ্যাডমিনিস্ট্রেটর হিসেবে রান করুন।\n২. পিসি রিস্টার্ট না করেই সাথে সাথে সমস্ত ক্যাশড স্ট্যান্ডবাই র‍্যাম ফ্রি মেমরিতে ফিরিয়ে দেয়।",
+        "commands_bn": [
+            "পাওয়ারশেলের মাধ্যমে প্রসেস মেমরি পরিষ্কার করুন"
+        ]
+    },
+    "throttlestop-quickcpu": {
+        "readme_bn": "## ওভারভিউ\nপ্রসেসরের পারফরম্যান্স সর্বোচ্চ বাড়ানো, আন্ডারভোল্টিং এবং অতিরিক্ত উত্তাপজনিত থ্রটলিং দূর করার পেশাদার ইউটিলিটি।\n\n## এগুলো যা করে\n- **ThrottleStop**: ইন্টেল সিপিইউ কোর/ক্যাশ আন্ডারভোল্ট করা, PL1/PL2 পাওয়ার লিমিট ঠিক করা এবং থার্মাল থ্রটলিং পুরোপুরি বন্ধ করা।\n- **QuickCPU**: কোর পার্কিং, ফ্রিকোয়েন্সি স্কেলিং, টার্বো বুস্ট সূচক এবং রিয়েল-টাইম পাওয়ার ব্যালেন্স নিখুঁতভাবে সমন্বয় করা।"
+    },
+    "latency-fixer": {
+        "readme_bn": "## ওভারভিউ\nইস্পোর্টস গেমিংয়ে মাইক্রো-স্টাটারিং দূর করা, কার্নেল টাইমার রেজোলিউশন স্থিতিশীল রাখা এবং জিপিইউ শিডিউলিং অগ্রাধিকার সর্বোচ্চ আনলক করার একটি নির্ভরযোগ্য ব্যাচ স্ক্রিপ্ট।\n\n## যে অপটিমাইজেশনগুলো প্রয়োগ করে\n- টাইমার ফ্রিকোয়েন্সি ওঠানামা রোধ করতে উইন্ডোজের ডায়নামিক টিক বন্ধ করে।\n- সিন্থেটিক HPET টাইমার ওভারহেড দূর করে ল্যাটেন্সি কমায়।\n- লো-পিং গেমিংয়ের জন্য নেটওয়ার্ক থ্রটলিং ইনডেক্স দূর করে।\n- উইন্ডোজের আলটিমেট পারফরম্যান্স (Ultimate Performance) পাওয়ার স্কিম সক্রিয় করে।",
+        "commands_bn": [
+            "ডায়নামিক টিক নিষ্ক্রিয় করুন (ফ্রেম টাইম জিটার দূরীকরণ)",
+            "সিন্থেটিক ক্লক ওভারহেড বন্ধ করুন",
+            "ধারাবাহিক সিন্থেটিক প্ল্যাটফর্ম টিক সক্ষম করুন",
+            "আলটিমেট পারফরম্যান্স পাওয়ার স্কিম সক্রিয় করুন"
+        ]
+    },
+    "autoruns": {
+        "readme_bn": "## ওভারভিউ\nপিসি বুট হওয়ার সময় স্বয়ংক্রিয়ভাবে চালু হওয়া সমস্ত প্রোগ্রাম, সার্ভিস, ড্রাইভার এবং শিডিউলড টাস্ক বিস্তারিত দেখার পূর্ণাঙ্গ মনিটর ইউটিলিটি।\n\n## নির্দেশিকা\n১. আরএআর (RAR) আর্কাইভটি এক্সট্র্যাক্ট করুন।\n২. `autoruns64.exe` ফাইলটি অ্যাডমিনিস্ট্রেটর হিসেবে রান করুন।"
+    },
+    "cpuz-gpuz": {
+        "readme_bn": "## ওভারভিউ\nপিসির হার্ডওয়্যার তথ্য ও ডায়াগনস্টিক পরীক্ষার জন্য বিশ্বখ্যাত দুটি অপরিহার্য সফটওয়্যারের জোড়া।\n\n## অন্তর্ভুক্ত টুলস\n- **CPU-Z (CPUID)**: রিয়েল-টাইম ক্লক ফ্রিকোয়েন্সি, মেমরি টাইমিংস, মাদারবোর্ড চিপসেট এবং সিঙ্গেল/মাল্টি-থ্রেড বেঞ্চমার্ক প্রদর্শন করে।\n- **GPU-Z (TechPowerUp)**: গ্রাফিক্স কার্ডের পূর্ণাঙ্গ তথ্য, ভি-র‍্যাম মেমরি ক্লক, বায়োস সংস্করণ, পিসিআইই বাস লোড এবং তাপমাত্রা সেন্সর মনিটর করে।"
+    },
+    "hitmanpro": {
+        "readme_bn": "## ওভারভিউ\nক্লাউড-ভিত্তিক সেকেন্ডারি ম্যালওয়্যার ও থ্রেট স্ক্যানার যা আপনার প্রধান অ্যান্টিভাইরাসের পাশাপাশি যেকোনো লুকানো ভাইরাস বা ম্যালওয়্যার নিমেষেই শনাক্ত করতে পারে।"
+    },
+    "hwinfo": {
+        "readme_bn": "## ওভারভিউ\nএইচডব্লিউইনফো (HWiNFO) হলো রিয়েল-টাইম সেন্সর মনিটরিং (তাপমাত্রা, ভোল্টেজ, ফ্যান স্পিড এবং পাওয়ার খরচ) সম্বলিত একটি পেশাদার হার্ডওয়্যার ডায়াগনস্টিক টুল।"
+    },
+    "process-explorer": {
+        "readme_bn": "## ওভারভিউ\nসিসইন্টারনালস প্রসেস এক্সপ্লোরার: উইন্ডোজের উন্নত টাস্ক ম্যানেজার যা সক্রিয় ডিএলএল (DLL), ফাইল হ্যান্ডেল এবং হার্ডওয়্যার পরিসংখ্যান নিখুঁতভাবে তুলে ধরে।"
+    },
+    "process-monitor": {
+        "readme_bn": "## ওভারভিউ\nউইন্ডোজের জন্য একটি অ্যাডভান্সড মনিটরিং টুল যা রিয়েল-টাইমে ফাইল সিস্টেম, রেজিস্ট্রি এবং প্রসেস/থ্রেড অ্যাক্টিভিটি প্রদর্শন করে।"
+    },
+    "adobe-suite": {
+        "readme_bn": "## অন্তর্ভুক্ত সফটওয়্যারসমূহ\n- অ্যাডোবি ফটোশপ সিসি ২০২০: প্রফেশনাল ফটো এডিটিং এবং ডিজিটাল ইমেজ কম্পোজিশন।\n- অ্যাডোবি ইলাস্ট্রেটর সিসি ২০২০: ভেক্টর গ্রাফিক্স, টাইপোগ্রাফি এবং লোগো ডিজাইন।"
+    },
+    "fontlab": {
+        "readme_bn": "## ওভারভিউ\nটাইপোগ্রাফি ডিজাইনারদের জন্য কাস্টম ওপেনটাইপ এবং ওয়েব ফন্ট তৈরি ও এক্সপোর্ট করার পেশাদার ফন্ট এডিটর।"
+    },
+    "foxit-pdf": {
+        "readme_bn": "## ওভারভিউ\nডকুমেন্ট তৈরি, অ্যানোটেশন, ডিজিটাল স্বাক্ষর এবং দ্রুত পিডিএফ এডিট করার জনপ্রিয় সফটওয়্যার।"
+    }
+};
+
 const fileData = [
     // =========================================================================
     // [1] PRODUCTIVITY & UTILITIES (Alphabetical A-Z)
@@ -199,7 +364,7 @@ const fileData = [
         officialUrl: "https://www.win-rar.com/fileadmin/winrar-versions/winrar-x64-701.exe",
         sevenZipUrl: "https://www.7-zip.org/",
         keywords: "winrar 7zip compression zip rar archive rarreg key extract",
-        readme: "## Instructions\n1. Install Official WinRAR.\n2. Extract 'rarreg.key' from the downloaded RAR.\n3. Move 'rarreg.key' into the WinRAR installation folder (`C:\\Program Files\\WinRAR`).\n\n## 7-Zip Recommendation\nIf you prefer free open-source software, 7-Zip is the best lightweight alternative to WinRAR."
+        readme: "## Instructions\n1. Install ${currentLang === 'bn' ? 'অফিসিয়াল WinRAR' : 'Official WinRAR'}.\n2. Extract 'rarreg.key' from the downloaded RAR.\n3. Move 'rarreg.key' into the WinRAR installation folder (`C:\\Program Files\\WinRAR`).\n\n## 7-Zip Recommendation\nIf you prefer free open-source software, 7-Zip is the best lightweight alternative to WinRAR."
     },
 
     // =========================================================================
@@ -660,7 +825,7 @@ const fileData = [
         id: "adobe-suite",
         name: "Adobe Software Suite",
         category: "creative",
-        badge: "Photoshop & Illustrator 2020",
+        badge: "Photoshop & ${currentLang === 'bn' ? 'ইলাস্ট্রেটর ২০২০' : 'Illustrator 2020'}",
         name_bn: "অ্যাডোবি সফটওয়্যার সুইট",
         badge_bn: "ফটোশপ ও ইলাস্ট্রেটর ২০২০",
         icon: "fa-solid fa-palette",
@@ -946,7 +1111,7 @@ function safeAssetUrl(url) {
     } else if (item.id === "adobe-suite") {
         heroHtml += `
             <a href="${safeAssetUrl(item.photoshopUrl)}" target="_blank" rel="noopener noreferrer" class="download-hero adobe-ps">
-                <i class="fa-solid fa-download"></i> Photoshop 2020
+                <i class="fa-solid fa-download"></i> ${currentLang === 'bn' ? 'ফটোশপ ২০২০' : 'Photoshop 2020'}
             </a>
             <a href="${safeAssetUrl(item.illustratorUrl)}" target="_blank" rel="noopener noreferrer" class="download-hero adobe-ai">
                 <i class="fa-solid fa-download"></i> Illustrator 2020
@@ -955,22 +1120,22 @@ function safeAssetUrl(url) {
     } else if (item.id === "winrar") {
         heroHtml += `
             <a href="${safeAssetUrl(item.path)}" class="download-hero" download>
-                <i class="fa-solid fa-key"></i> Activation Fix
+                <i class="fa-solid fa-key"></i> ${currentLang === 'bn' ? 'অ্যাক্টিভেশন ফিক্স' : 'Activation Fix'}
             </a>
             <a href="${safeAssetUrl(item.officialUrl)}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
                 <i class="fa-solid fa-download"></i> Official WinRAR
             </a>
             <a href="${safeAssetUrl(item.sevenZipUrl)}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
-                <i class="fa-solid fa-box-open"></i> Get 7-Zip (FOSS)
+                <i class="fa-solid fa-box-open"></i> ${currentLang === 'bn' ? '৭-জিপ (FOSS)' : 'Get 7-Zip (FOSS)'}
             </a>
         `;
     } else if (item.id === "hwinfo") {
         heroHtml += `
             <a href="${safeAssetUrl(item.installerUrl)}" target="_blank" rel="noopener noreferrer" class="download-hero">
-                <i class="fa-solid fa-download"></i> Official Installer
+                <i class="fa-solid fa-download"></i> ${currentLang === 'bn' ? 'অফিসিয়াল ইনস্টলার' : 'Official Installer'}
             </a>
             <a href="${safeAssetUrl(item.portableUrl)}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
-                <i class="fa-solid fa-box-archive"></i> Portable Version
+                <i class="fa-solid fa-box-archive"></i> ${currentLang === 'bn' ? 'পোর্টেবল সংস্করণ' : 'Portable Version'}
             </a>
         `;
     } else if (item.path && item.path.startsWith('http')) {
@@ -987,41 +1152,49 @@ function safeAssetUrl(url) {
         `;
     }
 
+        const isBn = currentLang === 'bn';
+    const docTrans = (typeof documentationTranslations !== 'undefined' && documentationTranslations[item.id]) ? documentationTranslations[item.id] : {};
+    const activeReadme = isBn ? (docTrans.readme_bn || item.readme_bn || item.readme) : item.readme;
+
     let bodyHtml = `<div class="readme-section">`;
 
-    if (item.readme) {
+    if (activeReadme) {
         bodyHtml += `
-            <div class="readme-title"><i class="fa-solid fa-circle-info"></i> Documentation</div>
-            <div class="readme-content">${formatMarkdown(item.readme)}</div>
+            <div class="readme-title"><i class="fa-solid fa-circle-info"></i> ${isBn ? 'ডকুমেন্টেশন' : 'Documentation'}</div>
+            <div class="readme-content">${formatMarkdown(activeReadme)}</div>
         `;
     }
 
     if (item.copyText) {
+        const copyLabelText = (isBn && (docTrans.copyLabel_bn || item.copyLabel_bn)) ? (docTrans.copyLabel_bn || item.copyLabel_bn) : (item.copyLabel || (isBn ? 'লাইসেন্স / সিরিয়াল কি' : 'License / Serial Key'));
+        const copyBtnText = isBn ? 'কপি করুন' : ('Copy ' + escapeHtml(item.copyLabel || 'Key'));
         bodyHtml += `
             <div class="doc-key-card">
                 <div class="doc-key-info">
-                    <span class="doc-key-label"><i class="fa-solid fa-key"></i> ${escapeHtml(item.copyLabel || 'License / Serial Key')}</span>
+                    <span class="doc-key-label"><i class="fa-solid fa-key"></i> ${escapeHtml(copyLabelText)}</span>
                     <code class="doc-key-code">${escapeHtml(item.copyText)}</code>
                 </div>
                 <button class="doc-key-copy-btn" data-copy="${escapeHtml(item.copyText)}" onclick="doCopy(this.getAttribute('data-copy'))">
-                    <i class="fa-solid fa-copy"></i> Copy ${escapeHtml(item.copyLabel || 'Key')}
+                    <i class="fa-solid fa-copy"></i> ${copyBtnText}
                 </button>
             </div>
         `;
     }
 
     if (item.commands && item.commands.length > 0) {
-        bodyHtml += `<div class="readme-title"><i class="fa-solid fa-terminal"></i> PowerShell Commands</div>`;
-        item.commands.forEach(cmd => {
+        bodyHtml += `<div class="readme-title"><i class="fa-solid fa-terminal"></i> ${isBn ? 'পাওয়ারশেল কমান্ড' : 'PowerShell Commands'}</div>`;
+        item.commands.forEach((cmd, idx) => {
+            const cmdDescBn = (docTrans.commands_bn && docTrans.commands_bn[idx]) || cmd.desc_bn;
+            const cmdDesc = (isBn && cmdDescBn) ? cmdDescBn : cmd.desc;
             bodyHtml += `
                 <div class="command-block">
-                    <span class="command-label">Command</span>
-                    <p class="command-desc">${escapeHtml(cmd.desc)}</p>
+                    <span class="command-label">${isBn ? 'কমান্ড' : 'Command'}</span>
+                    <p class="command-desc">${escapeHtml(cmdDesc)}</p>
                     <div class="code-box">
                         <code>${escapeHtml(cmd.code)}</code>
                     </div>
                     <button class="code-copy-btn" data-copy="${escapeHtml(cmd.code)}" onclick="doCopy(this.getAttribute('data-copy'))">
-                        <i class="fa-solid fa-copy"></i> Copy Command
+                        <i class="fa-solid fa-copy"></i> ${isBn ? 'কমান্ড কপি' : 'Copy Command'}
                     </button>
                 </div>
             `;
@@ -1030,13 +1203,13 @@ function safeAssetUrl(url) {
 
     if (item.content) {
         bodyHtml += `
-            <div class="readme-title"><i class="fa-solid fa-file-code"></i> Code / Reference</div>
+            <div class="readme-title"><i class="fa-solid fa-file-code"></i> ${isBn ? 'কোড / রেফারেন্স' : 'Code / Reference'}</div>
             <div class="code-card">
                 <div class="code-box">
                     <code>${escapeHtml(item.content)}</code>
                 </div>
                 <button class="code-copy-btn" onclick="doCopy('${escapeJsString(item.content)}')">
-                    <i class="fa-solid fa-copy"></i> Copy Code
+                    <i class="fa-solid fa-copy"></i> ${isBn ? 'কোড কপি' : 'Copy Code'}
                 </button>
             </div>
         `;
