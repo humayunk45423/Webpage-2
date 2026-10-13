@@ -1094,13 +1094,13 @@
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.35fr 0.85fr;
-            gap: clamp(2rem, 4vw, 3.5rem);
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: clamp(2rem, 3.5vw, 3rem);
             align-items: center
         }
 
         .hero-copy h2 {
-            font-size: clamp(1rem, 2.5vw, 1.35rem);
+            font-size: clamp(0.95rem, 2vw, 1.25rem);
             margin: 0 0 0.5rem;
             color: var(--accent);
             font-weight: 700;
@@ -1109,7 +1109,7 @@
         }
 
         .hero-copy h1 {
-            font-size: clamp(2.2rem, 4.2vw, 3.85rem);
+            font-size: clamp(2rem, 3.6vw, 3.5rem);
             line-height: 1.15;
             letter-spacing: -0.015em;
             margin: 0 0 0.8rem;
