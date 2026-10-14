@@ -239,7 +239,7 @@ const documentationTranslations = {
         "readme_bn": "## ওভারভিউ\nউইন্ডোজের জন্য একটি অ্যাডভান্সড মনিটরিং টুল যা রিয়েল-টাইমে ফাইল সিস্টেম, রেজিস্ট্রি এবং প্রসেস/থ্রেড অ্যাক্টিভিটি প্রদর্শন করে।"
     },
     "adobe-suite": {
-        "readme_bn": "## অন্তর্ভুক্ত সফটওয়্যারসমূহ\n- অ্যাডোবি ফটোশপ সিসি ২০২০: প্রফেশনাল ফটো এডিটিং এবং ডিজিটাল ইমেজ কম্পোজিশন।\n- অ্যাডোবি ইলাস্ট্রেটর সিসি ২০২০: ভেক্টর গ্রাফিক্স, টাইপোগ্রাফি এবং লোগো ডিজাইন।"
+        "readme_bn": "## ওভারভিউ\nগ্রাফিক ডিজাইন, ভেক্টর আর্ট, প্রফেশনাল ভিডিও এডিটিং এবং মোশন গ্রাফিক্সের জন্য বিশ্বখ্যাত অ্যাডোবি ক্রিয়েটিভ স্যুটের পূর্ণাঙ্গ সংকলন।\n\n## অন্তর্ভুক্ত সফটওয়্যারসমূহ\n- **Adobe Photoshop 2020 (v21.2.1.265)**: প্রফেশনাল ফটো এডিটিং, ডিজিটাল পেইন্টিং, রিটাচিং ও গ্রাফিক কম্পোজিশন।\n- **Adobe Illustrator 2020 (v24.3.0.569)**: নিখুঁত ভেক্টর ইলাস্ট্রেশন, টাইপোগ্রাফি, ব্র্যান্ড লোগো ও ভেক্টর আর্টওয়ার্ক।\n- **Adobe Premiere Pro 2021 (v14.5.0.51)**: হাই-পারফরম্যান্স টাইমলাইন ভিডিও এডিটিং, মাল্টি-ট্র্যাক অডিও ও কালার গ্রেডিং।\n- **Adobe After Effects 2020 (v17.5.0.40)**: সিনেমাটিক ভিজ্যুয়াল ইফেক্টস (VFX), ২D/৩D মোশন গ্রাফিক্স ও ইন্ট্রো অ্যানিমেশন।\n\n## ইনস্টলেশন ও বিশেষ সুবিধাসমূহ\n- **ইনস্টল ও প্লে (Pre-Activated)**: সম্পূর্ণ প্রি-প্যাচড ইনস্টলার। কোনো ফাইল ক্র্যাক করা, ডিএলএল (DLL) পেস্ট করা বা জটিল পাথ কনফিগারেশন ছাড়াই সরাসরি সেটআপ দিয়ে ব্যবহার করা যায়।\n- **১০০% পরিচ্ছন্ন ও নিরাপদ**: সম্পূর্ণ ভাইরাসমুক্ত, পরিচ্ছন্ন এবং স্থায়ীভাবে স্থিতিশীল রিলিজ।\n- **অফলাইন সেটআপ**: কোনো অ্যাডোবি ক্লাউড অ্যাকাউন্ট বা সাইন-ইন ছাড়াই সম্পূর্ণ অফলাইনে এক ক্লিকেই ইনস্টল করা যায়।"
     },
     "fontlab": {
         "readme_bn": "## ওভারভিউ\nটাইপোগ্রাফি ডিজাইনারদের জন্য কাস্টম ওপেনটাইপ এবং ওয়েব ফন্ট তৈরি ও এক্সপোর্ট করার পেশাদার ফন্ট এডিটর।"
@@ -273,7 +273,8 @@ const fileData = [
         name_bn: "ডাইরেক্টএক্স ১১ সেটআপ",
         badge_bn: "ডাইরেক্টএক্স গেমিং রানটাইম",
         icon: "fa-solid fa-gamepad",
-        path: "assets/DirectX 11 Setup.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/DirectX%2011%20Setup.rar",
+        download: true,
         keywords: "directx 11 dx11 runtime gaming 3d libraries graphics",
         readme: "## Overview\nEssential DirectX 11 Runtime components required to run modern games and high-performance graphics applications."
     },
@@ -337,7 +338,8 @@ const fileData = [
         name_bn: "ভিজ্যুয়াল C++ রানটাইমস অল-ইন-ওয়ান",
         badge_bn: "অল-ইন-ওয়ান VC++ রানটাইমস",
         icon: "fa-brands fa-microsoft",
-        path: "assets/Visual C++ Runtimes All-in-One-Jun-2026.zip",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Visual%20C%2B%2B%20Runtimes%20All-in-One-Jun-2026.zip",
+        download: true,
         keywords: "vcredist visual c++ redistributable runtimes 2005 2022 x86 x64 dll fix",
         readme: "## Overview\nAll-in-One package containing every Visual C++ Redistributable runtime (2005–2022), both x86 and x64.\n\n## Instructions\n1. Extract the ZIP file.\n2. Run the included batch installer to install all runtimes at once.\n\n## Why You Need This\nFixes common 'VCRUNTIME140.dll missing' or 'MSVCP.dll not found' errors."
     },
@@ -826,17 +828,53 @@ const fileData = [
     // =========================================================================
     {
         id: "adobe-suite",
-        name: "Adobe Software Suite",
+        name: "Adobe Creative Suite",
         category: "creative",
-        badge: "Photoshop & Illustrator 2020",
-        name_bn: "অ্যাডোবি সফটওয়্যার সুইট",
-        badge_bn: "ফটোশপ ও ইলাস্ট্রেটর ২০২০",
+        badge: "Ps • Ai • Pr • Ae (Pre-Activated)",
+        name_bn: "অ্যাডোবি ক্রিয়েটিভ সুইট",
+        badge_bn: "Ps • Ai • Pr • Ae (প্রি-অ্যাক্টিভেটেড)",
         icon: "fa-solid fa-palette",
-        path: "Adobe Software",
-        photoshopUrl: "https://getitintopc.com/adobe-photoshop-cc-2020-free-download/",
-        illustratorUrl: "https://getitintopc.com/adobe-illustrator-cc-2020-free-download/",
-        keywords: "photoshop illustrator adobe graphic design 2020 creative suite vector raster",
-        readme: "## Included Software\n- Adobe Photoshop CC 2020: Photo editing and digital imaging.\n- Adobe Illustrator CC 2020: Vector graphics, typography, and logo design."
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Adobe_Photoshop_2020_21.2.1.265.zip",
+        links: [
+            { 
+                label: "Download Photoshop 2020", 
+                label_bn: "ফটোশপ ২০২০ ডাউনলোড", 
+                url: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Adobe_Photoshop_2020_21.2.1.265.zip", 
+                icon: "fa-solid fa-paintbrush", 
+                primary: true, 
+                class: "adobe-ps", 
+                download: true 
+            },
+            { 
+                label: "Download Illustrator 2020", 
+                label_bn: "ইলাস্ট্রেটর ২০২০ ডাউনলোড", 
+                url: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Adobe_Illustrator_CC_2020_v24.3.0.569.zip", 
+                icon: "fa-solid fa-pen-nib", 
+                primary: true, 
+                class: "adobe-ai", 
+                download: true 
+            },
+            { 
+                label: "Download Premiere Pro 2021", 
+                label_bn: "প্রিমিয়ার প্রো ২০২১ ডাউনলোড", 
+                url: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Adobe.Premiere.Pro.CC.2021.v14.5.0.51.zip", 
+                icon: "fa-solid fa-film", 
+                primary: true, 
+                class: "adobe-pr", 
+                download: true 
+            },
+            { 
+                label: "Download After Effects 2020", 
+                label_bn: "আফটার ইফেক্টস ২০২০ ডাউনলোড", 
+                url: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Adobe_After_Effects_2020_v17.5.0.40.zip", 
+                icon: "fa-solid fa-wand-magic-sparkles", 
+                primary: true, 
+                class: "adobe-ae", 
+                download: true 
+            }
+        ],
+        keywords: "adobe creative suite photoshop illustrator premiere pro after effects 2020 2021 video editing vector raster graphics vfx",
+        readme: "## Overview\nThe industry-standard Adobe Creative Suite collection for digital raster art, vector design, timeline video production, and motion VFX compositing.\n\n## Included Software\n- **Adobe Photoshop 2020 (v21.2.1.265)**: Professional photo editing, digital matte painting, retouching, and graphic composition.\n- **Adobe Illustrator 2020 (v24.3.0.569)**: Precision vector illustration, typography, brand logos, and vector artwork.\n- **Adobe Premiere Pro 2021 (v14.5.0.51)**: High-performance timeline video editing, multi-track audio, and color grading.\n- **Adobe After Effects 2020 (v17.5.0.40)**: Cinematic visual effects (VFX), 2D/3D motion graphics, and intro animation.\n\n## Installation & Features\n- **Install & Play (Pre-Activated)**: Pre-patched offline installers. Zero file patching, zero crack replacements, and zero registry hacking required.\n- **100% Clean & Verified**: Tested clean, virus-free, and stable releases without telemetry or background bloatware.\n- **Offline Setup**: Installs directly offline without needing an Adobe Creative Cloud account or internet connection."
     },
     {
         id: "fontlab",
@@ -846,7 +884,8 @@ const fileData = [
         name_bn: "ফন্টল্যাব (FontLab)",
         badge_bn: "ওপেনটাইপ ফন্ট ডিজাইনার",
         icon: "fa-solid fa-font",
-        path: "assets/FontLab.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/FontLab.rar",
+        download: true,
         keywords: "fontlab typography font creator opentype truetype woff editor design",
         readme: "## Overview\nProfessional font editor used by type designers to craft and export custom OpenType and web fonts."
     },
@@ -858,7 +897,8 @@ const fileData = [
         name_bn: "ফক্সইট PDF এডিটর",
         badge_bn: "PDF এডিটর ও সিগনেচার",
         icon: "fa-solid fa-file-pdf",
-        path: "assets/Foxit pdf editor.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Foxit%20pdf%20editor.rar",
+        download: true,
         keywords: "foxit pdf editor convert merge annotate sign documents",
         readme: "## Overview\nFast PDF editor and converter to create, annotate, sign, and organize documents."
     }
@@ -1105,21 +1145,13 @@ function safeAssetUrl(url) {
     if (item.links && item.links.length > 0) {
         item.links.forEach(link => {
             const finalUrl = safeAssetUrl(link.url);
+            const extraClass = link.class ? ` ${link.class}` : '';
             heroHtml += `
-                <a href="${finalUrl}" ${link.download ? 'download' : 'target="_blank" rel="noopener noreferrer"'} class="${link.primary ? 'download-hero' : 'btn-secondary-soft'}">
+                <a href="${finalUrl}" ${link.download ? 'download' : 'target="_blank" rel="noopener noreferrer"'} class="${link.primary ? 'download-hero' : 'btn-secondary-soft'}${extraClass}">
                     <i class="${link.icon || 'fa-solid fa-download'}"></i> ${escapeHtml((currentLang === 'bn' && link.label_bn) ? link.label_bn : link.label)}
                 </a>
             `;
         });
-    } else if (item.id === "adobe-suite") {
-        heroHtml += `
-            <a href="${safeAssetUrl(item.photoshopUrl)}" target="_blank" rel="noopener noreferrer" class="download-hero adobe-ps">
-                <i class="fa-solid fa-download"></i> ${currentLang === 'bn' ? 'ফটোশপ ২০২০' : 'Photoshop 2020'}
-            </a>
-            <a href="${safeAssetUrl(item.illustratorUrl)}" target="_blank" rel="noopener noreferrer" class="download-hero adobe-ai">
-                <i class="fa-solid fa-download"></i> ${currentLang === 'bn' ? 'ইলাস্ট্রেটর ২০২০' : 'Illustrator 2020'}
-            </a>
-        `;
     } else if (item.id === "winrar") {
         heroHtml += `
             <a href="${safeAssetUrl(item.path)}" class="download-hero" download>
@@ -1142,9 +1174,14 @@ function safeAssetUrl(url) {
             </a>
         `;
     } else if (item.path && item.path.startsWith('http')) {
+        const isDirectArchive = item.download || /\.(zip|rar|7z|tar|gz|exe|apk|iso)$/i.test(item.path.split('?')[0]);
+        const btnLabel = isDirectArchive 
+            ? (translations[currentLang] && translations[currentLang].btn_download_file ? translations[currentLang].btn_download_file : 'Download File')
+            : (translations[currentLang] && translations[currentLang].btn_open_resource ? translations[currentLang].btn_open_resource : 'Open Resource');
+        const btnIcon = isDirectArchive ? 'fa-solid fa-download' : 'fa-solid fa-up-right-from-square';
         heroHtml += `
-            <a href="${item.path}" target="_blank" rel="noopener noreferrer" class="download-hero">
-                <i class="fa-solid fa-up-right-from-square"></i> ${translations[currentLang] && translations[currentLang].btn_open_resource ? translations[currentLang].btn_open_resource : 'Open Resource'}
+            <a href="${item.path}" ${isDirectArchive ? 'download' : 'target="_blank" rel="noopener noreferrer"'} class="download-hero">
+                <i class="${btnIcon}"></i> ${btnLabel}
             </a>
         `;
     } else if (item.path) {

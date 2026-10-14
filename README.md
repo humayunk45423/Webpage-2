@@ -126,8 +126,8 @@ A categorized breakdown of software, diagnostic utilities, scripts, and creative
 | **HitmanPro Scanner** | Freeware / Cloud Scanner | `assets/HitmanPro_3.8.28_Build_324/HitmanPro 3.8.rar` | Secondary cloud-based malware, rootkit, and trojan scanner. |
 | **Good Bye DPI** | Open Source (FOSS) | `assets/Good Bye DPI/goodbyedpi-0.2.2.rar` | Deep Packet Inspection bypass utility for censored or throttled networks. |
 | **WinRAR Pro** | Shareware (License key provided) | `assets/Winrar/rarreg.rar` | Archive manager with license key (`rarreg.key`). 7-Zip is also recommended as a FOSS alternative. |
-| **Visual C++ Runtimes AIO** | Redistributable Pack | `assets/Visual C++ Runtimes All-in-One-Jun-2026.zip` | Single installer covering Microsoft Visual C++ runtimes from 2005 to 2022 (x86 & x64). |
-| **DirectX 11 Setup** | Microsoft Runtime | `assets/DirectX 11 Setup.rar` | DirectX runtime libraries required for 3D apps and games. |
+| **Visual C++ Runtimes AIO** | Redistributable Pack | Cloudflare R2 | Single installer covering Microsoft Visual C++ runtimes from 2005 to 2022 (x86 & x64). |
+| **DirectX 11 Setup** | Microsoft Runtime | Cloudflare R2 | DirectX runtime libraries required for 3D apps and games. |
 
 ### Hardware Monitoring & Diagnostics
 
@@ -149,12 +149,9 @@ A categorized breakdown of software, diagnostic utilities, scripts, and creative
 
 ### Design & Typography Tools
 
-| Item | Type / License | Asset / Source | Notes |
-| :--- | :--- | :--- | :--- |
-| **Adobe Photoshop CC 2020** | Creative Suite (Repack) | Mirror Guide | Raster editing, photo manipulation, and UI graphic assets. |
-| **Adobe Illustrator CC 2020** | Creative Suite (Repack) | Mirror Guide | Vector graphic design for logos, brand identity, and illustrations. |
-| **FontLab** | Typeface Design Suite | `assets/FontLab.rar` | Typography software to create, edit, and export custom OpenType and Web fonts. |
-| **Foxit PDF Editor** | PDF Suite | `assets/Foxit pdf editor.rar` | Document management tool to edit text, merge files, and sign PDF forms. |
+| **Adobe Creative Suite** | Creative Suite (Pre-Activated) | Cloudflare R2 | Photoshop 2020, Illustrator 2020, Premiere Pro 2021, and After Effects 2020. |
+| **FontLab** | Typeface Design Suite | Cloudflare R2 | Typography software to create, edit, and export custom OpenType and Web fonts. |
+| **Foxit PDF Editor** | PDF Suite | Cloudflare R2 | Document management tool to edit text, merge files, and sign PDF forms. |
 
 ### Windows Tweaks & Registry
 
