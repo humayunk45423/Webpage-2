@@ -765,7 +765,7 @@ const fileData = [
         path: "https://www.cpuid.com/softwares/cpu-z.html",
         links: [
             { label: "Download CPU-Z", label_bn: "CPU-Z ডাউনলোড", url: "https://www.cpuid.com/softwares/cpu-z.html", icon: "fa-solid fa-microchip", primary: true },
-            { label: "Download GPU-Z", label_bn: "GPU-Z ডাউনলোড", url: "https://www.techpowerup.com/download/techpowerup-gpu-z/", icon: "fa-solid fa-desktop" }
+            { label: "Download GPU-Z", label_bn: "GPU-Z ডাউনলোড", url: "https://www.techpowerup.com/download/techpowerup-gpu-z/", icon: "fa-solid fa-desktop", primary: true }
         ],
         keywords: "cpuz gpuz cpu-z gpu-z techpowerup processor graphics card vram bios clocks telemetry hardware sensors diagnostics",
         readme: "## Overview\nThe definitive pair for PC hardware profiling and diagnostics.\n\n## Tools Included\n- **CPU-Z (CPUID)**: Provides real-time clock frequencies, memory timings, motherboard chipset details, and single/multi-thread benchmarks.\n- **GPU-Z (TechPowerUp)**: Delivers exhaustive GPU telemetry, VRAM memory clock, BIOS version, PCIe bus interface load, thermal sensors, and ASIC quality."
