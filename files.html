@@ -267,7 +267,7 @@
         media="print" onload="this.media='all'">
 
     <!-- Shared Style -->
-    <link rel="stylesheet" href="style.css?v=17">
+    <link rel="stylesheet" href="style.css?v=18">
     <meta name="format-detection" content="telephone=no">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -884,33 +884,161 @@
             outline-offset: 3px;
         }
 
-        /* Detail Page Components */
+        /* Detail Page Components - Luxury Theme-Blended Adobe Suite Buttons */
+        .adobe-ps,
+        .adobe-ai,
+        .adobe-pr,
+        .adobe-ae {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            min-height: 3.15rem;
+            padding: 0.85rem 1.4rem;
+            border-radius: 999px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            cursor: pointer;
+        }
+
+        .adobe-ps i,
+        .adobe-ai i,
+        .adobe-pr i,
+        .adobe-ae i {
+            font-size: 1.05rem;
+            transition: transform 0.3s ease;
+        }
+
+        .adobe-ps:hover i,
+        .adobe-ai:hover i,
+        .adobe-pr:hover i,
+        .adobe-ae:hover i {
+            transform: scale(1.15);
+        }
+
+        /* Light Mode: Clean, frosted glass with delicate brand tint & crisp contrast */
         .adobe-ps {
-            background: linear-gradient(135deg, #001E36, #00A9E5);
-            color: #fff !important;
-            border: none;
-            box-shadow: 0 10px 25px rgba(0, 169, 229, 0.3);
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(255, 255, 255, 0.96) 100%);
+            border: 1px solid rgba(2, 132, 199, 0.3);
+            color: #0369a1 !important;
+            box-shadow: 0 4px 16px -2px rgba(2, 132, 199, 0.12);
+        }
+        .adobe-ps i { color: #0284c7; }
+        .adobe-ps:hover {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.16) 0%, #ffffff 100%);
+            border-color: #0284c7;
+            box-shadow: 0 8px 24px -2px rgba(2, 132, 199, 0.28);
+            transform: translateY(-2px);
         }
 
         .adobe-ai {
-            background: linear-gradient(135deg, #330000, #FF9A00);
-            color: #fff !important;
-            border: none;
-            box-shadow: 0 10px 25px rgba(255, 154, 0, 0.3);
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.08) 0%, rgba(255, 255, 255, 0.96) 100%);
+            border: 1px solid rgba(234, 88, 12, 0.3);
+            color: #c2410c !important;
+            box-shadow: 0 4px 16px -2px rgba(234, 88, 12, 0.12);
+        }
+        .adobe-ai i { color: #ea580c; }
+        .adobe-ai:hover {
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.16) 0%, #ffffff 100%);
+            border-color: #ea580c;
+            box-shadow: 0 8px 24px -2px rgba(234, 88, 12, 0.28);
+            transform: translateY(-2px);
         }
 
         .adobe-pr {
-            background: linear-gradient(135deg, #1A0033, #9999FF);
-            color: #fff !important;
-            border: none;
-            box-shadow: 0 10px 25px rgba(153, 153, 255, 0.3);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(255, 255, 255, 0.96) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            color: #6d28d9 !important;
+            box-shadow: 0 4px 16px -2px rgba(124, 58, 237, 0.12);
+        }
+        .adobe-pr i { color: #7c3aed; }
+        .adobe-pr:hover {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.16) 0%, #ffffff 100%);
+            border-color: #7c3aed;
+            box-shadow: 0 8px 24px -2px rgba(124, 58, 237, 0.28);
+            transform: translateY(-2px);
         }
 
         .adobe-ae {
-            background: linear-gradient(135deg, #100028, #7B2CBF);
-            color: #fff !important;
-            border: none;
-            box-shadow: 0 10px 25px rgba(123, 44, 191, 0.3);
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(255, 255, 255, 0.96) 100%);
+            border: 1px solid rgba(79, 70, 229, 0.3);
+            color: #4338ca !important;
+            box-shadow: 0 4px 16px -2px rgba(79, 70, 229, 0.12);
+        }
+        .adobe-ae i { color: #4f46e5; }
+        .adobe-ae:hover {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.16) 0%, #ffffff 100%);
+            border-color: #4f46e5;
+            box-shadow: 0 8px 24px -2px rgba(79, 70, 229, 0.28);
+            transform: translateY(-2px);
+        }
+
+        /* Dark Mode: Obsidian glass with luminous atmospheric color wash */
+        html[data-theme="dark"] .adobe-ps {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.18) 0%, rgba(18, 18, 18, 0.88) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: #f0f9ff !important;
+            box-shadow: 0 6px 20px -3px rgba(2, 132, 199, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+        }
+        html[data-theme="dark"] .adobe-ps i { color: #38bdf8; }
+        html[data-theme="dark"] .adobe-ps:hover {
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.32) 0%, rgba(28, 28, 28, 0.95) 100%);
+            border-color: rgba(56, 189, 248, 0.65);
+            box-shadow: 0 10px 28px -2px rgba(2, 132, 199, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.22);
+            transform: translateY(-2px);
+            color: #ffffff !important;
+        }
+
+        html[data-theme="dark"] .adobe-ai {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.18) 0%, rgba(18, 18, 18, 0.88) 100%);
+            border: 1px solid rgba(251, 146, 60, 0.35);
+            color: #fff7ed !important;
+            box-shadow: 0 6px 20px -3px rgba(249, 115, 22, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+        }
+        html[data-theme="dark"] .adobe-ai i { color: #fb923c; }
+        html[data-theme="dark"] .adobe-ai:hover {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.32) 0%, rgba(28, 28, 28, 0.95) 100%);
+            border-color: rgba(251, 146, 60, 0.65);
+            box-shadow: 0 10px 28px -2px rgba(249, 115, 22, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.22);
+            transform: translateY(-2px);
+            color: #ffffff !important;
+        }
+
+        html[data-theme="dark"] .adobe-pr {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(18, 18, 18, 0.88) 100%);
+            border: 1px solid rgba(192, 132, 252, 0.35);
+            color: #faf5ff !important;
+            box-shadow: 0 6px 20px -3px rgba(168, 85, 247, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+        }
+        html[data-theme="dark"] .adobe-pr i { color: #c084fc; }
+        html[data-theme="dark"] .adobe-pr:hover {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.32) 0%, rgba(28, 28, 28, 0.95) 100%);
+            border-color: rgba(192, 132, 252, 0.65);
+            box-shadow: 0 10px 28px -2px rgba(168, 85, 247, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.22);
+            transform: translateY(-2px);
+            color: #ffffff !important;
+        }
+
+        html[data-theme="dark"] .adobe-ae {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.18) 0%, rgba(18, 18, 18, 0.88) 100%);
+            border: 1px solid rgba(129, 140, 248, 0.35);
+            color: #eef2ff !important;
+            box-shadow: 0 6px 20px -3px rgba(99, 102, 241, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+        }
+        html[data-theme="dark"] .adobe-ae i { color: #818cf8; }
+        html[data-theme="dark"] .adobe-ae:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.32) 0%, rgba(28, 28, 28, 0.95) 100%);
+            border-color: rgba(129, 140, 248, 0.65);
+            box-shadow: 0 10px 28px -2px rgba(99, 102, 241, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.22);
+            transform: translateY(-2px);
+            color: #ffffff !important;
         }
 
         .command-block {
@@ -1849,7 +1977,7 @@
         </div>
     </aside>
 
-    <script src="files.js?v=17" defer></script>
+    <script src="files.js?v=18" defer></script>
     <!-- Vercel Web Analytics -->
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </body>
