@@ -925,6 +925,10 @@
         }
 
         @media (max-width: 1024px) {
+            .nav {
+                display: none !important;
+            }
+
             .hamburger-btn {
                 display: inline-flex;
             }
@@ -2273,6 +2277,15 @@
             .projects-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 0.65rem;
+            }
+
+            /* Lone odd project card in bottom row spans both columns */
+            .projects-grid > .project-card:last-child:nth-child(odd) {
+                grid-column: 1 / -1;
+            }
+
+            .project-card .project-content {
+                width: 100%;
             }
 
             .service-card,
