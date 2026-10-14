@@ -267,7 +267,7 @@
         media="print" onload="this.media='all'">
 
     <!-- Shared Style -->
-    <link rel="stylesheet" href="style.css?v=13">
+    <link rel="stylesheet" href="style.css?v=15">
     <meta name="format-detection" content="telephone=no">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -355,7 +355,7 @@
         }
 
         .pill:hover {
-            border-color: var(--accent);
+            box-shadow: inset 0 0 0 1px var(--accent-line);
             color: var(--text);
             transform: translateY(-3px);
         }
@@ -364,6 +364,7 @@
             background: var(--vibrant-gradient);
             color: var(--accent-ink);
             box-shadow: 0 10px 20px var(--soft);
+            border: 0;
         }
 
         /* Category Dropdown */
@@ -634,13 +635,15 @@
             margin-bottom: 3rem;
             cursor: pointer;
             transition: all 0.3s var(--bezier);
-            border: 1px solid var(--line);
+            box-shadow: inset 0 0 0 1px var(--line);
+            border: 0;
+            outline: none;
         }
 
         .back-btn:hover {
-            border-color: var(--accent);
+            box-shadow: inset 0 0 0 1px var(--accent-line), var(--shadow);
+            color: var(--accent);
             transform: translateX(-5px);
-            box-shadow: var(--shadow);
         }
 
         .detail-grid {
@@ -716,21 +719,23 @@
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
-            padding: 1.25rem;
-            border-radius: 1.25rem;
+            min-height: 3.25rem;
+            padding: 1rem 1.75rem;
+            border-radius: 999px;
             background: var(--vibrant-gradient);
             color: var(--accent-ink);
             font-size: 1.05rem;
             font-weight: 800;
             text-decoration: none;
-            transition: all 0.4s var(--bezier);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 10px 30px var(--soft);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 0;
+            outline: none;
         }
 
         .download-hero:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px var(--soft);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 45px var(--soft);
         }
 
         .btn-secondary-soft {
@@ -739,21 +744,25 @@
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
-            padding: 1.1rem;
-            border-radius: 1.25rem;
-            background: var(--bg2);
+            min-height: 3.25rem;
+            padding: 1rem 1.75rem;
+            border-radius: 999px;
+            background: var(--surface);
             color: var(--text);
             font-size: 0.95rem;
             font-weight: 700;
             text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid var(--line);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 0 0 1px var(--line);
+            border: 0;
+            outline: none;
         }
 
         .btn-secondary-soft:hover {
-            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: inset 0 0 0 1px var(--accent-line), 0 10px 25px var(--soft);
             color: var(--accent);
-            background: var(--soft);
+            background: var(--surface2);
         }
 
         /* Grouped Section Headers */
@@ -1502,15 +1511,17 @@
             }
 
             .download-hero {
-                padding: 1rem;
+                padding: 0.75rem 1.25rem;
+                min-height: 2.75rem;
                 font-size: 0.9rem;
-                border-radius: 1rem;
+                border-radius: 999px;
             }
 
             .btn-secondary-soft {
-                padding: 0.85rem;
+                padding: 0.75rem 1.25rem;
+                min-height: 2.75rem;
                 font-size: 0.85rem;
-                border-radius: 1rem;
+                border-radius: 999px;
             }
 
             .copy-card {
@@ -1825,7 +1836,7 @@
         </div>
     </aside>
 
-    <script src="files.js?v=14" defer></script>
+    <script src="files.js?v=15" defer></script>
     <!-- Vercel Web Analytics -->
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </body>
