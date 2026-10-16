@@ -1,0 +1,46 @@
+<!-- ==========================================================================
+   HUMAYOUN KOBIR PORTFOLIO — BESPOKE SITE LOADER MARKUP (v1.0.0)
+   Precision CAD Drafting Reticle & Interlocking HK Brand Core
+   ========================================================================== -->
+<div id="site-loader" role="status" aria-live="polite" aria-busy="true">
+  <div class="sl-stage">
+    <!-- Precision CAD Drafting Reticle & Brand Center -->
+    <div class="sl-reticle" aria-hidden="true">
+      <svg class="sl-reticle-svg" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sl-arc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="var(--sl-accent)" stop-opacity="1" />
+            <stop offset="60%" stop-color="var(--sl-sec)" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="var(--sl-sec)" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <!-- Cardinal CAD Reticle Crosshairs (Calipers) -->
+        <line x1="56" y1="2" x2="56" y2="10" stroke="var(--sl-accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.85" />
+        <line x1="56" y1="102" x2="56" y2="110" stroke="var(--sl-accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.85" />
+        <line x1="2" y1="56" x2="10" y2="56" stroke="var(--sl-accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.85" />
+        <line x1="102" y1="56" x2="110" y2="56" stroke="var(--sl-accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.85" />
+        <!-- Subtle Engineering Coordinate Markers -->
+        <circle cx="21" cy="21" r="1.2" fill="var(--sl-muted)" opacity="0.5" />
+        <circle cx="91" cy="21" r="1.2" fill="var(--sl-muted)" opacity="0.5" />
+        <circle cx="21" cy="91" r="1.2" fill="var(--sl-muted)" opacity="0.5" />
+        <circle cx="91" cy="91" r="1.2" fill="var(--sl-muted)" opacity="0.5" />
+        <!-- Rotating Dashed Precision Ring -->
+        <circle class="sl-dashed-ring" cx="56" cy="56" r="48" stroke="var(--sl-sec)" stroke-width="1" stroke-dasharray="2 7" opacity="0.45" />
+        <!-- Rotating Dynamic Calibration Arc -->
+        <circle class="sl-arc-rotate" cx="56" cy="56" r="48" stroke="url(#sl-arc-grad)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="68 235" />
+      </svg>
+      <div class="sl-logo-bezel">
+        <img src="assets/site-images/Artboard_1logo_border_radious.png" width="52" height="52" alt="Humayoun Kobir Monogram" class="sl-logo-img" fetchpriority="high" decoding="sync">
+      </div>
+    </div>
+    <!-- Microcopy in Site Voice -->
+    <div class="sl-copy">
+      <span class="sl-brand-name" data-sl-name data-en="Humayoun Kobir" data-bn="হুমায়ুন কবির">Humayoun Kobir</span>
+      <span class="sl-status-text" data-sl-status data-en="Initializing portfolio..." data-bn="পোর্টফোলিও প্রস্তুত হচ্ছে...">Initializing portfolio...</span>
+    </div>
+    <!-- Measurable Real-Signal Progress Bar -->
+    <div class="sl-bar" aria-hidden="true"><i></i></div>
+  </div>
+  <span class="sr-only">Loading Humayoun Kobir portfolio</span>
+</div>
+<noscript><style>#site-loader{display:none!important}html.sl-lock{overflow:auto!important}</style></noscript>

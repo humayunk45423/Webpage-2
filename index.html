@@ -15,6 +15,13 @@
         var savedLang = localStorage.getItem('portfolio-lang') || 'en';
         document.documentElement.setAttribute('data-lang', savedLang);
         document.documentElement.setAttribute('lang', savedLang);
+        try {
+            var navEntries = window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation');
+            var isReload = navEntries && navEntries.length > 0 ? navEntries[0].type === 'reload' : (window.performance && performance.navigation && performance.navigation.type === 1);
+            if (sessionStorage.getItem('sl_seen') === '1' && !isReload) {
+                document.documentElement.classList.add('sl-bypass');
+            }
+        } catch (e) {}
     })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -359,9 +366,264 @@
       ]
     }
     </script>
+    <style id="sl-critical-css">
+/* ==========================================================================
+   HUMAYOUN KOBIR PORTFOLIO — BESPOKE SITE LOADER (v1.0.0)
+   Precision CAD Drafting Reticle & Interlocking HK Brand Core
+   Paints synchronously before paint; 0 CLS, 60fps GPU transforms
+   ========================================================================== */
+
+#site-loader {
+  --sl-bg: #ffffff;
+  --sl-fg: #050505;
+  --sl-accent: #ff6b00;
+  --sl-sec: #165844;
+  --sl-subtle: rgba(5, 5, 5, 0.08);
+  --sl-muted: rgba(5, 5, 5, 0.52);
+  --sl-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: grid;
+  place-items: center;
+  background: var(--sl-bg);
+  color: var(--sl-fg);
+  font-family: var(--font-primary, 'Manrope', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s var(--sl-ease), visibility 0s 0.5s;
+  will-change: opacity;
+  contain: strict;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+html[data-theme="dark"] #site-loader {
+  --sl-bg: #070707;
+  --sl-fg: #fdfdfd;
+  --sl-accent: #ff6b00;
+  --sl-sec: #2a9d8f;
+  --sl-subtle: rgba(253, 253, 253, 0.08);
+  --sl-muted: rgba(253, 253, 253, 0.6);
+}
+
+#site-loader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Bypass display when already seen in current session unless hard reload */
+html.sl-bypass #site-loader {
+  display: none !important;
+}
+
+html.sl-bypass.sl-lock {
+  overflow: auto !important;
+}
+
+.sl-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.15rem;
+  max-width: 90vw;
+}
+
+/* CAD Drafting Reticle Outer Vessel */
+.sl-reticle {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  display: grid;
+  place-items: center;
+}
+
+.sl-reticle-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.sl-arc-rotate {
+  transform-origin: 56px 56px;
+  animation: sl-spin 2.8s linear infinite;
+  will-change: transform;
+}
+
+.sl-dashed-ring {
+  transform-origin: 56px 56px;
+  animation: sl-spin-reverse 14s linear infinite;
+  will-change: transform;
+}
+
+@keyframes sl-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes sl-spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+/* Central Circular Brand Emblem */
+.sl-logo-bezel {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--sl-subtle);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s var(--sl-ease), box-shadow 0.4s var(--sl-ease);
+}
+
+html[data-theme="dark"] .sl-logo-bezel {
+  background: #0f1214;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 107, 0, 0.28), 0 0 18px rgba(255, 107, 0, 0.16);
+}
+
+.sl-logo-img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Microcopy in Site Voice */
+.sl-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sl-brand-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--sl-fg);
+  line-height: 1.2;
+}
+
+.sl-status-text {
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sl-muted);
+  font-weight: 500;
+  min-height: 1.2em;
+}
+
+/* Precision Progress Gauge */
+.sl-bar {
+  width: min(200px, 45vw);
+  height: 2px;
+  background: var(--sl-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.sl-bar i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--sl-sec), var(--sl-accent));
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+  transition: transform 0.25s linear;
+  border-radius: 2px;
+  will-change: transform;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+html.sl-lock {
+  overflow: hidden !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #site-loader *,
+  #site-loader {
+    animation: none !important;
+    transition: opacity 0.2s linear, visibility 0s 0.2s !important;
+  }
+  .sl-bar i {
+    transition: none !important;
+  }
+}
+
+    </style>
 </head>
 
 <body>
+    <!-- ==========================================================================
+   HUMAYOUN KOBIR PORTFOLIO — BESPOKE SITE LOADER MARKUP (v1.0.0)
+   Precision CAD Drafting Reticle & Interlocking HK Brand Core
+   ========================================================================== -->
+<div id="site-loader" role="status" aria-live="polite" aria-busy="true">
+  <div class="sl-stage">
+    <!-- Precision CAD Drafting Reticle & Brand Center -->
+    <div class="sl-reticle" aria-hidden="true">
+      <svg class="sl-reticle-svg" viewBox="0 0 112 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sl-arc-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="var(--sl-accent)" stop-opacity="1" />
+            <stop offset="60%" stop-color="var(--sl-sec)" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="var(--sl-sec)" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <!-- Cardinal CAD Reticle Crosshairs (Calipers) -->
+        <line x1="56" y1="2" x2="56" y2="10" stroke="var(--sl-accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.85" />
+        <line x1="56" y1="102" x2="56" y2="110" stroke="var(--sl-accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.85" />
+        <line x1="2" y1="56" x2="10" y2="56" stroke="var(--sl-accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.85" />
+        <line x1="102" y1="56" x2="110" y2="56" stroke="var(--sl-accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.85" />
+        <!-- Subtle Engineering Coordinate Markers -->
+        <circle cx="21" cy="21" r="1.2" fill="var(--sl-muted)" opacity="0.5" />
+        <circle cx="91" cy="21" r="1.2" fill="var(--sl-muted)" opacity="0.5" />
+        <circle cx="21" cy="91" r="1.2" fill="var(--sl-muted)" opacity="0.5" />
+        <circle cx="91" cy="91" r="1.2" fill="var(--sl-muted)" opacity="0.5" />
+        <!-- Rotating Dashed Precision Ring -->
+        <circle class="sl-dashed-ring" cx="56" cy="56" r="48" stroke="var(--sl-sec)" stroke-width="1" stroke-dasharray="2 7" opacity="0.45" />
+        <!-- Rotating Dynamic Calibration Arc -->
+        <circle class="sl-arc-rotate" cx="56" cy="56" r="48" stroke="url(#sl-arc-grad)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="68 235" />
+      </svg>
+      <div class="sl-logo-bezel">
+        <img src="assets/site-images/Artboard_1logo_border_radious.png" width="52" height="52" alt="Humayoun Kobir Monogram" class="sl-logo-img" fetchpriority="high" decoding="sync">
+      </div>
+    </div>
+    <!-- Microcopy in Site Voice -->
+    <div class="sl-copy">
+      <span class="sl-brand-name" data-sl-name data-en="Humayoun Kobir" data-bn="হুমায়ুন কবির">Humayoun Kobir</span>
+      <span class="sl-status-text" data-sl-status data-en="Initializing portfolio..." data-bn="পোর্টফোলিও প্রস্তুত হচ্ছে...">Initializing portfolio...</span>
+    </div>
+    <!-- Measurable Real-Signal Progress Bar -->
+    <div class="sl-bar" aria-hidden="true"><i></i></div>
+  </div>
+  <span class="sr-only">Loading Humayoun Kobir portfolio</span>
+</div>
+<noscript><style>#site-loader{display:none!important}html.sl-lock{overflow:auto!important}</style></noscript>
+
+
     <div class="bg" aria-hidden="true">
         <div class="orb o1"></div>
         <div class="orb o2"></div>
@@ -1039,6 +1301,107 @@
 
     <!-- Vercel Web Analytics -->
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+    <script id="sl-critical-js">
+/**
+ * HUMAYOUN KOBIR PORTFOLIO — BESPOKE SITE LOADER (v1.0.0)
+ * Real readiness signals, session-aware bypass on internal navigation,
+ * and hard-reload re-activation support.
+ */
+(() => {
+  const el = document.getElementById('site-loader');
+  if (!el) return;
+  const root = document.documentElement;
+
+  // Check if current visit is a reload (F5 / Ctrl+R / browser refresh)
+  let isReload = false;
+  try {
+    const navEntries = window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation');
+    if (navEntries && navEntries.length > 0) {
+      isReload = navEntries[0].type === 'reload';
+    } else if (window.performance && performance.navigation) {
+      isReload = performance.navigation.type === 1;
+    }
+  } catch (e) {}
+
+  let seen = false;
+  try {
+    seen = sessionStorage.getItem('sl_seen') === '1';
+  } catch (e) {}
+
+  // One-time only per session: Bypass on subsequent page navigations (e.g. going to Software HQ),
+  // unless user initiates a hard reload.
+  if ((seen && !isReload) || root.classList.contains('sl-bypass')) {
+    if (el && el.parentNode) el.remove();
+    root.classList.remove('sl-lock');
+    return;
+  }
+
+  const t0 = performance.now();
+  const MIN = 400;
+  const MAX = 5000;
+
+  // Sync bilingual microcopy immediately
+  const isBn = root.getAttribute('data-lang') === 'bn' || root.getAttribute('lang') === 'bn';
+  const nameEl = el.querySelector('[data-sl-name]');
+  const statusEl = el.querySelector('[data-sl-status]');
+  if (isBn) {
+    if (nameEl) nameEl.textContent = nameEl.getAttribute('data-bn') || 'হুমায়ুন কবির';
+    if (statusEl) statusEl.textContent = statusEl.getAttribute('data-bn') || 'পোর্টফোলিও প্রস্তুত হচ্ছে...';
+  }
+
+  const bar = el.querySelector('.sl-bar i');
+  let done = false;
+
+  const finish = () => {
+    if (done) return;
+    done = true;
+    const elapsed = performance.now() - t0;
+    const wait = Math.max(0, MIN - elapsed);
+
+    setTimeout(() => {
+      el.classList.add('is-done');
+      el.setAttribute('aria-busy', 'false');
+      root.classList.remove('sl-lock');
+      try {
+        sessionStorage.setItem('sl_seen', '1');
+      } catch (e) {}
+      setTimeout(() => {
+        if (el && el.parentNode) el.remove();
+        window.dispatchEvent(new CustomEvent('loader:done'));
+      }, 550);
+    }, wait);
+  };
+
+  // Real progress signals (A 4.3)
+  const signals = [
+    new Promise(r => document.readyState !== 'loading' ? r() : document.addEventListener('DOMContentLoaded', r, { once: true })),
+    document.fonts ? document.fonts.ready.catch(() => {}) : Promise.resolve(),
+    new Promise(r => document.readyState === 'complete' ? r() : window.addEventListener('load', r, { once: true }))
+  ];
+
+  // Hero image decode signal if present
+  const heroImg = document.querySelector('.hero img, .profile-card img, .mark img, .sl-logo-img');
+  if (heroImg && heroImg.decode) {
+    signals.push(heroImg.decode().catch(() => {}));
+  }
+
+  let completedCount = 0;
+  signals.forEach(p => {
+    p.then(() => {
+      completedCount++;
+      if (bar) {
+        el.style.setProperty('--p', (completedCount / signals.length).toFixed(3));
+      }
+    });
+  });
+
+  Promise.all(signals).then(finish);
+  setTimeout(finish, MAX); // Hard fallback safety timer
+
+  root.classList.add('sl-lock');
+})();
+
+    </script>
 </body>
 
 </html>
