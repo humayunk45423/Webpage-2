@@ -494,50 +494,89 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =========================================================================
-    // 3. Mobile Navigation Drawer & Backdrop Logic
+    // 3. Mobile Expanding Navbar Logic (Actual Navbar Container Extends Down)
     // =========================================================================
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const closeMenuBtn = document.getElementById('closeMenuBtn');
-    const mobileDrawer = document.getElementById('mobileDrawer');
-    const drawerBackdrop = document.getElementById('drawerBackdrop');
+    const navWrap = document.getElementById('navWrap');
+    const mobileNavContent = document.getElementById('mobileNavContent');
 
-    const openDrawer = () => {
-        if (mobileDrawer && drawerBackdrop) {
-            mobileDrawer.classList.add('active');
-            drawerBackdrop.classList.add('active');
-            mobileDrawer.setAttribute('aria-hidden', 'false');
-            drawerBackdrop.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
+    let isMenuOpen = false;
+
+    const openMenu = () => {
+        if (isMenuOpen || !navWrap) return;
+        isMenuOpen = true;
+        navWrap.classList.add('menu-open');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.classList.add('active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            mobileMenuBtn.setAttribute('aria-label', 'Close Navigation Menu');
+        }
+
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        if (scrollbarWidth > 0) {
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
+        }
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenu = () => {
+        if (!isMenuOpen || !navWrap) return;
+        isMenuOpen = false;
+        navWrap.classList.remove('menu-open');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.classList.remove('active');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.setAttribute('aria-label', 'Open Navigation Menu');
+        }
+
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+    };
+
+    const toggleMenu = () => {
+        if (isMenuOpen) {
+            closeMenu();
+        } else {
+            openMenu();
         }
     };
 
-    const closeDrawer = () => {
-        if (mobileDrawer && drawerBackdrop) {
-            mobileDrawer.classList.remove('active');
-            drawerBackdrop.classList.remove('active');
-            mobileDrawer.setAttribute('aria-hidden', 'true');
-            drawerBackdrop.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-        }
-    };
-
-    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openDrawer);
-    if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeDrawer);
-    if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
-
-    // Close drawer when clicking any navigation link
-    document.querySelectorAll('.drawer-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            closeDrawer();
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
         });
-    });
+    }
 
-    // Escape key closes mobile drawer
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('active')) {
-            closeDrawer();
+    // Close when tapping outside the expanding navbar
+    document.addEventListener('click', (e) => {
+        if (isMenuOpen && navWrap && !navWrap.contains(e.target)) {
+            closeMenu();
         }
     });
+
+    if (mobileNavContent) {
+        mobileNavContent.querySelectorAll('.nav-expand-link').forEach(link => {
+            link.addEventListener('click', () => {
+                closeMenu();
+            });
+        });
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isMenuOpen) {
+            closeMenu();
+            if (mobileMenuBtn) mobileMenuBtn.focus();
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1024 && isMenuOpen) {
+            closeMenu();
+        }
+    }, { passive: true });
 
     // =========================================================================
     // 4. Typing Animation
