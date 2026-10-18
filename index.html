@@ -482,11 +482,11 @@ html.sl-bypass.sl-lock {
   overflow: hidden;
   position: relative;
   z-index: 2;
-  transition: transform 0.4s var(--sl-ease), box-shadow 0.4s var(--sl-ease), background-color 0.3s ease;
+  transition: transform 0.4s var(--sl-ease), box-shadow 0.4s var(--sl-ease);
 }
 
 html[data-theme="dark"] .sl-logo-bezel {
-  background: #0f1214;
+  background: #ffffff;
   box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 107, 0, 0.28), 0 0 18px rgba(255, 107, 0, 0.16);
 }
 
@@ -498,34 +498,26 @@ html[data-theme="dark"] .sl-logo-bezel {
 
 .sl-logo-bg {
   fill: #ffffff;
-  transition: fill 0.25s ease;
 }
 
 .sl-logo-mark {
-  fill: #050505;
-  transition: fill 0.25s ease;
+  fill: #000000;
 }
 
 html[data-theme="dark"] .sl-logo-bg {
-  fill: #0f1214;
-}
-
-html[data-theme="dark"] .sl-logo-mark {
   fill: #ffffff;
 }
 
-/* Fallback for img tag rendering */
+html[data-theme="dark"] .sl-logo-mark {
+  fill: #000000;
+}
+
 .sl-logo-img {
   width: 52px;
   height: 52px;
   object-fit: contain;
   border-radius: 50%;
   display: block;
-  transition: filter 0.25s ease;
-}
-
-html[data-theme="dark"] .sl-logo-img {
-  filter: invert(1);
 }
 
 /* Microcopy in Site Voice */
@@ -553,17 +545,17 @@ html[data-theme="dark"] .sl-logo-img {
   min-height: 1.2em;
 }
 
-/* Precision Progress Gauge & Percentage Readout */
-.sl-progress-wrap {
+/* Precision Progress Gauge & In-line Percentage Readout */
+.sl-meter {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.55rem;
-  width: 100%;
+  justify-content: center;
+  gap: 0.75rem;
+  width: min(230px, 54vw);
 }
 
 .sl-bar {
-  width: min(220px, 48vw);
+  flex: 1;
   height: 5px;
   background: var(--sl-subtle);
   border-radius: 999px;
@@ -586,25 +578,20 @@ html[data-theme="dark"] .sl-bar i {
   box-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
 }
 
-.sl-counter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .sl-percent {
   font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
   color: var(--sl-muted);
-  font-family: inherit;
+  min-width: 2.6rem;
+  text-align: left;
   line-height: 1;
 }
 
 html[data-theme="dark"] .sl-percent {
-  color: rgba(253, 253, 253, 0.72);
+  color: rgba(253, 253, 253, 0.75);
 }
 
 .sr-only {
@@ -682,10 +669,10 @@ html.sl-lock {
       <span class="sl-brand-name" data-sl-name data-en="Humayoun Kobir" data-bn="হুমায়ুন কবির">Humayoun Kobir</span>
       <span class="sl-status-text" data-sl-status data-en="Initializing portfolio..." data-bn="পোর্টফোলিও প্রস্তুত হচ্ছে...">Initializing portfolio...</span>
     </div>
-    <!-- Measurable Progress Gauge & Percentage Readout -->
-    <div class="sl-progress-wrap">
+    <!-- Measurable Progress Gauge & In-line Percentage Readout -->
+    <div class="sl-meter">
       <div class="sl-bar" aria-hidden="true"><i></i></div>
-      <div class="sl-counter"><span class="sl-percent" data-sl-percent>0%</span></div>
+      <span class="sl-percent" data-sl-percent>0%</span>
     </div>
   </div>
   <span class="sr-only">Loading Humayoun Kobir portfolio</span>
