@@ -776,16 +776,47 @@
             cursor: pointer;
             position: relative;
             padding: 0;
-            transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
             -webkit-tap-highlight-color: transparent;
             flex-shrink: 0;
             z-index: 2;
         }
 
-        .hamburger-btn:hover {
+        .hamburger-btn:hover,
+        .hamburger-btn:focus-visible {
             background: var(--accent-line);
             border-color: var(--accent);
-            color: var(--accent-ink);
+            color: var(--text);
+            box-shadow: 0 0 10px var(--soft);
+        }
+
+        .hamburger-btn:active {
+            transform: scale(0.92);
+            background: var(--accent-line);
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        /* Active / Open state: High contrast, theme accent border and soft tint */
+        .hamburger-btn.active {
+            background: var(--soft);
+            border-color: var(--accent);
+            color: var(--text);
+            box-shadow: 0 0 10px var(--soft);
+        }
+
+        .hamburger-btn.active:hover,
+        .hamburger-btn.active:focus-visible {
+            background: var(--accent-line);
+            border-color: var(--accent);
+            color: var(--text);
+        }
+
+        .hamburger-btn.active:active {
+            transform: scale(0.92);
+            background: var(--accent-line);
+            border-color: var(--accent);
+            color: var(--text);
         }
 
         .hamburger-box {
@@ -801,7 +832,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: currentColor;
+            background: var(--text);
             border-radius: 2px;
             transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
                         opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
