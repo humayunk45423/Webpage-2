@@ -32,9 +32,8 @@
     return;
   }
 
+  const DURATION = 1680; // Exactly 1.68 seconds
   const t0 = performance.now();
-  const MIN = 400;
-  const MAX = 5000;
 
   // Sync bilingual microcopy immediately
   const isBn = root.getAttribute('data-lang') === 'bn' || root.getAttribute('lang') === 'bn';
@@ -46,53 +45,53 @@
   }
 
   const bar = el.querySelector('.sl-bar i');
+  const pctEl = el.querySelector('[data-sl-percent]');
+  const toBnNum = (num) => String(num).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+
   let done = false;
 
   const finish = () => {
     if (done) return;
     done = true;
-    const elapsed = performance.now() - t0;
-    const wait = Math.max(0, MIN - elapsed);
+    if (bar) el.style.setProperty('--p', '1');
+    if (pctEl) pctEl.textContent = isBn ? '১০০%' : '100%';
 
+    el.classList.add('is-done');
+    el.setAttribute('aria-busy', 'false');
+    root.classList.remove('sl-lock');
+    try {
+      sessionStorage.setItem('sl_seen', '1');
+    } catch (e) {}
     setTimeout(() => {
-      el.classList.add('is-done');
-      el.setAttribute('aria-busy', 'false');
-      root.classList.remove('sl-lock');
-      try {
-        sessionStorage.setItem('sl_seen', '1');
-      } catch (e) {}
-      setTimeout(() => {
-        if (el && el.parentNode) el.remove();
-        window.dispatchEvent(new CustomEvent('loader:done'));
-      }, 550);
-    }, wait);
+      if (el && el.parentNode) el.remove();
+      window.dispatchEvent(new CustomEvent('loader:done'));
+    }, 550);
   };
 
-  // Real progress signals (A 4.3)
-  const signals = [
-    new Promise(r => document.readyState !== 'loading' ? r() : document.addEventListener('DOMContentLoaded', r, { once: true })),
-    document.fonts ? document.fonts.ready.catch(() => {}) : Promise.resolve(),
-    new Promise(r => document.readyState === 'complete' ? r() : window.addEventListener('load', r, { once: true }))
-  ];
+  // 60fps/120fps synchronized progress & percentage tick across exactly 1.68s
+  const step = (now) => {
+    if (done) return;
+    const elapsed = now - t0;
+    const progress = Math.min(1, elapsed / DURATION);
 
-  // Hero image decode signal if present
-  const heroImg = document.querySelector('.hero img, .profile-card img, .mark img, .sl-logo-img');
-  if (heroImg && heroImg.decode) {
-    signals.push(heroImg.decode().catch(() => {}));
-  }
+    // Smooth natural easing: begins briskly, smoothly glides to 100%
+    const pEased = 1 - Math.pow(1 - progress, 1.35);
 
-  let completedCount = 0;
-  signals.forEach(p => {
-    p.then(() => {
-      completedCount++;
-      if (bar) {
-        el.style.setProperty('--p', (completedCount / signals.length).toFixed(3));
-      }
-    });
-  });
+    if (bar) {
+      el.style.setProperty('--p', pEased.toFixed(4));
+    }
+    if (pctEl) {
+      const pct = Math.min(100, Math.round(pEased * 100));
+      pctEl.textContent = isBn ? `${toBnNum(pct)}%` : `${pct}%`;
+    }
 
-  Promise.all(signals).then(finish);
-  setTimeout(finish, MAX); // Hard fallback safety timer
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      finish();
+    }
+  };
 
+  requestAnimationFrame(step);
   root.classList.add('sl-lock');
 })();

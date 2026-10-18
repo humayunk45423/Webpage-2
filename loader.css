@@ -101,6 +101,7 @@ html.sl-bypass.sl-lock {
 }
 
 /* Central Circular Brand Emblem */
+/* Central Circular Brand Emblem */
 .sl-logo-bezel {
   width: 62px;
   height: 62px;
@@ -117,10 +118,25 @@ html.sl-bypass.sl-lock {
 }
 
 html[data-theme="dark"] .sl-logo-bezel {
-  background: #0f1214;
+  background: #ffffff;
   box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 107, 0, 0.28), 0 0 18px rgba(255, 107, 0, 0.16);
 }
 
+.sl-logo-svg {
+  width: 52px;
+  height: 52px;
+  display: block;
+}
+
+.sl-logo-bg {
+  fill: #ffffff;
+}
+
+.sl-logo-mark {
+  fill: #000000;
+}
+
+/* Fallback for img tag rendering */
 .sl-logo-img {
   width: 52px;
   height: 52px;
@@ -154,14 +170,30 @@ html[data-theme="dark"] .sl-logo-bezel {
   min-height: 1.2em;
 }
 
-/* Precision Progress Gauge */
+/* Precision Progress Gauge & In-line Percentage Readout */
+.sl-progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.sl-percent-spacer {
+  width: 36px;
+  flex-shrink: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .sl-bar {
   width: min(200px, 45vw);
-  height: 2px;
+  height: 5px;
   background: var(--sl-subtle);
-  border-radius: 2px;
+  border-radius: 999px;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
 }
 
 .sl-bar i {
@@ -171,9 +203,30 @@ html[data-theme="dark"] .sl-logo-bezel {
   background: linear-gradient(90deg, var(--sl-sec), var(--sl-accent));
   transform: scaleX(var(--p, 0));
   transform-origin: left;
-  transition: transform 0.25s linear;
-  border-radius: 2px;
+  border-radius: 999px;
   will-change: transform;
+}
+
+html[data-theme="dark"] .sl-bar i {
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
+}
+
+.sl-percent {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  color: var(--sl-muted);
+  font-family: inherit;
+  line-height: 1;
+  width: 36px;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+html[data-theme="dark"] .sl-percent {
+  color: rgba(253, 253, 253, 0.75);
 }
 
 .sr-only {

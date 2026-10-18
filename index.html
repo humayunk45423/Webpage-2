@@ -486,10 +486,25 @@ html.sl-bypass.sl-lock {
 }
 
 html[data-theme="dark"] .sl-logo-bezel {
-  background: #0f1214;
+  background: #ffffff;
   box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 107, 0, 0.28), 0 0 18px rgba(255, 107, 0, 0.16);
 }
 
+.sl-logo-svg {
+  width: 52px;
+  height: 52px;
+  display: block;
+}
+
+.sl-logo-bg {
+  fill: #ffffff;
+}
+
+.sl-logo-mark {
+  fill: #000000;
+}
+
+/* Fallback for img tag rendering */
 .sl-logo-img {
   width: 52px;
   height: 52px;
@@ -523,14 +538,30 @@ html[data-theme="dark"] .sl-logo-bezel {
   min-height: 1.2em;
 }
 
-/* Precision Progress Gauge */
+/* Precision Progress Gauge & In-line Percentage Readout */
+.sl-progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.sl-percent-spacer {
+  width: 36px;
+  flex-shrink: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .sl-bar {
   width: min(200px, 45vw);
-  height: 2px;
+  height: 5px;
   background: var(--sl-subtle);
-  border-radius: 2px;
+  border-radius: 999px;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
 }
 
 .sl-bar i {
@@ -540,9 +571,30 @@ html[data-theme="dark"] .sl-logo-bezel {
   background: linear-gradient(90deg, var(--sl-sec), var(--sl-accent));
   transform: scaleX(var(--p, 0));
   transform-origin: left;
-  transition: transform 0.25s linear;
-  border-radius: 2px;
+  border-radius: 999px;
   will-change: transform;
+}
+
+html[data-theme="dark"] .sl-bar i {
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
+}
+
+.sl-percent {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  color: var(--sl-muted);
+  font-family: inherit;
+  line-height: 1;
+  width: 36px;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+html[data-theme="dark"] .sl-percent {
+  color: rgba(253, 253, 253, 0.75);
 }
 
 .sr-only {
@@ -608,7 +660,11 @@ html.sl-lock {
         <circle class="sl-arc-rotate" cx="56" cy="56" r="48" stroke="url(#sl-arc-grad)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="68 235" />
       </svg>
       <div class="sl-logo-bezel">
-        <img src="assets/site-images/Name%20logo.svg" width="52" height="52" alt="Humayoun Kobir Monogram" class="sl-logo-img" fetchpriority="high" decoding="sync">
+        <svg class="sl-logo-svg" viewBox="0 0 1080 1080" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Humayoun Kobir Monogram">
+          <path class="sl-logo-bg" d="M748.8,1080H331.2C148.3,1080,0,931.7,0,748.8V331.2C0,148.3,148.3,0,331.2,0h417.6 C931.7,0,1080,148.3,1080,331.2v417.6C1080,931.7,931.7,1080,748.8,1080z" />
+          <path class="sl-logo-mark" d="M953.9,826.9c2.9,4.5,5.6,9.2,10.4,17c-48.7-2.1-94.9,4.6-140.7-4.3c-24.5-4.8-43.7-22.1-58.7-44.7 c-38.4-57.8-76.6-115.6-115-173.4c-4.5-6.8-9.3-13.4-16.8-24.1c0,52.2,0.1,99.5-0.1,146.8c0,10.7-0.1,21.7-1.7,32.2 c-7.3,45.8-36.7,70.7-79.7,68.1c-33.1-1.9-64-35.9-65.7-76.3c-1.8-42.4-0.6-85-1-127.5c-0.1-7,2-10.1,8-11.5 c10.3-2.5,20.4-6,32.4-9.6c0,40.8-0.1,80.4,0.1,120.1c0.1,10.1-0.1,20.6,2.2,30.2c4.2,17.4,14.2,28.6,31.3,28.6 c17,0.1,27-9.9,31.3-28.1c0.6-2.4,1.6-4.6,2.5-6.9c0.3-58.1,0.6-116.2,0.9-174.3c17-14,34-27.9,50.9-42.1c8.2-6.8,9.6,3,12.1,6.9 c42.7,64.4,85.1,129,127.4,193.7c14.8,22.6,29,46.2,56.7,49c13.1,1.4,26.4,0.2,41.7,0.2c-17.9-28-34.7-54.6-51.9-80.8 c-38-58-76-116.1-114.7-173.5c-7.4-10.9-6.1-17.1,1-27c54.5-76.4,108.4-153.3,163.8-231.8c-35.9-5.3-66.4-2.3-89.8,32.6 c-32.2,48-66.7,93.8-99.3,141.5C621.7,559.9,528,607.9,416.2,615.6c-17.9,1.2-35.9,1.5-53.7,3.7c-33.7,4.1-51.3,26-52,63.9 c-0.4,22.2,0.1,44.4-0.4,66.6c-1.2,54.5-35.3,93.5-83.4,93.5c-21.3,0-42.9,4.5-63.9-3c-1.4-53.2-1.7-106.5,0.2-159.7 c2.7-76.4,45.7-176.9,149.9-205.8c26.3-7.3,53-9.2,79.9-9.2c12.3,0,24.7,0.1,36.9-1.4c36.5-4.7,54.5-27.6,55.1-69.4 c0.3-24.7-0.3-49.4,0.5-74.1c1.6-48.2,34.1-85,74.7-85.3c39.9-0.3,71.3,35.4,72.9,84.4c1,31,1.7,62.2,0,93.1 c-1.3,23.2-18.7,35.9-33,49.7c-7.4,9.1-7.2,2-7.2-4.4c0-27.2,0.1-54.5,0.2-81.8c0-20.3,0-40.6,0.1-60.8c-0.8-1.6-1.7-3.2-2.3-5 c-7.1-21.1-19.3-31.3-34.5-28.9c-17.8,2.8-29.6,18.5-30.1,41.6c-0.5,22.8-0.2,45.7-0.3,68.5c-0.2,67.7-35.9,112.2-95.4,118.7 c-32.3,3.5-65-1.4-97.2,5.8c-72.6,16.1-125.7,83-129.8,166.5c-1.6,34.2-0.4,68.5-0.9,102.8c-0.1,8.5,1.6,11.9,10.1,12.4 c39.1,2.2,57-16.6,57.2-61.5c0.1-18.4-0.1-36.8,0.3-55.2c1.3-58.9,38.1-103.4,90-107.8c45.2-3.8,90.4-4.3,134.8-18.3 c63.1-19.8,115.4-57.5,156.5-114.8c33.6-46.7,67.1-93.5,99.6-141.3c29.8-43.8,66.6-67.5,117-63.2c31,2.6,62.3,0.5,96.7,0.5 c-18.3,26.4-34.7,50.2-51.2,73.9c-48,68.6-95.9,137.3-144.5,205.4c-7.7,10.7-8.2,17.4-0.5,28.9 C830.6,638.3,892.2,732.7,953.9,826.9z" />
+          <path class="sl-logo-mark" d="M161.5,253.3c-0.1-13.4,2.9-17.5,14.7-16.6c23.4,1.8,46.9-2.4,70.3,2.4c37.8,9.9,61.3,41.4,63.2,88.5 c1.5,36.7,0.3,73.5,0.7,110.2c0.1,7.9-2.6,11.3-8.8,13.3c-10.1,3.4-20,7.4-32.1,12c0-40-0.1-78.9,0.1-117.9 c0-10.2-0.3-20.3-2.9-30.1c-6.8-26.6-37.4-43.5-60-33.4c-7.6,3.4-4.3,10.8-4.3,16.3c-0.3,64-0.6,128,0.1,191.9 c0.2,17.4-2.2,31.8-13.7,44.4c-7.5,8.2-13,18.8-19.4,28.3c-1.6,4.3-3.1,8.6-4.7,12.9c-0.9-0.2-1.8-0.3-2.8-0.5c0-9.8,0-19.6,0-29.3 C161.9,448.2,162.1,350.7,161.5,253.3z" />
+        </svg>
       </div>
     </div>
     <!-- Microcopy in Site Voice -->
@@ -616,8 +672,12 @@ html.sl-lock {
       <span class="sl-brand-name" data-sl-name data-en="Humayoun Kobir" data-bn="হুমায়ুন কবির">Humayoun Kobir</span>
       <span class="sl-status-text" data-sl-status data-en="Initializing portfolio..." data-bn="পোর্টফোলিও প্রস্তুত হচ্ছে...">Initializing portfolio...</span>
     </div>
-    <!-- Measurable Real-Signal Progress Bar -->
-    <div class="sl-bar" aria-hidden="true"><i></i></div>
+    <!-- Measurable Progress Gauge & In-line Percentage Readout -->
+    <div class="sl-progress-row">
+      <span class="sl-percent-spacer" aria-hidden="true"></span>
+      <div class="sl-bar" aria-hidden="true"><i></i></div>
+      <span class="sl-percent" data-sl-percent>0%</span>
+    </div>
   </div>
   <span class="sr-only">Loading Humayoun Kobir portfolio</span>
 </div>
@@ -1330,9 +1390,8 @@ html.sl-lock {
     return;
   }
 
+  const DURATION = 1680; // Exactly 1.68 seconds
   const t0 = performance.now();
-  const MIN = 400;
-  const MAX = 5000;
 
   // Sync bilingual microcopy immediately
   const isBn = root.getAttribute('data-lang') === 'bn' || root.getAttribute('lang') === 'bn';
@@ -1344,54 +1403,54 @@ html.sl-lock {
   }
 
   const bar = el.querySelector('.sl-bar i');
+  const pctEl = el.querySelector('[data-sl-percent]');
+  const toBnNum = (num) => String(num).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+
   let done = false;
 
   const finish = () => {
     if (done) return;
     done = true;
-    const elapsed = performance.now() - t0;
-    const wait = Math.max(0, MIN - elapsed);
+    if (bar) el.style.setProperty('--p', '1');
+    if (pctEl) pctEl.textContent = isBn ? '১০০%' : '100%';
 
+    el.classList.add('is-done');
+    el.setAttribute('aria-busy', 'false');
+    root.classList.remove('sl-lock');
+    try {
+      sessionStorage.setItem('sl_seen', '1');
+    } catch (e) {}
     setTimeout(() => {
-      el.classList.add('is-done');
-      el.setAttribute('aria-busy', 'false');
-      root.classList.remove('sl-lock');
-      try {
-        sessionStorage.setItem('sl_seen', '1');
-      } catch (e) {}
-      setTimeout(() => {
-        if (el && el.parentNode) el.remove();
-        window.dispatchEvent(new CustomEvent('loader:done'));
-      }, 550);
-    }, wait);
+      if (el && el.parentNode) el.remove();
+      window.dispatchEvent(new CustomEvent('loader:done'));
+    }, 550);
   };
 
-  // Real progress signals (A 4.3)
-  const signals = [
-    new Promise(r => document.readyState !== 'loading' ? r() : document.addEventListener('DOMContentLoaded', r, { once: true })),
-    document.fonts ? document.fonts.ready.catch(() => {}) : Promise.resolve(),
-    new Promise(r => document.readyState === 'complete' ? r() : window.addEventListener('load', r, { once: true }))
-  ];
+  // 60fps/120fps synchronized progress & percentage tick across exactly 1.68s
+  const step = (now) => {
+    if (done) return;
+    const elapsed = now - t0;
+    const progress = Math.min(1, elapsed / DURATION);
 
-  // Hero image decode signal if present
-  const heroImg = document.querySelector('.hero img, .profile-card img, .mark img, .sl-logo-img');
-  if (heroImg && heroImg.decode) {
-    signals.push(heroImg.decode().catch(() => {}));
-  }
+    // Smooth natural easing: begins briskly, smoothly glides to 100%
+    const pEased = 1 - Math.pow(1 - progress, 1.35);
 
-  let completedCount = 0;
-  signals.forEach(p => {
-    p.then(() => {
-      completedCount++;
-      if (bar) {
-        el.style.setProperty('--p', (completedCount / signals.length).toFixed(3));
-      }
-    });
-  });
+    if (bar) {
+      el.style.setProperty('--p', pEased.toFixed(4));
+    }
+    if (pctEl) {
+      const pct = Math.min(100, Math.round(pEased * 100));
+      pctEl.textContent = isBn ? `${toBnNum(pct)}%` : `${pct}%`;
+    }
 
-  Promise.all(signals).then(finish);
-  setTimeout(finish, MAX); // Hard fallback safety timer
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      finish();
+    }
+  };
 
+  requestAnimationFrame(step);
   root.classList.add('sl-lock');
 })();
 
