@@ -101,7 +101,6 @@ html.sl-bypass.sl-lock {
 }
 
 /* Central Circular Brand Emblem */
-/* Central Circular Brand Emblem */
 .sl-logo-bezel {
   width: 62px;
   height: 62px;
@@ -114,11 +113,11 @@ html.sl-bypass.sl-lock {
   overflow: hidden;
   position: relative;
   z-index: 2;
-  transition: transform 0.4s var(--sl-ease), box-shadow 0.4s var(--sl-ease);
+  transition: transform 0.4s var(--sl-ease), box-shadow 0.4s var(--sl-ease), background-color 0.3s ease;
 }
 
 html[data-theme="dark"] .sl-logo-bezel {
-  background: #ffffff;
+  background: #0f1214;
   box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 107, 0, 0.28), 0 0 18px rgba(255, 107, 0, 0.16);
 }
 
@@ -130,10 +129,20 @@ html[data-theme="dark"] .sl-logo-bezel {
 
 .sl-logo-bg {
   fill: #ffffff;
+  transition: fill 0.25s ease;
 }
 
 .sl-logo-mark {
-  fill: #000000;
+  fill: #050505;
+  transition: fill 0.25s ease;
+}
+
+html[data-theme="dark"] .sl-logo-bg {
+  fill: #0f1214;
+}
+
+html[data-theme="dark"] .sl-logo-mark {
+  fill: #ffffff;
 }
 
 /* Fallback for img tag rendering */
@@ -143,6 +152,11 @@ html[data-theme="dark"] .sl-logo-bezel {
   object-fit: contain;
   border-radius: 50%;
   display: block;
+  transition: filter 0.25s ease;
+}
+
+html[data-theme="dark"] .sl-logo-img {
+  filter: invert(1);
 }
 
 /* Microcopy in Site Voice */
@@ -170,30 +184,22 @@ html[data-theme="dark"] .sl-logo-bezel {
   min-height: 1.2em;
 }
 
-/* Precision Progress Gauge & In-line Percentage Readout */
-.sl-progress-row {
+/* Precision Progress Gauge & Percentage Readout */
+.sl-progress-wrap {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
+  gap: 0.55rem;
   width: 100%;
 }
 
-.sl-percent-spacer {
-  width: 38px;
-  flex-shrink: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 .sl-bar {
-  width: min(200px, 45vw);
+  width: min(220px, 48vw);
   height: 5px;
   background: var(--sl-subtle);
   border-radius: 999px;
   overflow: hidden;
   position: relative;
-  flex-shrink: 0;
 }
 
 .sl-bar i {
@@ -211,22 +217,25 @@ html[data-theme="dark"] .sl-bar i {
   box-shadow: 0 0 10px rgba(255, 107, 0, 0.4);
 }
 
+.sl-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .sl-percent {
   font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
   color: var(--sl-muted);
   font-family: inherit;
   line-height: 1;
-  width: 38px;
-  flex-shrink: 0;
-  text-align: right;
 }
 
 html[data-theme="dark"] .sl-percent {
-  color: rgba(253, 253, 253, 0.75);
+  color: rgba(253, 253, 253, 0.72);
 }
 
 .sr-only {
