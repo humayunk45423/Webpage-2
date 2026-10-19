@@ -48,6 +48,10 @@
   const pctEl = el.querySelector('[data-sl-percent]');
   const toBnNum = (num) => String(num).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
 
+  // Ensure initial 0% state is clamped and cleanly painted
+  if (bar) el.style.setProperty('--p', '0');
+  if (pctEl) pctEl.textContent = isBn ? '০%' : '0%';
+
   let done = false;
 
   const finish = () => {
@@ -71,17 +75,18 @@
   // 60fps/120fps synchronized progress & percentage tick across exactly 1.68s
   const step = (now) => {
     if (done) return;
-    const elapsed = now - t0;
-    const progress = Math.min(1, elapsed / DURATION);
+    const currentTime = (typeof now === 'number' && now > 0) ? now : performance.now();
+    const elapsed = Math.max(0, currentTime - t0);
+    const progress = Math.min(1, Math.max(0, elapsed / DURATION));
 
     // Smooth natural easing: begins briskly, smoothly glides to 100%
-    const pEased = 1 - Math.pow(1 - progress, 1.35);
+    const pEased = Math.min(1, Math.max(0, 1 - Math.pow(1 - progress, 1.35)));
 
     if (bar) {
       el.style.setProperty('--p', pEased.toFixed(4));
     }
     if (pctEl) {
-      const pct = Math.min(100, Math.round(pEased * 100));
+      const pct = Math.min(100, Math.max(0, Math.round(pEased * 100)));
       pctEl.textContent = isBn ? `${toBnNum(pct)}%` : `${pct}%`;
     }
 
