@@ -6,7 +6,7 @@
   <title>Bespoke Site Loader Preview — Humayoun Kobir Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=block" rel="stylesheet">
   <style>
     /* Preview Host Container Styles */
     :root {
@@ -350,21 +350,23 @@ html[data-theme="dark"] .sl-logo-mark {
 html[data-theme="dark"] .sl-brand-name {
   background: linear-gradient(
     115deg,
-    #c2410c 0%,
-    #ea580c 20%,
-    #ff6b00 35%,
-    #fed7aa 46%,
+    #ff6200 0%,
+    #ff7c0a 18%,
+    #ff981a 32%,
+    #ffc266 44%,
     #ffffff 50%,
-    #fed7aa 54%,
-    #ff6b00 65%,
-    #ea580c 80%,
-    #c2410c 100%
+    #ffc266 56%,
+    #ff981a 68%,
+    #ff7c0a 82%,
+    #ff6200 100%
   );
   background-size: 250% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: sl-sheen 3.2s ease-in-out infinite;
-  filter: drop-shadow(0 0 16px rgba(255, 107, 0, 0.65)) drop-shadow(0 0 2px rgba(255, 230, 200, 0.8));
+  filter: drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.95))
+          drop-shadow(0 0 5px rgba(255, 120, 0, 0.8))
+          drop-shadow(0 0 16px rgba(255, 95, 0, 0.42));
 }
 
 @keyframes sl-sheen {
@@ -379,11 +381,11 @@ html[data-theme="dark"] .sl-brand-name {
   }
 }
 
-/* 2. Initializing Status Microcopy — Precision Tracked to match ~220px */
+/* 2. Initializing Status Microcopy — Symmetrically Calibrated to match Name Length */
 .sl-status-text {
   display: inline-block;
-  font-size: 0.68rem;
-  letter-spacing: 0.232em;
+  font-size: 0.675rem;
+  letter-spacing: 0.315em;
   text-transform: uppercase;
   color: var(--sl-muted);
   font-weight: 600;
@@ -392,13 +394,32 @@ html[data-theme="dark"] .sl-brand-name {
   line-height: 1.2;
 }
 
-/* 3. Precision Progress Gauge & In-line Percentage Readout (~220px length) */
+/* Authentic Bengali Script Typography Standards (Preserves Ligatures, Vowels & Scale) */
+html[data-lang="bn"] .sl-brand-name,
+html[lang="bn"] .sl-brand-name {
+  font-family: 'Hind Siliguri', sans-serif !important;
+  font-size: 1.74rem;
+  letter-spacing: 0.01em;
+  padding: 0 0.15em;
+}
+
+html[data-lang="bn"] .sl-status-text,
+html[lang="bn"] .sl-status-text {
+  font-family: 'Hind Siliguri', sans-serif !important;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: normal !important; /* CRITICAL: Must be normal to prevent Brahmic script conjunct separation */
+  text-transform: none;
+  line-height: 1.3;
+}
+
+/* 3. Precision Progress Gauge & In-line Percentage Readout (216px length) */
 .sl-meter {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  width: 220px;
+  width: 216px;
 }
 
 .sl-bar {
@@ -757,8 +778,10 @@ function holdLoader() {
   const newEl = spawnFreshLoader();
   const bar = newEl.querySelector('.sl-bar i');
   const pctEl = newEl.querySelector('[data-sl-percent]');
+  const isBn = document.documentElement.getAttribute('data-lang') === 'bn';
+  const toBnNum = (n) => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
   if (bar) newEl.style.setProperty('--p', '0.65');
-  if (pctEl) pctEl.textContent = '65%';
+  if (pctEl) pctEl.textContent = isBn ? toBnNum(65) + '%' : '65%';
 }
 
 function replayLoader(durationMs) {
