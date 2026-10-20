@@ -378,14 +378,14 @@
             width: auto;
             height: 80%;
             max-height: 2.15rem;
-            transform: translateX(-1px) scale(1.30);
+            transform: scale(1.55);
             object-fit: contain;
-            contain: strict;
+            contain: paint;
             transition: transform 0.3s var(--bezier);
         }
 
         .brand:hover .mark img {
-            transform: translateX(-1px) scale(1.36);
+            transform: scale(1.62);
         }
 
         .brand-text {
@@ -606,10 +606,10 @@
         #themeToggleMobile[data-state="left"] .moon i,
         #themeToggle[data-state="left"] .moon svg,
         #themeToggleMobile[data-state="left"] .moon svg {
-            color: #94a3b8 !important;
+            color: #4b5563 !important;
             transform: scale(0.9);
             filter: none;
-            opacity: 0.65;
+            opacity: 0.85;
         }
 
         /* Dark state active Moon (White) */
@@ -635,10 +635,10 @@
         #themeToggleMobile[data-state="right"] .sun i,
         #themeToggle[data-state="right"] .sun svg,
         #themeToggleMobile[data-state="right"] .sun svg {
-            color: #64748b !important;
+            color: #94a3b8 !important;
             transform: scale(0.9);
             filter: none;
-            opacity: 0.5;
+            opacity: 0.85;
         }
 
         .toggle:focus-visible,
@@ -709,8 +709,8 @@
         html[data-theme="light"][data-lang="bn"] .lang-toggle .opt-right,
         html[data-theme="light"] .lang-toggle[data-state="left"] .opt-right,
         .lang-toggle[data-state="left"] .opt-right {
-            color: #94a3b8 !important;
-            opacity: 0.6 !important;
+            color: #475569 !important;
+            opacity: 1 !important;
             font-weight: 600 !important;
             transform: none !important;
             text-shadow: none !important;
@@ -729,8 +729,8 @@
         html[data-theme="light"][data-lang="en"] .lang-toggle .opt-left,
         html[data-theme="light"] .lang-toggle[data-state="right"] .opt-left,
         .lang-toggle[data-state="right"] .opt-left {
-            color: #94a3b8 !important;
-            opacity: 0.6 !important;
+            color: #475569 !important;
+            opacity: 1 !important;
             font-weight: 600 !important;
             transform: none !important;
             text-shadow: none !important;
@@ -748,8 +748,8 @@
         }
         html[data-theme="dark"][data-lang="bn"] .lang-toggle .opt-right,
         html[data-theme="dark"] .lang-toggle[data-state="left"] .opt-right {
-            color: #64748b !important;
-            opacity: 0.5 !important;
+            color: #94a3b8 !important;
+            opacity: 1 !important;
             font-weight: 600 !important;
             transform: none !important;
             text-shadow: none !important;
@@ -766,8 +766,8 @@
         }
         html[data-theme="dark"][data-lang="en"] .lang-toggle .opt-left,
         html[data-theme="dark"] .lang-toggle[data-state="right"] .opt-left {
-            color: #64748b !important;
-            opacity: 0.5 !important;
+            color: #94a3b8 !important;
+            opacity: 1 !important;
             font-weight: 600 !important;
             transform: none !important;
             text-shadow: none !important;

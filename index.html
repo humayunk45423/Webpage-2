@@ -332,10 +332,13 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 
+    <!-- Preload Critical Above-The-Fold LCP Image -->
+    <link rel="preload" as="image" href="assets/site-images/refined.webp" type="image/webp">
+
     <!-- Typography: Pure Modern System (Manrope for EN, Hind Siliguri for BN - Zero FOUT) -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=optional" rel="stylesheet">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=block"
+        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=optional"
             rel="stylesheet">
         <style>
             .reveal {
@@ -797,12 +800,12 @@ html.sl-lock {
                             <div class="glider" id="navGlider"></div>
                         </nav>
                         <div class="header-controls">
-                            <button type="button" class="segmented-toggle lang-toggle" id="langToggle" data-state="right" aria-label="Toggle Language (English / Bangla)" title="Toggle Language (English / Bangla)">
+                            <button type="button" class="segmented-toggle lang-toggle" id="langToggle" role="switch" aria-checked="true" data-state="right" aria-label="Toggle Language (English / Bangla)" title="Toggle Language (English / Bangla)">
                                 <div class="toggle-slider" aria-hidden="true"></div>
                                 <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
                                 <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
                             </button>
-                            <button type="button" class="segmented-toggle" id="themeToggle" data-state="left" aria-label="Toggle Theme (Light / Dark)" title="Toggle Theme (Light / Dark)">
+                            <button type="button" class="segmented-toggle" id="themeToggle" role="switch" aria-checked="false" data-state="left" aria-label="Toggle Theme (Light / Dark)" title="Toggle Theme (Light / Dark)">
                                 <div class="toggle-slider" aria-hidden="true"></div>
                                 <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
                                     <i class="fa-solid fa-sun" aria-hidden="true"></i>
@@ -829,7 +832,7 @@ html.sl-lock {
                             <div class="nav-expand-toggles">
                                 <div class="nav-toggle-row">
                                     <span data-i18n="toggle_language_label">Language</span>
-                                    <button type="button" class="segmented-toggle lang-toggle" id="langToggleMobile" data-state="right" aria-label="Toggle Language" title="Toggle Language">
+                                    <button type="button" class="segmented-toggle lang-toggle" id="langToggleMobile" role="switch" aria-checked="true" data-state="right" aria-label="Toggle Language" title="Toggle Language">
                                         <div class="toggle-slider" aria-hidden="true"></div>
                                         <span class="toggle-opt opt-left" data-lang-opt="bn">BN</span>
                                         <span class="toggle-opt opt-right" data-lang-opt="en">EN</span>
@@ -837,7 +840,7 @@ html.sl-lock {
                                 </div>
                                 <div class="nav-toggle-row">
                                     <span data-i18n="toggle_theme_label">Theme</span>
-                                    <button type="button" class="segmented-toggle" id="themeToggleMobile" data-state="left" aria-label="Toggle Theme" title="Toggle Theme">
+                                    <button type="button" class="segmented-toggle" id="themeToggleMobile" role="switch" aria-checked="false" data-state="left" aria-label="Toggle Theme" title="Toggle Theme">
                                         <div class="toggle-slider" aria-hidden="true"></div>
                                         <span class="toggle-opt opt-left sun" data-val="light" aria-label="Light mode">
                                             <i class="fa-solid fa-sun" aria-hidden="true"></i>
