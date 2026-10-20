@@ -118,14 +118,14 @@ A categorized breakdown of software, diagnostic utilities, scripts, and creative
 
 | Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **Autoruns** | Freeware (Microsoft Sysinternals) | `assets/Autoruns/Autoruns.rar` | Deep startup program, service, driver, and scheduled task manager. |
-| **Process Explorer** | Freeware (Microsoft Sysinternals) | `assets/ProcessExplorer/PE.rar` | Detailed task manager showing handles, DLLs, and per-process hardware stats. |
-| **Process Monitor** | Freeware (Microsoft Sysinternals) | `assets/ProcessMonitor.zip` | Real-time tracking of file system, registry, and thread activity. |
-| **Glary Utilities Pro** | Software (Key included) | `assets/Glary Utility/Glary_Utilities_v5.211.0.240.exe` | System maintenance suite with registry repair, disk cleanup, and startup tools. |
-| **Revo Uninstaller Pro** | Software (Patched) | `assets/Revo Uninstaller Pro 5.4.3 FINAL/Revo Uninsataller.rar` | Deep uninstaller that cleans remnant files and registry keys after standard uninstall. |
-| **HitmanPro Scanner** | Freeware / Cloud Scanner | `assets/HitmanPro_3.8.28_Build_324/HitmanPro 3.8.rar` | Secondary cloud-based malware, rootkit, and trojan scanner. |
-| **Good Bye DPI** | Open Source (FOSS) | `assets/Good Bye DPI/goodbyedpi-0.2.2.rar` | Deep Packet Inspection bypass utility for censored or throttled networks. |
-| **WinRAR Pro** | Shareware (License key provided) | `assets/Winrar/rarreg.rar` | Archive manager with license key (`rarreg.key`). 7-Zip is also recommended as a FOSS alternative. |
+| **Autoruns** | Freeware (Microsoft Sysinternals) | Cloudflare R2 | Deep startup program, service, driver, and scheduled task manager. |
+| **Process Explorer** | Freeware (Microsoft Sysinternals) | Cloudflare R2 | Detailed task manager showing handles, DLLs, and per-process hardware stats. |
+| **Process Monitor** | Freeware (Microsoft Sysinternals) | Cloudflare R2 | Real-time tracking of file system, registry, and thread activity. |
+| **Glary Utilities Pro** | Software (Key included) | Cloudflare R2 | System maintenance suite with registry repair, disk cleanup, and startup tools. |
+| **Revo Uninstaller Pro** | Software (Patched) | Cloudflare R2 | Deep uninstaller that cleans remnant files and registry keys after standard uninstall. |
+| **HitmanPro Scanner** | Freeware / Cloud Scanner | Cloudflare R2 | Secondary cloud-based malware, rootkit, and trojan scanner. |
+| **Good Bye DPI** | Open Source (FOSS) | Cloudflare R2 | Deep Packet Inspection bypass utility for censored or throttled networks. |
+| **WinRAR Pro** | Shareware (License key provided) | Cloudflare R2 | Archive manager with license key (`rarreg.key`). 7-Zip is also recommended as a FOSS alternative. |
 | **Visual C++ Runtimes AIO** | Redistributable Pack | Cloudflare R2 | Single installer covering Microsoft Visual C++ runtimes from 2005 to 2022 (x86 & x64). |
 | **DirectX 11 Setup** | Microsoft Runtime | Cloudflare R2 | DirectX runtime libraries required for 3D apps and games. |
 
@@ -133,19 +133,19 @@ A categorized breakdown of software, diagnostic utilities, scripts, and creative
 
 | Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **CrystalDiskInfo (CDI)** | Open Source / Freeware | `assets/CrystalDiskInfo/CDI.rar` | Storage drive health monitoring and S.M.A.R.T. telemetry. |
-| **CrystalDiskMark (CDM)** | Open Source / Freeware | `assets/CrystalDiskMark/CDM.rar` | Sequential and random read/write storage benchmark utility. |
+| **CrystalDiskInfo (CDI)** | Open Source / Freeware | Cloudflare R2 | Storage drive health monitoring and S.M.A.R.T. telemetry. |
+| **CrystalDiskMark (CDM)** | Open Source / Freeware | Cloudflare R2 | Sequential and random read/write storage benchmark utility. |
 | **HWiNFO** | Freeware | Official Mirror Link (`hwinfo.com`) | In-depth hardware telemetry: temperatures, voltages, clock speeds, and fan curves. |
-| **Custom Resolution Utility (CRU)** | Freeware (ToastyX) | `assets/cru-1.5.3/CRU.rar` | EDID manager to configure custom display resolutions and refresh rates. |
-| **BIOS Enter Button** | Batch Utility | `assets/BIOS enter button/One click to Bios.rar` | One-click reboot directly into motherboard UEFI/BIOS firmware. |
+| **Custom Resolution Utility (CRU)** | Freeware (ToastyX) | Cloudflare R2 | EDID manager to configure custom display resolutions and refresh rates. |
+| **BIOS Enter Button** | Batch Utility | Cloudflare R2 | One-click reboot directly into motherboard UEFI/BIOS firmware. |
 
 ### Data Recovery & Storage
 
 | Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **EaseUS Data Recovery** | Software (Technician v12.8) | `assets/EaseUS_Data_Recovery_Wizard_Technician_...` | File recovery for formatted, deleted, or RAW partitions. |
-| **EaseUS Partition Master** | Software (Technician v13.0) | `assets/EaseUS_Partition_Master_13.0_...` | Partition resizing, 4K alignment, MBR-to-GPT conversion, and disk cloning. |
-| **Picture Recovery (PhotoRec)** | Open Source (GPL) | `assets/Picture Recovery Software/testdisk-7.3-WIP.rar` | File carving tool for recovering photos, documents, and media from corrupted storage. |
+| **EaseUS Data Recovery** | Software (Technician v12.8) | Cloudflare R2 | File recovery for formatted, deleted, or RAW partitions. |
+| **EaseUS Partition Master** | Software (Technician v13.0) | Cloudflare R2 | Partition resizing, 4K alignment, MBR-to-GPT conversion, and disk cloning. |
+| **Picture Recovery (PhotoRec)** | Open Source (GPL) | Cloudflare R2 | File carving tool for recovering photos, documents, and media from corrupted storage. |
 
 ### Design & Typography Tools
 
@@ -157,16 +157,16 @@ A categorized breakdown of software, diagnostic utilities, scripts, and creative
 
 | Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **Win10 Menu on Win11** | Registry Patch | `assets/Windows 10 Right click menu/...` | Restores classic Windows 10 context menus in Windows 11. |
-| **Win11 Rounded Cursors** | Custom Asset | `assets/Windows 11 rounded Cursor/...` | High-DPI rounded cursor theme for Windows. |
-| **Context Menu Registry Path** | Text Reference | `assets/Registry path of context menu.txt` | Direct registry path for custom context menu entries. |
-| **Right Click Repair Code** | Shell GUID | `assets/Right click repair code.txt` | Direct GUID string for Windows Explorer right-click behavior. |
+| **Win10 Menu on Win11** | Registry Patch | Cloudflare R2 | Restores classic Windows 10 context menus in Windows 11. |
+| **Win11 Rounded Cursors** | Custom Asset | Cloudflare R2 | High-DPI rounded cursor theme for Windows. |
+| **Context Menu Registry Path** | Text Reference | Cloudflare R2 | Direct registry path for custom context menu entries. |
+| **Right Click Repair Code** | Shell GUID | Cloudflare R2 | Direct GUID string for Windows Explorer right-click behavior. |
 
 ### Productivity & Language
 
 | Item | Type / License | Asset / Source | Notes |
 | :--- | :--- | :--- | :--- |
-| **Avro Keyboard** | Open Source (OmicronLab) | `assets/Avro/setup_avrokeyboard_5.6.0.exe` | Standard phonetic Bangla typing software supporting Unicode and ANSI layouts. |
+| **Avro Keyboard** | Open Source (OmicronLab) | Cloudflare R2 | Standard phonetic Bangla typing software supporting Unicode and ANSI layouts. |
 
 ---
 

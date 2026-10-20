@@ -268,7 +268,7 @@ const fileData = [
         name_bn: "অভ্র কীবোর্ড",
         badge_bn: "ফোনেটিক বাংলা কীবোর্ড",
         icon: "fa-solid fa-keyboard",
-        path: "assets/Avro/setup_avrokeyboard_5.6.0.exe",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/setup_avrokeyboard_5.6.0.exe",
         keywords: "bangla bengali phonetic keyboard typing unicode omicronlab",
         readme: "## Overview\nStandard Bengali phonetic keyboard software supporting full Unicode and ANSI typing."
     },
@@ -305,7 +305,7 @@ const fileData = [
         name_bn: "গুড বাই DPI",
         badge_bn: "DPI বাইপাস ইউটিলিটি",
         icon: "fa-solid fa-unlock",
-        path: "assets/Good Bye DPI/goodbyedpi-0.2.2.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/goodbyedpi-0.2.2.rar",
         keywords: "dpi censorship bypass packet inspection network throttling vpn free",
         readme: "## Overview\nBypass Deep Packet Inspection censorship and ISP throttling without requiring a slow proxy or VPN."
     },
@@ -317,7 +317,7 @@ const fileData = [
         name_bn: "হুমায়ূন'স মাস্টার ম্যাক্রো",
         badge_bn: "অটোহটকি ম্যাক্রো প্যাক",
         icon: "fa-solid fa-keyboard",
-        path: "assets/scripts/master-productivity-macro.ahk",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/master-productivity-macro.ahk",
         keywords: "humayoun master productivity macro autohotkey ahk shortcuts window always on top quick launch plain text paste transparency",
         readme: "## Overview\nA high-efficiency AutoHotkey macro script designed by Humayoun Kobir to speed up everyday Windows workflow, window management, and text manipulation.\n\n## Included Shortcuts\n- `Win + A`: Pin active window Always-on-Top.\n- `Ctrl + Shift + V`: Paste pure plain text without any formatting.\n- `Ctrl + Alt + Shift + E`: Instant Windows Explorer restart.\n- `Win + Mouse Scroll`: Adjust active window transparency on the fly.\n- `;d` / `;dt`: Expand into formatted dynamic dates & timestamps."
     },
@@ -356,9 +356,9 @@ const fileData = [
         category: "utilities",
         badge: "MAS PowerShell Script",
         name_bn: "উইন্ডোজ ও অফিস অ্যাক্টিভেটর",
-        badge_bn: "MAS পাওয়ারশেল স্ক্রিপ্ট",
+        badge_bn: "MAS পাওয়ারশেল স্ক্রিপ্ট",
         icon: "fa-solid fa-key",
-        path: "assets/Windows Office Activation Script.txt",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Windows%20Office%20Activation%20Script.txt",
         keywords: "activation mas massgrave windows office powershell script",
         readme: "## Instructions\nRun PowerShell as Administrator to use this script.",
         content: "irm https://get.activated.win | iex"
@@ -371,7 +371,7 @@ const fileData = [
         name_bn: "উইনরার প্রো (WinRAR Pro)",
         badge_bn: "আর্কাইভ ও কম্প্রেশন",
         icon: "fa-solid fa-file-zipper",
-        path: "assets/Winrar/rarreg.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/rarreg.rar",
         officialUrl: "https://www.win-rar.com/fileadmin/winrar-versions/winrar-x64-701.exe",
         sevenZipUrl: "https://www.7-zip.org/",
         keywords: "winrar 7zip compression zip rar archive rarreg key extract",
@@ -389,7 +389,7 @@ const fileData = [
         name_bn: "BIOS এন্টার বাটন",
         badge_bn: "ওয়ান-ক্লিক UEFI রিবুট",
         icon: "fa-solid fa-microchip",
-        path: "assets/BIOS enter button/One click to Bios.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/One%20click%20to%20Bios.rar",
         keywords: "uefi bios fastboot restart bootloader firmware motherboard",
         readme: "## What it does\nAn instant, one-click solution to reboot your PC directly into the UEFI/BIOS settings without manual key spamming."
     },
@@ -417,7 +417,7 @@ const fileData = [
         name_bn: "কনটেক্সট মেনু রেজিস্ট্রি",
         badge_bn: "রেজিস্ট্রি ডিরেক্টরি রেফারেন্স",
         icon: "fa-solid fa-code",
-        path: "assets/Registry path of context menu.txt",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Registry%20path%20of%20context%20menu.txt",
         keywords: "registry path context menu background shell windows tweak",
         content: "Computer\\HKEY_CLASSES_ROOT\\Directory\\Background\\shell"
     },
@@ -429,7 +429,7 @@ const fileData = [
         name_bn: "ডিপ ক্লিন ও ক্যাশ পার্জার",
         badge_bn: "ক্যাশ ও টেম্প ফাইল ক্লিনার",
         icon: "fa-solid fa-broom",
-        path: "assets/scripts/clean-cache-purger.bat",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/clean-cache-purger.bat",
         keywords: "deep clean cache purger temp files prefetch thumbnail directx delivery optimization windows update dns bat script",
         readme: "## Overview\nOne-click deep maintenance batch utility to purge all redundant Windows junk, temp files, shader caches, and broken update artifacts without touching your personal documents.\n\n## Cleaned Areas\n- User & System `%temp%` folders.\n- Windows Prefetch cache.\n- DirectX, NVIDIA, and AMD Shader Cache (`DXCache`).\n- Windows Delivery Optimization & SoftwareDistribution download cache.\n- Explorer Thumbnail database & DNS resolver cache.",
         commands: [
@@ -445,7 +445,7 @@ const fileData = [
         name_bn: "গ্ল্যারি ইউটিলিটি প্রো",
         badge_bn: "সিস্টেম ক্লিনার ও স্পিডআপ",
         icon: "fa-solid fa-broom",
-        path: "assets/Glary Utility/Glary_Utilities_v5.211.0.240.exe",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Glary_Utilities_v5.211.0.240.exe",
         copyLabel: "Serial Key",
         copyText: "3788-61679-58286-4470",
         keywords: "cleaner optimizer registry disk maintenance speedup serial key",
@@ -459,7 +459,7 @@ const fileData = [
         name_bn: "গডমোড অ্যাডমিন প্যানেল ক্রিয়েটর",
         badge_bn: "মাস্টার কন্ট্রোল প্যানেল",
         icon: "fa-solid fa-sliders",
-        path: "assets/scripts/godmode-creator.bat",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/godmode-creator.bat",
         keywords: "godmode all tasks master admin panel control panel guid windows 10 11 batch bat shortcut",
         readme: "## Overview\nCreates a permanent desktop shortcut to the hidden Windows 'All Tasks' Master Control Panel containing over 200 centralized system administration settings.\n\n## Manual Creation Method\nCreate a new folder anywhere and name it exactly:\n`GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}`",
         commands: [
@@ -486,7 +486,7 @@ const fileData = [
         name_bn: "পাওয়ার ইউজার কনটেক্সট মেনু প্যাক",
         badge_bn: "পাওয়ার ইউজার রেজিস্ট্রি প্যাক",
         icon: "fa-solid fa-wand-magic-sparkles",
-        path: "assets/scripts/power-context-menu.reg",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/power-context-menu.reg",
         keywords: "context menu power user right click take ownership restart explorer command prompt godmode registry reg tweak",
         readme: "## Overview\nA clean, lightweight registry file that adds essential power-user shortcuts to the right-click desktop and folder context menus.\n\n## Added Shortcuts\n- **Take Ownership**: Gain instant administrative access to locked system files and folders.\n- **Restart Explorer**: Instantly restart the Windows shell if icons or the taskbar freeze.\n- **Open PowerShell as Admin**: One-click elevated terminal in the current directory.\n- **GodMode Panel**: Direct access to all 200+ Windows master settings."
     },
@@ -498,7 +498,7 @@ const fileData = [
         name_bn: "রেভো আনইনস্টলার প্রো",
         badge_bn: "ডিপ সফটওয়্যার আনইনস্টলার",
         icon: "fa-solid fa-eraser",
-        path: "assets/Revo Uninstaller Pro 5.4.3 FINAL/Revo Uninsataller.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Revo%20Uninsataller.rar",
         copyLabel: "License Path",
         copyText: "C:\\ProgramData\\VS Revo Group\\Revo Uninstaller Pro\\",
         keywords: "revo uninstaller deep clean remove registry remnant apps",
@@ -512,7 +512,7 @@ const fileData = [
         name_bn: "রাইট ক্লিক রিপেয়ার কোড",
         badge_bn: "এক্সপ্লোরার কনটেক্সট মেনু ফিক্স",
         icon: "fa-solid fa-wrench",
-        path: "assets/Right click repair code.txt",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Right%20click%20repair%20code.txt",
         keywords: "right click context menu explorer fix guid clsid repair",
         content: "shell:::{80F3F1D5-FECA-45F3-BC32-752C152E456E}"
     },
@@ -524,7 +524,7 @@ const fileData = [
         name_bn: "উইন ১০ রাইট ক্লিক মেনু",
         badge_bn: "ক্লাসিক কনটেক্সট মেনু",
         icon: "fa-solid fa-window-restore",
-        path: "assets/Windows 10 Right click menu/Old-Right-Click-Menu-WIndows-11.zip",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Old-Right-Click-Menu-WIndows-11.zip",
         keywords: "windows 10 classic context menu windows 11 restore old right click",
         readme: "## Overview\nRestores the classic Windows 10 right-click context menu in Windows 11."
     },
@@ -536,8 +536,8 @@ const fileData = [
         name_bn: "উইন ১১ রাউন্ডেড কার্সার",
         badge_bn: "HD রাউন্ডেড কার্সার সেট",
         icon: "fa-solid fa-arrow-pointer",
-        path: "assets/Windows 11 rounded Cursor/windows_11 cursors.zip",
-        previewImage: "assets/Windows 11 rounded Cursor/cursor-preview.webp",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/windows_11%20cursors.zip",
+        previewImage: "assets/site-images/cursor-preview.webp",
         keywords: "cursor mouse rounded theme pointers win11 customization",
         readme: "## Overview\nClean rounded high-DPI cursor set for Windows desktop customization."
     },
@@ -549,7 +549,7 @@ const fileData = [
         name_bn: "উইন ১১ সার্চ ও ওয়েব ব্লোট রিমুভার",
         badge_bn: "স্টার্ট মেনু সার্চ ফিক্স",
         icon: "fa-solid fa-shield-halved",
-        path: "assets/scripts/disable-web-search.reg",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/disable-web-search.reg",
         keywords: "windows 11 disable bing search web search cortana bloat privacy start menu reg registry tweak speedup",
         readme: "## Overview\nDisables Bing web search results, Cortana consent, search highlights, and sponsored suggested apps in the Windows 11 Start Menu, making searches instant and completely offline.\n\n## Instructions\n1. Download the `.reg` file.\n2. Double-click to import into Windows Registry.\n3. Restart `explorer.exe` or reboot your PC."
     },
@@ -565,7 +565,7 @@ const fileData = [
         name_bn: "ক্রিস্টালডিস্কইনফো (CrystalDiskInfo)",
         badge_bn: "S.M.A.R.T. ড্রাইভ হেলথ মনিটর",
         icon: "fa-solid fa-hard-drive",
-        path: "assets/CrystalDiskInfo/CDI.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/CDI.rar",
         keywords: "smart hdd ssd nvme disk health temperature telemetry crystal",
         readme: "## Overview\nA professional HDD/SSD health monitoring tool that displays detailed hardware information and S.M.A.R.T. status to prevent data loss."
     },
@@ -577,7 +577,7 @@ const fileData = [
         name_bn: "ক্রিস্টালডিস্কমার্ক (CrystalDiskMark)",
         badge_bn: "ডিস্ক স্পিড বেঞ্চমার্ক",
         icon: "fa-solid fa-gauge-high",
-        path: "assets/CrystalDiskMark/CDM.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/CDM.rar",
         keywords: "benchmark speed read write test storage ssd hdd nvme",
         readme: "## Overview\nThe industry-standard disk benchmark utility to measure sequential and random read/write speeds of storage drives."
     },
@@ -589,7 +589,7 @@ const fileData = [
         name_bn: "ইজআস ডাটা রিকভারি",
         badge_bn: "ডিপ ফাইল রিকভারি",
         icon: "fa-solid fa-database",
-        path: "assets/EaseUS_Data_Recovery_Wizard_Technician_12.8.0_Multilingual/EaseUS_Data_Recovery_Wizard_Technician_12.8.0_Multilingual.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/EaseUS_Data_Recovery_Wizard_Technician_12.8.0_Multilingual.rar",
         keywords: "data recovery restore lost deleted formatted raw partition files",
         readme: "## Overview\nAdvanced data recovery software for technicians to retrieve lost, deleted, or formatted files from any storage device."
     },
@@ -601,7 +601,7 @@ const fileData = [
         name_bn: "ইজআস পার্টিশন মাস্টার",
         badge_bn: "ডিস্ক ও পার্টিশন ম্যানেজার",
         icon: "fa-solid fa-layer-group",
-        path: "assets/EaseUS_Partition_Master_13.0_Technician_Edition/EPM Technical Edition.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/EPM%20Technical%20Edition.rar",
         keywords: "partition master disk manager format resize clone mbr gpt 4k alignment",
         readme: "## Overview\nA comprehensive disk management tool for partitioning, merging, and optimizing hard drives and SSDs."
     },
@@ -629,7 +629,7 @@ const fileData = [
         name_bn: "পিকচার রিকভারি সফটওয়্যার",
         badge_bn: "PhotoRec / TestDisk কার্ভিং",
         icon: "fa-solid fa-image",
-        path: "assets/Picture Recovery Software/testdisk-7.3-WIP.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/testdisk-7.3-WIP.rar",
         keywords: "photorec testdisk data recovery image photo file carving open source",
         readme: "## Overview\nOpen-source data and image recovery tool to carve and recover lost files from corrupt storage."
     },
@@ -661,7 +661,7 @@ const fileData = [
         name_bn: "কাস্টম CRU ইস্পোর্টস রেজোলিউশন প্যাক",
         badge_bn: "ইস্পোর্টস রেজোলিউশন প্যাক",
         icon: "fa-solid fa-tv",
-        path: "assets/scripts/cru-esports-resolutions.txt",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/cru-esports-resolutions.txt",
         keywords: "cru custom resolution utility esports stretched res pubg steam 1728x1080 1440x1080 2304x1440 1920x1440 16:10 4:3 144hz 240hz 165hz 75hz 60hz 120hz 360hz fov competitive gaming",
         readme: "## Overview\nComplete competitive esports stretched resolution matrix and guide for Custom Resolution Utility (CRU). Includes pro-tested aspect ratios, native monitor equivalents, and timing profiles.\n\n## 1080p Monitor Profiles (16:9 Native)\n- **1728 x 1080 (16:10 Stretched)**: The PUBG Steam Pro Meta. Widens character hitboxes by ~10% with almost zero vertical FOV reduction and crystal clear crosshair dot.\n- **1440 x 1080 (4:3 Stretched)**: CS2 / Valorant classic stretched resolution for maximum target width.\n- **1600 x 1080 (4:3 Wide)**: Balanced hybrid profile.\n- **1280 x 960 (4:3 Classic)**: Maximum FPS boost for low-spec setups.\n\n## 1440p (2K) Monitor Profiles (16:9 Native)\n- **2304 x 1440 (16:10 Stretched)**: Direct 1:1 mathematical equivalent of 1728x1080 on 1440p panels.\n- **1920 x 1440 (4:3 Stretched)**: True 4:3 stretched resolution for QHD 2K monitors.\n\n## Supported Refresh Rates\nEvery resolution profile supports **60Hz, 75Hz, 120Hz, 144Hz, 165Hz, 240Hz, 280Hz, and 360Hz**.\n\n## GPU Scaling Setup (To Remove Black Bars)\n1. Open NVIDIA Control Panel -> **Adjust desktop size and position**.\n2. Set Scaling Mode to **Full-screen**.\n3. Set Perform scaling on: **GPU** (or Display).\n4. Check **Override the scaling mode set by games and programs**.\n*(AMD users: Enable 'GPU Scaling' and set Scaling Mode to 'Full panel')*"
     },
@@ -673,7 +673,7 @@ const fileData = [
         name_bn: "কাস্টম রেজোলিউশন ইউটিলিটি (CRU)",
         badge_bn: "ডিসপ্লে ও রিফ্রেশ রেট টিউনিং",
         icon: "fa-solid fa-tv",
-        path: "assets/cru-1.5.3/CRU.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/CRU.rar",
         keywords: "cru toastyx custom resolution refresh rate monitor overclock edid freesync",
         readme: "## Overview\nConfigure custom monitor resolutions, overclock display refresh rates, and tweak EDID display timings."
     },
@@ -685,7 +685,7 @@ const fileData = [
         name_bn: "পিসি অপ্টিমাইজেশন গাইড",
         badge_bn: "পাওয়ারশেল পারফরম্যান্স গাইড",
         icon: "fa-solid fa-bolt-lightning",
-        path: "assets/Pc optimisation.txt",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Pc%20optimisation.txt",
         keywords: "powershell tweaks debloat sfc dism dynamic tick power plan optimization scripts",
         readme: "## Instructions\nRun PowerShell as Administrator and execute the commands below.",
         commands: [
@@ -706,7 +706,7 @@ const fileData = [
         name_bn: "র‍্যাম স্ট্যান্ডবাই মেমরি ফ্লাশার",
         badge_bn: "স্ট্যান্ডবাই র‍্যাম ক্লিনার",
         icon: "fa-solid fa-memory",
-        path: "assets/scripts/ram-cache-flusher.bat",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/ram-cache-flusher.bat",
         keywords: "ram standby memory empty standby list auto flusher working set memory leak stutter fix vbs bat script",
         readme: "## Overview\nFixes stuttering in modern games caused by Windows caching files in Standby RAM without releasing them in time when memory is needed.\n\n## Instructions\n1. Run the `.bat` script as Administrator before starting memory-heavy games or video editing sessions.\n2. Instantly releases all cached Standby RAM back into Free RAM without restarting your system.",
         commands: [
@@ -737,7 +737,7 @@ const fileData = [
         name_bn: "আলটিমেট উইন্ডোজ ল্যাটেন্সি ফিক্সার",
         badge_bn: "ল্যাটেন্সি ও স্টাটার ফিক্সার",
         icon: "fa-solid fa-bolt-lightning",
-        path: "assets/scripts/latency-optimizer.bat",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/latency-optimizer.bat",
         keywords: "latency microstutter fix bcdedit msi mode timer resolution disabledynamictick dpc latency gaming fps bat batch script",
         readme: "## Overview\nA curated high-performance batch script that eliminates micro-stutters, stabilizes kernel timer resolution, and unlocks maximum GPU scheduling priority for competitive esports.\n\n## Optimizations Applied\n- Disables Windows Dynamic Tick to prevent timer frequency jitter.\n- Disables synthetic HPET timer overhead.\n- Eliminates Network Throttling Index for low-ping gaming.\n- Duplicates and enables the Windows Ultimate Performance power scheme.",
         commands: [
@@ -759,7 +759,7 @@ const fileData = [
         name_bn: "অটোরানস (Autoruns)",
         badge_bn: "স্টার্টআপ ও বুট মনিটর",
         icon: "fa-solid fa-bolt",
-        path: "assets/Autoruns/Autoruns.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/Autoruns.rar",
         keywords: "startup boot autostart sysinternals windows microsoft services drivers tasks",
         readme: "## Overview\nStartup monitor utility showing all programs, services, drivers, and scheduled tasks configured to run during system bootup.\n\n## Instructions\n1. Extract the RAR archive.\n2. Run `autoruns64.exe` as Administrator."
     },
@@ -787,7 +787,7 @@ const fileData = [
         name_bn: "হিটম্যানপ্রো স্ক্যানার",
         badge_bn: "সেকেন্ড-অপিনিয়ন ক্লাউড স্ক্যানার",
         icon: "fa-solid fa-bug-slash",
-        path: "assets/HitmanPro_3.8.28_Build_324/HitmanPro 3.8.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/HitmanPro%203.8.rar",
         keywords: "antivirus malware scanner cloud second opinion security virus trojan",
         readme: "## Overview\nCloud-based secondary malware and threat scanner that operates alongside your primary antivirus."
     },
@@ -813,7 +813,7 @@ const fileData = [
         name_bn: "প্রসেস এক্সপ্লোরার",
         badge_bn: "Sysinternals টাস্ক ম্যানেজার",
         icon: "fa-solid fa-list-check",
-        path: "assets/ProcessExplorer/PE.rar",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/PE.rar",
         keywords: "process explorer task manager sysinternals handles dll cpu gpu",
         readme: "## Overview\nSysinternals Process Explorer: advanced task manager showing active DLLs, file handles, and hardware statistics."
     },
@@ -825,7 +825,7 @@ const fileData = [
         name_bn: "প্রসেস মনিটর",
         badge_bn: "রিয়েল-টাইম রেজিস্ট্রি ও ফাইল I/O",
         icon: "fa-solid fa-desktop",
-        path: "assets/ProcessMonitor.zip",
+        path: "https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/ProcessMonitor.zip",
         keywords: "procmon process monitor sysinternals registry file thread real-time",
         readme: "## Overview\nProcess Monitor is an advanced monitoring tool for Windows that shows real-time file system, Registry, and process/thread activity."
     },
@@ -1181,7 +1181,7 @@ function safeAssetUrl(url) {
             </a>
         `;
     } else if (item.path && item.path.startsWith('http')) {
-        const isDirectArchive = item.download || /\.(zip|rar|7z|tar|gz|exe|apk|iso)$/i.test(item.path.split('?')[0]);
+        const isDirectArchive = item.download || /\.(zip|rar|7z|tar|gz|exe|apk|iso|bat|reg|ahk|txt)$/i.test(item.path.split('?')[0]);
         const btnLabel = isDirectArchive 
             ? (translations[currentLang] && translations[currentLang].btn_download_file ? translations[currentLang].btn_download_file : 'Download File')
             : (translations[currentLang] && translations[currentLang].btn_open_resource ? translations[currentLang].btn_open_resource : 'Open Resource');

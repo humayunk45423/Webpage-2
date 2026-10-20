@@ -23,7 +23,7 @@ const CORE_ASSETS = [
     './assets/site-images/Name logo.svg',
     './assets/site-images/Name%20logo.svg',
     './assets/site-images/projects-meta.json',
-    './assets/Windows 11 rounded Cursor/cursor-preview.webp'
+    './assets/site-images/cursor-preview.webp'
 ];
 
 self.addEventListener('install', (event) => {

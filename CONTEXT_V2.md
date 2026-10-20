@@ -128,6 +128,21 @@
   * Purged `Poppins` from `404.html`.
   * Replaced `JetBrains Mono` in `files.html` with system monospace (`'Consolas', 'Courier New', monospace`).
 
+### Phase 9: Cloudflare R2 Asset Offloading & 93% Repo Weight Reduction (Oct 21)
+* **Offloaded all heavy Software HQ downloadable assets, scripts, and utilities to Cloudflare R2**:
+  * Target Bucket: `software-hq` (APAC region).
+  * Public Endpoint: `https://pub-99ac10b0e7f146fb9cde114019bb15b1.r2.dev/`
+  * Complete safety backup preserved locally in:
+    `F:\Me & My Docs\1. Recent Projects\Webpage-2 extra files\assets-backup-pre-r2\` (74 files, 192.64 MB).
+  * 31 assets/scripts uploaded directly via S3 SigV4 API with 100% success rate (HTTP 200 OK verified on all endpoints).
+* **Codebase & Config Updates**:
+  * `files.js`: Updated all 30 utility entries to point to fast Cloudflare R2 public URLs; enhanced `isDirectArchive` regex to natively trigger downloads for `.bat`, `.reg`, `.ahk`, and `.txt` files.
+  * `sw.js`: Cached asset path updated to `./assets/site-images/cursor-preview.webp`.
+  * `README.md`: Updated asset tables to reference Cloudflare R2.
+* **Results**:
+  * **Working tree dropped from 193.33 MB to ~13 MB (93.3% reduction)**.
+  * Local project directory is now featherweight and contains only source code + optimized WebP site graphics.
+
 ---
 
 ## 5. Current Modified Files (Ready for Commit)
@@ -135,11 +150,14 @@
 ```
  M 404.html    -> Removed Poppins; unified with Manrope & Hind Siliguri
  M files.html  -> Added font preloads, beacon, replaced JetBrains Mono, display=swap
- M files.js    -> Added font pre-warming and async font-ready guard in toggleLanguage
+ M files.js    -> Migrated all Software HQ downloads to Cloudflare R2; font pre-warming & guard
  M index.html  -> Added font preloads, beacon, display=swap, BanglaOneClean
  M loader.css  -> Added BanglaOneClean to CAD preloader typography
  M script.js   -> Added font pre-warming and async font-ready guard in toggleLanguage
  M style.css   -> Added @font-face BanglaOneClean, updated Bangla typography stacks
+ M sw.js       -> Updated cursor-preview path to assets/site-images/
+ M README.md   -> Updated Software HQ asset sources to Cloudflare R2
+ D assets/...  -> Removed ~180 MB of binary archives offloaded to Cloudflare R2
 ```
 
 ---
@@ -148,3 +166,4 @@
 When opening your new conversation (v2), you can simply provide or reference this document:
 `C:\Users\Humayoun\Desktop\Webpage-2_Context_Master_v2.md`
 The agent will immediately have full awareness of the entire 16-day project history, all 247 messages of context, all rules, and current unstaged file states.
+
