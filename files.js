@@ -4,6 +4,13 @@
  */
 
 
+// Pre-warm Hind Siliguri font into browser memory immediately
+if (typeof document !== 'undefined' && document.fonts) {
+    document.fonts.load('400 1em "Hind Siliguri"');
+    document.fonts.load('600 1em "Hind Siliguri"');
+    document.fonts.load('700 1em "Hind Siliguri"');
+}
+
 // =========================================================================
 // Bilingual Translation Dictionary for Software HQ
 // =========================================================================
@@ -1502,9 +1509,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const toggleLanguage = () => {
+    const toggleLanguage = async () => {
         const cur = root.getAttribute('data-lang') || 'en';
         const newLang = cur === 'bn' ? 'en' : 'bn';
+        // If switching to Bangla, ensure Hind Siliguri is completely ready before rendering
+        if (newLang === 'bn' && document.fonts && !document.fonts.check('1em "Hind Siliguri"')) {
+            try {
+                await Promise.all([
+                    document.fonts.load('400 1em "Hind Siliguri"'),
+                    document.fonts.load('600 1em "Hind Siliguri"'),
+                    document.fonts.load('700 1em "Hind Siliguri"')
+                ]);
+            } catch (e) {}
+        }
         applyLanguage(newLang);
     };
 

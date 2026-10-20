@@ -14,6 +14,11 @@
         var savedLang = localStorage.getItem('portfolio-lang') || 'en';
         document.documentElement.setAttribute('data-lang', savedLang);
         document.documentElement.setAttribute('lang', savedLang);
+        if (document.fonts) {
+            document.fonts.load('400 1em "Hind Siliguri"');
+            document.fonts.load('600 1em "Hind Siliguri"');
+            document.fonts.load('700 1em "Hind Siliguri"');
+        }
         try {
             var navEntries = window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation');
             var isReload = navEntries && navEntries.length > 0 ? navEntries[0].type === 'reload' : (window.performance && performance.navigation && performance.navigation.type === 1);
@@ -261,10 +266,14 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=optional" rel="stylesheet">
+    <!-- Preload Hind Siliguri Bengali Font Subsets (Eliminates 0.3s lazy-download FOUT delay) -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/hindsiliguri/v14/ijwTs5juQtsyLLR5jN4cxBEoTI7ax9k0.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/hindsiliguri/v14/ijwOs5juQtsyLLR5jN4cxBEoREP-0vQVKxGv.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/hindsiliguri/v14/ijwOs5juQtsyLLR5jN4cxBEoRCf_0vQVKxGv.woff2" as="font" type="font/woff2" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=optional" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     </noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         media="print" onload="this.media='all'">
@@ -846,7 +855,7 @@
         }
 
         .doc-key-code {
-            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-family: 'Consolas', 'Courier New', monospace;
             font-size: 1rem;
             font-weight: 700;
             color: var(--text);
@@ -1080,7 +1089,7 @@
         }
 
         .code-box code {
-            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-family: 'Consolas', 'Courier New', monospace;
             font-size: 0.88rem;
             line-height: 1.5;
             color: var(--text);
@@ -1160,7 +1169,7 @@
 
         .copy-card code {
             display: block;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Consolas', 'Courier New', monospace;
             font-size: 0.85rem;
             color: var(--text);
             margin-bottom: 0.75rem;
@@ -1253,7 +1262,7 @@
             color: var(--text);
             padding: 1.5rem;
             border-radius: 1rem;
-            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-family: 'Consolas', 'Courier New', monospace;
             font-size: 0.95rem;
             border: 1px solid var(--line);
             margin: 1.5rem 0;
@@ -1731,7 +1740,7 @@
             -webkit-user-select: text !important;
         }
 
-        /* Harmonized Bengali Typography: Apply Tool Font ("Hind Siliguri") to Category & UI elements */
+        /* Harmonized Bengali Typography: Apply Tool Font ("Hind Siliguri" with clean 1) to Category & UI elements */
         html[data-lang="bn"] button,
         html[data-lang="bn"] .pill,
         html[data-lang="bn"] .dropdown-btn,
@@ -1747,7 +1756,7 @@
         html[data-lang="bn"] .category-chip,
         html[data-lang="bn"] .doc-key-label,
         html[data-lang="bn"] .copy-toast {
-            font-family: 'Hind Siliguri', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-family: 'BanglaOneClean', 'Hind Siliguri', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
         }
     </style>
     <!-- Instant Page Transitions: Chromium Speculation Rules -->
@@ -1783,7 +1792,7 @@
   place-items: center;
   background: var(--sl-bg);
   color: var(--sl-fg);
-  font-family: var(--font-primary, 'Manrope', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  font-family: var(--font-primary, 'BanglaOneClean', 'Manrope', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
   opacity: 1;
   visibility: visible;
   transition: opacity 0.5s var(--sl-ease), visibility 0s 0.5s;
@@ -2000,15 +2009,29 @@ html[data-theme="dark"] .sl-brand-name {
   line-height: 1.2;
 }
 
+/* Clean standard fallback exclusively for Bengali numeral "১" (U+09E7) without extra font downloads */
+@font-face {
+  font-family: 'BanglaOneClean';
+  src: local('Nirmala UI'),
+       local('Noto Sans Bengali'),
+       local('Kohinoor Bangla'),
+       local('Bangla Sangam MN'),
+       local('SolaimanLipi'),
+       local('Kalpurush'),
+       local('Segoe UI'),
+       local('Vrinda');
+  unicode-range: U+09E7;
+}
+
 /* Authentic Bengali Script Typography Standards (Preserves Ligatures, Vowels & Scale) */
 html[data-lang="bn"] #site-loader,
 html[lang="bn"] #site-loader {
-  font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'BanglaOneClean', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 html[data-lang="bn"] .sl-brand-name,
 html[lang="bn"] .sl-brand-name {
-  font-family: 'Hind Siliguri', sans-serif !important;
+  font-family: 'BanglaOneClean', 'Hind Siliguri', sans-serif !important;
   font-size: 1.76rem;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -2017,7 +2040,7 @@ html[lang="bn"] .sl-brand-name {
 
 html[data-lang="bn"] .sl-status-text,
 html[lang="bn"] .sl-status-text {
-  font-family: 'Hind Siliguri', sans-serif !important;
+  font-family: 'BanglaOneClean', 'Hind Siliguri', sans-serif !important;
   font-size: 0.94rem;
   font-weight: 500;
   letter-spacing: normal !important; /* CRITICAL: Must be normal to prevent Brahmic script conjunct separation */
@@ -2481,6 +2504,12 @@ html.sl-lock {
 })();
 
     </script>
+    <!-- Invisible Font Pre-warm Beacon: Ensures Hind Siliguri is pre-rendered in memory for zero-lag toggle -->
+    <div aria-hidden="true" style="position:fixed;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;z-index:-9999;">
+        <span style="font-family:'Hind Siliguri';font-weight:400;">বাংলা হুমায়ূন কবির ১</span>
+        <span style="font-family:'Hind Siliguri';font-weight:600;">বাংলা হুমায়ূন কবির ১</span>
+        <span style="font-family:'Hind Siliguri';font-weight:700;">বাংলা হুমায়ূন কবির ১</span>
+    </div>
 </body>
 
 </html>

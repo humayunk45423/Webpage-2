@@ -3,6 +3,13 @@
  * Optimized for maximum performance, bilingual support (EN/BN), and smooth transitions.
  */
 
+// Pre-warm Hind Siliguri font into browser memory immediately
+if (typeof document !== 'undefined' && document.fonts) {
+    document.fonts.load('400 1em "Hind Siliguri"');
+    document.fonts.load('600 1em "Hind Siliguri"');
+    document.fonts.load('700 1em "Hind Siliguri"');
+}
+
 // Translation Dictionary for Full Bilingual Support
 const translations = {
     en: {
@@ -478,8 +485,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 60);
     };
 
-    const toggleLanguage = () => {
+    const toggleLanguage = async () => {
         const newLang = activeLang === 'bn' ? 'en' : 'bn';
+        // If switching to Bangla, ensure Hind Siliguri is completely ready before rendering
+        if (newLang === 'bn' && document.fonts && !document.fonts.check('1em "Hind Siliguri"')) {
+            try {
+                await Promise.all([
+                    document.fonts.load('400 1em "Hind Siliguri"'),
+                    document.fonts.load('600 1em "Hind Siliguri"'),
+                    document.fonts.load('700 1em "Hind Siliguri"')
+                ]);
+            } catch (e) {}
+        }
         applyLanguage(newLang);
     };
 

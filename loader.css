@@ -4,6 +4,19 @@
    Paints synchronously before paint; 0 CLS, 60fps GPU transforms
    ========================================================================== */
 
+@font-face {
+  font-family: 'BanglaOneClean';
+  src: local('Nirmala UI'),
+       local('Noto Sans Bengali'),
+       local('Kohinoor Bangla'),
+       local('Bangla Sangam MN'),
+       local('SolaimanLipi'),
+       local('Kalpurush'),
+       local('Segoe UI'),
+       local('Vrinda');
+  unicode-range: U+09E7;
+}
+
 #site-loader {
   --sl-bg: #ffffff;
   --sl-fg: #050505;
@@ -19,7 +32,7 @@
   place-items: center;
   background: var(--sl-bg);
   color: var(--sl-fg);
-  font-family: var(--font-primary, 'Manrope', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  font-family: var(--font-primary, 'BanglaOneClean', 'Manrope', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
   opacity: 1;
   visibility: visible;
   transition: opacity 0.5s var(--sl-ease), visibility 0s 0.5s;
@@ -239,12 +252,12 @@ html[data-theme="dark"] .sl-brand-name {
 /* Authentic Bengali Script Typography Standards (Preserves Ligatures, Vowels & Scale) */
 html[data-lang="bn"] #site-loader,
 html[lang="bn"] #site-loader {
-  font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'BanglaOneClean', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 html[data-lang="bn"] .sl-brand-name,
 html[lang="bn"] .sl-brand-name {
-  font-family: 'Hind Siliguri', sans-serif !important;
+  font-family: 'BanglaOneClean', 'Hind Siliguri', sans-serif !important;
   font-size: 1.76rem;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -253,7 +266,7 @@ html[lang="bn"] .sl-brand-name {
 
 html[data-lang="bn"] .sl-status-text,
 html[lang="bn"] .sl-status-text {
-  font-family: 'Hind Siliguri', sans-serif !important;
+  font-family: 'BanglaOneClean', 'Hind Siliguri', sans-serif !important;
   font-size: 0.94rem;
   font-weight: 500;
   letter-spacing: normal !important; /* CRITICAL: Must be normal to prevent Brahmic script conjunct separation */

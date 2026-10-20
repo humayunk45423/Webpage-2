@@ -117,15 +117,33 @@
             transition: background-color 0.2s ease, color 0.2s ease;
         }
 
-        /* Strict Dual-Font System: Manrope for English, Hind Siliguri for Bangla */
+        /* Clean standard fallback exclusively for Bengali numeral "১" (U+09E7) without extra font downloads */
+        @font-face {
+            font-family: 'BanglaOneClean';
+            src: local('Nirmala UI'),
+                 local('Noto Sans Bengali'),
+                 local('Kohinoor Bangla'),
+                 local('Bangla Sangam MN'),
+                 local('SolaimanLipi'),
+                 local('Kalpurush'),
+                 local('Segoe UI'),
+                 local('Vrinda');
+            unicode-range: U+09E7;
+        }
+
+        /* Strict Dual-Font System: Manrope for English, Hind Siliguri for Bangla (with clean 1) */
         html[data-lang="en"],
         html[data-lang="en"] body {
             font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         html[data-lang="bn"],
-        html[data-lang="bn"] body {
-            font-family: 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        html[data-lang="bn"] body,
+        html[data-lang="bn"] button,
+        html[data-lang="bn"] input,
+        html[data-lang="bn"] textarea,
+        html[data-lang="bn"] select {
+            font-family: 'BanglaOneClean', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         /* Modern Scrollbar */
@@ -686,10 +704,10 @@
             letter-spacing: 0.04em !important;
         }
 
-        /* Bangla Language Mode Typography (authentic Bengali font) */
+        /* Bangla Language Mode Typography (authentic Bengali font with clean 1) */
         html[data-lang="bn"] .lang-toggle,
         html[data-lang="bn"] .lang-toggle .toggle-opt {
-            font-family: 'Hind Siliguri', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+            font-family: 'BanglaOneClean', 'Hind Siliguri', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
             font-size: 11px !important;
             font-weight: 700 !important;
             letter-spacing: 0.01em !important;
