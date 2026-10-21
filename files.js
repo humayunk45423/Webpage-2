@@ -1825,6 +1825,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navigator.serviceWorker.register('./sw.js').catch(() => {});
         });
     }
+});
 
     // =========================================================================
     // Antigravity Hardware Capability & Performance Governor
@@ -1992,7 +1993,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     })();
-});
 
 window.copyContact = (text, btn) => {
     const updateBtnUi = () => {

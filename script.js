@@ -1460,6 +1460,8 @@ document.addEventListener('DOMContentLoaded', () => {
             updateGliderSync();
             if (window.innerWidth >= 1024) startLoop();
         }, 100);
+    }
+});
     // =========================================================================
     // 12. Antigravity Hardware Capability & Performance Governor
     // =========================================================================
@@ -1631,7 +1633,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     })();
-});
 
 // Developer Console Welcome Message
 console.log(
