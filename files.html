@@ -280,1517 +280,10 @@
 
     <!-- Shared Style -->
     <link rel="stylesheet" href="style.css?v=29">
+    <link rel="stylesheet" href="files.css?v=2">
     <meta name="format-detection" content="telephone=no">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
-    <!-- Instant Page Transitions: Chromium Speculation Rules -->
-    <script type="speculationrules">
-    {
-      "prerender": [
-        {
-          "source": "list",
-          "urls": ["index.html"],
-          "eagerness": "moderate"
-        }
-      ]
-    }
-    </script>
-
-    <style>
-        /* Cross-Document View Transitions */
-        @view-transition {
-            navigation: auto;
-        }
-        #siteHeader {
-            view-transition-name: site-header;
-        }
-
-        /* Symmetrical Layout */
-        .files-layout {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 0.5rem;
-            min-height: 80vh;
-        }
-
-        .explorer-header {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .header-top {
-            text-align: left;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: var(--vibrant-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 4px;
-            background: var(--vibrant-gradient);
-            border-radius: 2px;
-            margin-top: 0.25rem;
-        }
-
-        .controls-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            width: 100%;
-        }
-
-        .search-box {
-            flex: 1;
-            max-width: 400px;
-            margin: 0 !important;
-        }
-
-        .category-pills {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin: 0 !important;
-            flex-wrap: nowrap;
-            padding: 0.2rem 0;
-        }
-
-        .pill {
-            padding: 0.65rem 1.25rem;
-            white-space: nowrap;
-            font-size: 0.85rem;
-            background: var(--surface);
-            box-shadow: inset 0 0 0 1px var(--line);
-            border-radius: 999px;
-            color: var(--muted);
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s var(--bezier);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            backdrop-filter: blur(10px);
-            border: 0;
-        }
-
-        .pill:hover {
-            box-shadow: inset 0 0 0 1px var(--accent-line);
-            color: var(--text);
-            transform: translateY(-3px);
-        }
-
-        .pill.active {
-            background: var(--vibrant-gradient);
-            color: var(--accent-ink);
-            box-shadow: 0 10px 20px var(--soft);
-            border: 0;
-        }
-
-        /* Category Dropdown */
-        .category-dropdown-wrapper {
-            position: relative;
-            display: inline-flex;
-        }
-
-        .dropdown-btn {
-            gap: 0.6rem !important;
-        }
-
-        .dropdown-btn .chevron-icon {
-            font-size: 0.75rem;
-            transition: transform 0.3s var(--bezier);
-            opacity: 0.75;
-        }
-
-        .dropdown-btn[aria-expanded="true"] .chevron-icon {
-            transform: rotate(180deg);
-        }
-
-        .category-dropdown-menu {
-            position: absolute;
-            top: calc(100% + 0.6rem);
-            right: 0;
-            min-width: 250px;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 1.25rem;
-            padding: 0.45rem;
-            box-shadow: 0 20px 45px -10px var(--soft), 0 0 0 1px rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-            gap: 0.25rem;
-            animation: dropdownFadeIn 0.25s var(--bezier);
-        }
-
-        .category-dropdown-menu.show {
-            display: flex;
-        }
-
-        @keyframes dropdownFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-8px) scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.7rem 0.95rem;
-            border-radius: 0.85rem;
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.2s var(--bezier);
-            width: 100%;
-        }
-
-        .dropdown-item i {
-            width: 1.25rem;
-            text-align: center;
-            color: var(--accent);
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-
-        .dropdown-item:hover {
-            background: var(--bg2);
-            color: var(--accent);
-            transform: translateX(3px);
-        }
-
-        .dropdown-item.active {
-            background: var(--vibrant-gradient);
-            color: var(--accent-ink);
-            font-weight: 700;
-        }
-
-        .dropdown-item.active i {
-            color: var(--accent-ink);
-        }
-
-        /* Views */
-        #explorerView {
-            display: none;
-            animation: fastFade 0.3s ease-out;
-            width: 100%;
-        }
-
-        #detailView {
-            display: none;
-            animation: slideUp 0.5s var(--bezier);
-            width: 100%;
-        }
-
-        #explorerView.active,
-        #detailView.active {
-            display: block;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fastFade {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Explorer Mode */
-        .file-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.15rem;
-            position: relative;
-            overflow: visible;
-        }
-
-        .file-card {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 1.75rem;
-            padding: 1.25rem;
-            transition: transform 0.4s var(--bezier), background 0.4s var(--bezier), box-shadow 0.4s var(--bezier), border-color 0.4s var(--bezier);
-            cursor: pointer;
-            position: relative;
-            z-index: 1;
-            backdrop-filter: blur(10px);
-        }
-
-        .file-card:hover {
-            transform: translateY(-8px);
-            background: var(--bg2);
-            border-color: var(--accent);
-            box-shadow: 0 25px 50px -10px var(--soft), 0 0 30px -5px var(--soft);
-            z-index: 10;
-        }
-
-        .file-info {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-        }
-
-        .group-header {
-            grid-column: 1 / -1;
-            margin: 1.75rem 0 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            width: 100%;
-        }
-
-        .group-title {
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            white-space: nowrap;
-        }
-
-        .group-title i {
-            font-size: 1.15rem;
-            color: var(--accent);
-        }
-
-        .group-count {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--muted);
-            background: var(--surface);
-            border: 1px solid var(--line);
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            white-space: nowrap;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-        }
-
-        .file-icon {
-            width: 3.5rem;
-            height: 3.5rem;
-            flex-shrink: 0;
-            background: var(--vibrant-gradient);
-            border-radius: 1.15rem;
-            display: grid;
-            place-items: center;
-            font-size: 1.5rem;
-            color: var(--accent-ink);
-            box-shadow: 0 8px 20px -5px var(--soft);
-            transition: all 0.4s var(--bezier);
-        }
-
-        .file-card:hover .file-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .file-meta {
-            min-width: 0;
-            flex: 1;
-        }
-
-        .file-meta h3 {
-            margin: 0 0 0.25rem;
-            font-size: 1.1rem;
-            font-weight: 800;
-        }
-
-        .file-meta span {
-            font-size: 0.8rem;
-            color: var(--muted);
-            font-weight: 600;
-        }
-
-        /* Detail View Mode */
-        .detail-mode .explorer-header {
-            display: none;
-        }
-
-        .detail-page {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 999px;
-            background: var(--surface);
-            color: var(--text);
-            font-weight: 700;
-            margin-bottom: 3rem;
-            cursor: pointer;
-            transition: all 0.3s var(--bezier);
-            box-shadow: inset 0 0 0 1px var(--line);
-            border: 0;
-            outline: none;
-        }
-
-        .back-btn:hover {
-            box-shadow: inset 0 0 0 1px var(--accent-line), var(--shadow);
-            color: var(--accent);
-            transform: translateX(-5px);
-        }
-
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        .detail-grid > * {
-            min-width: 0;
-        }
-
-        .detail-hero-column {
-            position: sticky;
-            top: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            padding: 2rem;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 2.5rem;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow2);
-            text-align: center;
-        }
-
-        .detail-hero-info {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .detail-icon {
-            width: 80px;
-            height: 80px;
-            flex-shrink: 0;
-            background: var(--vibrant-gradient);
-            color: var(--accent-ink);
-            border-radius: 1.75rem;
-            display: grid;
-            place-items: center;
-            font-size: 2.2rem;
-            box-shadow: 0 20px 40px var(--soft);
-            margin: 0 auto 0.5rem;
-        }
-
-        .detail-hero-info h1 {
-            font-size: 1.75rem;
-            font-weight: 900;
-            margin: 0 0 0.5rem;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-
-        .version-badge {
-            display: inline-flex;
-            padding: 0.35rem 0.85rem;
-            border-radius: 999px;
-            background: var(--soft);
-            color: var(--accent);
-            font-weight: 800;
-            font-size: 0.75rem;
-            border: 1px solid var(--accent-line);
-        }
-
-        .download-hero {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            min-height: 3.25rem;
-            padding: 1rem 1.75rem;
-            border-radius: 999px;
-            background: var(--vibrant-gradient);
-            color: var(--accent-ink);
-            font-size: 1.05rem;
-            font-weight: 800;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px var(--soft);
-            border: 0;
-            outline: none;
-        }
-
-        .download-hero:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 45px var(--soft);
-        }
-
-        .btn-secondary-soft {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            min-height: 3.25rem;
-            padding: 1rem 1.75rem;
-            border-radius: 999px;
-            background: var(--surface);
-            color: var(--text);
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: inset 0 0 0 1px var(--line);
-            border: 0;
-            outline: none;
-        }
-
-        .btn-secondary-soft:hover {
-            transform: translateY(-4px);
-            box-shadow: inset 0 0 0 1px var(--accent-line), 0 10px 25px var(--soft);
-            color: var(--accent);
-            background: var(--surface2);
-        }
-
-        /* Grouped Section Headers */
-        .section-group {
-            margin-bottom: 2.75rem;
-            width: 100%;
-            position: relative;
-            overflow: visible;
-            padding-top: 0.25rem;
-        }
-
-        .group-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.25rem;
-            padding: 0 0.5rem;
-        }
-
-        .group-title {
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            letter-spacing: -0.01em;
-            margin: 0;
-        }
-
-        .group-title i {
-            color: var(--accent);
-            font-size: 1.15rem;
-        }
-
-        .group-count {
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            background: var(--soft);
-            color: var(--accent);
-            border: 1px solid var(--accent-line);
-        }
-
-        /* Documentation License / Serial Key Card */
-        .doc-key-card {
-            background: var(--bg2);
-            border: 1px solid var(--line);
-            border-radius: 1.5rem;
-            padding: 1.25rem 1.5rem;
-            margin: 1.5rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.25rem;
-            flex-wrap: wrap;
-            box-shadow: var(--shadow2);
-        }
-
-        .doc-key-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-            min-width: 200px;
-            flex: 1;
-        }
-
-        .doc-key-label {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .doc-key-code {
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            background: var(--surface);
-            padding: 0.4rem 0.75rem;
-            border-radius: 0.6rem;
-            border: 1px solid var(--line);
-            display: inline-block;
-            word-break: break-all;
-            user-select: all;
-        }
-
-        .doc-key-copy-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            background: var(--accent);
-            color: var(--accent-ink);
-            border: none;
-            border-radius: 999px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.25s var(--bezier);
-            box-shadow: 0 8px 20px var(--soft);
-            flex-shrink: 0;
-        }
-
-        .doc-key-copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px var(--soft);
-            opacity: 0.95;
-        }
-
-        .doc-key-copy-btn:focus-visible {
-            outline: 2px solid var(--accent) !important;
-            outline-offset: 3px;
-        }
-
-        /* Detail Page Components - Luxury Theme-Blended Adobe Suite Buttons */
-        .adobe-ps,
-        .adobe-ai,
-        .adobe-pr,
-        .adobe-ae {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            min-height: 3.15rem;
-            padding: 0.85rem 1.4rem;
-            border-radius: 999px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            cursor: pointer;
-        }
-
-        .adobe-ps i,
-        .adobe-ai i,
-        .adobe-pr i,
-        .adobe-ae i {
-            font-size: 1.05rem;
-            transition: transform 0.3s ease;
-        }
-
-        .adobe-ps:hover i,
-        .adobe-ai:hover i,
-        .adobe-pr:hover i,
-        .adobe-ae:hover i {
-            transform: scale(1.15);
-        }
-
-        /* Light Mode: Clean, frosted glass with delicate brand tint & crisp contrast */
-        .adobe-ps {
-            background: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(255, 255, 255, 0.96) 100%);
-            border: 1px solid rgba(2, 132, 199, 0.3);
-            color: #0369a1 !important;
-            box-shadow: 0 4px 16px -2px rgba(2, 132, 199, 0.12);
-        }
-        .adobe-ps i { color: #0284c7; }
-        .adobe-ps:hover {
-            background: linear-gradient(135deg, rgba(2, 132, 199, 0.16) 0%, #ffffff 100%);
-            border-color: #0284c7;
-            box-shadow: 0 8px 24px -2px rgba(2, 132, 199, 0.28);
-            transform: translateY(-2px);
-        }
-
-        .adobe-ai {
-            background: linear-gradient(135deg, rgba(234, 88, 12, 0.08) 0%, rgba(255, 255, 255, 0.96) 100%);
-            border: 1px solid rgba(234, 88, 12, 0.3);
-            color: #c2410c !important;
-            box-shadow: 0 4px 16px -2px rgba(234, 88, 12, 0.12);
-        }
-        .adobe-ai i { color: #ea580c; }
-        .adobe-ai:hover {
-            background: linear-gradient(135deg, rgba(234, 88, 12, 0.16) 0%, #ffffff 100%);
-            border-color: #ea580c;
-            box-shadow: 0 8px 24px -2px rgba(234, 88, 12, 0.28);
-            transform: translateY(-2px);
-        }
-
-        .adobe-pr {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08) 0%, rgba(255, 255, 255, 0.96) 100%);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            color: #6d28d9 !important;
-            box-shadow: 0 4px 16px -2px rgba(124, 58, 237, 0.12);
-        }
-        .adobe-pr i { color: #7c3aed; }
-        .adobe-pr:hover {
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.16) 0%, #ffffff 100%);
-            border-color: #7c3aed;
-            box-shadow: 0 8px 24px -2px rgba(124, 58, 237, 0.28);
-            transform: translateY(-2px);
-        }
-
-        .adobe-ae {
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(255, 255, 255, 0.96) 100%);
-            border: 1px solid rgba(79, 70, 229, 0.3);
-            color: #4338ca !important;
-            box-shadow: 0 4px 16px -2px rgba(79, 70, 229, 0.12);
-        }
-        .adobe-ae i { color: #4f46e5; }
-        .adobe-ae:hover {
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.16) 0%, #ffffff 100%);
-            border-color: #4f46e5;
-            box-shadow: 0 8px 24px -2px rgba(79, 70, 229, 0.28);
-            transform: translateY(-2px);
-        }
-
-        /* Dark Mode: Obsidian glass with luminous atmospheric color wash */
-        html[data-theme="dark"] .adobe-ps {
-            background: linear-gradient(135deg, rgba(2, 132, 199, 0.18) 0%, rgba(18, 18, 18, 0.88) 100%);
-            border: 1px solid rgba(56, 189, 248, 0.35);
-            color: #f0f9ff !important;
-            box-shadow: 0 6px 20px -3px rgba(2, 132, 199, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.12);
-        }
-        html[data-theme="dark"] .adobe-ps i { color: #38bdf8; }
-        html[data-theme="dark"] .adobe-ps:hover {
-            background: linear-gradient(135deg, rgba(2, 132, 199, 0.32) 0%, rgba(28, 28, 28, 0.95) 100%);
-            border-color: rgba(56, 189, 248, 0.65);
-            box-shadow: 0 10px 28px -2px rgba(2, 132, 199, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.22);
-            transform: translateY(-2px);
-            color: #ffffff !important;
-        }
-
-        html[data-theme="dark"] .adobe-ai {
-            background: linear-gradient(135deg, rgba(249, 115, 22, 0.18) 0%, rgba(18, 18, 18, 0.88) 100%);
-            border: 1px solid rgba(251, 146, 60, 0.35);
-            color: #fff7ed !important;
-            box-shadow: 0 6px 20px -3px rgba(249, 115, 22, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.12);
-        }
-        html[data-theme="dark"] .adobe-ai i { color: #fb923c; }
-        html[data-theme="dark"] .adobe-ai:hover {
-            background: linear-gradient(135deg, rgba(249, 115, 22, 0.32) 0%, rgba(28, 28, 28, 0.95) 100%);
-            border-color: rgba(251, 146, 60, 0.65);
-            box-shadow: 0 10px 28px -2px rgba(249, 115, 22, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.22);
-            transform: translateY(-2px);
-            color: #ffffff !important;
-        }
-
-        html[data-theme="dark"] .adobe-pr {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(18, 18, 18, 0.88) 100%);
-            border: 1px solid rgba(192, 132, 252, 0.35);
-            color: #faf5ff !important;
-            box-shadow: 0 6px 20px -3px rgba(168, 85, 247, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.12);
-        }
-        html[data-theme="dark"] .adobe-pr i { color: #c084fc; }
-        html[data-theme="dark"] .adobe-pr:hover {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.32) 0%, rgba(28, 28, 28, 0.95) 100%);
-            border-color: rgba(192, 132, 252, 0.65);
-            box-shadow: 0 10px 28px -2px rgba(168, 85, 247, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.22);
-            transform: translateY(-2px);
-            color: #ffffff !important;
-        }
-
-        html[data-theme="dark"] .adobe-ae {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.18) 0%, rgba(18, 18, 18, 0.88) 100%);
-            border: 1px solid rgba(129, 140, 248, 0.35);
-            color: #eef2ff !important;
-            box-shadow: 0 6px 20px -3px rgba(99, 102, 241, 0.22), inset 0 1px 1px rgba(255, 255, 255, 0.12);
-        }
-        html[data-theme="dark"] .adobe-ae i { color: #818cf8; }
-        html[data-theme="dark"] .adobe-ae:hover {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.32) 0%, rgba(28, 28, 28, 0.95) 100%);
-            border-color: rgba(129, 140, 248, 0.65);
-            box-shadow: 0 10px 28px -2px rgba(99, 102, 241, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.22);
-            transform: translateY(-2px);
-            color: #ffffff !important;
-        }
-
-        .command-block {
-            margin-bottom: 1.5rem;
-            background: var(--bg2);
-            padding: 1.25rem;
-            border-radius: 1.35rem;
-            border: 1px solid var(--line);
-        }
-
-        .command-label {
-            display: block;
-            font-size: 0.72rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.35rem;
-        }
-
-        .command-desc {
-            margin: 0 0 0.85rem;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .code-box {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 1rem;
-            padding: 0.95rem 1.15rem;
-            margin-bottom: 0.75rem;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .code-box code {
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.88rem;
-            line-height: 1.5;
-            color: var(--text);
-            display: block;
-            white-space: pre-wrap;
-            word-break: break-all;
-        }
-
-        .code-copy-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-            padding: 0.75rem 1.25rem;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 0.95rem;
-            color: var(--text);
-            font-size: 0.85rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.25s var(--bezier);
-        }
-
-        .code-copy-btn:hover {
-            background: var(--accent);
-            color: var(--accent-ink);
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px var(--soft);
-        }
-
-        .code-copy-btn:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-
-        .code-card {
-            margin-bottom: 1.5rem;
-            background: var(--bg2);
-            padding: 1.25rem;
-            border-radius: 1.35rem;
-            border: 1px solid var(--line);
-        }
-
-        .readme-meta {
-            font-size: 0.8rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.35rem;
-            margin-top: 1.25rem;
-            display: block;
-        }
-
-        .readme-meta:first-child {
-            margin-top: 0;
-        }
-
-        .readme-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            color: var(--text);
-            line-height: 1.5;
-        }
-
-        .readme-item i {
-            color: var(--accent);
-            font-size: 0.85rem;
-            margin-top: 0.4rem;
-        }
-
-        .copy-card code {
-            display: block;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.85rem;
-            color: var(--text);
-            margin-bottom: 0.75rem;
-            word-break: break-all;
-        }
-
-        .copy-btn-small {
-            width: 100%;
-            padding: 0.65rem;
-            border-radius: 0.85rem;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            color: var(--text);
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .copy-btn-small:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--soft);
-        }
-
-        .readme-section {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 2.5rem;
-            padding: 3rem;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
-        }
-
-        .readme-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--text);
-        }
-
-        .readme-title::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--line);
-        }
-
-        .readme-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--muted);
-            white-space: pre-wrap;
-        }
-
-        /* Embedded Documentation Preview Image */
-        .doc-preview-wrapper {
-            margin-top: 1.5rem;
-            border-radius: 1.25rem;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            background: var(--bg2);
-            box-shadow: var(--shadow2);
-            transition: transform 0.3s var(--bezier), border-color 0.3s var(--bezier), box-shadow 0.3s var(--bezier);
-        }
-
-        .doc-preview-wrapper:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px var(--soft);
-        }
-
-        .doc-preview-img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 1.25rem;
-            object-fit: cover;
-        }
-
-        pre {
-            background: var(--bg2);
-            color: var(--text);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.95rem;
-            border: 1px solid var(--line);
-            margin: 1.5rem 0;
-            overflow-x: auto;
-            position: relative;
-            max-width: 100%;
-        }
-
-        .pre-copy-btn {
-            position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            padding: 0.4rem 0.8rem;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            color: var(--text);
-            border-radius: 0.5rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .pre-copy-btn:hover {
-            background: var(--accent);
-            color: var(--accent-ink);
-            border-color: var(--accent);
-        }
-
-        .search-box {
-            position: relative;
-            max-width: 500px;
-            margin: 2rem 0 3rem;
-            animation: fadeIn 0.8s var(--bezier);
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--muted);
-            font-size: 1.1rem;
-            pointer-events: none;
-            transition: color 0.3s ease;
-            z-index: 2;
-        }
-
-        .search-box:focus-within i {
-            color: var(--accent);
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 1.1rem 4.75rem 1.1rem 3.5rem;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 1.25rem;
-            color: var(--text);
-            font-family: inherit;
-            font-size: 1rem;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s var(--bezier);
-            box-shadow: var(--shadow);
-        }
-
-        .search-box input::placeholder {
-            color: var(--muted);
-            opacity: 0.75;
-        }
-
-        .search-box input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: var(--bg2);
-            box-shadow: 0 0 0 4px var(--soft), 0 15px 30px -5px var(--soft);
-            transform: translateY(-2px);
-        }
-
-        .search-kbd {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.2rem;
-            padding: 0.25rem 0.55rem;
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 0.02em;
-            color: var(--muted);
-            background: var(--surface2);
-            border: 1px solid var(--line);
-            border-radius: 0.5rem;
-            pointer-events: none;
-            transition: opacity 0.25s var(--bezier), transform 0.25s var(--bezier);
-            user-select: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
-            z-index: 2;
-        }
-
-        .search-box input:focus ~ .search-kbd,
-        .search-box.has-text .search-kbd {
-            opacity: 0;
-            transform: translateY(-50%) scale(0.85);
-            pointer-events: none;
-        }
-
-        @media (max-width: 768px) {
-            .search-kbd {
-                display: none !important;
-            }
-            .search-box input {
-                padding-right: 1.5rem !important;
-            }
-        }
-
-        .footer {
-            margin-top: 2rem !important;
-            padding: 2rem 0;
-            border-top: 1px solid var(--line);
-            text-align: center;
-            opacity: 0.6;
-            font-size: 0.85rem;
-        }
-
-        /* Robust Copy Toast */
-        .copy-toast {
-            position: fixed !important;
-            bottom: 4rem;
-            left: 50%;
-            transform: translate(-50%, 20px) !important;
-            background: var(--surface) !important;
-            color: var(--accent) !important;
-            padding: 0.85rem 1.75rem;
-            border-radius: 999px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            border: 2px solid var(--accent-line) !important;
-            backdrop-filter: blur(25px) !important;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5) !important;
-            transition: all 0.4s var(--bezier) !important;
-            z-index: 999999 !important;
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            white-space: nowrap;
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-
-        .copy-toast.show {
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: translate(-50%, 0) !important;
-            pointer-events: all !important;
-        }
-
-        @media (max-width: 1024px) {
-            .detail-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .detail-hero-column {
-                position: static;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .files-layout {
-                margin-top: 0;
-                padding: 0.75rem;
-                border-radius: 1.25rem;
-            }
-
-            .explorer-header {
-                gap: 0.65rem;
-                margin-bottom: 0.5rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .header-top {
-                display: flex;
-                justify-content: center;
-                text-align: center;
-                width: 100%;
-            }
-
-            .section-title {
-                font-size: 1.85rem;
-                margin-bottom: 0.25rem;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .section-title::after {
-                margin: 0.35rem auto 0;
-            }
-
-            .controls-row {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.75rem;
-                width: 100%;
-            }
-
-            .search-box {
-                max-width: 100%;
-                width: 100%;
-                position: relative;
-            }
-
-            .search-box input {
-                padding: 0.85rem 1rem 0.85rem 2.85rem;
-                font-size: 0.95rem;
-                border-radius: 1rem;
-                text-align: left;
-            }
-
-            .search-box i {
-                left: 1.1rem;
-                opacity: 0.9;
-                z-index: 2;
-            }
-
-            .category-pills {
-                display: flex;
-                gap: 0.5rem;
-                width: 100%;
-                margin: 0 !important;
-                padding: 0.1rem 0 0.35rem;
-                overflow: visible;
-                flex-wrap: nowrap;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .pill#pillAll {
-                flex: 1;
-                justify-content: center;
-                text-align: center;
-                padding: 0.65rem 1rem;
-                font-size: 0.85rem;
-            }
-
-            .category-dropdown-wrapper {
-                flex: 1.35;
-                display: flex;
-                width: 100%;
-            }
-
-            .category-dropdown-wrapper .pill {
-                width: 100%;
-                justify-content: center;
-                text-align: center;
-                padding: 0.65rem 0.9rem;
-                font-size: 0.85rem;
-            }
-
-            .category-dropdown-menu {
-                right: 0;
-                left: 0;
-                min-width: 100%;
-                max-width: 100%;
-            }
-
-            .group-header {
-                margin: 1.15rem 0 0.5rem;
-                gap: 0.5rem;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0 0.25rem;
-            }
-
-            .group-title {
-                font-size: 0.82rem;
-                letter-spacing: 0.04em;
-                gap: 0.45rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .group-title i {
-                font-size: 0.95rem;
-                flex-shrink: 0;
-            }
-
-            .group-count {
-                font-size: 0.68rem;
-                padding: 0.2rem 0.55rem;
-                flex-shrink: 0;
-                white-space: nowrap;
-                border-radius: 999px;
-            }
-
-            .file-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.65rem;
-                padding: 0 0.25rem;
-            }
-
-            .file-card {
-                padding: 1rem 0.65rem;
-                border-radius: 1.15rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 0.75rem;
-                backdrop-filter: none !important;
-            }
-
-            .file-info {
-                flex-direction: column;
-                align-items: center;
-                gap: 0.75rem;
-            }
-
-            .file-icon {
-                width: 2.75rem;
-                height: 2.75rem;
-                flex-shrink: 0;
-                font-size: 1.15rem;
-                margin: 0 auto;
-                border-radius: 0.85rem;
-            }
-
-            .file-meta h3 {
-                font-size: 0.85rem;
-                line-height: 1.2;
-                margin-bottom: 0.25rem;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-
-            .file-meta span {
-                font-size: 0.6rem;
-                display: block;
-                opacity: 0.8;
-            }
-
-            /* Detail View Mobile Polish */
-            .detail-page {
-                padding: 0;
-            }
-
-            .back-btn {
-                margin-bottom: 1.5rem;
-                padding: 0.6rem 1.25rem;
-                font-size: 0.85rem;
-            }
-
-            .detail-hero-column {
-                padding: 1.25rem 1rem;
-                border-radius: 1.25rem;
-                gap: 1rem;
-            }
-
-            .detail-icon {
-                width: 65px;
-                height: 65px;
-                font-size: 1.75rem;
-                border-radius: 1.25rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .detail-hero-info h1 {
-                font-size: 1.15rem;
-                line-height: 1.2;
-                margin: 0 0 0.25rem;
-            }
-
-            .readme-section {
-                padding: 1.25rem;
-                border-radius: 1.5rem;
-            }
-
-            .readme-content {
-                font-size: 0.9rem;
-                line-height: 1.6;
-            }
-
-            .version-badge {
-                padding: 0.25rem 0.75rem;
-                font-size: 0.65rem;
-            }
-
-            .download-hero {
-                padding: 0.75rem 1.25rem;
-                min-height: 2.75rem;
-                font-size: 0.9rem;
-                border-radius: 999px;
-            }
-
-            .btn-secondary-soft {
-                padding: 0.75rem 1.25rem;
-                min-height: 2.75rem;
-                font-size: 0.85rem;
-                border-radius: 999px;
-            }
-
-            .copy-card {
-                padding: 1rem;
-                border-radius: 1rem;
-            }
-
-
-            .readme-title {
-                font-size: 1.25rem;
-            }
-            
-            .readme-section {
-                border: none !important;
-                box-shadow: none !important;
-                padding: 1.5rem 1rem;
-                background: transparent;
-                width: 100%;
-                border-radius: 0;
-            }
-
-            .readme-title::after {
-                background: var(--line) !important;
-                opacity: 0.3;
-            }
-
-            pre {
-                border: 1px solid var(--line) !important;
-                box-shadow: none !important;
-                margin: 1rem 0;
-                background: var(--bg2) !important;
-                border-radius: 1.25rem;
-            }
-
-            html[data-theme="dark"] pre {
-                background: rgba(255, 255, 255, 0.05) !important;
-                border-color: rgba(255, 255, 255, 0.1) !important;
-            }
-
-            pre::-webkit-scrollbar {
-                display: none;
-            }
-
-            .command-block {
-                border: 1px solid var(--line) !important;
-                box-shadow: none !important;
-                padding: 1.25rem;
-                background: var(--surface);
-                overflow: hidden;
-                border-radius: 1.75rem;
-            }
-
-            .command-desc {
-                font-size: 0.85rem;
-            }
-        }
-
-        /* Allow Selection for Code and Readme */
-        pre,
-        code,
-        .readme-content {
-            user-select: text !important;
-            -webkit-user-select: text !important;
-        }
-
-        /* Harmonized Bengali Typography: Apply Tool Font ("Hind Siliguri" with clean 1) to Category & UI elements */
-        html[data-lang="bn"] button,
-        html[data-lang="bn"] .pill,
-        html[data-lang="bn"] .dropdown-btn,
-        html[data-lang="bn"] .dropdown-item,
-        html[data-lang="bn"] .search-box input,
-        html[data-lang="bn"] .file-meta h3,
-        html[data-lang="bn"] .file-meta span,
-        html[data-lang="bn"] .group-title,
-        html[data-lang="bn"] .detail-page h1,
-        html[data-lang="bn"] .detail-page p,
-        html[data-lang="bn"] .readme-title,
-        html[data-lang="bn"] .readme-content,
-        html[data-lang="bn"] .category-chip,
-        html[data-lang="bn"] .doc-key-label,
-        html[data-lang="bn"] .copy-toast {
-            font-family: 'BanglaOneClean', 'Hind Siliguri', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
-        }
-    </style>
-    <!-- Instant Page Transitions: Chromium Speculation Rules -->
-    <script type="speculationrules">
-    {
-      "prerender": [
-        {
-          "source": "list",
-          "urls": ["index.html", "/"]
-        }
-      ]
-    }
-    </script>
     <style id="sl-critical-css">
 /* ==========================================================================
    HUMAYOUN KOBIR PORTFOLIO — BESPOKE SITE LOADER (v1.0.0)
@@ -2209,26 +702,32 @@ html.sl-lock {
 <noscript><style>#site-loader{display:none!important}html.sl-lock{overflow:auto!important}</style></noscript>
 
 
-    <div class="bg">
-        <span class="orb o1"></span>
-        <span class="orb o2"></span>
-        <span class="orb o3"></span>
+    <div class="bg" aria-hidden="true">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
     </div>
 
-    <div class="shell">
+    <div class="shell" id="top">
         <header class="header" id="siteHeader">
             <div class="container">
                 <div class="nav-wrap" id="navWrap">
                     <div class="nav-bar-row">
-                        <a href="index.html" class="brand">
-                            <div class="mark"><img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir - Animated Brand Logo" width="44" height="44" decoding="async" fetchpriority="high"></div>
-                            <div class="brand-text"><strong data-i18n="brand_name">Humayoun Kobir</strong><small data-i18n="brand_repo">Repository</small></div>
+                        <a class="brand" href="#top" aria-label="Go to top">
+                            <span class="mark">
+                                <img src="assets/site-images/Logo-Animation.gif" alt="Humayoun Kobir - Animated Brand Logo"
+                                    width="44" height="44" decoding="async" fetchpriority="high">
+                            </span>
+                            <span class="brand-text">
+                                <strong data-i18n="brand_name">Humayoun Kobir</strong>
+                                <small data-i18n="brand_title">Engineer & Designer</small>
+                            </span>
                         </a>
                         <nav class="nav" aria-label="Primary navigation">
-                            <a href="index.html#about" data-i18n="nav_about">About</a>
-                            <a href="index.html#skills" data-i18n="nav_skills">Skills</a>
-                            <a href="index.html#projects" data-i18n="nav_projects">Projects</a>
-                            <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+                            <a href="#about" data-i18n="nav_about">About</a>
+                            <a href="#skills" data-i18n="nav_skills">Skills</a>
+                            <a href="#projects" data-i18n="nav_projects">Projects</a>
+                            <a href="#contact" data-i18n="nav_contact">Contact</a>
                             <a href="files.html" class="active" id="navSoftwareHq" data-i18n="nav_softwarehq">Software HQ</a>
                             <div class="glider" id="navGlider"></div>
                         </nav>
@@ -2290,11 +789,11 @@ html.sl-lock {
                         <div class="nav-expand-section">
                             <div class="nav-expand-title" data-i18n="drawer_nav_title">Navigation</div>
                             <nav class="nav-expand-links" aria-label="Mobile primary navigation">
-                                <a href="index.html#about" class="nav-expand-link"><i class="fa-solid fa-user"></i><span data-i18n="nav_about">About</span></a>
-                                <a href="index.html#skills" class="nav-expand-link"><i class="fa-solid fa-layer-group"></i><span data-i18n="nav_skills">Skills</span></a>
-                                <a href="index.html#projects" class="nav-expand-link"><i class="fa-solid fa-briefcase"></i><span data-i18n="nav_projects">Projects</span></a>
-                                <a href="index.html#contact" class="nav-expand-link"><i class="fa-solid fa-paper-plane"></i><span data-i18n="nav_contact">Contact</span></a>
-                                <a href="files.html" class="nav-expand-link active"><i class="fa-solid fa-folder-open"></i><span data-i18n="nav_softwarehq">Software HQ</span></a>
+                                <a href="#about" class="nav-expand-link"><i class="fa-solid fa-user"></i><span data-i18n="nav_about">About</span></a>
+                                <a href="#skills" class="nav-expand-link"><i class="fa-solid fa-layer-group"></i><span data-i18n="nav_skills">Skills</span></a>
+                                <a href="#projects" class="nav-expand-link"><i class="fa-solid fa-briefcase"></i><span data-i18n="nav_projects">Projects</span></a>
+                                <a href="#contact" class="nav-expand-link"><i class="fa-solid fa-paper-plane"></i><span data-i18n="nav_contact">Contact</span></a>
+                                <a href="files.html" class="nav-expand-link" id="mobileNavSoftwareHq"><i class="fa-solid fa-folder-open"></i><span data-i18n="nav_softwarehq">Software HQ</span></a>
                             </nav>
                         </div>
 
@@ -2337,87 +836,622 @@ html.sl-lock {
             </div>
         </header>
 
-        <main class="page-main container">
-            <div class="files-layout" id="mainLayout">
-                <section class="explorer-header">
-                    <div class="header-top">
-                        <h1 class="section-title" data-i18n="shq_title">Software HQ</h1>
+        <main class="page-main">
+            <!-- ─── View 1: Portfolio View (Hero, Skills, Projects, Contact, Footer) ─── -->
+            <div id="portfolioView" class="spa-view spa-view-hidden">
+                <section class="section hero" id="about" style="content-visibility: visible; contain: none;">
+                <div class="container hero-grid">
+                    <div class="hero-copy reveal">
+                        <h2 data-i18n="hero_greeting">Assalamu Alaikum (Greetings)!</h2>
+                        <h1 data-i18n="hero_iam">I'm <span class="hero-name">Humayoun Kobir</span></h1>
+                        <div id="typing" aria-hidden="true"></div>
+                        <div class="sr-only">
+                            <p>Humayoun Kobir (widely written as Humayun Kabir, Humayun Kobir, Humayoun Kabir, or in Bengali as হুমায়ূন কবির / হুমায়ুন কবির / মো: হুমায়ুন কবির) is a professional Computer Science Diploma Engineer, Creative Graphic Designer, 3D Visualizer, and Windows Hardware Specialist from Bangladesh.</p>
+                            <p>Specializations: Humayun Kabir Designer (Logo, Branding, Business Cards, Posters, Social Ads), Humayun Kabir Engineer (PC Hardware Diagnostics, BIOS Optimization, Custom Scripts, Software HQ Utilities), 3D Blender Artist, and Excel Data Specialist.</p>
+                        </div>
+                        <p class="about-text" data-i18n="hero_about_text">
+                            A Computer Technology Diploma Engineer by training, a designer by eye. From logos and branding to Excel automation, web tools, and hardware fixes, my goal is the same: smart strategy delivering accurate, reliable results.
+                        </p>
+                        <div class="actions">
+                            <a href="#skills" class="btn primary">
+                                <i class="fa-solid fa-layer-group"></i>
+                                <span data-i18n="btn_skills">Skills</span>
+                            </a>
+                            <a href="#projects" class="btn secondary">
+                                <i class="fa-solid fa-briefcase"></i>
+                                <span data-i18n="btn_projects">Projects</span>
+                            </a>
+                            <a href="#contact" class="btn outline">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span data-i18n="btn_connect">Connect</span>
+                            </a>
+                        </div>
+                        <div class="hero-notes">
+                            <span class="hero-note" data-i18n="chip_gd">Graphic Design</span>
+                            <span class="hero-note" data-i18n="chip_3d">3D Modeling & Blender</span>
+                            <span class="hero-note" data-i18n="chip_excel">Excel & Data Specialists</span>
+                            <span class="hero-note" data-i18n="chip_hw">Hardware Solutions</span>
+                        </div>
                     </div>
 
-                    <div class="controls-row">
-                        <div class="search-box" role="search">
-                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                            <input type="text" id="fileSearch" placeholder="Search essential tools, scripts, commands..." aria-label="Search tools and utilities">
-                            <kbd class="search-kbd" id="searchKbd" title="Press Ctrl+K or / to search"><span class="kbd-mod">Ctrl</span> K</kbd>
-                        </div>
-
-                        <div class="category-pills" role="tablist" aria-label="Filter software categories">
-                            <button class="pill active" id="pillAll" data-category="all" role="tab" aria-selected="true" type="button"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <span data-i18n="cat_all">All</span></button>
-                            
-                            <div class="category-dropdown-wrapper">
-                                <button class="pill dropdown-btn" id="catDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select category">
-                                    <i class="fa-solid fa-sliders" id="catDropdownIcon" aria-hidden="true"></i>
-                                    <span id="catDropdownLabel" data-i18n="cat_categories">Categories</span>
-                                    <i class="fa-solid fa-chevron-down chevron-icon" aria-hidden="true"></i>
-                                </button>
-                                <div class="category-dropdown-menu" id="catDropdownMenu" role="menu" aria-label="Categories menu">
-                                    <button class="dropdown-item" data-category="utilities" role="menuitem" type="button">
-                                        <i class="fa-solid fa-toolbox" aria-hidden="true"></i> Productivity &amp; Utilities
-                                    </button>
-                                    <button class="dropdown-item" data-category="system" role="menuitem" type="button">
-                                        <i class="fa-solid fa-sliders" aria-hidden="true"></i> System &amp; Maintenance
-                                    </button>
-                                    <button class="dropdown-item" data-category="storage" role="menuitem" type="button">
-                                        <i class="fa-solid fa-hard-drive" aria-hidden="true"></i> Storage &amp; Recovery
-                                    </button>
-                                    <button class="dropdown-item" data-category="optimization" role="menuitem" type="button">
-                                        <i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i> Optimization &amp; Gaming
-                                    </button>
-                                    <button class="dropdown-item" data-category="diagnostics" role="menuitem" type="button">
-                                        <i class="fa-solid fa-microchip" aria-hidden="true"></i> Hardware &amp; Diagnostics
-                                    </button>
-                                    <button class="dropdown-item" data-category="creative" role="menuitem" type="button">
-                                        <i class="fa-solid fa-palette" aria-hidden="true"></i> Creative &amp; Design
-                                    </button>
+                    <div class="hero-side reveal d1">
+                        <div class="portrait">
+                            <div class="frame">
+                                <img src="assets/site-images/refined.webp"
+                                    alt="Humayoun Kobir - Computer Science Engineer & Graphic Designer" width="380"
+                                    height="380" decoding="async" loading="eager" fetchpriority="high">
+                            </div>
+                            <div class="portrait-meta" style="contain: content;">
+                                <div class="available">
+                                    <span class="dot"></span>
+                                    <span data-i18n="available_badge">Available for Hire</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-
-                <div id="explorerView" class="active"></div>
-
-                <div id="detailView">
-                    <div class="detail-page" id="detailContent"></div>
                 </div>
+            </section>
 
-                <!-- Semantic Search & Entity Indexing Landmark (Accessible to Screen Readers & Web Crawlers) -->
-                <section class="sr-only" aria-label="Software HQ Directory Overview and Entity Index">
-                    <h2>Software HQ by Humayoun Kobir (Humayun Kabir / হুমায়ূন কবির)</h2>
-                    <p>
-                        Welcome to Software HQ (SoftwareHQ), the official software, utility, and PC optimization repository created and curated by Humayoun Kobir (also known as Humayun Kabir, Humayun Kobir, Humain Kabir, and in Bengali as মোঃ হুমায়ুন কবির / হুমায়ুন কবির সফটওয়্যার এইচকিউ).
-                    </p>
-                    <p>
-                        Software HQ provides verified utilities, Windows optimization scripts, hardware diagnostic tools (CrystalDiskInfo, CrystalDiskMark, HWiNFO, Custom Resolution Utility CRU, Autoruns, Process Explorer, Process Monitor), productivity suites (FontLab, Foxit PDF Editor), uninstaller solutions (Revo Uninstaller), data recovery software, and DPI bypass utilities (GoodByeDPI) for power users, developers, and engineers worldwide.
-                    </p>
-                    <p>
-                        Indexed queries: Humayoun Kobir Software HQ, Humayun Kabir Software HQ, Software HQ Humayun Kabir, Software HQ Humayoun Kobir, SoftwareHQ Humayun Kabir, হুমায়ূন কবির সফটওয়্যার এইচকিউ, হুমায়ুন কবির সফটওয়্যার এইচকিউ, সফটওয়্যার এইচকিউ হুমায়ুন কবির, Humain Kabir Software HQ, Humayun Kabir Tools, Humayoun Kobir PC Optimization.
-                    </p>
-                </section>
+            <section class="section split-section" id="skills"
+                style="content-visibility: auto; contain-intrinsic-size: 1px 1000px;">
+                <div class="container">
+                    <h2 class="section-title reveal" data-i18n="skills_title">Skills</h2>
+                    <div class="services-grid">
+                        <article class="service-card reveal">
+                            <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                            <h3 data-i18n="svc1_title">Graphic Design</h3>
+                            <p data-i18n="svc1_desc">Visual assets built for promotion, branding, and polished communication.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc1_c1">Logo design</li>
+                                <li data-i18n="svc1_c2">Banner design</li>
+                                <li data-i18n="svc1_c3">Business cards</li>
+                                <li data-i18n="svc1_c4">Social ads</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal d1">
+                            <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+                            <h3 data-i18n="svc2_title">Programming & Web Basics</h3>
+                            <p data-i18n="svc2_desc">Comfortable with core languages and practical scripting for small projects.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc2_c1">C and C++</li>
+                                <li data-i18n="svc2_c2">Python</li>
+                                <li data-i18n="svc2_c3">HTML, CSS, JavaScript</li>
+                                <li data-i18n="svc2_c4">VBS for Windows</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal d2">
+                            <div class="service-icon"><i class="fa-solid fa-sheet-plastic"></i></div>
+                            <h3 data-i18n="svc3_title">Data & Office Work</h3>
+                            <p data-i18n="svc3_desc">Spreadsheet-heavy tasks delivered with accuracy, structure, and clean formatting.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc3_c1">Microsoft Excel</li>
+                                <li data-i18n="svc3_c2">Google Sheets</li>
+                                <li data-i18n="svc3_c3">Data entry</li>
+                                <li data-i18n="svc3_c4">Lead generation</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal">
+                            <div class="service-icon"><i class="fa-solid fa-cube"></i></div>
+                            <h3 data-i18n="svc4_title">3D & Blender</h3>
+                            <p data-i18n="svc4_desc">Entry-level 3D work with attention to form, scene lighting, and presentation.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc4_c1">3D modeling</li>
+                                <li data-i18n="svc4_c2">Rendering</li>
+                                <li data-i18n="svc4_c3">Lighting</li>
+                                <li data-i18n="svc4_c4">Architectural visuals</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal d1">
+                            <div class="service-icon"><i class="fa-solid fa-desktop"></i></div>
+                            <h3 data-i18n="svc5_title">PC Software & Hardware</h3>
+                            <p data-i18n="svc5_desc">Hands-on setup, diagnostics, optimization, and maintenance across devices.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc5_c1">Hardware diagnostics</li>
+                                <li data-i18n="svc5_c2">BIOS and thermals</li>
+                                <li data-i18n="svc5_c3">OS installs</li>
+                                <li data-i18n="svc5_c4">Custom ROM flashing</li>
+                            </ul>
+                        </article>
+                        <article class="service-card reveal d2">
+                            <div class="service-icon"><i class="fa-solid fa-microchip"></i></div>
+                            <h3 data-i18n="svc6_title">Electronics & DIY</h3>
+                            <p data-i18n="svc6_desc">Practical builds using core electronics knowledge and reliable component testing.</p>
+                            <ul class="chips">
+                                <li data-i18n="svc6_c1">Breadboard prototyping</li>
+                                <li data-i18n="svc6_c2">DC-DC systems</li>
+                                <li data-i18n="svc6_c3">Charging modules</li>
+                                <li data-i18n="svc6_c4">Basic soldering</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section split-section" id="projects"
+                style="content-visibility: auto; contain-intrinsic-size: 1px 1200px;">
+                <div class="container">
+                    <h2 class="section-title reveal" data-i18n="projects_title">Projects</h2>
+                    <div class="projects-grid">
+                        <article class="project-card reveal">
+                            <div class="project-content">
+                                <h3 data-i18n="proj1_title">SnapSignFit</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_wasm">WASM</span><span class="tag" data-i18n="tag_clientside">Client-Side</span></div>
+                                <div class="project-links">
+                                    <a href="https://snapsignfit.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit SnapSignFit Live Website">
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/SnapSignFit" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View SnapSignFit GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d1">
+                            <div class="project-content">
+                                <h3 data-i18n="proj2_title">HK-Tool</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_powershell">PowerShell</span><span class="tag" data-i18n="tag_hardware">Hardware</span></div>
+                                <div class="project-links">
+                                    <a href="https://hktool.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit HK-Tool Live Web App">
+                                        <span data-i18n="lnk_live_webapp">Live Web App</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/HK-Tool" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View HK-Tool GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d2">
+                            <div class="project-content">
+                                <h3 data-i18n="proj3_title">SthapattoShoili</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_3d_webgl">3D WebGL</span><span class="tag" data-i18n="tag_threejs">Three.js</span><span class="tag" data-i18n="tag_react">React</span></div>
+                                <div class="project-links">
+                                    <a href="https://sthapottoshoili.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit SthapottoShoili Live 3D Experience">
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/SthapottoShoili" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View SthapottoShoili GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal">
+                            <div class="project-content">
+                                <h3 data-i18n="proj4_title">DUET C & C++ Programs</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_cpp">C / C++</span><span class="tag" data-i18n="tag_algorithms">Algorithms</span></div>
+                                <div class="project-links">
+                                    <a href="https://duetcode.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit DUET Code Live Explorer Web App">
+                                        <span data-i18n="lnk_live_webapp">Live Web App</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/C-Cpp-Basic-programmes" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View DUET C & C++ Programs GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/C-Cpp-Basic-programmes/raw/main/DUET%20C%20%26%20C%2B%2B%20Programs.pdf" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Download DUET Admission C & C++ PDF">
+                                        <span data-i18n="lnk_download_pdf">Download PDF</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d1">
+                            <div class="project-content">
+                                <h3 data-i18n="proj5_title">DUET Admission Timer</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_bentoui">Bento UI</span><span class="tag" data-i18n="tag_countdown">Countdown</span></div>
+                                <div class="project-links">
+                                    <a href="https://duettimer.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit DUET Timer Live Web App">
+                                        <span data-i18n="lnk_live_webapp">Live Web App</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/DUET-Timer" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View DUET Timer GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d2">
+                            <div class="project-content">
+                                <h3 data-i18n="proj6_title">Sadia Variety Store</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_banner">Banner</span><span class="tag" data-i18n="tag_poster">Poster</span></div>
+                                <div class="project-links">
+                                    <a href="https://sadiastore.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit Sadia Variety Store Live Website">
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://github.com/humayunk45423/SadiaVarietyStore" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Sadia Variety Store GitHub Repository">
+                                        <span data-i18n="lnk_github_repo">GitHub Repository</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="https://maps.app.goo.gl/M4JL9vnC1bjpBjrp7" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Sadia Variety Store Banner Design">
+                                        <span data-i18n="lnk_banner_design">Banner Design</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="assets/site-images/sadia-variety-store-poster.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Sadia Variety Store Poster Work">
+                                        <span data-i18n="lnk_poster_design">Poster Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal">
+                            <div class="project-content">
+                                <h3 data-i18n="proj8_title">Tadrib Academy</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_logo">Logo</span><span class="tag" data-i18n="tag_poster">Poster</span><span class="tag" data-i18n="tag_ads">Ads</span></div>
+                                <div class="project-links">
+                                    <a href="assets/site-images/tadrib-academy-logo.webp"
+                                        target="_blank" rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Tadrib Academy Logo Project">
+                                        <span data-i18n="lnk_logo_design">Logo Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/tadrib-academy-facebook-ad.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Facebook Ads Designs">
+                                        <span data-i18n="lnk_fb_ads">Facebook Ads Poster</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/tadrib-academy-marketplace-ad.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Marketplace Marketing Work">
+                                        <span data-i18n="lnk_mkt_ads">Marketplace Ads Run</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d1">
+                            <div class="project-content">
+                                <h3 data-i18n="proj9_title">Fuad Mobile Point</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_logo">Logo</span><span class="tag" data-i18n="tag_banner">Banner</span><span class="tag" data-i18n="tag_bcard">Business Card</span></div>
+                                <div class="project-links">
+                                    <a href="assets/site-images/fuad-mobile-point-logo.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Fuad Mobile Point Logo Design">
+                                        <span data-i18n="lnk_logo_design">Logo Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/fuad-mobile-point-banner.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Fuad Mobile Point Banner Design">
+                                        <span data-i18n="lnk_banner_design">Banner Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/fuad-mobile-point-business-card.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Fuad Mobile Point Business Card Design">
+                                        <span data-i18n="lnk_card_design">Business Card Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/fuad-mobile-point-cash-memo.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="View Fuad Mobile Point Cash Memo Design">
+                                        <span data-i18n="lnk_cash_memo">Cash Memo Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="project-card reveal d2">
+                            <div class="project-content">
+                                <h3 data-i18n="proj7_title">Mobile Express</h3>
+                                <div class="project-tags"><span class="tag" data-i18n="tag_webapp">Web App</span><span class="tag" data-i18n="tag_logo">Logo</span><span class="tag" data-i18n="tag_ads">Ads</span><span class="tag" data-i18n="tag_corporate">Corporate</span></div>
+                                <div class="project-links">
+                                    <a href="https://mobileexpress.vercel.app" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link"
+                                        title="Visit Mobile Express Live Web App">
+                                        <span data-i18n="lnk_live_website">Live Website</span><i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <div class="project-links-row">
+                                        <a href="assets/site-images/mobile-express-logo.webp" target="_blank"
+                                            rel="noopener noreferrer nofollow" class="project-link"
+                                            title="View Mobile Express Logo Design">
+                                            <span data-i18n="lnk_logo_design">Logo Design</span><i class="fa-solid fa-expand"></i>
+                                        </a>
+                                        <a href="assets/site-images/mobile-express-business-card.webp" target="_blank"
+                                            rel="noopener noreferrer nofollow" class="project-link" decoding="async"
+                                            loading="lazy" title="View Mobile Express Business Card">
+                                            <span data-i18n="lnk_business_card">Business Card</span><i class="fa-solid fa-expand"></i>
+                                        </a>
+                                    </div>
+                                    <a href="assets/site-images/mobile-express-cash-memo.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link" decoding="async"
+                                        loading="lazy" title="View Mobile Express Cash Memo Design">
+                                        <span data-i18n="lnk_cash_memo">Cash Memo Design</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                    <a href="assets/site-images/mobile-express-facebook-ad.webp" target="_blank"
+                                        rel="noopener noreferrer nofollow" class="project-link" decoding="async"
+                                        loading="lazy" title="View Mobile Express Facebook Ads">
+                                        <span data-i18n="lnk_fb_ads">Facebook Ads</span><i class="fa-solid fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section split-section" id="contact"
+                style="content-visibility: auto; contain-intrinsic-size: 1px 900px;">
+                <div class="container">
+                    <h2 class="section-title reveal" data-i18n="contact_section_title">Contact</h2>
+                    <div class="contact-layout">
+                        <div class="contact-info reveal">
+                            <h3 data-i18n="contact_title">Let's build<br>something great.</h3>
+                        <p class="about-text" data-i18n="contact_text">Open for collaborations, freelance projects, or just a coffee chat about tech and design.</p>
+                        <div class="contact-methods">
+                            <div class="method" id="mailMethod">
+                                <a href="mailto:humayunk45423@gmail.com" class="method-main" aria-label="Send email">
+                                    <div class="method-icon"><i class="fa-solid fa-envelope"></i></div>
+                                    <div class="method-text">
+                                        <strong data-i18n="contact_email_btn">Click here to Email</strong>
+                                        <span id="emailText">humayunk45423@gmail.com</span>
+                                    </div>
+                                </a>
+                                <button class="copy-btn" title="Copy Email"
+                                    onclick="copyContact('humayunk45423@gmail.com', this)">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="method" id="waMethod">
+                                <a href="https://wa.me/8801721445207" target="_blank" rel="noopener noreferrer nofollow"
+                                    class="method-main" aria-label="Chat on WhatsApp">
+                                    <div class="method-icon">
+                                        <svg viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M20 10C20 15.51 15.51 20 10 20C7.97 20 6.08 19.39 4.5 18.35L0.66 19.58L1.9 15.86C0.7 14.22 0 12.19 0 10C0 4.49 4.48 0 10 0L10 0C15.51 0 20 4.49 20 10ZM15.99 12.73C15.89 12.56 13.62 11.51 13.44 11.45C13.18 11.35 12.92 11.38 12.72 11.66C12.44 12.06 12.16 12.46 11.94 12.7C11.77 12.89 11.48 12.91 11.24 12.81C10.91 12.67 10.01 12.36 8.89 11.36C8.03 10.59 7.44 9.64 7.27 9.35C7.1 9.05 7.25 8.88 7.39 8.72C7.81 8.2 8.39 7.85 8.1 7.24C8.03 7.1 7.45 5.66 7.2 5.08C7 4.59 6.86 4.57 6.23 4.57C4.93 4.57 4.19 6.08 4.19 7.37C4.19 9.9 7.77 13.71 10.35 14.78C12.65 15.73 13.33 15.64 13.86 15.53C14.62 15.37 15.58 14.8 15.82 14.12C16.06 13.44 16.06 12.86 15.99 12.73Z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div class="method-text">
+                                        <strong data-i18n="contact_wa_btn">Click here to WhatsApp</strong>
+                                        <span id="waText">+8801721445207</span>
+                                    </div>
+                                </a>
+                                <button class="copy-btn" title="Copy Number"
+                                    onclick="copyContact('+8801721445207', this)">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-grid reveal d1">
+                        <a href="https://github.com/humayunk45423" target="_blank" rel="noopener noreferrer nofollow"
+                            class="social-item">
+                            <i class="fa-brands fa-github"></i><span data-i18n="social_github">GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/humayounkobir/" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-linkedin"></i><span data-i18n="social_linkedin">LinkedIn</span>
+                        </a>
+                        <a href="https://www.behance.net/humayunk45423" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-behance"></i><span data-i18n="social_behance">Behance</span>
+                        </a>
+                        <a href="https://dribbble.com/humayunk45423" target="_blank" rel="noopener noreferrer nofollow"
+                            class="social-item">
+                            <i class="fa-brands fa-dribbble"></i><span data-i18n="social_dribbble">Dribbble</span>
+                        </a>
+                        <a href="https://www.upwork.com/freelancers/~019f94538da41f401d" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-upwork"></i><span data-i18n="social_upwork">Upwork</span>
+                        </a>
+                        <a href="https://www.reddit.com/user/Great_Media_7280/" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-reddit"></i><span data-i18n="social_reddit">Reddit</span>
+                        </a>
+                        <a href="https://discord.gg/t6SJQwdj" target="_blank" rel="noopener noreferrer nofollow"
+                            class="social-item">
+                            <i class="fa-brands fa-discord"></i><span data-i18n="social_discord">Discord</span>
+                        </a>
+                        <a href="https://stackoverflow.com/users/20905785" target="_blank"
+                            rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-brands fa-stack-overflow"></i><span data-i18n="social_stackoverflow">Stack Overflow</span>
+                        </a>
+                        <a href="https://muslimbangla.com/quran" target="_blank" rel="noopener noreferrer nofollow"
+                            class="social-item">
+                            <i class="fa-solid fa-book-open"></i><span data-i18n="social_quran">Read Quran</span>
+                        </a>
+                        <a href="https://drive.google.com/drive/folders/13VIzyy7N3K6mcx4eBnc7XTe4E-SxVGEG"
+                            target="_blank" rel="noopener noreferrer nofollow" class="social-item">
+                            <i class="fa-solid fa-mosque"></i><span data-i18n="social_dawah">Dawah Files</span>
+                        </a>
+                        <a href="files.html" class="social-item">
+                            <i class="fa-solid fa-folder-open"></i><span data-i18n="social_softwarehq">Software HQ</span>
+                        </a>
+                        <a href="https://github.com/humayunk45423/Webpage-2/releases/download/v1.0/Humayoun.Kobir.apk"
+                            class="social-item" aria-label="Download Humayoun Kobir Android App" role="link"
+                            rel="nofollow">
+                            <i class="fa-brands fa-android" aria-hidden="true"></i><span data-i18n="social_app_dl">App Download</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+                <footer class="container footer">
+                    <span data-i18n="footer_copyright">&copy; 2026 Humayoun Kobir. All rights reserved.</span>
+                    <div class="footer-links">
+                        <a href="#top" data-i18n="footer_back_top">Back to top</a>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- ─── View 2: Software HQ View (Instant In-Page SPA Module) ─── -->
+            <div id="softwareHqView" class="spa-view spa-view-active">
+                <div class="container">
+                    <div class="files-layout" id="mainLayout">
+                        <section class="explorer-header">
+                            <div class="header-top">
+                                <h1 class="section-title" data-i18n="shq_title">Software HQ</h1>
+                            </div>
+
+                            <div class="controls-row">
+                                <div class="search-box" role="search">
+                                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                                    <input type="text" id="fileSearch" placeholder="Search essential tools, scripts, commands..." aria-label="Search tools and utilities">
+                                    <kbd class="search-kbd" id="searchKbd" title="Press Ctrl+K or / to search"><span class="kbd-mod">Ctrl</span> K</kbd>
+                                </div>
+
+                                <div class="category-pills" role="tablist" aria-label="Filter software categories">
+                                    <button class="pill active" id="pillAll" data-category="all" role="tab" aria-selected="true" type="button"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <span data-i18n="cat_all">All</span></button>
+                                    
+                                    <div class="category-dropdown-wrapper">
+                                        <button class="pill dropdown-btn" id="catDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select category">
+                                            <i class="fa-solid fa-sliders" id="catDropdownIcon" aria-hidden="true"></i>
+                                            <span id="catDropdownLabel" data-i18n="cat_categories">Categories</span>
+                                            <i class="fa-solid fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                                        </button>
+                                        <div class="category-dropdown-menu" id="catDropdownMenu" role="menu" aria-label="Categories menu">
+                                            <button class="dropdown-item" data-category="utilities" role="menuitem" type="button">
+                                                <i class="fa-solid fa-toolbox" aria-hidden="true"></i> Productivity &amp; Utilities
+                                            </button>
+                                            <button class="dropdown-item" data-category="system" role="menuitem" type="button">
+                                                <i class="fa-solid fa-sliders" aria-hidden="true"></i> System &amp; Maintenance
+                                            </button>
+                                            <button class="dropdown-item" data-category="storage" role="menuitem" type="button">
+                                                <i class="fa-solid fa-hard-drive" aria-hidden="true"></i> Storage &amp; Recovery
+                                            </button>
+                                            <button class="dropdown-item" data-category="optimization" role="menuitem" type="button">
+                                                <i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i> Optimization &amp; Gaming
+                                            </button>
+                                            <button class="dropdown-item" data-category="diagnostics" role="menuitem" type="button">
+                                                <i class="fa-solid fa-microchip" aria-hidden="true"></i> Hardware &amp; Diagnostics
+                                            </button>
+                                            <button class="dropdown-item" data-category="creative" role="menuitem" type="button">
+                                                <i class="fa-solid fa-palette" aria-hidden="true"></i> Creative &amp; Design
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div id="explorerView" class="active"></div>
+
+                        <div id="detailView">
+                            <div class="detail-page" id="detailContent"></div>
+                        </div>
+
+                        <!-- Semantic Search & Entity Indexing Landmark (Accessible to Screen Readers & Web Crawlers) -->
+                        <section class="sr-only" aria-label="Software HQ Directory Overview and Entity Index">
+                            <h2>Software HQ by Humayoun Kobir (Humayun Kabir / হুমায়ূন কবির)</h2>
+                            <p>
+                                Welcome to Software HQ (SoftwareHQ), the official software, utility, and PC optimization repository created and curated by Humayoun Kobir (also known as Humayun Kabir, Humayun Kobir, Humain Kabir, and in Bengali as মোঃ হুমায়ুন কবির / হুমায়ুন কবির সফটওয়্যার এইচকিউ).
+                            </p>
+                            <p>
+                                Software HQ provides verified utilities, Windows optimization scripts, hardware diagnostic tools (CrystalDiskInfo, CrystalDiskMark, HWiNFO, Custom Resolution Utility CRU, Autoruns, Process Explorer, Process Monitor), productivity suites (FontLab, Foxit PDF Editor), uninstaller solutions (Revo Uninstaller), data recovery software, and DPI bypass utilities (GoodByeDPI) for power users, developers, and engineers worldwide.
+                            </p>
+                            <p>
+                                Indexed queries: Humayoun Kobir Software HQ, Humayun Kabir Software HQ, Software HQ Humayun Kabir, Software HQ Humayoun Kobir, SoftwareHQ Humayun Kabir, হুমায়ূন কবির সফটওয়্যার এইচকিউ, হুমায়ুন কবির সফটওয়্যার এইচকিউ, সফটওয়্যার এইচকিউ হুমায়ুন কবির, Humain Kabir Software HQ, Humayun Kabir Tools, Humayoun Kobir PC Optimization.
+                            </p>
+                        </section>
+                    </div>
+                </div>
+                <footer class="footer container">
+                    <p data-i18n="footer_copyright">&copy; 2026 Humayoun Kobir. All rights reserved.</p>
+                </footer>
             </div>
         </main>
-
-        <footer class="footer container">
-            <p data-i18n="footer_copyright">&copy; 2026 Humayoun Kobir. All rights reserved.</p>
-        </footer>
     </div>
 
     <div class="copy-toast" id="copyToast" role="status" aria-live="polite"><i class="fa-solid fa-circle-check"></i> Copied to clipboard!</div>
 
-    
-    
+    <script src="script.js?v=28" defer></script>
+    <script src="files.js?v=28" defer></script>
 
-    <script src="files.js?v=26" defer></script>
+
+    <!-- Interactive Photo Viewer / Lightbox Modal -->
+    <div id="photoViewerModal" class="photo-viewer-modal" role="dialog" aria-modal="true" aria-label="Photo Viewer" hidden>
+        <!-- Blurred Backdrop -->
+        <div class="photo-viewer-backdrop" id="photoViewerBackdrop"></div>
+
+        <!-- Header Bar -->
+        <header class="photo-viewer-header">
+            <div class="photo-viewer-info">
+                <div class="photo-viewer-badge">
+                    <i class="fa-solid fa-image" aria-hidden="true"></i>
+                    <span id="photoViewerCounter">1 / 1</span>
+                </div>
+                <div class="photo-viewer-text">
+                    <h3 id="photoViewerTitle" class="photo-viewer-title">Project Graphic</h3>
+                    <span id="photoViewerSubtitle" class="photo-viewer-subtitle">Design Preview</span>
+                </div>
+            </div>
+
+            <div class="photo-viewer-actions">
+                <!-- Zoom Controls -->
+                <div class="photo-viewer-zoom-bar" role="toolbar" aria-label="Zoom controls">
+                    <button type="button" class="photo-viewer-btn" id="photoViewerZoomOut" title="Zoom Out (-)" aria-label="Zoom Out">
+                        <i class="fa-solid fa-minus" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="photo-viewer-btn zoom-level-btn" id="photoViewerZoomReset" title="Reset Zoom (100%)" aria-label="Reset Zoom">
+                        <span id="photoViewerZoomText">100%</span>
+                    </button>
+                    <button type="button" class="photo-viewer-btn" id="photoViewerZoomIn" title="Zoom In (+)" aria-label="Zoom In">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <!-- Download / Open Original -->
+                <a id="photoViewerDownload" href="#" download class="photo-viewer-btn" title="Download Image" aria-label="Download Image" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-download" aria-hidden="true"></i>
+                </a>
+
+                <!-- Top Right Cross / Close Button -->
+                <button type="button" class="photo-viewer-btn photo-viewer-close" id="photoViewerClose" title="Close (Esc)" aria-label="Close viewer">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Stage -->
+        <div class="photo-viewer-stage" id="photoViewerStage">
+            <button type="button" class="photo-viewer-nav-btn prev" id="photoViewerPrev" title="Previous Image (Left Arrow)" aria-label="Previous image">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+
+            <div class="photo-viewer-viewport" id="photoViewerViewport">
+                <div class="photo-viewer-track" id="photoViewerTrack">
+                    <!-- Dynamic 3-slide window (prev, curr, next) -->
+                </div>
+            </div>
+
+            <button type="button" class="photo-viewer-nav-btn next" id="photoViewerNext" title="Next Image (Right Arrow)" aria-label="Next image">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <!-- Footer Hint -->
+        <footer class="photo-viewer-footer">
+            <span class="photo-viewer-hint">
+                <kbd>Scroll</kbd> or <kbd>Double-click</kbd> to zoom &bull; <kbd>Drag</kbd> to pan &bull; <kbd>←</kbd> <kbd>→</kbd> navigate &bull; <kbd>Esc</kbd> to close
+            </span>
+        </footer>
+    </div>
+
     <!-- Vercel Web Analytics -->
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
     <script id="sl-critical-js">

@@ -3,6 +3,8 @@
  * Optimized for maximum performance, bilingual support (EN/BN), and smooth transitions.
  */
 
+window.__portfolioScriptLoaded = true;
+
 // Pre-warm Hind Siliguri font into browser memory immediately
 if (typeof document !== 'undefined' && document.fonts) {
     document.fonts.load('400 1em "Hind Siliguri"');
@@ -110,7 +112,6 @@ const translations = {
         lnk_card_design: "Business Card Design",
         lnk_cash_memo: "Cash Memo Design",
 
-
         // Social Media Grid
         social_github: "GitHub",
         social_linkedin: "LinkedIn",
@@ -151,6 +152,18 @@ const translations = {
         contact_text: "Open for collaborations, freelance projects, or just a coffee chat about tech and design.",
         contact_email_btn: "Click here to Email",
         contact_wa_btn: "Click here to WhatsApp",
+
+        // Software HQ
+        shq_title: "Software HQ",
+        cat_all: "All",
+        cat_categories: "Categories",
+        cat_select: "Select Category",
+        btn_back_explorer: "Back to Explorer",
+        btn_download_file: "Download File",
+        btn_open_resource: "Open Resource",
+        btn_copy_cmd: "Copy Command",
+        btn_copy_code: "Copy Code",
+        toast_copied: "Copied to clipboard!",
 
         // Footer
         footer_copyright: "© 2026 Humayoun Kobir. All rights reserved.",
@@ -295,6 +308,18 @@ const translations = {
         contact_email_btn: "ইমেইল করতে ক্লিক করুন",
         contact_wa_btn: "হোয়াটসঅ্যাপ করতে ক্লিক করুন",
 
+        // Software HQ
+        shq_title: "সফটওয়্যার HQ",
+        cat_all: "সকল",
+        cat_categories: "ক্যাটাগরি",
+        cat_select: "ক্যাটাগরি বাছাই করুন",
+        btn_back_explorer: "ভান্ডারে ফিরে যান",
+        btn_download_file: "ফাইল ডাউনলোড",
+        btn_open_resource: "রিসোর্স খুলুন",
+        btn_copy_cmd: "কমান্ড কপি",
+        btn_copy_code: "কোড কপি",
+        toast_copied: "ক্লিপবোর্ডে কপি হয়েছে!",
+
         // Footer
         footer_copyright: "© ২০২৬ হুমায়ূন কবির। সর্বস্বত্ব সংরক্ষিত।",
         footer_back_top: "উপরে ফিরে যান"
@@ -382,62 +407,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Navigation metrics already initialized and synced above
-
-    let lastGliderIdx = -1;
-
-    const syncActiveGlider = () => {
-        if (!glider || window.innerWidth < 1024) return;
-        const activeLink = document.querySelector('.nav a.active') || navLinks[0];
-        if (activeLink) {
-            glider.style.transform = `translate3d(${Math.round(activeLink.offsetLeft)}px, 0, 0)`;
-            glider.style.width = `${Math.round(activeLink.offsetWidth)}px`;
-            glider.classList.add('visible');
-        }
-    };
-
-    const updateGliderSync = (force = false) => {
-        if (!glider || window.innerWidth < 1024) return;
-        if (softwareHqLink && softwareHqLink.classList.contains('active')) {
-            syncActiveGlider();
-            return;
-        }
-
-        const sy = state ? state.scrollY : (window.scrollY || window.pageYOffset || 0);
-        const sMetrics = cachedSectionMetrics;
-        const nMetrics = cachedNavMetrics;
-
-        if (!sMetrics.length || !nMetrics.length) return;
-
-        let activeIdx = 0;
-        const bodyHeight = (document.body && document.body.offsetHeight) || document.documentElement.scrollHeight || 0;
-        const isAtBottom = (window.innerHeight + sy) >= bodyHeight - 80;
-
-        if (isAtBottom) {
-            activeIdx = sMetrics.length - 1;
-        } else {
-            for (let i = sMetrics.length - 1; i >= 0; i--) {
-                if (sy >= sMetrics[i].target - 20) {
-                    activeIdx = i;
-                    break;
-                }
-            }
-        }
-
-        if (!force && activeIdx === lastGliderIdx) return;
-        lastGliderIdx = activeIdx;
-
-        const target = nMetrics[activeIdx];
-        if (target) {
-            glider.style.transform = `translate3d(${Math.round(target.left)}px, 0, 0)`;
-            glider.style.width = `${Math.round(target.width)}px`;
-            glider.classList.add('visible');
-
-            navLinks.forEach((link, idx) => {
-                link.classList.toggle('active', idx === activeIdx);
-            });
-        }
-    };
+    // Glider navigation engine functions (defined with persistent caching below)
+    let syncActiveGlider = () => {};
+    let updateGliderSync = () => {};
+    let refreshMetrics = () => {};
 
     const applyLanguage = (lang) => {
         activeLang = lang;
@@ -459,6 +432,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         updateLangToggleUi(lang);
+
+        if (typeof window.applySoftwareHqLanguage === 'function') {
+            window.applySoftwareHqLanguage(lang);
+        }
 
         // Update Typing animation dataset
         words = typingWords[lang] || typingWords.en;
@@ -758,36 +735,118 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 360);
     }
 
-    const navLinks = document.querySelectorAll('.nav a[href^="#"]');
-    const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute('href'))).filter(s => s);
+    // =========================================================================
+    // 7. Ultra-Fluid Dual-View SPA Router & Persistent Glider Engine
+    // =========================================================================
+    const navLinks = Array.from(document.querySelectorAll('.nav a:not(.glider)'));
+    const portfolioLinks = Array.from(document.querySelectorAll('.nav a[href^="#"]'));
+    const sections = portfolioLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(s => s);
     const glider = document.getElementById('navGlider');
-    const softwareHqLink = document.querySelector('.nav a[href="files.html"]');
+    const softwareHqLink = document.getElementById('navSoftwareHq') || document.querySelector('.nav a[href*="files"]');
+    const portfolioView = document.getElementById('portfolioView');
+    const softwareHqView = document.getElementById('softwareHqView');
+    const mobileSoftwareHqLink = document.getElementById('mobileNavSoftwareHq');
 
-    let cachedNavMetrics = [];
+    let isNavigating = false;
+    let isSoftwareHqActive = false;
+    let lastGliderIdx = -1;
+
+    let cachedNavMetrics = new Map();
     let cachedSectionMetrics = [];
 
-    const refreshMetrics = () => {
+    refreshMetrics = () => {
         const scrollMargin = 72;
-        cachedNavMetrics = Array.from(navLinks).map(link => ({
-            left: link.offsetLeft,
-            width: link.offsetWidth
-        }));
+        navLinks.forEach(link => {
+            if (link.offsetWidth > 0) {
+                cachedNavMetrics.set(link, {
+                    left: link.offsetLeft,
+                    width: link.offsetWidth
+                });
+            }
+        });
         cachedSectionMetrics = sections.map(section => ({
             target: Math.max(0, section.offsetTop - scrollMargin)
         }));
     };
 
+    const setGliderTo = (targetLink, immediate = false) => {
+        if (!glider || window.innerWidth < 1024 || !targetLink) return;
+        let m = cachedNavMetrics.get(targetLink);
+        if (!m || m.width <= 0) {
+            m = { left: targetLink.offsetLeft, width: targetLink.offsetWidth };
+            if (m.width > 0) cachedNavMetrics.set(targetLink, m);
+        }
+        if (!m || m.width <= 0) return;
+
+        navLinks.forEach(l => l.classList.toggle('active', l === targetLink));
+
+        if (immediate) {
+            glider.style.transition = 'none';
+        }
+        glider.style.transform = `translate3d(${Math.round(m.left)}px, 0, 0)`;
+        glider.style.width = `${Math.round(m.width)}px`;
+        glider.classList.add('visible');
+
+        if (immediate) {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    if (glider) glider.style.transition = '';
+                });
+            });
+        }
+    };
+
+    syncActiveGlider = () => {
+        if (isSoftwareHqActive && softwareHqLink) {
+            setGliderTo(softwareHqLink, false);
+        } else {
+            const activeLink = document.querySelector('.nav a.active') || portfolioLinks[0];
+            setGliderTo(activeLink, false);
+        }
+    };
+
+    updateGliderSync = (force = false) => {
+        if (!glider || window.innerWidth < 1024) return;
+        if (isSoftwareHqActive || isNavigating) return;
+
+        const sy = state ? state.scrollY : (window.scrollY || window.pageYOffset || 0);
+        const sMetrics = cachedSectionMetrics;
+        if (!sMetrics.length || !portfolioLinks.length) return;
+
+        let activeIdx = 0;
+        const bodyHeight = (document.body && document.body.offsetHeight) || document.documentElement.scrollHeight || 0;
+        const isAtBottom = (window.innerHeight + sy) >= bodyHeight - 80;
+
+        if (isAtBottom) {
+            activeIdx = sMetrics.length - 1;
+        } else {
+            for (let i = sMetrics.length - 1; i >= 0; i--) {
+                if (sy >= sMetrics[i].target - 20) {
+                    activeIdx = i;
+                    break;
+                }
+            }
+        }
+
+        if (!force && activeIdx === lastGliderIdx) return;
+        lastGliderIdx = activeIdx;
+
+        const targetLink = portfolioLinks[activeIdx];
+        if (targetLink) {
+            setGliderTo(targetLink, false);
+        }
+    };
+
     const initGliderTarget = () => {
         if (!glider || window.innerWidth < 1024) return;
         refreshMetrics();
-        if (!cachedNavMetrics.length) return;
 
-        let activeIdx = 0;
+        let activeLink = portfolioLinks[0];
         const currentHash = window.location.hash;
-        if (currentHash) {
-            const hashIdx = Array.from(navLinks).findIndex(l => l.getAttribute('href') === currentHash);
-            if (hashIdx !== -1) {
-                activeIdx = hashIdx;
+        if (currentHash && currentHash !== '#top') {
+            const found = portfolioLinks.find(l => l.getAttribute('href') === currentHash);
+            if (found) {
+                activeLink = found;
                 const targetSec = document.querySelector(currentHash);
                 if (targetSec) {
                     const targetScroll = Math.max(0, targetSec.offsetTop - 72);
@@ -801,57 +860,205 @@ document.addEventListener('DOMContentLoaded', () => {
             if (cachedSectionMetrics.length) {
                 for (let i = cachedSectionMetrics.length - 1; i >= 0; i--) {
                     if (currentScroll >= cachedSectionMetrics[i].target - 20) {
-                        activeIdx = i;
+                        activeLink = portfolioLinks[i] || activeLink;
                         break;
                     }
                 }
             }
         }
 
-        if (cachedNavMetrics[activeIdx]) {
-            const target = cachedNavMetrics[activeIdx];
-            glider.style.transition = 'none';
-            glider.style.transform = `translate3d(${Math.round(target.left)}px, 0, 0)`;
-            glider.style.width = `${Math.round(target.width)}px`;
-            glider.classList.add('visible');
+        setGliderTo(activeLink, true);
+    };
 
-            navLinks.forEach((link, idx) => {
-                link.classList.toggle('active', idx === activeIdx);
-            });
+    const showSoftwareHqView = (updateHistory = true) => {
+        if (!softwareHqView) return;
+        isSoftwareHqActive = true;
+        isNavigating = true;
 
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    if (glider) glider.style.transition = '';
-                    document.documentElement.style.scrollBehavior = '';
-                });
-            });
+        // 1. Instantly move glider to Software HQ with pure 0.22s cubic-bezier glide
+        if (softwareHqLink) {
+            setGliderTo(softwareHqLink, false);
+        }
+
+        // 2. Seamless view transition with GPU microfade
+        if (portfolioView) {
+            portfolioView.classList.remove('spa-view-active', 'spa-view-fading-in');
+            portfolioView.classList.add('spa-view-hidden');
+        }
+        softwareHqView.classList.remove('spa-view-hidden');
+        softwareHqView.classList.add('spa-view-active', 'spa-view-fading-in');
+        setTimeout(() => softwareHqView.classList.remove('spa-view-fading-in'), 230);
+
+        // 3. Document Title
+        const isBn = root.getAttribute('data-lang') === 'bn' || root.getAttribute('lang') === 'bn';
+        document.title = isBn
+            ? "সফটওয়্যার HQ | হুমায়ূন কবির (Humayun Kabir) ভান্ডার"
+            : "Software HQ | Humayoun Kobir (Humayun Kabir) Repository";
+
+        // 4. Update History State
+        if (updateHistory) {
+            history.pushState({ view: 'softwarehq' }, '', 'files.html');
+        }
+
+        // 5. Scroll cleanly to top (instant)
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        state.scrollY = 0;
+        state.lastScrollY = 0;
+
+        // 6. Non-blocking ensure explorer cards are rendered
+        if (typeof window.renderSoftwareHqExplorer === 'function') {
+            window.renderSoftwareHqExplorer(false);
+        }
+
+        setTimeout(() => {
+            isNavigating = false;
+        }, 300);
+    };
+
+    const showPortfolioView = (targetHash = '#about', updateHistory = true) => {
+        if (!portfolioView) return;
+        isSoftwareHqActive = false;
+        isNavigating = true;
+
+        const validHash = targetHash && targetHash !== '#top' ? targetHash : '#about';
+        const targetLink = document.querySelector(`.nav a[href="${validHash}"]`) || portfolioLinks[0];
+
+        // 1. Instantly glide pill directly to the destination tab (no intermediate jumping)
+        if (targetLink) {
+            setGliderTo(targetLink, false);
+        }
+
+        // 2. Seamless view transition with GPU microfade
+        if (softwareHqView) {
+            softwareHqView.classList.remove('spa-view-active', 'spa-view-fading-in');
+            softwareHqView.classList.add('spa-view-hidden');
+        }
+        portfolioView.classList.remove('spa-view-hidden');
+        portfolioView.classList.add('spa-view-active', 'spa-view-fading-in');
+        setTimeout(() => portfolioView.classList.remove('spa-view-fading-in'), 230);
+
+        // 3. Document Title
+        const isBn = root.getAttribute('data-lang') === 'bn' || root.getAttribute('lang') === 'bn';
+        document.title = isBn
+            ? "হুমায়ূন কবির | ডিপ্লোমা ইঞ্জিনিয়ার ও ডিজাইনার পোর্টফোলিও"
+            : "Humayoun Kobir | Diploma Engineer & Designer Portfolio";
+
+        // 4. Update History State
+        if (updateHistory) {
+            const cleanHash = targetHash && targetHash !== '#top' ? targetHash : '';
+            const newUrl = cleanHash ? ('index.html' + cleanHash) : 'index.html';
+            history.pushState({ view: 'portfolio', hash: targetHash }, '', newUrl);
+        }
+
+        // 5. Recompute section metrics now that portfolioView is visible
+        refreshMetrics();
+
+        // 6. Smooth scroll to target section
+        if (targetHash === '#top') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            state.scrollY = 0;
+            state.lastScrollY = 0;
+            setTimeout(() => { isNavigating = false; }, 400);
+        } else {
+            const targetSec = document.querySelector(validHash);
+            if (targetSec) {
+                const targetTop = Math.max(0, targetSec.offsetTop - 72);
+                window.scrollTo({ top: targetTop, behavior: 'smooth' });
+                state.scrollY = targetTop;
+                state.lastScrollY = targetTop;
+                setTimeout(() => { isNavigating = false; }, 500);
+            } else {
+                isNavigating = false;
+            }
         }
     };
 
-    // updateGliderSync already defined above
-
-    if (softwareHqLink && !softwareHqLink.classList.contains('active')) {
+    // Software HQ Tab Click
+    if (softwareHqLink) {
         softwareHqLink.addEventListener('click', (e) => {
-            navLinks.forEach(l => l.classList.remove('active'));
-            softwareHqLink.classList.add('active');
-            if (glider && window.innerWidth >= 1024) {
-                glider.style.transform = `translate3d(${Math.round(softwareHqLink.offsetLeft)}px, 0, 0)`;
-                glider.style.width = `${Math.round(softwareHqLink.offsetWidth)}px`;
-                glider.classList.add('visible');
-            }
-            sessionStorage.setItem('page-transition-dir', 'to-files');
-            // When native Cross-Document View Transitions are supported, let browser navigate instantly without delay
-            if ('startViewTransition' in document) {
-                return;
-            }
             e.preventDefault();
-            if (pageMain) {
-                pageMain.classList.add('page-exit-left');
+            if (!isSoftwareHqActive) {
+                showSoftwareHqView(true);
             }
-            setTimeout(() => {
-                window.location.href = softwareHqLink.href;
-            }, 180);
         });
+    }
+
+    // Mobile Software HQ Link Click
+    if (mobileSoftwareHqLink) {
+        mobileSoftwareHqLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeMenu();
+            if (!isSoftwareHqActive) {
+                showSoftwareHqView(true);
+            }
+        });
+    }
+
+    // Portfolio Navigation Links (About, Skills, Projects, Contact)
+    portfolioLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetHash = link.getAttribute('href');
+            if (isSoftwareHqActive) {
+                e.preventDefault();
+                showPortfolioView(targetHash, true);
+            } else {
+                isNavigating = true;
+                setGliderTo(link, false);
+                setTimeout(() => { isNavigating = false; }, 500);
+            }
+        });
+    });
+
+    // Mobile Expand Navigation Links
+    if (mobileNavContent) {
+        mobileNavContent.querySelectorAll('.nav-expand-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href === 'files.html' || href === '#softwarehq') {
+                    e.preventDefault();
+                    closeMenu();
+                    showSoftwareHqView(true);
+                } else if (href && href.startsWith('#')) {
+                    if (isSoftwareHqActive) {
+                        e.preventDefault();
+                        closeMenu();
+                        showPortfolioView(href, true);
+                    } else {
+                        closeMenu();
+                    }
+                }
+            });
+        });
+    }
+
+    // Brand Logo Click
+    const brandLink = document.querySelector('.header .brand');
+    if (brandLink) {
+        brandLink.addEventListener('click', (e) => {
+            if (isSoftwareHqActive) {
+                e.preventDefault();
+                showPortfolioView('#top', true);
+            }
+        });
+    }
+
+    // History Popstate Navigation (Seamless Back/Forward)
+    window.addEventListener('popstate', (e) => {
+        const isFilesUrl = window.location.pathname.endsWith('files.html') || (e.state && e.state.view === 'softwarehq');
+        if (isFilesUrl) {
+            showSoftwareHqView(false);
+        } else {
+            const targetHash = (e.state && e.state.hash) || window.location.hash || '#about';
+            showPortfolioView(targetHash, false);
+        }
+    });
+
+    // Initial Route Check (If landing directly on Software HQ view)
+    const initialIsFiles = window.location.pathname.endsWith('files.html') || 
+                           window.location.search.includes('view=files') || 
+                           window.location.hash === '#softwarehq';
+    if (initialIsFiles) {
+        showSoftwareHqView(false);
     }
 
     // Apply saved or initial language
@@ -866,12 +1073,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.fonts.ready.then(() => {
             computePositions();
             refreshMetrics();
+            syncActiveGlider();
             updateGliderSync();
         });
     }
     window.addEventListener('load', () => {
         computePositions();
         refreshMetrics();
+        syncActiveGlider();
         updateGliderSync();
     });
 

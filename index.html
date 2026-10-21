@@ -365,18 +365,8 @@
         media="print" onload="this.media='all'">
 
     <link rel="stylesheet" href="style.css?v=29">
-    <!-- Instant Page Transitions: Chromium Speculation Rules -->
-    <script type="speculationrules">
-    {
-      "prerender": [
-        {
-          "source": "list",
-          "urls": ["files.html"],
-          "eagerness": "moderate"
-        }
-      ]
-    }
-    </script>
+    <link rel="stylesheet" href="files.css?v=2">
+
     <style id="sl-critical-css">
 /* ==========================================================================
    HUMAYOUN KOBIR PORTFOLIO — BESPOKE SITE LOADER (v1.0.0)
@@ -886,7 +876,7 @@ html.sl-lock {
                                 <a href="#skills" class="nav-expand-link"><i class="fa-solid fa-layer-group"></i><span data-i18n="nav_skills">Skills</span></a>
                                 <a href="#projects" class="nav-expand-link"><i class="fa-solid fa-briefcase"></i><span data-i18n="nav_projects">Projects</span></a>
                                 <a href="#contact" class="nav-expand-link"><i class="fa-solid fa-paper-plane"></i><span data-i18n="nav_contact">Contact</span></a>
-                                <a href="files.html" class="nav-expand-link"><i class="fa-solid fa-folder-open"></i><span data-i18n="nav_softwarehq">Software HQ</span></a>
+                                <a href="files.html" class="nav-expand-link" id="mobileNavSoftwareHq"><i class="fa-solid fa-folder-open"></i><span data-i18n="nav_softwarehq">Software HQ</span></a>
                             </nav>
                         </div>
 
@@ -930,7 +920,9 @@ html.sl-lock {
         </header>
 
         <main class="page-main">
-            <section class="section hero" id="about" style="content-visibility: visible; contain: none;">
+            <!-- ─── View 1: Portfolio View (Hero, Skills, Projects, Contact, Footer) ─── -->
+            <div id="portfolioView" class="spa-view spa-view-active">
+                <section class="section hero" id="about" style="content-visibility: visible; contain: none;">
                 <div class="container hero-grid">
                     <div class="hero-copy reveal">
                         <h2 data-i18n="hero_greeting">Assalamu Alaikum (Greetings)!</h2>
@@ -1382,17 +1374,96 @@ html.sl-lock {
                 </div>
             </div>
         </section>
-        </main>
-
-        <footer class="container footer">
-            <span data-i18n="footer_copyright">&copy; 2026 Humayoun Kobir. All rights reserved.</span>
-            <div class="footer-links">
-                <a href="#top" data-i18n="footer_back_top">Back to top</a>
+                <footer class="container footer">
+                    <span data-i18n="footer_copyright">&copy; 2026 Humayoun Kobir. All rights reserved.</span>
+                    <div class="footer-links">
+                        <a href="#top" data-i18n="footer_back_top">Back to top</a>
+                    </div>
+                </footer>
             </div>
-        </footer>
+
+            <!-- ─── View 2: Software HQ View (Instant In-Page SPA Module) ─── -->
+            <div id="softwareHqView" class="spa-view spa-view-hidden">
+                <div class="container">
+                    <div class="files-layout" id="mainLayout">
+                        <section class="explorer-header">
+                            <div class="header-top">
+                                <h1 class="section-title" data-i18n="shq_title">Software HQ</h1>
+                            </div>
+
+                            <div class="controls-row">
+                                <div class="search-box" role="search">
+                                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                                    <input type="text" id="fileSearch" placeholder="Search essential tools, scripts, commands..." aria-label="Search tools and utilities">
+                                    <kbd class="search-kbd" id="searchKbd" title="Press Ctrl+K or / to search"><span class="kbd-mod">Ctrl</span> K</kbd>
+                                </div>
+
+                                <div class="category-pills" role="tablist" aria-label="Filter software categories">
+                                    <button class="pill active" id="pillAll" data-category="all" role="tab" aria-selected="true" type="button"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <span data-i18n="cat_all">All</span></button>
+                                    
+                                    <div class="category-dropdown-wrapper">
+                                        <button class="pill dropdown-btn" id="catDropdownBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select category">
+                                            <i class="fa-solid fa-sliders" id="catDropdownIcon" aria-hidden="true"></i>
+                                            <span id="catDropdownLabel" data-i18n="cat_categories">Categories</span>
+                                            <i class="fa-solid fa-chevron-down chevron-icon" aria-hidden="true"></i>
+                                        </button>
+                                        <div class="category-dropdown-menu" id="catDropdownMenu" role="menu" aria-label="Categories menu">
+                                            <button class="dropdown-item" data-category="utilities" role="menuitem" type="button">
+                                                <i class="fa-solid fa-toolbox" aria-hidden="true"></i> Productivity &amp; Utilities
+                                            </button>
+                                            <button class="dropdown-item" data-category="system" role="menuitem" type="button">
+                                                <i class="fa-solid fa-sliders" aria-hidden="true"></i> System &amp; Maintenance
+                                            </button>
+                                            <button class="dropdown-item" data-category="storage" role="menuitem" type="button">
+                                                <i class="fa-solid fa-hard-drive" aria-hidden="true"></i> Storage &amp; Recovery
+                                            </button>
+                                            <button class="dropdown-item" data-category="optimization" role="menuitem" type="button">
+                                                <i class="fa-solid fa-bolt-lightning" aria-hidden="true"></i> Optimization &amp; Gaming
+                                            </button>
+                                            <button class="dropdown-item" data-category="diagnostics" role="menuitem" type="button">
+                                                <i class="fa-solid fa-microchip" aria-hidden="true"></i> Hardware &amp; Diagnostics
+                                            </button>
+                                            <button class="dropdown-item" data-category="creative" role="menuitem" type="button">
+                                                <i class="fa-solid fa-palette" aria-hidden="true"></i> Creative &amp; Design
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div id="explorerView" class="active"></div>
+
+                        <div id="detailView">
+                            <div class="detail-page" id="detailContent"></div>
+                        </div>
+
+                        <!-- Semantic Search & Entity Indexing Landmark (Accessible to Screen Readers & Web Crawlers) -->
+                        <section class="sr-only" aria-label="Software HQ Directory Overview and Entity Index">
+                            <h2>Software HQ by Humayoun Kobir (Humayun Kabir / হুমায়ূন কবির)</h2>
+                            <p>
+                                Welcome to Software HQ (SoftwareHQ), the official software, utility, and PC optimization repository created and curated by Humayoun Kobir (also known as Humayun Kabir, Humayun Kobir, Humain Kabir, and in Bengali as মোঃ হুমায়ুন কবির / হুমায়ুন কবির সফটওয়্যার এইচকিউ).
+                            </p>
+                            <p>
+                                Software HQ provides verified utilities, Windows optimization scripts, hardware diagnostic tools (CrystalDiskInfo, CrystalDiskMark, HWiNFO, Custom Resolution Utility CRU, Autoruns, Process Explorer, Process Monitor), productivity suites (FontLab, Foxit PDF Editor), uninstaller solutions (Revo Uninstaller), data recovery software, and DPI bypass utilities (GoodByeDPI) for power users, developers, and engineers worldwide.
+                            </p>
+                            <p>
+                                Indexed queries: Humayoun Kobir Software HQ, Humayun Kabir Software HQ, Software HQ Humayun Kabir, Software HQ Humayoun Kobir, SoftwareHQ Humayun Kabir, হুমায়ূন কবির সফটওয়্যার এইচকিউ, হুমায়ুন কবির সফটওয়্যার এইচকিউ, সফটওয়্যার এইচকিউ হুমায়ুন কবির, Humain Kabir Software HQ, Humayun Kabir Tools, Humayoun Kobir PC Optimization.
+                            </p>
+                        </section>
+                    </div>
+                </div>
+                <footer class="footer container">
+                    <p data-i18n="footer_copyright">&copy; 2026 Humayoun Kobir. All rights reserved.</p>
+                </footer>
+            </div>
+        </main>
     </div>
 
-    <script src="script.js?v=26" defer></script>
+    <div class="copy-toast" id="copyToast" role="status" aria-live="polite"><i class="fa-solid fa-circle-check"></i> Copied to clipboard!</div>
+
+    <script src="script.js?v=28" defer></script>
+    <script src="files.js?v=28" defer></script>
 
 
     <!-- Interactive Photo Viewer / Lightbox Modal -->

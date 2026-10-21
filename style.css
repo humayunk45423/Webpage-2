@@ -1179,20 +1179,7 @@
             }
         }
 
-        /* Native Hardware Cross-Document & Same-Document View Transitions */
-        @view-transition {
-            navigation: auto;
-        }
-
-        #siteHeader {
-            view-transition-name: site-header;
-        }
-
-        ::view-transition-old(root),
-        ::view-transition-new(root) {
-            animation-duration: 0.22s;
-            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        /* Glider Navigation Hover & Smooth Pill Physics */
 
         .nav a:not(.active):hover {
             color: var(--text);
