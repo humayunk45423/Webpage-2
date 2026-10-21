@@ -384,6 +384,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Navigation metrics already initialized and synced above
 
+    let lastGliderIdx = -1;
+
     const syncActiveGlider = () => {
         if (!glider || window.innerWidth < 1024) return;
         const activeLink = document.querySelector('.nav a.active') || navLinks[0];
@@ -394,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const updateGliderSync = () => {
+    const updateGliderSync = (force = false) => {
         if (!glider || window.innerWidth < 1024) return;
         if (softwareHqLink && softwareHqLink.classList.contains('active')) {
             syncActiveGlider();
@@ -421,6 +423,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+
+        if (!force && activeIdx === lastGliderIdx) return;
+        lastGliderIdx = activeIdx;
 
         const target = nMetrics[activeIdx];
         if (target) {
@@ -652,8 +657,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    revealObserver.unobserve(entry.target);
+                    const el = entry.target;
+                    el.classList.add('animating', 'active');
+                    revealObserver.unobserve(el);
+                    el.addEventListener('transitionend', () => {
+                        el.classList.remove('animating');
+                    }, { once: true });
                 }
             });
         }, observerOptions);
@@ -823,7 +832,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (softwareHqLink && !softwareHqLink.classList.contains('active')) {
         softwareHqLink.addEventListener('click', (e) => {
-            e.preventDefault();
             navLinks.forEach(l => l.classList.remove('active'));
             softwareHqLink.classList.add('active');
             if (glider && window.innerWidth >= 1024) {
@@ -832,12 +840,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 glider.classList.add('visible');
             }
             sessionStorage.setItem('page-transition-dir', 'to-files');
+            // When native Cross-Document View Transitions are supported, let browser navigate instantly without delay
+            if ('startViewTransition' in document) {
+                return;
+            }
+            e.preventDefault();
             if (pageMain) {
                 pageMain.classList.add('page-exit-left');
             }
             setTimeout(() => {
                 window.location.href = softwareHqLink.href;
-            }, 200);
+            }, 180);
         });
     }
 
@@ -1182,6 +1195,44 @@ document.addEventListener('DOMContentLoaded', () => {
             }, { passive: false });
 
             // Desktop Click & Drag (Pan when zoomed, Swipe when unzoomed)
+            const onMouseMove = (e) => {
+                if (isMousePanning && scale > 1.05) {
+                    panX = prevPanX + (e.clientX - panStartX);
+                    panY = prevPanY + (e.clientY - panStartY);
+                    updateTransform(false);
+                } else if (isMouseSwiping && scale <= 1.05 && track) {
+                    swipeDeltaX = e.clientX - swipeStartX;
+                    track.style.transform = `translate3d(${swipeDeltaX}px, 0, 0)`;
+                }
+            };
+
+            const onMouseUp = () => {
+                window.removeEventListener('mousemove', onMouseMove);
+                window.removeEventListener('mouseup', onMouseUp);
+
+                if (isMousePanning) {
+                    isMousePanning = false;
+                    const frame = getCurrentFrame();
+                    if (frame) frame.classList.remove('is-dragging');
+                }
+                if (isMouseSwiping && track) {
+                    isMouseSwiping = false;
+                    const duration = Math.max(Date.now() - swipeStartTime, 1);
+                    const velocity = Math.abs(swipeDeltaX) / duration;
+                    const threshold = Math.min(window.innerWidth * 0.2, 80);
+
+                    if (gallery.length > 1 && (swipeDeltaX < -threshold || (swipeDeltaX < -25 && velocity > 0.45))) {
+                        nextImage();
+                    } else if (gallery.length > 1 && (swipeDeltaX > threshold || (swipeDeltaX > 25 && velocity > 0.45))) {
+                        prevImage();
+                    } else {
+                        track.style.transition = 'transform 0.2s ease-out';
+                        track.style.transform = 'translate3d(0, 0, 0)';
+                        setTimeout(() => { if (track) track.style.willChange = 'auto'; }, 200);
+                    }
+                }
+            };
+
             stage.addEventListener('mousedown', (e) => {
                 if (e.button !== 0 || isTransitioning) return;
                 if (e.target.closest('.photo-viewer-nav-btn') || e.target.closest('.photo-viewer-header') || e.target.closest('.photo-viewer-footer')) return;
@@ -1204,41 +1255,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         track.style.willChange = 'transform';
                     }
                 }
-            });
 
-            window.addEventListener('mousemove', (e) => {
-                if (isMousePanning && scale > 1.05) {
-                    panX = prevPanX + (e.clientX - panStartX);
-                    panY = prevPanY + (e.clientY - panStartY);
-                    updateTransform(false);
-                } else if (isMouseSwiping && scale <= 1.05 && track) {
-                    swipeDeltaX = e.clientX - swipeStartX;
-                    track.style.transform = `translate3d(${swipeDeltaX}px, 0, 0)`;
-                }
-            });
-
-            window.addEventListener('mouseup', () => {
-                if (isMousePanning) {
-                    isMousePanning = false;
-                    const frame = getCurrentFrame();
-                    if (frame) frame.classList.remove('is-dragging');
-                }
-                if (isMouseSwiping && track) {
-                    isMouseSwiping = false;
-                    const duration = Math.max(Date.now() - swipeStartTime, 1);
-                    const velocity = Math.abs(swipeDeltaX) / duration;
-                    const threshold = Math.min(window.innerWidth * 0.2, 80);
-
-                    if (gallery.length > 1 && (swipeDeltaX < -threshold || (swipeDeltaX < -25 && velocity > 0.45))) {
-                        nextImage();
-                    } else if (gallery.length > 1 && (swipeDeltaX > threshold || (swipeDeltaX > 25 && velocity > 0.45))) {
-                        prevImage();
-                    } else {
-                        track.style.transition = 'transform 0.2s ease-out';
-                        track.style.transform = 'translate3d(0, 0, 0)';
-                        setTimeout(() => { if (track) track.style.willChange = 'auto'; }, 200);
-                    }
-                }
+                window.addEventListener('mousemove', onMouseMove, { passive: true });
+                window.addEventListener('mouseup', onMouseUp);
             });
         }
 
@@ -1441,7 +1460,177 @@ document.addEventListener('DOMContentLoaded', () => {
             updateGliderSync();
             if (window.innerWidth >= 1024) startLoop();
         }, 100);
-    }
+    // =========================================================================
+    // 12. Antigravity Hardware Capability & Performance Governor
+    // =========================================================================
+    (function initPerfGovernor() {
+        const root = document.documentElement;
+
+        // Detect GPU & Software Rendering
+        let isSoftwareGpu = false;
+        let rendererString = 'Hardware GPU';
+        try {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (gl) {
+                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                if (debugInfo) {
+                    rendererString = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || 'Hardware GPU';
+                    const lower = rendererString.toLowerCase();
+                    isSoftwareGpu = /swiftshader|llvmpipe|softpipe|software|basic render|microsoft basic render|mesa/i.test(lower);
+                }
+            } else {
+                isSoftwareGpu = true;
+                rendererString = 'Software (No WebGL)';
+            }
+        } catch (e) {
+            isSoftwareGpu = true;
+        }
+
+        const cores = navigator.hardwareConcurrency || 4;
+        const memory = navigator.deviceMemory || 4;
+        const isSaveData = !!(navigator.connection && (navigator.connection.saveData || /2g/.test(navigator.connection.effectiveType || '')));
+        const isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Determine initial tier
+        let tier = 'full';
+        const savedTier = sessionStorage.getItem('perf-governor-tier');
+        if (savedTier && ['full', 'balanced', 'lean'].includes(savedTier)) {
+            tier = savedTier;
+        } else if (isReducedMotion || isSoftwareGpu || isSaveData || cores <= 2 || memory <= 2) {
+            tier = 'lean';
+        } else if (cores <= 4 || memory <= 4) {
+            tier = 'balanced';
+        } else {
+            tier = 'full';
+        }
+
+        root.setAttribute('data-perf-tier', tier);
+
+        // Frame-rate drop monitoring: if frames stutter consistently, adapt cost downward
+        let slowFrames = 0;
+        let lastFrameTime = performance.now();
+        let frameCount = 0;
+        let currentFps = 60;
+
+        const sampleFrame = (now) => {
+            const delta = now - lastFrameTime;
+            lastFrameTime = now;
+            frameCount++;
+
+            if (delta > 36) { // Below 28 FPS
+                slowFrames++;
+                if (slowFrames > 6 && tier === 'full' && !sessionStorage.getItem('perf-governor-tier')) {
+                    tier = 'balanced';
+                    root.setAttribute('data-perf-tier', tier);
+                } else if (slowFrames > 12 && tier === 'balanced' && !sessionStorage.getItem('perf-governor-tier')) {
+                    tier = 'lean';
+                    root.setAttribute('data-perf-tier', tier);
+                }
+            } else if (delta < 20) {
+                slowFrames = Math.max(0, slowFrames - 1);
+            }
+
+            if (now - fpsHistoryStartTime >= 500) {
+                currentFps = Math.round((frameCount * 1000) / (now - fpsHistoryStartTime));
+                frameCount = 0;
+                fpsHistoryStartTime = now;
+                updateHud();
+            }
+
+            if (isHudActive || document.visibilityState === 'visible') {
+                requestAnimationFrame(sampleFrame);
+            }
+        };
+
+        let fpsHistoryStartTime = performance.now();
+        let isHudActive = window.location.search.includes('perf=1') || window.location.hash.includes('perf=1') || sessionStorage.getItem('perf-debug-hud') === '1';
+
+        // Debug HUD UI (?perf=1)
+        let hudEl = null;
+        function updateHud() {
+            if (!hudEl) return;
+            const fpsEl = hudEl.querySelector('[data-hud-fps]');
+            if (fpsEl) {
+                fpsEl.textContent = `${currentFps} FPS`;
+                fpsEl.className = 'hud-val ' + (currentFps >= 55 ? 'fps-good' : (currentFps >= 35 ? 'fps-mid' : 'fps-bad'));
+            }
+        }
+
+        function renderHud() {
+            if (document.getElementById('perfGovernorHud')) return;
+            hudEl = document.createElement('div');
+            hudEl.id = 'perfGovernorHud';
+            hudEl.setAttribute('role', 'status');
+            hudEl.innerHTML = `
+                <div class="hud-header">
+                    <span>⚡ Antigravity Governor</span>
+                    <span style="font-size:0.75rem; opacity:0.8; cursor:pointer;" onclick="this.closest('#perfGovernorHud').remove(); sessionStorage.removeItem('perf-debug-hud');">✕</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">FPS Target:</span>
+                    <span class="hud-val fps-good" data-hud-fps>60 FPS</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">Active Tier:</span>
+                    <span class="hud-val" id="hudActiveTier" style="text-transform:uppercase; color:#38bdf8;">${tier}</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">GPU Render:</span>
+                    <span class="hud-val" style="font-size:0.65rem; max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${rendererString}">${rendererString}</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">Cores / RAM:</span>
+                    <span class="hud-val">${cores} cores / ${memory}GB</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">View Transitions:</span>
+                    <span class="hud-val" style="color:#34d399;">${'startViewTransition' in document ? 'Native 120fps' : 'CSS Fallback'}</span>
+                </div>
+                <div class="hud-tier-buttons">
+                    <button type="button" class="hud-tier-btn ${tier === 'full' ? 'active' : ''}" data-tier="full">Full</button>
+                    <button type="button" class="hud-tier-btn ${tier === 'balanced' ? 'active' : ''}" data-tier="balanced">Balanced</button>
+                    <button type="button" class="hud-tier-btn ${tier === 'lean' ? 'active' : ''}" data-tier="lean">Lean</button>
+                </div>
+            `;
+            document.body.appendChild(hudEl);
+
+            hudEl.querySelectorAll('.hud-tier-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const newTier = btn.getAttribute('data-tier');
+                    tier = newTier;
+                    sessionStorage.setItem('perf-governor-tier', newTier);
+                    root.setAttribute('data-perf-tier', newTier);
+                    hudEl.querySelectorAll('.hud-tier-btn').forEach(b => b.classList.toggle('active', b === btn));
+                    const tierEl = hudEl.querySelector('#hudActiveTier');
+                    if (tierEl) tierEl.textContent = newTier.toUpperCase();
+                });
+            });
+        }
+
+        if (isHudActive) {
+            sessionStorage.setItem('perf-debug-hud', '1');
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', renderHud);
+            } else {
+                renderHud();
+            }
+            requestAnimationFrame(sampleFrame);
+        } else {
+            requestAnimationFrame(sampleFrame);
+        }
+
+        // Clean bfcache restoration
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                const pm = document.querySelector('.page-main');
+                if (pm) {
+                    pm.classList.remove('page-exit-left', 'page-exit-right', 'page-slide-in-left', 'page-slide-in-right');
+                }
+                if (typeof updateGliderSync === 'function') updateGliderSync(true);
+            }
+        });
+    })();
 });
 
 // Developer Console Welcome Message

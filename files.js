@@ -1706,8 +1706,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    let searchRaf = null;
+    const debouncedRenderExplorer = () => {
+        if (searchRaf) cancelAnimationFrame(searchRaf);
+        searchRaf = requestAnimationFrame(renderExplorer);
+    };
+
     if (fileSearch) {
-        fileSearch.addEventListener('input', renderExplorer);
+        fileSearch.addEventListener('input', debouncedRenderExplorer);
     }
 
     if (pillAll) {
@@ -1774,7 +1780,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth Page Exit Slide When Clicking Back to Main Tabs
     document.querySelectorAll('.nav a[href^="index.html"]').forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
             const targetHref = link.getAttribute('href');
             document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
             link.classList.add('active');
@@ -1783,20 +1788,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 glider.style.width = `${Math.round(link.offsetWidth)}px`;
             }
             sessionStorage.setItem('page-transition-dir', 'to-index');
+            // When native View Transitions are supported, let browser navigate instantly without delay
+            if ('startViewTransition' in document) {
+                return;
+            }
+            e.preventDefault();
             if (pageMain) {
                 pageMain.classList.add('page-exit-right');
             }
             setTimeout(() => {
                 window.location.href = targetHref;
-            }, 200);
+            }, 180);
         });
     });
 
     const brandLink = document.querySelector('.header .brand[href="index.html"]');
     if (brandLink) {
         brandLink.addEventListener('click', (e) => {
-            e.preventDefault();
             sessionStorage.setItem('page-transition-dir', 'to-index');
+            if ('startViewTransition' in document) {
+                return;
+            }
+            e.preventDefault();
             if (pageMain) {
                 pageMain.classList.add('page-exit-right');
             }
@@ -1812,6 +1825,173 @@ document.addEventListener('DOMContentLoaded', () => {
             navigator.serviceWorker.register('./sw.js').catch(() => {});
         });
     }
+
+    // =========================================================================
+    // Antigravity Hardware Capability & Performance Governor
+    // =========================================================================
+    (function initPerfGovernor() {
+        const root = document.documentElement;
+
+        let isSoftwareGpu = false;
+        let rendererString = 'Hardware GPU';
+        try {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (gl) {
+                const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                if (debugInfo) {
+                    rendererString = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || 'Hardware GPU';
+                    const lower = rendererString.toLowerCase();
+                    isSoftwareGpu = /swiftshader|llvmpipe|softpipe|software|basic render|microsoft basic render|mesa/i.test(lower);
+                }
+            } else {
+                isSoftwareGpu = true;
+                rendererString = 'Software (No WebGL)';
+            }
+        } catch (e) {
+            isSoftwareGpu = true;
+        }
+
+        const cores = navigator.hardwareConcurrency || 4;
+        const memory = navigator.deviceMemory || 4;
+        const isSaveData = !!(navigator.connection && (navigator.connection.saveData || /2g/.test(navigator.connection.effectiveType || '')));
+        const isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        let tier = 'full';
+        const savedTier = sessionStorage.getItem('perf-governor-tier');
+        if (savedTier && ['full', 'balanced', 'lean'].includes(savedTier)) {
+            tier = savedTier;
+        } else if (isReducedMotion || isSoftwareGpu || isSaveData || cores <= 2 || memory <= 2) {
+            tier = 'lean';
+        } else if (cores <= 4 || memory <= 4) {
+            tier = 'balanced';
+        } else {
+            tier = 'full';
+        }
+
+        root.setAttribute('data-perf-tier', tier);
+
+        let slowFrames = 0;
+        let lastFrameTime = performance.now();
+        let frameCount = 0;
+        let currentFps = 60;
+
+        const sampleFrame = (now) => {
+            const delta = now - lastFrameTime;
+            lastFrameTime = now;
+            frameCount++;
+
+            if (delta > 36) {
+                slowFrames++;
+                if (slowFrames > 6 && tier === 'full' && !sessionStorage.getItem('perf-governor-tier')) {
+                    tier = 'balanced';
+                    root.setAttribute('data-perf-tier', tier);
+                } else if (slowFrames > 12 && tier === 'balanced' && !sessionStorage.getItem('perf-governor-tier')) {
+                    tier = 'lean';
+                    root.setAttribute('data-perf-tier', tier);
+                }
+            } else if (delta < 20) {
+                slowFrames = Math.max(0, slowFrames - 1);
+            }
+
+            if (now - fpsHistoryStartTime >= 500) {
+                currentFps = Math.round((frameCount * 1000) / (now - fpsHistoryStartTime));
+                frameCount = 0;
+                fpsHistoryStartTime = now;
+                updateHud();
+            }
+
+            if (isHudActive || document.visibilityState === 'visible') {
+                requestAnimationFrame(sampleFrame);
+            }
+        };
+
+        let fpsHistoryStartTime = performance.now();
+        let isHudActive = window.location.search.includes('perf=1') || window.location.hash.includes('perf=1') || sessionStorage.getItem('perf-debug-hud') === '1';
+
+        let hudEl = null;
+        function updateHud() {
+            if (!hudEl) return;
+            const fpsEl = hudEl.querySelector('[data-hud-fps]');
+            if (fpsEl) {
+                fpsEl.textContent = `${currentFps} FPS`;
+                fpsEl.className = 'hud-val ' + (currentFps >= 55 ? 'fps-good' : (currentFps >= 35 ? 'fps-mid' : 'fps-bad'));
+            }
+        }
+
+        function renderHud() {
+            if (document.getElementById('perfGovernorHud')) return;
+            hudEl = document.createElement('div');
+            hudEl.id = 'perfGovernorHud';
+            hudEl.setAttribute('role', 'status');
+            hudEl.innerHTML = `
+                <div class="hud-header">
+                    <span>⚡ Antigravity Governor</span>
+                    <span style="font-size:0.75rem; opacity:0.8; cursor:pointer;" onclick="this.closest('#perfGovernorHud').remove(); sessionStorage.removeItem('perf-debug-hud');">✕</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">FPS Target:</span>
+                    <span class="hud-val fps-good" data-hud-fps>60 FPS</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">Active Tier:</span>
+                    <span class="hud-val" id="hudActiveTier" style="text-transform:uppercase; color:#38bdf8;">${tier}</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">GPU Render:</span>
+                    <span class="hud-val" style="font-size:0.65rem; max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${rendererString}">${rendererString}</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">Cores / RAM:</span>
+                    <span class="hud-val">${cores} cores / ${memory}GB</span>
+                </div>
+                <div class="hud-row">
+                    <span class="hud-label">View Transitions:</span>
+                    <span class="hud-val" style="color:#34d399;">${'startViewTransition' in document ? 'Native 120fps' : 'CSS Fallback'}</span>
+                </div>
+                <div class="hud-tier-buttons">
+                    <button type="button" class="hud-tier-btn ${tier === 'full' ? 'active' : ''}" data-tier="full">Full</button>
+                    <button type="button" class="hud-tier-btn ${tier === 'balanced' ? 'active' : ''}" data-tier="balanced">Balanced</button>
+                    <button type="button" class="hud-tier-btn ${tier === 'lean' ? 'active' : ''}" data-tier="lean">Lean</button>
+                </div>
+            `;
+            document.body.appendChild(hudEl);
+
+            hudEl.querySelectorAll('.hud-tier-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const newTier = btn.getAttribute('data-tier');
+                    tier = newTier;
+                    sessionStorage.setItem('perf-governor-tier', newTier);
+                    root.setAttribute('data-perf-tier', newTier);
+                    hudEl.querySelectorAll('.hud-tier-btn').forEach(b => b.classList.toggle('active', b === btn));
+                    const tierEl = hudEl.querySelector('#hudActiveTier');
+                    if (tierEl) tierEl.textContent = newTier.toUpperCase();
+                });
+            });
+        }
+
+        if (isHudActive) {
+            sessionStorage.setItem('perf-debug-hud', '1');
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', renderHud);
+            } else {
+                renderHud();
+            }
+            requestAnimationFrame(sampleFrame);
+        } else {
+            requestAnimationFrame(sampleFrame);
+        }
+
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                const pm = document.querySelector('.page-main');
+                if (pm) {
+                    pm.classList.remove('page-exit-left', 'page-exit-right', 'page-slide-in-left', 'page-slide-in-right');
+                }
+                if (typeof syncGlider === 'function') syncGlider(false);
+            }
+        });
+    })();
 });
 
 window.copyContact = (text, btn) => {
