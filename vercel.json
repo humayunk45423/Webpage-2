@@ -32,7 +32,7 @@
       ]
     },
     {
-      "source": "/(style.css|script.js|loader.css|loader.js)",
+      "source": "/(style.css|script.js|files.css|files.js)",
       "headers": [
         {
           "key": "Cache-Control",

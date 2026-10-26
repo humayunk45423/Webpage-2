@@ -40,7 +40,7 @@ The site is built with pure Vanilla web technologies (HTML5, CSS3, ES6+ JS) with
 | Endpoint | File | Purpose |
 | :--- | :--- | :--- |
 | `https://humayounkobir.vercel.app/` | `index.html` | Profile, design showcase, service breakdown, social connections |
-| `https://humayounkobir.vercel.app/files.html` | `files.html` | Interactive software library, deep links, one-click script copy |
+| `https://humayounkobir.vercel.app/files` | `files.html` | Interactive software library, deep links, one-click script copy |
 
 ---
 

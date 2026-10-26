@@ -897,7 +897,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 4. Update History State
         if (updateHistory) {
-            history.pushState({ view: 'softwarehq' }, '', 'files.html');
+            history.pushState({ view: 'softwarehq' }, '', 'files');
         }
 
         // 5. Scroll cleanly to top (instant)
@@ -946,7 +946,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 4. Update History State
         if (updateHistory) {
             const cleanHash = targetHash && targetHash !== '#top' ? targetHash : '';
-            const newUrl = cleanHash ? ('index.html' + cleanHash) : 'index.html';
+            const newUrl = cleanHash ? ('/' + cleanHash) : '/';
             history.pushState({ view: 'portfolio', hash: targetHash }, '', newUrl);
         }
 
@@ -1014,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileNavContent.querySelectorAll('.nav-expand-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
-                if (href === 'files.html' || href === '#softwarehq') {
+                if (href === 'files' || href === 'files.html' || href === '/files' || href === '#softwarehq') {
                     e.preventDefault();
                     closeMenu();
                     showSoftwareHqView(true);
@@ -1044,7 +1044,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // History Popstate Navigation (Seamless Back/Forward)
     window.addEventListener('popstate', (e) => {
-        const isFilesUrl = window.location.pathname.endsWith('files.html') || (e.state && e.state.view === 'softwarehq');
+        const isFilesUrl = window.location.pathname.endsWith('files.html') || 
+                           window.location.pathname.endsWith('/files') || 
+                           window.location.pathname === '/files' || 
+                           (e.state && e.state.view === 'softwarehq');
         if (isFilesUrl) {
             showSoftwareHqView(false);
         } else {
@@ -1055,6 +1058,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial Route Check (If landing directly on Software HQ view)
     const initialIsFiles = window.location.pathname.endsWith('files.html') || 
+                           window.location.pathname.endsWith('/files') || 
+                           window.location.pathname === '/files' || 
                            window.location.search.includes('view=files') || 
                            window.location.hash === '#softwarehq';
     if (initialIsFiles) {

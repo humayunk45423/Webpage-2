@@ -4,7 +4,7 @@
 
 ## Core Documentation
 - [Official Portfolio](https://humayounkobir.vercel.app/): Interactive developer portfolio showcasing mechanical engineering projects, interactive web applications, UI design systems, and skills.
-- [Software HQ Repository](https://humayounkobir.vercel.app/files.html): High-performance, categorized directory for downloading essential productivity tools, development environments, and multimedia software without bloated ads.
+- [Software HQ Repository](https://humayounkobir.vercel.app/files): High-performance, categorized directory for downloading essential productivity tools, development environments, and multimedia software without bloated ads.
 
 ## Professional Profiles & Socials
 - [GitHub Profile](https://github.com/humayunk45423): Open-source repositories, web applications, and utility projects by Humayoun Kobir.
@@ -22,7 +22,7 @@
 - **Professional Titles**: Diploma Mechanical Engineer, Full-Stack Web Developer, UI/UX Designer, CAD Specialist, Technical Lead
 - **Brand / Repository Platform**: Software HQ (software-hq.vercel.app / Software Repository)
 - **Primary Website**: https://humayounkobir.vercel.app/
-- **Software Directory**: https://humayounkobir.vercel.app/files.html
+- **Software Directory**: https://humayounkobir.vercel.app/files
 - **Location**: Bangladesh (Available Globally for Remote & Contract Work)
 - **Email**: humayunk45423@gmail.com
 
