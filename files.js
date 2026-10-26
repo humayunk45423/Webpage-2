@@ -1790,7 +1790,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth Page Exit Slide When Clicking Back to Main Tabs (Standalone Fallback Only)
     if (!window.__portfolioScriptLoaded) {
-        document.querySelectorAll('.nav a[href^="index.html"]').forEach(link => {
+        document.querySelectorAll('.nav a[href^="index.html"], .nav a[href^="/#"], .nav a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
                 const targetHref = link.getAttribute('href');
                 document.querySelectorAll('.nav a').forEach(l => l.classList.remove('active'));
@@ -1813,7 +1813,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        const brandLink = document.querySelector('.header .brand[href="index.html"]');
+        const brandLink = document.querySelector('.header .brand[href="index.html"], .header .brand[href="/"], .header .brand[href="#top"]');
         if (brandLink) {
             brandLink.addEventListener('click', (e) => {
                 sessionStorage.setItem('page-transition-dir', 'to-index');
@@ -1825,7 +1825,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     pageMain.classList.add('page-exit-right');
                 }
                 setTimeout(() => {
-                    window.location.href = 'index.html';
+                    window.location.href = '/';
                 }, 180);
             });
         }
