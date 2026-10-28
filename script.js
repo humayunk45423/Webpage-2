@@ -98,6 +98,15 @@ const translations = {
         proj7_title: "Mobile Express",
         proj8_title: "Tadrib Academy",
         proj9_title: "Fuad Mobile Point",
+        proj1_badge: "WASM Studio",
+        proj2_badge: "System Suite",
+        proj3_badge: "3D Architecture",
+        proj4_badge: "Code Archive",
+        proj5_badge: "Live Tracker",
+        proj6_badge: "Web & Print",
+        proj7_badge: "Full Branding",
+        proj8_badge: "Brand Identity",
+        proj9_badge: "Print Suite",
         lnk_live_website: "Live Website",
         lnk_live_webapp: "Live Web App",
         lnk_github_repo: "GitHub Repository",
@@ -253,6 +262,15 @@ const translations = {
         proj7_title: "মোবাইল এক্সপ্রেস",
         proj8_title: "তাদরিব একাডেমি",
         proj9_title: "ফুয়াদ মোবাইল পয়েন্ট",
+        proj1_badge: "WASM স্টুডিও",
+        proj2_badge: "সিস্টেম স্যুট",
+        proj3_badge: "৩ডি স্থাপত্য",
+        proj4_badge: "কোড আর্কাইভ",
+        proj5_badge: "লাইভ ট্র্যাকার",
+        proj6_badge: "ওয়েব ও প্রিন্ট",
+        proj7_badge: "পূর্ণাঙ্গ ব্র্যান্ডিং",
+        proj8_badge: "ব্র্যান্ড আইডেন্টিটি",
+        proj9_badge: "প্রিন্ট স্যুট",
         lnk_live_website: "লাইভ ওয়েবসাইট",
         lnk_live_webapp: "লাইভ ওয়েব অ্যাপ",
         lnk_github_repo: "গিটহাব রেপো",
@@ -894,6 +912,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.title = isBn
             ? "সফটওয়্যার HQ | হুমায়ূন কবির (Humayun Kabir) ভান্ডার"
             : "Software HQ | Humayoun Kobir (Humayun Kabir) Repository";
+        const canonEl = document.querySelector('link[rel="canonical"]');
+        if (canonEl) canonEl.setAttribute('href', 'https://humayounkobir.vercel.app/files');
 
         // 4. Update History State
         if (updateHistory) {
@@ -942,6 +962,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.title = isBn
             ? "হুমায়ূন কবির | ডিপ্লোমা ইঞ্জিনিয়ার ও ডিজাইনার পোর্টফোলিও"
             : "Humayoun Kobir | Diploma Engineer & Designer Portfolio";
+        const canonEl = document.querySelector('link[rel="canonical"]');
+        if (canonEl) canonEl.setAttribute('href', 'https://humayounkobir.vercel.app/');
 
         // 4. Update History State
         if (updateHistory) {
@@ -1626,6 +1648,21 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('keydown', (e) => {
             if (!modal.classList.contains('is-open')) return;
 
+            if (e.key === 'Tab') {
+                const focusables = Array.from(modal.querySelectorAll('button:not([disabled])'));
+                if (focusables.length > 0) {
+                    const first = focusables[0];
+                    const last = focusables[focusables.length - 1];
+                    if (e.shiftKey && document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    } else if (!e.shiftKey && document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
+                return;
+            }
             if (e.key === 'Escape') {
                 e.preventDefault();
                 closeViewer();
@@ -1680,6 +1717,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 12. Antigravity Hardware Capability & Performance Governor
     // =========================================================================
     (function initPerfGovernor() {
+        if (window.__perfGovernorInitialized) return;
+        window.__perfGovernorInitialized = true;
         const root = document.documentElement;
 
         // Detect GPU & Software Rendering
@@ -1727,12 +1766,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let slowFrames = 0;
         let lastFrameTime = performance.now();
         let frameCount = 0;
+        let totalCalibrationFrames = 0;
         let currentFps = 60;
 
         const sampleFrame = (now) => {
             const delta = now - lastFrameTime;
             lastFrameTime = now;
             frameCount++;
+            totalCalibrationFrames++;
 
             if (delta > 36) { // Below 28 FPS
                 slowFrames++;
@@ -1754,7 +1795,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateHud();
             }
 
-            if (isHudActive || document.visibilityState === 'visible') {
+            if (isHudActive || (document.visibilityState === 'visible' && totalCalibrationFrames < 180)) {
                 requestAnimationFrame(sampleFrame);
             }
         };

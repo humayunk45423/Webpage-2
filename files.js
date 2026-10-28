@@ -1843,6 +1843,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Antigravity Hardware Capability & Performance Governor
     // =========================================================================
     (function initPerfGovernor() {
+        if (window.__perfGovernorInitialized) return;
+        window.__perfGovernorInitialized = true;
         const root = document.documentElement;
 
         let isSoftwareGpu = false;
@@ -1887,12 +1889,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let slowFrames = 0;
         let lastFrameTime = performance.now();
         let frameCount = 0;
+        let totalCalibrationFrames = 0;
         let currentFps = 60;
 
         const sampleFrame = (now) => {
             const delta = now - lastFrameTime;
             lastFrameTime = now;
             frameCount++;
+            totalCalibrationFrames++;
 
             if (delta > 36) {
                 slowFrames++;
@@ -1914,7 +1918,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateHud();
             }
 
-            if (isHudActive || document.visibilityState === 'visible') {
+            if (isHudActive || (document.visibilityState === 'visible' && totalCalibrationFrames < 180)) {
                 requestAnimationFrame(sampleFrame);
             }
         };

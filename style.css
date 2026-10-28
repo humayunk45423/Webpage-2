@@ -6,6 +6,7 @@
             --green: #165844;
             --bg: var(--white);
             --bg2: #fcfcfc;
+            --card: var(--bg2);
             --surface: rgba(255, 255, 255, .98);
             --surface2: var(--white);
             --nav: rgba(255, 255, 255, .98);
@@ -34,6 +35,7 @@
             color-scheme: dark;
             --bg: #070707;
             --bg2: #0c0c0c;
+            --card: var(--bg2);
             --surface: rgba(22, 22, 22, .98);
             --surface2: rgba(35, 35, 35, 0.98);
             --nav: rgba(10, 10, 10, .98);
@@ -94,6 +96,21 @@
             -webkit-user-select: none;
             -webkit-user-drag: none;
             text-rendering: optimizeSpeed;
+        }
+
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        li,
+        .lead,
+        .project-card p,
+        .service-card p,
+        .method-text span,
+        .contact-info p {
+            user-select: text;
+            -webkit-user-select: text;
         }
 
         :focus-visible {
@@ -365,8 +382,8 @@
                 gap: 0;
                 box-sizing: border-box;
                 box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
-                transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1),
-                            box-shadow 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                            box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
                             border-color 0.3s ease,
                             background 0.3s ease;
                 will-change: height, box-shadow;
@@ -880,7 +897,7 @@
             height: 12px;
             position: relative;
             display: block;
-            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .hamburger-line {
@@ -890,8 +907,8 @@
             height: 2px;
             background: var(--text);
             border-radius: 2px;
-            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             transform-origin: center;
             will-change: transform, opacity;
         }
@@ -950,7 +967,7 @@
         .nav-wrap.menu-open .nav-expanded-content {
             opacity: 1;
             pointer-events: auto;
-            transition: opacity 0.8s ease 0.35s;
+            transition: opacity 0.32s ease 0.05s;
         }
 
         /* Staggered Sections (Left Aligned) */
@@ -968,19 +985,19 @@
         .nav-wrap.menu-open .nav-expand-section:nth-child(1) {
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.7s ease 0.35s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+            transition: opacity 0.35s ease 0.04s, transform 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.04s;
         }
 
         .nav-wrap.menu-open .nav-expand-section:nth-child(2) {
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.7s ease 0.55s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s;
+            transition: opacity 0.35s ease 0.09s, transform 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.09s;
         }
 
         .nav-wrap.menu-open .nav-expand-section:nth-child(3) {
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.7s ease 0.75s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.75s;
+            transition: opacity 0.35s ease 0.14s, transform 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.14s;
         }
 
         .nav-expand-title {
@@ -999,7 +1016,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.7rem;
-            background: var(--card);
+            background: var(--bg2);
             border: 1px solid var(--line);
             border-radius: 0.95rem;
             padding: 0.8rem 0.95rem;
@@ -1090,7 +1107,7 @@
         .nav-expand-contacts .method {
             width: 100%;
             padding: 0.6rem 0.8rem;
-            background: var(--card);
+            background: var(--bg2);
             border: 1px solid var(--line);
             border-radius: 0.95rem;
             display: flex;
@@ -1354,7 +1371,8 @@
             text-transform: uppercase;
         }
 
-        .hero-copy h1 {
+        .hero-copy h1,
+        .hero-copy .hero-main-heading {
             font-size: clamp(2rem, 3.6vw, 3.5rem);
             line-height: 1.15;
             letter-spacing: -0.015em;
@@ -1365,7 +1383,8 @@
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.05));
         }
 
-        .hero-copy h1 .hero-name {
+        .hero-copy h1 .hero-name,
+        .hero-copy .hero-main-heading .hero-name {
             white-space: nowrap;
             display: inline-block;
         }
@@ -1376,7 +1395,8 @@
             margin-bottom: 0.55rem;
         }
 
-        html[data-lang="bn"] .hero-copy h1 {
+        html[data-lang="bn"] .hero-copy h1,
+        .hero-copy .hero-main-heading {
             letter-spacing: 0.008em;
             line-height: 1.20;
             margin-bottom: 0.85rem;
@@ -1390,13 +1410,15 @@
             line-height: 1.35;
         }
 
-        html[data-theme=dark] .hero-copy h1 {
+        html[data-theme=dark] .hero-copy h1,
+        .hero-copy .hero-main-heading {
             color: #fff;
             filter: drop-shadow(0 0 30px rgba(255, 122, 0, 0.4)) drop-shadow(0 0 60px rgba(255, 122, 0, 0.15));
         }
 
         @media (max-width: 768px) {
-            html[data-theme=dark] .hero-copy h1 {
+            html[data-theme=dark] .hero-copy h1,
+        .hero-copy .hero-main-heading {
                 filter: drop-shadow(0 0 16px rgba(255, 122, 0, 0.35));
             }
         }
@@ -1804,6 +1826,46 @@
             }
         }
 
+        .project-visual-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.1rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .project-visual-icon {
+            width: 2.85rem;
+            height: 2.85rem;
+            border-radius: 0.95rem;
+            background: var(--vibrant-gradient);
+            color: var(--accent-ink);
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 20px -4px var(--soft);
+            transition: transform 0.35s var(--bezier);
+        }
+
+        @media (hover: hover) {
+            .project-card:hover .project-visual-icon {
+                transform: scale(1.08) rotate(4deg);
+            }
+        }
+
+        .project-visual-badge {
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.28rem 0.7rem;
+            border-radius: 999px;
+            background: var(--soft);
+            color: var(--accent);
+            border: 1px solid var(--accent-line);
+        }
+
         .project-content h3 {
             font-size: 1.35rem;
             font-weight: 800;
@@ -2052,6 +2114,10 @@
         .copy-btn.copied::after {
             opacity: 1;
             transform: translateX(-50%) translateY(0)
+        }
+
+        html[data-lang="bn"] .copy-btn::after {
+            content: "কপি হয়েছে!";
         }
 
         .social-grid {
@@ -2365,14 +2431,16 @@
                 letter-spacing: 0.04em;
             }
 
-            .hero-copy h1 {
+            .hero-copy h1,
+        .hero-copy .hero-main-heading {
                 margin: 0 0 0.75rem;
                 font-size: clamp(1.85rem, 6.8vw, 2.15rem);
                 letter-spacing: -0.01em;
                 line-height: 1.22;
             }
 
-            html[data-lang="bn"] .hero-copy h1 {
+            html[data-lang="bn"] .hero-copy h1,
+        .hero-copy .hero-main-heading {
                 letter-spacing: 0.015em;
                 line-height: 1.28;
                 word-spacing: 0.12em;
@@ -2790,15 +2858,89 @@
                 border-color: var(--accent) !important;
             }
 
-            /* Prevent primary button from looking stuck/active */
+            /* Prevent primary button from looking stuck/active while preserving gradient */
             .btn.primary:hover {
-                background: var(--accent) !important;
+                background: var(--vibrant-gradient) !important;
                 color: var(--accent-ink) !important;
             }
 
             .section {
                 contain: layout;
                 /* Replaced paint with layout to prevent tooltip clipping */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 0.85rem;
+            }
+
+            .service-card,
+            .project-card {
+                padding: 1.25rem 1.15rem;
+                text-align: left;
+                align-items: flex-start;
+            }
+
+            .project-visual-head {
+                width: 100%;
+                margin-bottom: 0.75rem;
+                padding-bottom: 0.65rem;
+            }
+
+            .project-visual-icon {
+                width: 2.4rem;
+                height: 2.4rem;
+                font-size: 1rem;
+                border-radius: 0.75rem;
+            }
+
+            .service-card h3,
+            .project-content h3 {
+                font-size: 1.05rem;
+                min-height: 0;
+                justify-content: flex-start;
+                text-align: left;
+                margin-bottom: 0.35rem;
+            }
+
+            .service-card p,
+            .project-content p {
+                font-size: 0.84rem;
+                line-height: 1.5;
+                text-align: left;
+                margin-bottom: 0.75rem;
+            }
+
+            .project-tags {
+                justify-content: flex-start;
+                gap: 0.35rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .tag {
+                font-size: 0.68rem;
+                padding: 0.15rem 0.45rem;
+            }
+
+            .project-link,
+            .project-links-row .project-link {
+                font-size: 0.78rem;
+                padding: 0.6rem 0.9rem;
+            }
+
+            .chips {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 0.4rem;
+            }
+
+            .chips li {
+                font-size: 0.76rem;
+                padding: 0.38rem 0.75rem;
             }
         }
 
