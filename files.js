@@ -6,9 +6,10 @@
 
 // Pre-warm Hind Siliguri font into browser memory immediately
 if (typeof document !== 'undefined' && document.fonts) {
-    document.fonts.load('400 1em "Hind Siliguri"');
-    document.fonts.load('600 1em "Hind Siliguri"');
-    document.fonts.load('700 1em "Hind Siliguri"');
+    document.fonts.load('400 1em "Hind Siliguri"', 'বাংলা');
+    document.fonts.load('500 1em "Hind Siliguri"', 'বাংলা');
+    document.fonts.load('600 1em "Hind Siliguri"', 'বাংলা');
+    document.fonts.load('700 1em "Hind Siliguri"', 'বাংলা');
 }
 
 // =========================================================================
@@ -129,7 +130,7 @@ const documentationTranslations = {
         "readme_bn": "## ওভারভিউ\nবাল্ক ক্র্যাপ আনইনস্টলার হলো উইন্ডোজের জন্য একটি ফ্রি এবং ওপেন-সোর্স (FOSS) আনইনস্টলার। এটি একসাথে একাধিক অ্যাপ্লিকেশন, অবশিষ্ট ফাইল, আবর্জনা এবং রেজিস্ট্রি কি স্বয়ংক্রিয়ভাবে কোনো ঝামেলা ছাড়াই পরিষ্কার করতে সক্ষম।\n\n## প্রধান সুবিধাসমূহ\n- একসাথে শত শত প্রোগ্রাম ব্যাচ আকারে আনইনস্টল করার সুবিধা।\n- স্বয়ংক্রিয়ভাবে অবশিষ্ট ফাইল ও রেজিস্ট্রি এন্ট্রি পরিষ্কার করে।\n- উইন্ডোজ স্টোর অ্যাপস, ওকুলাস, স্টিম গেমস এবং পোর্টেবল অ্যাপস আনইনস্টল করতে পারে।\n- স্বয়ংক্রিয় ব্যাকগ্রাউন্ড সাইলেন্ট আনইনস্টল সুবিধা।"
     },
     "registry-path": {
-        "readme_bn": ""
+        "readme_bn": "## ওভারভিউ\nউইন্ডোজ এক্সপ্লোরারের ডেস্কটপ এবং ফোল্ডারের রাইট-ক্লিক ব্যাকগ্রাউন্ড কনটেক্সট মেনু কাস্টমাইজ করার সরাসরি রেজিস্ট্রি পাথ রেফারেন্স।"
     },
     "clean-purger": {
         "readme_bn": "## ওভারভিউ\nআপনার ব্যক্তিগত ডকুমেন্টে কোনো হাত না দিয়েই উইন্ডোজের অপ্রয়োজনীয় আবর্জনা, টেম্পোরারি ফাইল, শেডার ক্যাশ এবং নষ্ট আপডেট ফাইল এক ক্লিকে সম্পূর্ণ পরিষ্কার করার শক্তিশালী ব্যাচ ইউটিলিটি।\n\n## যে স্থানগুলো পরিষ্কার করে\n- ইউজার ও সিস্টেমের `%temp%` ফোল্ডার।\n- উইন্ডোজ প্রিফেচ (Prefetch) ক্যাশ।\n- ডাইরেক্টএক্স, এনভিডিয়া এবং এএমডি শেডার ক্যাশ (`DXCache`)।\n- উইন্ডোজ ডেলিভারি অপটিমাইজেশন ও সফটওয়্যার ডিস্ট্রিবিউশন ডাউনলোড ক্যাশ।\n- এক্সপ্লোরার থাম্বনেইল ডাটাবেস ও ডিএনএস রিজলভার ক্যাশ।",
@@ -159,7 +160,7 @@ const documentationTranslations = {
         "copyLabel_bn": "লাইসেন্স ফাইলের লোকেশন"
     },
     "right-click-repair": {
-        "readme_bn": ""
+        "readme_bn": "## ওভারভিউ\nউইন্ডোজ এক্সপ্লোরারে মাউসের রাইট-ক্লিক কনটেক্সট মেনু কাজ না করলে বা হ্যাং হলে তা দ্রুত মেরামত করার শেল CLSID কোড।"
     },
     "win10-menu": {
         "readme_bn": "## ওভারভিউ\nউইন্ডোজ ১১-এ ক্লাসিক উইন্ডোজ ১০ এর মতো সম্পূর্ণ রাইট-ক্লিক কনটেক্সট মেনু ফিরিয়ে আনে।"
@@ -1060,13 +1061,15 @@ function renderExplorer() {
     });
 
     if (filtered.length === 0) {
+        const curLang = document.documentElement.getAttribute('data-lang') || 'en';
+        const isBn = curLang === 'bn';
         explorerView.innerHTML = `
             <div class="file-grid">
                 <div class="empty-state">
                     <i class="fa-solid fa-magnifying-glass empty-icon"></i>
-                    <h3>No tools or scripts found</h3>
-                    <p>No results match "${escapeHtml(query)}". Try searching for a different keyword or category.</p>
-                    <button class="empty-clear-btn" onclick="clearSearch()">Clear Search</button>
+                    <h3>${isBn ? 'কোনো টুল বা স্ক্রিপ্ট পাওয়া যায়নি' : 'No tools or scripts found'}</h3>
+                    <p>${isBn ? `"${escapeHtml(query)}" এর সাথে কোনো ফলাফল মেলেনি। অনুগ্রহ করে অন্য কোনো কিওয়ার্ড বা ক্যাটাগরি দিয়ে চেষ্টা করুন।` : `No results match "${escapeHtml(query)}". Try searching for a different keyword or category.`}</p>
+                    <button class="empty-clear-btn" onclick="clearSearch()">${isBn ? 'সার্চ মুছুন' : 'Clear Search'}</button>
                 </div>
             </div>
         `;
@@ -1085,7 +1088,8 @@ function renderExplorer() {
         if (itemsInCat.length > 0) {
             const curLang = document.documentElement.getAttribute('data-lang') || 'en';
             const catTitle = (categoryNames[cat.id] && categoryNames[cat.id][curLang]) || cat.name;
-            const countLabel = curLang === 'bn' ? `${itemsInCat.length} টি টুল` : (itemsInCat.length === 1 ? '1 item' : `${itemsInCat.length} items`);
+            const toBnDigits = (n) => String(n).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+            const countLabel = curLang === 'bn' ? `${toBnDigits(itemsInCat.length)} টি টুল` : (itemsInCat.length === 1 ? '1 item' : `${itemsInCat.length} items`);
 
             const section = document.createElement('div');
             section.className = 'section-group';
@@ -1114,12 +1118,15 @@ function clearSearch() {
     renderExplorer();
 }
 
+let currentDetailId = null;
+
 function showDetail(id, isFromPopstate = false) {
     const item = fileData.find(f => f.id === id);
     if (!item) {
         hideDetail();
         return;
     }
+    currentDetailId = id;
 
     if (explorerView.classList.contains('active')) {
         explorerScrollPos = window.scrollY || window.pageYOffset;
@@ -1168,7 +1175,7 @@ function safeAssetUrl(url) {
                 <i class="fa-solid fa-key"></i> ${currentLang === 'bn' ? 'অ্যাক্টিভেশন ফিক্স' : 'Activation Fix'}
             </a>
             <a href="${safeAssetUrl(item.officialUrl)}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
-                <i class="fa-solid fa-download"></i> Official WinRAR
+                <i class="fa-solid fa-download"></i> ${currentLang === 'bn' ? 'অফিসিয়াল WinRAR' : 'Official WinRAR'}
             </a>
             <a href="${safeAssetUrl(item.sevenZipUrl)}" target="_blank" rel="noopener noreferrer" class="btn-secondary-soft">
                 <i class="fa-solid fa-box-open"></i> ${currentLang === 'bn' ? '৭-জিপ (FOSS)' : 'Get 7-Zip (FOSS)'}
@@ -1186,8 +1193,8 @@ function safeAssetUrl(url) {
     } else if (item.path && item.path.startsWith('http')) {
         const isDirectArchive = item.download || /\.(zip|rar|7z|tar|gz|exe|apk|iso|bat|reg|ahk|txt)$/i.test(item.path.split('?')[0]);
         const btnLabel = isDirectArchive 
-            ? (translations[currentLang] && translations[currentLang].btn_download_file ? translations[currentLang].btn_download_file : 'Download File')
-            : (translations[currentLang] && translations[currentLang].btn_open_resource ? translations[currentLang].btn_open_resource : 'Open Resource');
+            ? (shqTranslations[currentLang] && shqTranslations[currentLang].btn_download_file ? shqTranslations[currentLang].btn_download_file : 'Download File')
+            : (shqTranslations[currentLang] && shqTranslations[currentLang].btn_open_resource ? shqTranslations[currentLang].btn_open_resource : 'Open Resource');
         const btnIcon = isDirectArchive ? 'fa-solid fa-download' : 'fa-solid fa-up-right-from-square';
         heroHtml += `
             <a href="${item.path}" ${isDirectArchive ? 'download' : 'target="_blank" rel="noopener noreferrer"'} class="download-hero">
@@ -1197,7 +1204,7 @@ function safeAssetUrl(url) {
     } else if (item.path) {
         heroHtml += `
             <a href="${safeAssetUrl(item.path)}" class="download-hero" download>
-                <i class="fa-solid fa-download"></i> ${translations[currentLang] && translations[currentLang].btn_download_file ? translations[currentLang].btn_download_file : 'Download File'}
+                <i class="fa-solid fa-download"></i> ${shqTranslations[currentLang] && shqTranslations[currentLang].btn_download_file ? shqTranslations[currentLang].btn_download_file : 'Download File'}
             </a>
         `;
     }
@@ -1292,6 +1299,7 @@ function safeAssetUrl(url) {
 }
 
 function hideDetail(isFromPopstate = false) {
+    currentDetailId = null;
     mainLayout.classList.remove('detail-mode');
     detailView.classList.remove('active');
     explorerView.classList.add('active');
@@ -1510,21 +1518,28 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(syncGlider, 60);
         }
 
-        if (detailView && detailView.classList.contains('active') && window.location.hash) {
-            showDetail(window.location.hash.substring(1), true);
+        if (detailView && detailView.classList.contains('active')) {
+            const activeId = currentDetailId || (window.location.hash ? window.location.hash.substring(1) : '');
+            if (activeId) {
+                showDetail(activeId, true);
+            }
         }
     };
+
+    // Expose applyLanguage globally so script.js language toggle updates Software HQ immediately
+    window.applySoftwareHqLanguage = applyLanguage;
 
     const toggleLanguage = async () => {
         const cur = root.getAttribute('data-lang') || 'en';
         const newLang = cur === 'bn' ? 'en' : 'bn';
         // If switching to Bangla, ensure Hind Siliguri is completely ready before rendering
-        if (newLang === 'bn' && document.fonts && !document.fonts.check('1em "Hind Siliguri"')) {
+        if (newLang === 'bn' && document.fonts) {
             try {
                 await Promise.all([
-                    document.fonts.load('400 1em "Hind Siliguri"'),
-                    document.fonts.load('600 1em "Hind Siliguri"'),
-                    document.fonts.load('700 1em "Hind Siliguri"')
+                    document.fonts.load('400 1em "Hind Siliguri"', 'বাংলা'),
+                    document.fonts.load('500 1em "Hind Siliguri"', 'বাংলা'),
+                    document.fonts.load('600 1em "Hind Siliguri"', 'বাংলা'),
+                    document.fonts.load('700 1em "Hind Siliguri"', 'বাংলা')
                 ]);
             } catch (e) {}
         }
@@ -1650,17 +1665,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
 
-        const savedLang = localStorage.getItem('portfolio-lang') || 'en';
-        applyLanguage(savedLang);
         const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
         applyTheme(savedTheme);
     }
 
-
-    updateSearchPlaceholder();
+    const initialLang = root.getAttribute('data-lang') || localStorage.getItem('portfolio-lang') || 'en';
+    applyLanguage(initialLang);
     window.addEventListener('resize', updateSearchPlaceholder);
-
-    renderExplorer();
 
     // Detect macOS to display ⌘ K instead of Ctrl K
     const isMac = (typeof navigator !== 'undefined') && (
@@ -1761,7 +1772,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (window.location.hash && !['#about', '#skills', '#projects', '#contact', '#top'].includes(window.location.hash)) {
         const id = window.location.hash.substring(1);
-        const itemExists = typeof filesData !== 'undefined' && filesData.some(f => f.id === id);
+        const itemExists = typeof fileData !== 'undefined' && fileData.some(f => f.id === id);
         if (itemExists) {
             showDetail(id, true);
         }
@@ -1770,7 +1781,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Page Slide In Transition for Main Content
     const pageMain = document.querySelector('.page-main');
     const transitionDir = sessionStorage.getItem('page-transition-dir');
-    if (pageMain && (transitionDir === 'to-files' || !transitionDir)) {
+    if (pageMain && transitionDir === 'to-files') {
         pageMain.classList.add('page-slide-in-right');
         sessionStorage.removeItem('page-transition-dir');
         setTimeout(() => {
@@ -2044,8 +2055,6 @@ window.renderSoftwareHqExplorer = (force = false) => {
         renderExplorer();
     }
 };
-window.applySoftwareHqLanguage = (lang) => {
-    if (typeof applyLanguage === 'function') applyLanguage(lang);
-};
+// window.applySoftwareHqLanguage is bound directly inside DOMContentLoaded
 window.shqTranslations = shqTranslations;
 window.selectCategory = selectCategory;

@@ -7,9 +7,10 @@ window.__portfolioScriptLoaded = true;
 
 // Pre-warm Hind Siliguri font into browser memory immediately
 if (typeof document !== 'undefined' && document.fonts) {
-    document.fonts.load('400 1em "Hind Siliguri"');
-    document.fonts.load('600 1em "Hind Siliguri"');
-    document.fonts.load('700 1em "Hind Siliguri"');
+    document.fonts.load('400 1em "Hind Siliguri"', 'বাংলা');
+    document.fonts.load('500 1em "Hind Siliguri"', 'বাংলা');
+    document.fonts.load('600 1em "Hind Siliguri"', 'বাংলা');
+    document.fonts.load('700 1em "Hind Siliguri"', 'বাংলা');
 }
 
 // Translation Dictionary for Full Bilingual Support
@@ -30,6 +31,16 @@ const translations = {
         contact_wa_title: "WhatsApp / Phone",
         toggle_language_label: "Language",
         toggle_theme_label: "Theme",
+        shq_title: "Software HQ",
+        cat_all: "All",
+        cat_categories: "Categories",
+        cat_select: "Select Category",
+        btn_back_explorer: "Back to Explorer",
+        btn_download_file: "Download File",
+        btn_open_resource: "Open Resource",
+        btn_copy_cmd: "Copy Command",
+        btn_copy_code: "Copy Code",
+        toast_copied: "Copied to clipboard!",
 
         hero_greeting: "Assalamu Alaikum (Greetings)!",
         hero_iam: 'I\'m <span class="hero-name">Humayoun Kobir</span>',
@@ -194,6 +205,16 @@ const translations = {
         contact_wa_title: "হোয়াটসঅ্যাপ / ফোন",
         toggle_language_label: "ভাষা",
         toggle_theme_label: "থিম",
+        shq_title: "সফটওয়্যার HQ",
+        cat_all: "সকল",
+        cat_categories: "ক্যাটাগরি",
+        cat_select: "ক্যাটাগরি বাছাই করুন",
+        btn_back_explorer: "ভান্ডারে ফিরে যান",
+        btn_download_file: "ফাইল ডাউনলোড",
+        btn_open_resource: "রিসোর্স খুলুন",
+        btn_copy_cmd: "কমান্ড কপি",
+        btn_copy_code: "কোড কপি",
+        toast_copied: "ক্লিপবোর্ডে কপি হয়েছে!",
 
         hero_greeting: "আসসালামু আলাইকুম!",
         hero_iam: 'আমি <span class="hero-name">হুমায়ুন কবির</span>',
@@ -455,6 +476,17 @@ document.addEventListener('DOMContentLoaded', () => {
             window.applySoftwareHqLanguage(lang);
         }
 
+        // Keep document title synchronized with active language & view
+        if (typeof isSoftwareHqActive !== 'undefined' && isSoftwareHqActive) {
+            document.title = lang === 'bn'
+                ? "সফটওয়্যার HQ | হুমায়ূন কবির (Humayun Kabir) ভান্ডার"
+                : "Software HQ | Humayoun Kobir (Humayun Kabir) Repository";
+        } else {
+            document.title = lang === 'bn'
+                ? "হুমায়ূন কবির | ডিপ্লোমা ইঞ্জিনিয়ার ও ডিজাইনার পোর্টফোলিও"
+                : "Humayoun Kobir | Diploma Engineer & Designer Portfolio";
+        }
+
         // Update Typing animation dataset
         words = typingWords[lang] || typingWords.en;
         wordIndex = 0;
@@ -488,12 +520,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleLanguage = async () => {
         const newLang = activeLang === 'bn' ? 'en' : 'bn';
         // If switching to Bangla, ensure Hind Siliguri is completely ready before rendering
-        if (newLang === 'bn' && document.fonts && !document.fonts.check('1em "Hind Siliguri"')) {
+        if (newLang === 'bn' && document.fonts) {
             try {
                 await Promise.all([
-                    document.fonts.load('400 1em "Hind Siliguri"'),
-                    document.fonts.load('600 1em "Hind Siliguri"'),
-                    document.fonts.load('700 1em "Hind Siliguri"')
+                    document.fonts.load('400 1em "Hind Siliguri"', 'বাংলা'),
+                    document.fonts.load('500 1em "Hind Siliguri"', 'বাংলা'),
+                    document.fonts.load('600 1em "Hind Siliguri"', 'বাংলা'),
+                    document.fonts.load('700 1em "Hind Siliguri"', 'বাংলা')
                 ]);
             } catch (e) {}
         }
@@ -700,15 +733,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let needsUpdate = false;
         const sy = state.scrollY;
         if (state.winW >= 1024) {
-            const titlePositions = state.titlePositions;
-            for (let i = 0; i < titlePositions.length; i++) {
-                const pos = titlePositions[i];
-                const relativeTop = pos.top - sy;
-                if (relativeTop < 400 && relativeTop > -200) {
-                    const opacity = Math.max(0, Math.min(1, (relativeTop - 50) / 150)).toFixed(2);
-                    if (pos.el.style.opacity !== opacity) pos.el.style.opacity = opacity;
-                }
-            }
             if (typeof updateGliderSync === "function") updateGliderSync();
         }
 
@@ -787,16 +811,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }));
     };
 
+    const syncMobileNavActive = (targetHref) => {
+        if (!mobileNavContent) return;
+        mobileNavContent.querySelectorAll('.nav-expand-link').forEach(link => {
+            const href = link.getAttribute('href');
+            const isShq = (targetHref === 'files' || targetHref === '/files' || targetHref === 'files.html') &&
+                          (href === 'files' || href === '/files' || href === 'files.html' || href === '#softwarehq');
+            link.classList.toggle('active', href === targetHref || isShq);
+        });
+    };
+
     const setGliderTo = (targetLink, immediate = false) => {
-        if (!glider || window.innerWidth < 1024 || !targetLink) return;
+        if (!targetLink) return;
+        navLinks.forEach(l => l.classList.toggle('active', l === targetLink));
+        syncMobileNavActive(targetLink.getAttribute('href'));
+
+        if (!glider || window.innerWidth < 1024) return;
         let m = cachedNavMetrics.get(targetLink);
         if (!m || m.width <= 0) {
             m = { left: targetLink.offsetLeft, width: targetLink.offsetWidth };
             if (m.width > 0) cachedNavMetrics.set(targetLink, m);
         }
         if (!m || m.width <= 0) return;
-
-        navLinks.forEach(l => l.classList.toggle('active', l === targetLink));
 
         if (immediate) {
             glider.style.transition = 'none';
@@ -858,6 +894,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const initGliderTarget = () => {
         if (!glider || window.innerWidth < 1024) return;
         refreshMetrics();
+
+        if (isSoftwareHqActive && softwareHqLink) {
+            setGliderTo(softwareHqLink, true);
+            return;
+        }
 
         let activeLink = portfolioLinks[0];
         const currentHash = window.location.hash;
@@ -949,12 +990,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 2. Seamless view transition with GPU microfade
+        if (typeof window.hideDetail === 'function') {
+            const dv = document.getElementById('detailView');
+            if (dv && dv.classList.contains('active')) {
+                window.hideDetail(true);
+            }
+        }
         if (softwareHqView) {
             softwareHqView.classList.remove('spa-view-active', 'spa-view-fading-in');
             softwareHqView.classList.add('spa-view-hidden');
         }
         portfolioView.classList.remove('spa-view-hidden');
         portfolioView.classList.add('spa-view-active', 'spa-view-fading-in');
+        portfolioView.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
         setTimeout(() => portfolioView.classList.remove('spa-view-fading-in'), 230);
 
         // 3. Document Title
@@ -1001,6 +1049,13 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             if (!isSoftwareHqActive) {
                 showSoftwareHqView(true);
+            } else if (typeof window.hideDetail === 'function') {
+                const dv = document.getElementById('detailView');
+                if (dv && dv.classList.contains('active')) {
+                    window.hideDetail();
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
             }
         });
     }
